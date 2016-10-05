@@ -12,56 +12,56 @@ public class Game {
 
     private void createRooms() {
         /* Creating rooms */
-        Room lvl_1, lvl_2, lvl_2b, lvl_3, lvl_3b, lvl_4, lvl_4b, lvl_5, lvl_5b, lvl_6, lvl_7, lvl_8;
+        Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
         /* Give rooms descriptions. If you write "in a cave" then the game will say something like "You are in a cave" */
-        lvl_1 = new Room("lvl_1");
-        lvl_2 = new Room("lvl_2");
-        lvl_2b = new Room("lvl_2b");
-        lvl_3 = new Room("lvl_3");
-        lvl_3b = new Room("lvl_3b");
-        lvl_4 = new Room("lvl_4");
-        lvl_4b = new Room("lvl_4b");
-        lvl_5 = new Room("lvl_5");
-        lvl_5b = new Room("lvl_5b");
-        lvl_6 = new Room("lvl_6");
-        lvl_7 = new Room("lvl_7");
-        lvl_8 = new Room("lvl_8");
+        lvl_1 = new Room("in level 1");
+        lvl_2 = new Room("in level 2");
+        lvl_2a = new Room("in level 2a");
+        lvl_3 = new Room("in level 3");
+        lvl_3a = new Room("in level 3a");
+        lvl_4 = new Room("in level 4");
+        lvl_4a = new Room("in level 4a");
+        lvl_5 = new Room("in level 5");
+        lvl_5a = new Room("in level 5a");
+        lvl_6 = new Room("in level 6");
+        lvl_7 = new Room("in level 7");
+        lvl_8 = new Room("in level 8");
 
         /* This gives the player the option to move between the rooms */
-        lvl_1.setExit("east", lvl_2);
-        lvl_1.setExit("west", lvl_2b);
+        lvl_1.setExit("left", lvl_2);
+        lvl_1.setExit("right", lvl_2a);
 
-        lvl_2.setExit("south", lvl_3);
-        lvl_2.setExit("west", lvl_1);
+        lvl_2.setExit("forward", lvl_3);
+        lvl_2.setExit("back", lvl_1);
 
-        lvl_2b.setExit("south", lvl_3b);
-        lvl_2b.setExit("east", lvl_1);
+        lvl_2a.setExit("forward", lvl_3a);
+        lvl_2a.setExit("back", lvl_1);
 
-        lvl_3.setExit("south", lvl_4);
-        lvl_3.setExit("north", lvl_2);
+        lvl_3.setExit("forward", lvl_4);
+        lvl_3.setExit("back", lvl_2);
 
-        lvl_3b.setExit("east", lvl_4b);
-        lvl_3b.setExit("north", lvl_2b);
+        lvl_3a.setExit("forward", lvl_4a);
+        lvl_3a.setExit("back", lvl_2a);
 
-        lvl_4.setExit("west", lvl_5);
-        lvl_4.setExit("south", lvl_5b);
+        lvl_4.setExit("forward", lvl_5);
+        lvl_4.setExit("left", lvl_5a);
+        lvl_4.setExit("right", lvl_3);
 
-        lvl_4b.setExit("west", lvl_3b);
+        lvl_4a.setExit("back", lvl_3a);
 
-        lvl_5.setExit("north", lvl_3);
-        lvl_5.setExit("west", lvl_6);
-        lvl_5.setExit("east", lvl_4);
+        lvl_5.setExit("forward", lvl_6);
+        lvl_5.setExit("back", lvl_4);
 
-        lvl_5b.setExit("north", lvl_5);
+        lvl_5a.setExit("back", lvl_4);
 
-        lvl_6.setExit("south", lvl_7);
-        lvl_6.setExit("east", lvl_5);
+        lvl_6.setExit("forward", lvl_7);
+        lvl_6.setExit("back", lvl_5);
         
-        lvl_7.setExit("east", lvl_8);
-        lvl_7.setExit("north", lvl_6);
+        lvl_7.setExit("forward", lvl_8);
+        lvl_7.setExit("back", lvl_6);
         
-        lvl_8.setExit("west", lvl_7);
+        lvl_8.setExit("back", lvl_7);
         
         currentRoom = lvl_1; //The player will start in this room
     }
