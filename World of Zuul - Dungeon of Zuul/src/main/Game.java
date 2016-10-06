@@ -57,12 +57,12 @@ public class Game {
 
         lvl_6.setExit("forward", lvl_7);
         lvl_6.setExit("back", lvl_5);
-        
+
         lvl_7.setExit("forward", lvl_8);
         lvl_7.setExit("back", lvl_6);
-        
+
         lvl_8.setExit("back", lvl_7);
-        
+
         currentRoom = lvl_1; //The player will start in this room
     }
 
@@ -79,8 +79,10 @@ public class Game {
 
     private void printWelcome() {
         System.out.println();
-        System.out.println("You're lost in a dark cave.");
-        System.out.println("Your mission is to go out of the cave.");
+        System.out.println("You're lost in a cave. You have to find the exit to win.");
+        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
+        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
+        System.out.println("win, but if your health reaches zero, you will lose.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -107,23 +109,39 @@ public class Game {
         }
         return wantToQuit;
     }
-
+    /* By writing "help" in console, this method will be called. */
     private void printHelp() {
-        System.out.println("You're lost in a cave. You have to ");
-        System.out.println("find the exit to win.");
+        System.out.println();
+        System.out.println("You're lost in a cave. You have to find the exit to win.");
+        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
+        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
+        System.out.println("win, but if your health reaches zero, you will lose.");
+        System.out.println();
+        System.out.println("There will be monsters in every room and to move to be able to move to the next room,");
+        System.out.println("you have to defeat all the monsters.");
         System.out.println();
         System.out.println("Your command words are:");
-        parser.showCommands();
-    }
-
-    private void printMap() {
+        System.out.println("help: Self-explanatory.");
         System.out.println();
-		System.out.println("/--------------------------------------------------------------\\");
-		System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
-		System.out.println("|         " + currentRoom.isInRoom("2 ") + " -- " + currentRoom.isInRoom("3 ") + " -- " + currentRoom.isInRoom("4 ") + " -<                              |");
-		System.out.println("| " + currentRoom.isInRoom("1 ") + " -<                         " + currentRoom.isInRoom("5 ") + " -- " + currentRoom.isInRoom("6 ") + " -- " + currentRoom.isInRoom("7 ") + " -- " + currentRoom.isInRoom("8 ") + " |");
-		System.out.println("|         " + currentRoom.isInRoom("2a") + " -- " + currentRoom.isInRoom("3a") + " -- " + currentRoom.isInRoom("4a") + "                                 |");
-		System.out.println("\\--------------------------------------------------------------/");
+        System.out.println("go: This gives you the option to move around. The command is: go \"direction\".");
+        System.out.println("The game will tell you the paths. For example, if you can and want to go right");
+        System.out.println("you write \"go right\" to go right.");
+        System.out.println();
+        System.out.println("map: The console will print out a map and your current whereabouts.");
+        System.out.println();
+        System.out.println("quit: The game will quit.");
+
+        /* parser.showCommands(); */ // This line prints out the command words.
+}
+
+private void printMap() {
+        System.out.println();
+        System.out.println("/--------------------------------------------------------------\\");
+        System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
+        System.out.println("|         " + currentRoom.isInRoom("2 ") + " -- " + currentRoom.isInRoom("3 ") + " -- " + currentRoom.isInRoom("4 ") + " -<                              |");
+        System.out.println("| " + currentRoom.isInRoom("1 ") + " -<                         " + currentRoom.isInRoom("5 ") + " -- " + currentRoom.isInRoom("6 ") + " -- " + currentRoom.isInRoom("7 ") + " -- " + currentRoom.isInRoom("8 ") + " |");
+        System.out.println("|         " + currentRoom.isInRoom("2a") + " -- " + currentRoom.isInRoom("3a") + " -- " + currentRoom.isInRoom("4a") + "                                 |");
+        System.out.println("\\--------------------------------------------------------------/");
         System.out.println();
     }
 
