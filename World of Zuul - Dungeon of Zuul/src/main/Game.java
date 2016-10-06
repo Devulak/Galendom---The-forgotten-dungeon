@@ -86,6 +86,15 @@ public class Game {
         System.out.println(currentRoom.getLongDescription());
     }
 
+    private void printMap() {
+        System.out.println();
+		System.out.println("                              *.5a                       ");
+		System.out.println("      *.2 --- *.3 --- *.4 --<                            ");
+		System.out.println("*.1 --<                       *.5 --- *.6 --- *.7 --- *.8");
+		System.out.println("      *.2a -- *.3a -- *.4a                               ");
+        System.out.println();
+    }
+
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
@@ -98,6 +107,8 @@ public class Game {
 
         if (commandWord == CommandWord.HELP) {
             printHelp();
+        } else if (commandWord == CommandWord.MAP) {
+            printMap();
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
