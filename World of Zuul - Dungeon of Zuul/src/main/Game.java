@@ -15,18 +15,18 @@ public class Game {
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
         /* Give rooms descriptions. If you write "in a cave" then the game will say something like "You are in a cave" */
-        lvl_1 = new Room("in level 1");
-        lvl_2 = new Room("in level 2");
-        lvl_2a = new Room("in level 2a");
-        lvl_3 = new Room("in level 3");
-        lvl_3a = new Room("in level 3a");
-        lvl_4 = new Room("in level 4");
-        lvl_4a = new Room("in level 4a");
-        lvl_5 = new Room("in level 5");
-        lvl_5a = new Room("in level 5a");
-        lvl_6 = new Room("in level 6");
-        lvl_7 = new Room("in level 7");
-        lvl_8 = new Room("in level 8");
+        lvl_1 = new Room("in level 1", "1 ");
+        lvl_2 = new Room("in level 2", "2 ");
+        lvl_2a = new Room("in level 2a", "2a");
+        lvl_3 = new Room("in level 3", "3 ");
+        lvl_3a = new Room("in level 3a", "3a");
+        lvl_4 = new Room("in level 4", "4 ");
+        lvl_4a = new Room("in level 4a", "4a");
+        lvl_5 = new Room("in level 5", "5 ");
+        lvl_5a = new Room("in level 5a", "5a");
+        lvl_6 = new Room("in level 6", "6 ");
+        lvl_7 = new Room("in level 7", "7 ");
+        lvl_8 = new Room("in level 8", "8 ");
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
@@ -86,15 +86,6 @@ public class Game {
         System.out.println(currentRoom.getLongDescription());
     }
 
-    private void printMap() {
-        System.out.println();
-		System.out.println("                              *.5a                       ");
-		System.out.println("      *.2 --- *.3 --- *.4 --<                            ");
-		System.out.println("*.1 --<                       *.5 --- *.6 --- *.7 --- *.8");
-		System.out.println("      *.2a -- *.3a -- *.4a                               ");
-        System.out.println();
-    }
-
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
@@ -123,6 +114,17 @@ public class Game {
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
+    }
+
+    private void printMap() {
+        System.out.println();
+		System.out.println("/--------------------------------------------------------------\\");
+		System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
+		System.out.println("|         " + currentRoom.isInRoom("2 ") + " -- " + currentRoom.isInRoom("3 ") + " -- " + currentRoom.isInRoom("4 ") + " -<                              |");
+		System.out.println("| " + currentRoom.isInRoom("1 ") + " -<                         " + currentRoom.isInRoom("5 ") + " -- " + currentRoom.isInRoom("6 ") + " -- " + currentRoom.isInRoom("7 ") + " -- " + currentRoom.isInRoom("8 ") + " |");
+		System.out.println("|         " + currentRoom.isInRoom("2a") + " -- " + currentRoom.isInRoom("3a") + " -- " + currentRoom.isInRoom("4a") + "                                 |");
+		System.out.println("\\--------------------------------------------------------------/");
+        System.out.println();
     }
 
     private void goRoom(Command command) {

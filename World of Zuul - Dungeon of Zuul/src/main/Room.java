@@ -7,18 +7,28 @@ import java.util.Iterator;
 
 public class Room 
 {
+    private String uniqueId;
     private String description;
     private HashMap<String, Room> exits;
 
-    public Room(String description) 
+    public Room(String description, String uniqueId) 
     {
         this.description = description;
+        this.uniqueId = uniqueId;
         exits = new HashMap<String, Room>();
     }
 
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
+    }
+
+    public String isInRoom(String CheckId)
+    {
+		String RoomBlock = "*";
+		if (CheckId == this.uniqueId)
+			RoomBlock = "█";
+		return RoomBlock + "." + CheckId;
     }
 
     public String getShortDescription()
