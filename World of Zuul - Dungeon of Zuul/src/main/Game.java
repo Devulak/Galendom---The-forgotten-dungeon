@@ -44,9 +44,9 @@ public class Game {
         lvl_3a.setExit("forward", lvl_4a);
         lvl_3a.setExit("back", lvl_2a);
 
-        lvl_4.setExit("forward", lvl_5);
+        lvl_4.setExit("right", lvl_5);
         lvl_4.setExit("left", lvl_5a);
-        lvl_4.setExit("right", lvl_3);
+        lvl_4.setExit("back", lvl_3);
 
         lvl_4a.setExit("back", lvl_3a);
 
