@@ -18,9 +18,6 @@ public class Game {
         parser = new Parser();
     }
 
-<<<<<<< HEAD
-    protected void createRooms() {
-=======
     private void generateWeapons() {
         Weapons woodenSword = new Weapons("wooden sword", 1, 3);
         Weapons ironSword = new Weapons("iron sword", 2, 4);
@@ -55,7 +52,20 @@ public class Game {
         lvl_6 = new Room("in level 6", "6 ");
         lvl_7 = new Room("in level 7", "7 ");
         lvl_8 = new Room("in level 8", "8 ");
-
+        
+        
+        Creatures monster2 = new Creatures(2);
+        Creatures monster2a = new Creatures(3);
+        Creatures monster3 = new Creatures(4);
+        Creatures monster3a = new Creatures(5); 
+        Creatures monster4 = new Creatures(6); 
+        Creatures monster4a = new Creatures(7); 
+        Creatures monster5 = new Creatures(8); 
+        Creatures monster5a = new Creatures(9); 
+        Creatures monster6 = new Creatures(10);
+        Creatures monster7 = new Creatures(11); 
+        Creatures monster8 = new Creatures(12); 
+        
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
         lvl_1.setExit("right", lvl_2a);
