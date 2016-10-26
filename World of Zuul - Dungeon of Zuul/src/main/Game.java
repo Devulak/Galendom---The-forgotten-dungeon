@@ -3,7 +3,7 @@ package main;
 public class Game {
 
     private Parser parser;
-    private Room currentRoom;
+    protected Room currentRoom;
     private Weapons currentWeapon;
     private Helmets currentHelmet;
     private Armor currentArmor;
