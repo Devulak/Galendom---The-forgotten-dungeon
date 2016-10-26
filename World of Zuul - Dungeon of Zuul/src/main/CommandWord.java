@@ -2,7 +2,7 @@ package main;
 
 public enum CommandWord
 {
-    GO("go"), QUIT("quit"), HELP("help"), MAP("map"), UNKNOWN("?");
+    GO("go"), QUIT("quit"), HELP("help"), MAP("map"), EQUIP("equip"), UNKNOWN("?");
     
     private String commandString;
     

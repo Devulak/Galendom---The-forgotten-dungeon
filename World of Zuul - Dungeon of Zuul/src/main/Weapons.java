@@ -24,4 +24,8 @@ public class Weapons {
     public String getWeaponName(){
 	return weaponName;
     }
+    
+    public int getWeaponMinDamage(){
+        return minDamage;
+    }
 }

@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class Creatures {
 
-    private int health; //the health
+    protected int health; //the health
     private int level; //the level
-    private int damage; //the damage
+    protected int damage; //the damage
     private int givesXP; //the amount of XP the monster gives when it dies
     private int XP; //the XP the hero has
 
