@@ -143,23 +143,9 @@ public class Game {
     /* By writing "help" in console, this method will be called. */
     private void printHelp() {
         System.out.println();
-        System.out.println("You're lost in a cave. You have to find the exit to win.");
-        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
-        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
-        System.out.println("win, but if your health reaches zero, you will lose.");
-        System.out.println();
-        System.out.println("There will be monsters in every room and to move to be able to move to the next room,");
-        System.out.println("you have to defeat all the monsters.");
-        System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("help: Self-explanatory.");
-        System.out.println();
         System.out.println("go: This gives you the option to move around. The command is: go \"direction\".");
-        System.out.println("The game will tell you the paths. For example, if you can and want to go right");
-        System.out.println("you write \"go right\" to go right.");
-        System.out.println();
         System.out.println("map: The console will print out a map and your current whereabouts.");
-        System.out.println();
         System.out.println("quit: The game will quit.");
 
         /* parser.showCommands(); */ // This line prints out the command words.
