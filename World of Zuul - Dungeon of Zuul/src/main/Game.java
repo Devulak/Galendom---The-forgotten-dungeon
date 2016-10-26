@@ -3,31 +3,70 @@ package main;
 public class Game {
 
     private Parser parser;
-    private Room currentRoom;
+    protected Room currentRoom;
+    private Weapons currentWeapon;
+    private Helmets currentHelmet;
+    private Armor currentArmor;
+    private Leggings currentLeggings;
+    private Shields currentShield;
+    private Boots currentBoots;
 
     public Game() {
         createRooms();
+        generateWeapons();
+        generateArmor();
         parser = new Parser();
     }
 
+    private void generateWeapons() {
+        Weapons woodenSword = new Weapons("wooden sword", 1, 3);
+        Weapons ironSword = new Weapons("iron sword", 2, 4);
+        Weapons steelSword = new Weapons("steel sword", 3, 5);
+        currentWeapon = woodenSword;
+    }
+
+    private void generateArmor() {
+        Armor woodenChestplate = new Armor("wooden chestplate", 5);
+        Leggings woodenLeggings = new Leggings("wooden leggings", 2);
+        Boots woodenBoots = new Boots("wooden boots", 2);
+
+        Shields woodenShield = new Shields("wooden shield", 1, 5);
+        currentShield = woodenShield;
+    }
+
     private void createRooms() {
+
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
         /* Give rooms descriptions. If you write "in a cave" then the game will say something like "You are in a cave" */
-        lvl_1 = new Room("in level 1", "1");
-        lvl_2 = new Room("in level 2", "2");
+        lvl_1 = new Room("in level 1", "1 ");
+        lvl_2 = new Room("in level 2", "2 ");
         lvl_2a = new Room("in level 2a", "2a");
-        lvl_3 = new Room("in level 3", "3");
+        lvl_3 = new Room("in level 3", "3 ");
         lvl_3a = new Room("in level 3a", "3a");
-        lvl_4 = new Room("in level 4", "4");
+        lvl_4 = new Room("in level 4", "4 ");
         lvl_4a = new Room("in level 4a", "4a");
-        lvl_5 = new Room("in level 5", "5");
+        lvl_5 = new Room("in level 5", "5 ");
         lvl_5a = new Room("in level 5a", "5a");
-        lvl_6 = new Room("in level 6", "6");
-        lvl_7 = new Room("in level 7", "7");
-        lvl_8 = new Room("in level 8", "8");
-
+        lvl_6 = new Room("in level 6", "6 ");
+        lvl_7 = new Room("in level 7", "7 ");
+        lvl_8 = new Room("in level 8", "8 ");
+        
+        /* Add NPC's to a game  */
+        lvl_1.setCreature(new Creatures(1));
+        lvl_2.setCreature(new Creatures(2));
+        lvl_2a.setCreature(new Creatures(2));
+        lvl_3.setCreature(new Creatures(3));
+        lvl_3a.setCreature(new Creatures(3));
+        lvl_4.setCreature(new Creatures(4));
+        lvl_4a.setCreature(new Creatures(4));
+        lvl_5.setCreature(new Creatures(5));
+        lvl_5a.setCreature(new Creatures(5));
+        lvl_6.setCreature(new Creatures(6));
+        lvl_7.setCreature(new Creatures(7));
+        lvl_8.setCreature(new Creatures(8));
+        
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
         lvl_1.setExit("right", lvl_2a);
@@ -57,17 +96,18 @@ public class Game {
 
         lvl_6.setExit("forward", lvl_7);
         lvl_6.setExit("back", lvl_5);
-        
+
         lvl_7.setExit("forward", lvl_8);
         lvl_7.setExit("back", lvl_6);
-        
+
         lvl_8.setExit("back", lvl_7);
-        
+
         currentRoom = lvl_1; //The player will start in this room
     }
 
     public void play() {
         printWelcome();
+        test();
 
         boolean finished = false;
         while (!finished) {
@@ -79,11 +119,18 @@ public class Game {
 
     private void printWelcome() {
         System.out.println();
-        System.out.println("You're lost in a dark cave.");
-        System.out.println("Your mission is to go out of the cave.");
+        System.out.println("You're lost in a cave. You have to find the exit to win.");
+        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
+        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
+        System.out.println("win, but if your health reaches zero, you will lose.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
+    }
+
+    private void test() {
+        System.out.println();
+        System.out.println("You have a " + currentWeapon.getWeaponName() + " and a " + currentShield.getShieldName() + ".");
     }
 
     private boolean processCommand(Command command) {
@@ -108,22 +155,25 @@ public class Game {
         return wantToQuit;
     }
 
+    /* By writing "help" in console, this method will be called. */
     private void printHelp() {
-        System.out.println("You're lost in a cave. You have to ");
-        System.out.println("find the exit to win.");
         System.out.println();
         System.out.println("Your command words are:");
-        parser.showCommands();
+        System.out.println("go: This gives you the option to move around. The command is: go \"direction\".");
+        System.out.println("map: The console will print out a map and your current whereabouts.");
+        System.out.println("quit: The game will quit.");
+
+        /* parser.showCommands(); */ // This line prints out the command words.
     }
 
     private void printMap() {
         System.out.println();
-		System.out.println("/--------------------------------------------------------------\\");
-		System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
-		System.out.println("|         " + currentRoom.isInRoom("2") + " -- " + currentRoom.isInRoom("3") + " -- " + currentRoom.isInRoom("4") + " -<                              |");
-		System.out.println("| " + currentRoom.isInRoom("1") + " -<                         " + currentRoom.isInRoom("5") + " -- " + currentRoom.isInRoom("6") + " -- " + currentRoom.isInRoom("7") + " -- " + currentRoom.isInRoom("8") + " |");
-		System.out.println("|         " + currentRoom.isInRoom("2a") + " -- " + currentRoom.isInRoom("3a") + " -- " + currentRoom.isInRoom("4a") + "                                 |");
-		System.out.println("\\--------------------------------------------------------------/");
+        System.out.println("/--------------------------------------------------------------\\");
+        System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
+        System.out.println("|         " + currentRoom.isInRoom("2 ") + " -- " + currentRoom.isInRoom("3 ") + " -- " + currentRoom.isInRoom("4 ") + " -<                              |");
+        System.out.println("| " + currentRoom.isInRoom("1 ") + " -<                         " + currentRoom.isInRoom("5 ") + " -- " + currentRoom.isInRoom("6 ") + " -- " + currentRoom.isInRoom("7 ") + " -- " + currentRoom.isInRoom("8 ") + " |");
+        System.out.println("|         " + currentRoom.isInRoom("2a") + " -- " + currentRoom.isInRoom("3a") + " -- " + currentRoom.isInRoom("4a") + "                                 |");
+        System.out.println("\\--------------------------------------------------------------/");
         System.out.println();
     }
 
