@@ -3,14 +3,42 @@ package main;
 public class Game {
 
     private Parser parser;
-    private Room currentRoom;
+    protected Room currentRoom;
+    private Weapons currentWeapon;
+    private Helmets currentHelmet;
+    private Armor currentArmor;
+    private Leggings currentLeggings;
+    private Shields currentShield;
+    private Boots currentBoots;
 
     public Game() {
         createRooms();
+        generateWeapons();
+        generateArmor();
         parser = new Parser();
     }
 
+<<<<<<< HEAD
     protected void createRooms() {
+=======
+    private void generateWeapons() {
+        Weapons woodenSword = new Weapons("wooden sword", 1, 3);
+        Weapons ironSword = new Weapons("iron sword", 2, 4);
+        Weapons steelSword = new Weapons("steel sword", 3, 5);
+        currentWeapon = woodenSword;
+    }
+
+    private void generateArmor() {
+        Armor woodenChestplate = new Armor("wooden chestplate", 5);
+        Leggings woodenLeggings = new Leggings("wooden leggings", 2);
+        Boots woodenBoots = new Boots("wooden boots", 2);
+
+        Shields woodenShield = new Shields("wooden shield", 1, 5);
+        currentShield = woodenShield;
+    }
+
+    private void createRooms() {
+>>>>>>> refs/remotes/origin/master
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
@@ -68,6 +96,7 @@ public class Game {
 
     public void play() {
         printWelcome();
+        test();
 
         boolean finished = false;
         while (!finished) {
@@ -86,6 +115,11 @@ public class Game {
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
+    }
+
+    private void test() {
+        System.out.println();
+        System.out.println("You have a " + currentWeapon.getWeaponName() + " and a " + currentShield.getShieldName() + ".");
     }
 
     private boolean processCommand(Command command) {
@@ -109,32 +143,19 @@ public class Game {
         }
         return wantToQuit;
     }
+
     /* By writing "help" in console, this method will be called. */
     private void printHelp() {
         System.out.println();
-        System.out.println("You're lost in a cave. You have to find the exit to win.");
-        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
-        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
-        System.out.println("win, but if your health reaches zero, you will lose.");
-        System.out.println();
-        System.out.println("There will be monsters in every room and to move to be able to move to the next room,");
-        System.out.println("you have to defeat all the monsters.");
-        System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("help: Self-explanatory.");
-        System.out.println();
         System.out.println("go: This gives you the option to move around. The command is: go \"direction\".");
-        System.out.println("The game will tell you the paths. For example, if you can and want to go right");
-        System.out.println("you write \"go right\" to go right.");
-        System.out.println();
         System.out.println("map: The console will print out a map and your current whereabouts.");
-        System.out.println();
         System.out.println("quit: The game will quit.");
 
         /* parser.showCommands(); */ // This line prints out the command words.
-}
+    }
 
-private void printMap() {
+    private void printMap() {
         System.out.println();
         System.out.println("/--------------------------------------------------------------\\");
         System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
