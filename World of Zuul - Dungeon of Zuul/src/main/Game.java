@@ -35,7 +35,7 @@ public class Game {
     }
 
     private void createRooms() {
->>>>>>> refs/remotes/origin/master
+
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
