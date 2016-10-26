@@ -151,6 +151,10 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.LOOK) {
+            getLongDescription;
+        } else if (commandWord == CommandWord.STATUS) {
+            
         }
         return wantToQuit;
     }
