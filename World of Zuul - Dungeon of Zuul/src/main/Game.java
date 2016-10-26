@@ -3,11 +3,35 @@ package main;
 public class Game {
 
     private Parser parser;
-    private Room currentRoom;
+    protected Room currentRoom;
+    private Weapons currentWeapon;
+    private Helmets currentHelmet;
+    private Armor currentArmor;
+    private Leggings currentLeggings;
+    private Shields currentShield;
+    private Boots currentBoots;
 
     public Game() {
         createRooms();
+        generateWeapons();
+        generateArmor();
         parser = new Parser();
+    }
+
+    private void generateWeapons() {
+        Weapons woodenSword = new Weapons("wooden sword", 1, 3);
+        Weapons ironSword = new Weapons("iron sword", 2, 4);
+        Weapons steelSword = new Weapons("steel sword", 3, 5);
+        currentWeapon = woodenSword;
+    }
+
+    private void generateArmor() {
+        Armor woodenChestplate = new Armor("wooden chestplate", 5);
+        Leggings woodenLeggings = new Leggings("wooden leggings", 2);
+        Boots woodenBoots = new Boots("wooden boots", 2);
+
+        Shields woodenShield = new Shields("wooden shield", 1, 5);
+        currentShield = woodenShield;
     }
 
     private void createRooms() {
@@ -68,6 +92,7 @@ public class Game {
 
     public void play() {
         printWelcome();
+        test();
 
         boolean finished = false;
         while (!finished) {
@@ -86,6 +111,11 @@ public class Game {
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
+    }
+
+    private void test() {
+        System.out.println();
+        System.out.println("You have a " + currentWeapon.getWeaponName() + " and a " + currentShield.getShieldName() + ".");
     }
 
     private boolean processCommand(Command command) {
@@ -109,6 +139,7 @@ public class Game {
         }
         return wantToQuit;
     }
+
     /* By writing "help" in console, this method will be called. */
     private void printHelp() {
         System.out.println();
@@ -118,9 +149,9 @@ public class Game {
         System.out.println("quit: The game will quit.");
 
         /* parser.showCommands(); */ // This line prints out the command words.
-}
+    }
 
-private void printMap() {
+    private void printMap() {
         System.out.println();
         System.out.println("/--------------------------------------------------------------\\");
         System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
