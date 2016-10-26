@@ -41,3 +41,4 @@ public class Creatures {
 class vendor {
     String[] inventoryVendor = new String[8]; //mkaing inventory
 }
+ 
