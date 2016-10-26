@@ -14,8 +14,8 @@ public class Shields extends Armor {
     private String shieldName;
     private int reflectChance;
 
-    public Shields(String n, int a, int r) {
-	super(a);
+    public Shields(String description, int uniqueID, String n, int a, int r) {
+	super(description, uniqueID, a);
 	shieldName = n;
 	reflectChance = r;
     }

@@ -10,6 +10,8 @@ public class Game {
     private Leggings currentLeggings;
     private Shields currentShield;
     private Boots currentBoots;
+    private boolean hasWeapon = true;
+    private boolean hasShield = true;
 
     public Game() {
         createRooms();
@@ -19,18 +21,12 @@ public class Game {
     }
 
     private void generateWeapons() {
-        Weapons woodenSword = new Weapons("wooden sword", 1, 3);
-        Weapons ironSword = new Weapons("iron sword", 2, 4);
-        Weapons steelSword = new Weapons("steel sword", 3, 5);
+        Weapons woodenSword = new Weapons("It's a wooden sword.",1,"wooden sword", 1, 3);
         currentWeapon = woodenSword;
     }
 
     private void generateArmor() {
-        Armor woodenChestplate = new Armor("wooden chestplate", 5);
-        Leggings woodenLeggings = new Leggings("wooden leggings", 2);
-        Boots woodenBoots = new Boots("wooden boots", 2);
-
-        Shields woodenShield = new Shields("wooden shield", 1, 5);
+        Shields woodenShield = new Shields("It's a wooden shield",2,"wooden shield", 1, 5);
         currentShield = woodenShield;
     }
 
@@ -51,7 +47,6 @@ public class Game {
         lvl_6 = new Room("in level 6", "6 ");
         lvl_7 = new Room("in level 7", "7 ");
         lvl_8 = new Room("in level 8", "8 ");
-<<<<<<< HEAD
 
         Creatures monster2 = new Creatures(2);
         Creatures monster2a = new Creatures(3);
@@ -65,8 +60,6 @@ public class Game {
         Creatures monster7 = new Creatures(11);
         Creatures monster8 = new Creatures(12);
 
-=======
-        
         /* Add NPC's to a game  */
         lvl_1.setCreature(new Creatures(1));
         lvl_2.setCreature(new Creatures(2));
@@ -80,8 +73,7 @@ public class Game {
         lvl_6.setCreature(new Creatures(6));
         lvl_7.setCreature(new Creatures(7));
         lvl_8.setCreature(new Creatures(8));
-        
->>>>>>> refs/remotes/origin/master
+
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
         lvl_1.setExit("right", lvl_2a);
@@ -164,6 +156,8 @@ public class Game {
             printMap();
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
+        } else if (commandWord == CommandWord.DROP) {
+            dropWeapon(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         }
@@ -192,7 +186,19 @@ public class Game {
         System.out.println();
     }
 
-    private void equipWeapon() {
+    private void dropWeapon(Command command) {
+        String weapon = currentWeapon.getWeaponName();
+        if (!hasWeapon) {
+            System.out.println("You don't have any weapon to drop.");
+        } else if (!command.hasSecondWord()) {
+            System.out.println("Drop what?");
+        } else if (command.getSecondWord() == weapon) {
+            currentWeapon = null;
+            hasWeapon = false;
+            System.out.println("Successfully dropped");
+        } else {
+            System.out.println("I'm not sure what you mean with " + command.getSecondWord() + ("."));
+        }
 
     }
 

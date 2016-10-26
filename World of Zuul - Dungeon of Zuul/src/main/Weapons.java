@@ -9,16 +9,17 @@ package main;
  *
  * @author Nicolai
  */
-public class Weapons {
+public class Weapons extends Items {
 
     private int maxDamage;
     private int minDamage;
     private final String weaponName;
 
-    public Weapons(String n, int minD, int maxD) {
-	weaponName = n;
-	minDamage = minD;
-	maxDamage = maxD;
+    public Weapons(String description, int uniqueID, String n, int minD, int maxD) {
+        super(description, uniqueID);
+	this.weaponName = n;
+	this.minDamage = minD;
+	this.maxDamage = maxD;
     }
 
     public String getWeaponName(){

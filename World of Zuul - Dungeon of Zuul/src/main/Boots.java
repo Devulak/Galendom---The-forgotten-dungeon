@@ -13,8 +13,8 @@ public class Boots extends Armor {
 
     private String bootsName;
 
-    public Boots(String n, int a) {
-	super(a);
+    public Boots(String description, int uniqueID, String n, int a) {
+	super(description, uniqueID, a);
 	bootsName = n;
     }
 

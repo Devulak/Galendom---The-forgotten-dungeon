@@ -13,8 +13,8 @@ public class Leggings extends Armor {
 
     private String leggingsName;
 
-    public Leggings(String n, int a) {
-	super(a);
+    public Leggings(String description, int uniqueID, String n, int a) {
+	super(description, uniqueID, a);
 	leggingsName = n;
     }
 

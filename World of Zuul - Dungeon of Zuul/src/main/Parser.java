@@ -30,7 +30,7 @@ public class Parser
 			word1 = tokenizer.next();
 			if(tokenizer.hasNext())
 			{
-				word2 = tokenizer.next(); 
+                            word2 = tokenizer.next(); 
 			}
 		}
 
