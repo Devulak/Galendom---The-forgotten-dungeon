@@ -10,12 +10,18 @@ public class Room
     private String uniqueId;
     private String description;
     private HashMap<String, Room> exits;
+	private Creatures NPC;
 
     public Room(String description, String uniqueId) 
     {
         this.description = description;
         this.uniqueId = uniqueId;
         exits = new HashMap<String, Room>();
+    }
+
+    public void setCreature(Creatures Creature) 
+    {
+        NPC = Creature;
     }
 
     public void setExit(String direction, Room neighbor) 
