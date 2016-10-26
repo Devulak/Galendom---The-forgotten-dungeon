@@ -6,6 +6,7 @@ public class Game {
     private Room currentRoom;
     private Weapons currentWeapon;
     private Armor currentArmor;
+    private Shields currentShield;
 
     public Game() {
 	createRooms();
@@ -27,7 +28,7 @@ public class Game {
 	Boots woodenBoots = new Boots("wooden boots", 2);
 	
 	Shields woodenShield = new Shields("wooden shield", 1, 5);
-	currentArmor = woodenShield;
+	currentShield = woodenShield;
     }
 
     private void createRooms() {
@@ -111,7 +112,7 @@ public class Game {
 
     private void test() {
 	System.out.println();
-	System.out.println("You have a " + currentWeapon.getWeaponName() + " and a " + currentArmor.getArmorName() + ".");
+	System.out.println("You have a " + currentWeapon.getWeaponName() + " and a " + currentShield.getShieldName() + ".");
     }
 
     private boolean processCommand(Command command) {
