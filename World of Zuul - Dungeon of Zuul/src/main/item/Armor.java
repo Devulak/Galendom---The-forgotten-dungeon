@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package main.item;
+
+import main.item.Item;
 
 /**
  *
  * @author Nicolai
  */
-public class Armor extends Items {
+public class Armor extends Item {
 
     private int armorPoints;
     private String armorName;

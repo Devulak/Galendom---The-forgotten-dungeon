@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package main.item;
+
+import main.item.Item;
 
 /**
  *
  * @author Nicolai
  */
-public class Weapons extends Items {
+public class Weapons extends Item {
 
     private int maxDamage;
     private int minDamage;

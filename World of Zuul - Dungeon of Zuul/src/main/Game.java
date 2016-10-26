@@ -1,5 +1,12 @@
 package main;
 
+import main.item.Helmets;
+import main.item.Shields;
+import main.item.Weapons;
+import main.item.Armor;
+import main.item.Leggings;
+import main.item.Boots;
+
 public class Game {
 
     private Parser parser;

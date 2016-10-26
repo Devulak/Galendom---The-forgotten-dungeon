@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package main.item;
 
 
-public class Items {
+public class Item {
 
     private String description;
     private int uniqueID;
     
             
-    public Items(String d, int u) {
+    public Item(String d, int u) {
         this.description = d;
         this.uniqueID = u;
 
