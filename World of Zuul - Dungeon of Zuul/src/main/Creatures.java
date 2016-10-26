@@ -38,9 +38,4 @@ public class Creatures {
         damage = 5;
         XP = 0;
         }
-    
-    protected Vendor(){
-        String[] inventoryVendor = new String[8]; //mkaing inventory
-        Creatures Vendor = new Creatures();
-    }
 }
