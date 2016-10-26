@@ -35,6 +35,10 @@ public class Game {
     }
 
     private void createRooms() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
@@ -51,7 +55,20 @@ public class Game {
         lvl_6 = new Room("in level 6", "6 ");
         lvl_7 = new Room("in level 7", "7 ");
         lvl_8 = new Room("in level 8", "8 ");
-
+        
+        
+        Creatures monster2 = new Creatures(2);
+        Creatures monster2a = new Creatures(3);
+        Creatures monster3 = new Creatures(4);
+        Creatures monster3a = new Creatures(5); 
+        Creatures monster4 = new Creatures(6); 
+        Creatures monster4a = new Creatures(7); 
+        Creatures monster5 = new Creatures(8); 
+        Creatures monster5a = new Creatures(9); 
+        Creatures monster6 = new Creatures(10);
+        Creatures monster7 = new Creatures(11); 
+        Creatures monster8 = new Creatures(12); 
+        
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
         lvl_1.setExit("right", lvl_2a);

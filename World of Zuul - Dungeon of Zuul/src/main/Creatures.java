@@ -30,6 +30,7 @@ public class Creatures {
     Creatures monster7 = new Creatures(11); 
     Creatures monster8 = new Creatures(12); 
     
+       
     protected Creatures(){ //this is a constructor for the hero
         String[] inventoryHero = new String[8]; //making inventory
         health = 12;
@@ -38,7 +39,3 @@ public class Creatures {
         XP = 0;
         }
 }
-class vendor {
-    String[] inventoryVendor = new String[8]; //mkaing inventory
-}
- 
