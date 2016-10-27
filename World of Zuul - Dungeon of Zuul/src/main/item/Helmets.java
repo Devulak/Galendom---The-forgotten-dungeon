@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package main.item;
 
 /**
  *
@@ -13,8 +13,8 @@ public class Helmets extends Armor {
 
     private String helmetName;
 
-    public Helmets(String n, int a) {
-	super(a);
+    public Helmets(String description, int uniqueID, String n, int a) {
+	super(description, uniqueID, a);
 	helmetName = n;
     }
 
