@@ -107,19 +107,26 @@ public class Game {
 
         currentRoom = lvl_1; //The player will start in this room
     }
-
+	
+	/**
+	 * The play method will be called when the main class starts. The game will
+	 * run until you write quit in the console.
+	 */
     public void play() {
         printWelcome();
         test();
 
-        boolean finished = false;
-        while (!finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-        System.out.println("Thank you for playing.  Good bye.");
-    }
+		boolean finished = false;
+		while (!finished) {
+			Command command = parser.getCommand();
+			finished = processCommand(command);
+		}
+		System.out.println("Thank you for playing.  Good bye.");
+	}
 
+	/**
+	 * This method will print out when you start the game 
+	 */
     private void printWelcome() {
         System.out.println();
         System.out.println("You're lost in a cave. You have to find the exit to win.");
@@ -192,7 +199,11 @@ public class Game {
 		else
 			System.out.println(currentRoom.getExitString());
 	}
-
+	
+	/**
+	 * This method will be called when you write "map" in console. /* It will
+	 * print out the whole map and it will also include your current position.
+	 */
     private void printMap()
 	{
         System.out.println("/----------------------------------------------------------------------------------------\\");
@@ -220,7 +231,7 @@ public class Game {
 
     } */
     
-    
+	/* When you write "go" in console, this method will be called. */
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
@@ -235,17 +246,22 @@ public class Game {
 		{
             System.out.println("The monster is blocking your way");
 		}
-		else if (nextRoom == null)
+		else if (nextRoom == null) // It will first check if there is a path to the next room.
 		{
-            System.out.println("There is no door!");
+            System.out.println("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
         }
 		else
 		{
             currentRoom = nextRoom;
-			printLook();
+			printLook(); // It will give you a description of what's in the room
         }
     }
 
+/**
+ * This method will run when you write quit in the console. It will first check
+ * if you add a second word. Like "quit game", the game will ask you to quit what?
+ * Otherwise the while loop in play() method will stop and the game will quit.
+ */
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
