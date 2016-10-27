@@ -154,6 +154,13 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.LOOK) {
+            currentRoom.getLongDescription();
+            System.out.println(currentRoom.getLongDescription());
+        } else if (commandWord == CommandWord.STATUS) {
+            
+        } else if (commandWord == CommandWord.STATUS) {
+            
         }
         return wantToQuit;
     }
@@ -165,6 +172,9 @@ public class Game {
         System.out.println("go: This gives you the option to move around. The command is: go \"direction\".");
         System.out.println("map: The console will print out a map and your current whereabouts.");
         System.out.println("quit: The game will quit.");
+        System.out.println("look: Look around in the room for items.");
+        System.out.println("Status: Your healthpoints and XP");
+        System.out.println("Inventory: Look through your inventory");
 
         /* parser.showCommands(); */ // This line prints out the command words.
     }

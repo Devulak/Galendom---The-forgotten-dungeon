@@ -34,7 +34,10 @@ public class Room
 		String RoomBlock = "*";
 		if (CheckId == this.uniqueId)
 			RoomBlock = "█";
-		return RoomBlock + "." + CheckId;
+		if (CheckId.length() < 2)
+			return RoomBlock + "." + CheckId + " ";
+		else
+			return RoomBlock + "." + CheckId;
     }
 
     public String getShortDescription()
