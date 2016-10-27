@@ -28,12 +28,12 @@ public class Game {
     }
 
     private void generateWeapons() {
-        Weapons woodenSword = new Weapons("It's a wooden sword.", 1, "wooden sword", 1, 3);
+        Weapons woodenSword = new Weapons("It's a wooden sword.",1,"wooden sword", 1, 3);
         currentWeapon = woodenSword;
     }
 
     private void generateArmor() {
-        Shields woodenShield = new Shields("It's a wooden shield", 2, "wooden shield", 1, 5);
+        Shields woodenShield = new Shields("It's a wooden shield",2,"wooden shield", 1, 5);
         currentShield = woodenShield;
     }
 
@@ -119,16 +119,11 @@ public class Game {
         currentRoom = lvl_1; //The player will start in this room
     }
 
-    /**
-     * The play method will be called when the main class starts. The game will
-     * run until you write quit in the console.
-     */
     public void play() {
         printWelcome();
         test();
 
         boolean finished = false;
-
         while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
@@ -136,9 +131,6 @@ public class Game {
         System.out.println("Thank you for playing.  Good bye.");
     }
 
-    /**  
-     * This method will print out when you start the game 
-     */
     private void printWelcome() {
         System.out.println();
         System.out.println("You're lost in a cave. You have to find the exit to win.");
@@ -198,10 +190,6 @@ public class Game {
         /* parser.showCommands(); */ // This line prints out the command words.
     }
 
-    /**
-     * This method will be called when you write "map" in console. /* It will
-     * print out the whole map and it will also include your current position.
-     */
     private void printMap() {
         System.out.println();
         System.out.println("/--------------------------------------------------------------\\");
@@ -229,10 +217,11 @@ public class Game {
         }
 
     } */
- /* When you write "go" in console, this method will be called. */
+    
+    
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
-            System.out.println("Go where?"); // If you only write "go" in console, the game will ask you "Go where?"
+            System.out.println("Go where?");
             return;
         }
 
@@ -240,18 +229,14 @@ public class Game {
 
         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) { // It will first check if there is a path to the next room.
-            System.out.println("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
+        if (nextRoom == null) {
+            System.out.println("There is no door!");
         } else {
-            currentRoom = nextRoom; //If there is a path to the room, the game will place you in that room.
-            System.out.println(currentRoom.getLongDescription()); // It will give you a long description of the room.
+            currentRoom = nextRoom;
+            System.out.println(currentRoom.getLongDescription());
         }
     }
-/**
- * This method will run when you write quit in the console. It will first check
- * if you add a second word. Like "quit game", the game will ask you to quit what?
- * Otherwise the while loop in play() method will stop and the game will quit.
- */
+
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
