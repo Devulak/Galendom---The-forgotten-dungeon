@@ -163,8 +163,6 @@ public class Game {
             printMap();
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
-        } else if (commandWord == CommandWord.DROP) {
-            dropWeapon(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         }
