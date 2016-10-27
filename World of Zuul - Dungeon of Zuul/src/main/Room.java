@@ -10,7 +10,7 @@ public class Room
     private String uniqueId;
     private String description;
     private HashMap<String, Room> exits;
-	private Creatures NPC;
+	private Creature Monster;
 
     public Room(String description, String uniqueId) 
     {
@@ -19,9 +19,9 @@ public class Room
         exits = new HashMap<String, Room>();
     }
 
-    public void setCreature(Creatures Creature) 
+    public void setCreature(Creature Creature) 
     {
-        NPC = Creature;
+        Monster = Creature;
     }
 
     public void setExit(String direction, Room neighbor) 

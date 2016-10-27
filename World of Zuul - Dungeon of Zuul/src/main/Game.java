@@ -19,6 +19,7 @@ public class Game {
     private Boots currentBoots;
     private boolean hasWeapon = true;
     private boolean hasShield = true;
+	private Creature Hero = new Creature(1);
 
     public Game() {
         createRooms();
@@ -55,31 +56,19 @@ public class Game {
         lvl_7 = new Room("in level 7", "7 ");
         lvl_8 = new Room("in level 8", "8 ");
 
-        Creatures monster2 = new Creatures(2);
-        Creatures monster2a = new Creatures(3);
-        Creatures monster3 = new Creatures(4);
-        Creatures monster3a = new Creatures(5);
-        Creatures monster4 = new Creatures(6);
-        Creatures monster4a = new Creatures(7);
-        Creatures monster5 = new Creatures(8);
-        Creatures monster5a = new Creatures(9);
-        Creatures monster6 = new Creatures(10);
-        Creatures monster7 = new Creatures(11);
-        Creatures monster8 = new Creatures(12);
-
         /* Add NPC's to a game  */
-        lvl_1.setCreature(new Creatures(1));
-        lvl_2.setCreature(new Creatures(2));
-        lvl_2a.setCreature(new Creatures(2));
-        lvl_3.setCreature(new Creatures(3));
-        lvl_3a.setCreature(new Creatures(3));
-        lvl_4.setCreature(new Creatures(4));
-        lvl_4a.setCreature(new Creatures(4));
-        lvl_5.setCreature(new Creatures(5));
-        lvl_5a.setCreature(new Creatures(5));
-        lvl_6.setCreature(new Creatures(6));
-        lvl_7.setCreature(new Creatures(7));
-        lvl_8.setCreature(new Creatures(8));
+        lvl_1.setCreature(new Creature(1));
+        lvl_2.setCreature(new Creature(2));
+        lvl_2a.setCreature(new Creature(2));
+        lvl_3.setCreature(new Creature(3));
+        lvl_3a.setCreature(new Creature(3));
+        lvl_4.setCreature(new Creature(4));
+        lvl_4a.setCreature(new Creature(4));
+        lvl_5.setCreature(new Creature(5));
+        lvl_5a.setCreature(new Creature(5));
+        lvl_6.setCreature(new Creature(6));
+        lvl_7.setCreature(new Creature(7));
+        lvl_8.setCreature(new Creature(8));
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
