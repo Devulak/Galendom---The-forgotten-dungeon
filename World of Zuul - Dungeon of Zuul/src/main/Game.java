@@ -19,6 +19,7 @@ public class Game {
     private Boots currentBoots;
     private boolean hasWeapon = true;
     private boolean hasShield = true;
+	private Creature Hero = new Creature(1);
 
     public Game() {
         createRooms();
@@ -42,44 +43,32 @@ public class Game {
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
         /* Give rooms descriptions. If you write "in a cave" then the game will say something like "You are in a cave" */
-        lvl_1 = new Room("in level 1", "1 ");
-        lvl_2 = new Room("in level 2", "2 ");
-        lvl_2a = new Room("in level 2a", "2a");
-        lvl_3 = new Room("in level 3", "3 ");
-        lvl_3a = new Room("in level 3a", "3a");
-        lvl_4 = new Room("in level 4", "4 ");
-        lvl_4a = new Room("in level 4a", "4a");
-        lvl_5 = new Room("in level 5", "5 ");
-        lvl_5a = new Room("in level 5a", "5a");
-        lvl_6 = new Room("in level 6", "6 ");
-        lvl_7 = new Room("in level 7", "7 ");
-        lvl_8 = new Room("in level 8", "8 ");
+        lvl_1 = new Room("in level 1");
+        lvl_2 = new Room("in level 2");
+        lvl_2a = new Room("in level 2a");
+        lvl_3 = new Room("in level 3");
+        lvl_3a = new Room("in level 3a");
+        lvl_4 = new Room("in level 4");
+        lvl_4a = new Room("in level 4a");
+        lvl_5 = new Room("in level 5");
+        lvl_5a = new Room("in level 5a");
+        lvl_6 = new Room("in level 6");
+        lvl_7 = new Room("in level 7");
+        lvl_8 = new Room("in level 8");
 
-        Creatures monster2 = new Creatures(2);
-        Creatures monster2a = new Creatures(3);
-        Creatures monster3 = new Creatures(4);
-        Creatures monster3a = new Creatures(5);
-        Creatures monster4 = new Creatures(6);
-        Creatures monster4a = new Creatures(7);
-        Creatures monster5 = new Creatures(8);
-        Creatures monster5a = new Creatures(9);
-        Creatures monster6 = new Creatures(10);
-        Creatures monster7 = new Creatures(11);
-        Creatures monster8 = new Creatures(12);
-
-        /* Add NPC's to a game  */
-        lvl_1.setCreature(new Creatures(1));
-        lvl_2.setCreature(new Creatures(2));
-        lvl_2a.setCreature(new Creatures(2));
-        lvl_3.setCreature(new Creatures(3));
-        lvl_3a.setCreature(new Creatures(3));
-        lvl_4.setCreature(new Creatures(4));
-        lvl_4a.setCreature(new Creatures(4));
-        lvl_5.setCreature(new Creatures(5));
-        lvl_5a.setCreature(new Creatures(5));
-        lvl_6.setCreature(new Creatures(6));
-        lvl_7.setCreature(new Creatures(7));
-        lvl_8.setCreature(new Creatures(8));
+        /* Adds monsters to a game  */
+        lvl_1.setMonster(new Creature(1));
+        lvl_2.setMonster(new Creature(2));
+        lvl_2a.setMonster(new Creature(2));
+        lvl_3.setMonster(new Creature(3));
+        lvl_3a.setMonster(new Creature(3));
+        lvl_4.setMonster(new Creature(4));
+        lvl_4a.setMonster(new Creature(4));
+        lvl_5.setMonster(new Creature(5));
+        lvl_5a.setMonster(new Creature(5));
+        lvl_6.setMonster(new Creature(6));
+        lvl_7.setMonster(new Creature(7));
+        lvl_8.setMonster(new Creature(8));
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
@@ -139,7 +128,7 @@ public class Game {
         System.out.println("win, but if your health reaches zero, you will lose.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+		printLook();
     }
 
     private void test() {
@@ -166,10 +155,9 @@ public class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.LOOK) {
-            currentRoom.getLongDescription();
-            System.out.println(currentRoom.getLongDescription());
+			printLook();
         } else if (commandWord == CommandWord.STATUS) {
-            
+            printStatus();
         } else if (commandWord == CommandWord.STATUS) {
             
         }
@@ -189,16 +177,30 @@ public class Game {
 
         /* parser.showCommands(); */ // This line prints out the command words.
     }
+	
+    private void printStatus() // Prints out the character specific things to check
+	{
+        System.out.println(Hero.getHealth()); // Prints out the hero's health
+        System.out.println(Hero.getExperience()); // Prints out the hero's experience
+    }
+	
+	private void printLook() // Prints out what the character can see
+	{
+		System.out.println("You are " + currentRoom.getShortDescription());
+		if(currentRoom.hasMonster())
+			System.out.println("There's a monster " + currentRoom.Monster.getLevel() + " blocking your way");
+		else
+			System.out.println(currentRoom.getExitString());
+	}
 
-    private void printMap() {
-        System.out.println();
-        System.out.println("/--------------------------------------------------------------\\");
-        System.out.println("|                                 " + currentRoom.isInRoom("5a") + "                         |");
-        System.out.println("|         " + currentRoom.isInRoom("2 ") + " -- " + currentRoom.isInRoom("3 ") + " -- " + currentRoom.isInRoom("4 ") + " -<                              |");
-        System.out.println("| " + currentRoom.isInRoom("1 ") + " -<                         " + currentRoom.isInRoom("5 ") + " -- " + currentRoom.isInRoom("6 ") + " -- " + currentRoom.isInRoom("7 ") + " -- " + currentRoom.isInRoom("8 ") + " |");
-        System.out.println("|         " + currentRoom.isInRoom("2a") + " -- " + currentRoom.isInRoom("3a") + " -- " + currentRoom.isInRoom("4a") + "                                 |");
-        System.out.println("\\--------------------------------------------------------------/");
-        System.out.println();
+    private void printMap()
+	{
+        System.out.println("/----------------------------------------------------------------------------------------\\");
+        System.out.println("|                                              level 5a                                  |");
+        System.out.println("|            level 2  -- level 3 -- level 4 -<                                           |");
+        System.out.println("| level 1 -<                                   level 5 -- level 6 -- level 7 -- level 8  |");
+        System.out.println("|            level 2a -- level 3a -- level 4a                                            |");
+        System.out.println("\\----------------------------------------------------------------------------------------/");
     }
 
     /*
@@ -229,11 +231,18 @@ public class Game {
 
         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
+        if(currentRoom.hasMonster())
+		{
+            System.out.println("The monster is blocking your way");
+		}
+		else if (nextRoom == null)
+		{
             System.out.println("There is no door!");
-        } else {
+        }
+		else
+		{
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+			printLook();
         }
     }
 
