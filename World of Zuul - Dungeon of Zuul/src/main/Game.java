@@ -57,6 +57,8 @@ public class Game {
         lvl_8 = new Room("in level 8");
 
         /* Adds monsters to a game  */
+        lvl_1.setMonster(new Creature(1));
+        lvl_2.setMonster(new Creature(2));
         lvl_2a.setMonster(new Creature(2));
         lvl_3.setMonster(new Creature(3));
         lvl_3a.setMonster(new Creature(3));
