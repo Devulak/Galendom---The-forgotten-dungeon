@@ -20,6 +20,8 @@ public class Creature {
 	
     private int damageMin; // Maximum amount of damage
     private int damageMax; // Minimum amount of damage
+	
+	private List<Object> inventory = new ArrayList<>(); // Inventory full of stuff!
 
     public Creature(int lvl) { //this is a constructor for the creatures
 		level = lvl;

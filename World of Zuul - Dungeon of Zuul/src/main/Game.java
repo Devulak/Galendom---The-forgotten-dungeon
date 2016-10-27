@@ -194,7 +194,8 @@ public class Game {
     }
 
     /* By writing "help" in console, this method will be called. */
-    private void printHelp() {
+    private void printHelp()
+	{
         System.out.println();
         System.out.println("Your command words are:");
         System.out.println("go: This gives you the option to move around. The command is: go \"direction\".");
@@ -222,7 +223,9 @@ public class Game {
             System.out.println("Monster: " + currentRoom.Monster.printHealth());
 		}
 		else
+		{
 			System.out.println(currentRoom.getExitString());
+		}
 	}
 	
 	/**
@@ -251,7 +254,7 @@ public class Game {
 			{
 				currentRoom.Monster.attack(Hero);
 				
-				if(Hero.health > 0 || true)
+				if(Hero.health > 0)
 				{
 					System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth());
 					System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
