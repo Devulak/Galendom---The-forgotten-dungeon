@@ -251,7 +251,7 @@ public class Game {
 			{
 				currentRoom.Monster.attack(Hero);
 				
-				if(Hero.health > 0)
+				if(Hero.health > 0 || true)
 				{
 					System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth());
 					System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
@@ -264,6 +264,7 @@ public class Game {
 			else
 			{
 				System.out.println("You have slain the monster (" + currentRoom.Monster.printLevel() + ")!");
+				Hero.gainExperience(currentRoom.Monster);
 				currentRoom.Monster = null;
 			}
 		}
