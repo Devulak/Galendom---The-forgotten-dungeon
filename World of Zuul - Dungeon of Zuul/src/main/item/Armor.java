@@ -18,7 +18,7 @@ public class Armor extends Item {
 
     /* Constructor for armor in general */
     public Armor(String description, int uniqueID, int a) {
-        super(description, uniqueID);
+        super(description, true, "");
         armorPoints = a;
     }
 

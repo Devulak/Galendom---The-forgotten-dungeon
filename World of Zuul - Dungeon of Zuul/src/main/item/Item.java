@@ -1,20 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.item;
 
 
-public class Item {
+public class Item
+{
+	private String name;
+	private boolean stackable;
+	private String slot;
 
-    private String description;
-    private int uniqueID;
-    
-            
-    public Item(String d, int u) {
-        this.description = d;
-        this.uniqueID = u;
+	public Item(String name, boolean stackable, String slot) // Constructor
+	{
+		this.name = name;
+		this.stackable = stackable;
+		this.slot = slot;
+	}
 
-    }
+	public String getName() // Get the name of the item
+	{
+		return name;
+	}
 }

@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import main.item.*;
 
 public class Creature {
 	
@@ -21,7 +22,7 @@ public class Creature {
     private int damageMin; // Maximum amount of damage
     private int damageMax; // Minimum amount of damage
 	
-	private List<Object> inventory = new ArrayList<>(); // Inventory full of stuff!
+	protected List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
 
     public Creature(int lvl) { //this is a constructor for the creatures
 		level = lvl;
@@ -30,6 +31,8 @@ public class Creature {
 		health = healthMax;
 		damageMin = level;
 		damageMax = level*2;
+		
+		inventory.add(new Weapon("Wooden Sword", false, "weapon", 1, 2));
 	}
 	
 	protected String printLevel()

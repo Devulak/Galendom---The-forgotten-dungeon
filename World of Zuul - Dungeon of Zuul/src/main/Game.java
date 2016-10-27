@@ -1,41 +1,14 @@
 package main;
 
-import main.item.Helmets;
-import main.item.Shields;
-import main.item.Weapons;
-import main.item.Armor;
-import main.item.Leggings;
-import main.item.Boots;
-
 public class Game {
 
     private Parser parser;
     protected Room currentRoom;
-    private Weapons currentWeapon;
-    private Helmets currentHelmet;
-    private Armor currentArmor;
-    private Leggings currentLeggings;
-    private Shields currentShield;
-    private Boots currentBoots;
-    private boolean hasWeapon = true;
-    private boolean hasShield = true;
 	private Creature Hero = new Creature(1);
 
     public Game() {
         createRooms();
-        generateWeapons();
-        generateArmor();
         parser = new Parser();
-    }
-
-    private void generateWeapons() {
-        Weapons woodenSword = new Weapons("It's a wooden sword.",1,"wooden sword", 1, 3);
-        currentWeapon = woodenSword;
-    }
-
-    private void generateArmor() {
-        Shields woodenShield = new Shields("It's a wooden shield",2,"wooden shield", 1, 5);
-        currentShield = woodenShield;
     }
 
     private void createRooms() {
@@ -114,7 +87,6 @@ public class Game {
 	 */
     public void play() {
         printWelcome();
-        test();
 
 		boolean finished = false;
 		while (!finished) {
@@ -136,11 +108,6 @@ public class Game {
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
 		printLook();
-    }
-
-    private void test() {
-        System.out.println();
-        System.out.println("You have a " + currentWeapon.getWeaponName() + " and a " + currentShield.getShieldName() + ".");
     }
 
     private boolean processCommand(Command command) {
@@ -179,7 +146,7 @@ public class Game {
         }
 		else if (commandWord == CommandWord.INVENTORY)
 		{
-            
+            printInventory();
         }
 		else if (commandWord == CommandWord.ATTACK)
 		{
@@ -205,7 +172,7 @@ public class Game {
         System.out.println("Status: Your healthpoints and XP");
         System.out.println("Inventory: Look through your inventory");
 
-        /* parser.showCommands(); */ // This line prints out the command words.
+        // parser.showCommands(); // This line prints out the command words.
     }
 	
     private void printStatus() // Prints out the character specific things to check
@@ -227,6 +194,14 @@ public class Game {
 			System.out.println(currentRoom.getExitString());
 		}
 	}
+	
+    private void printInventory() // Prints out the hero's current inventory
+	{
+		for (Object Item : Hero.inventory)
+		{
+			System.out.println(Item);
+		}
+    }
 	
 	/**
 	 * This method will be called when you write "map" in console. /* It will

@@ -14,7 +14,7 @@ public class Potions extends Item {
     private int healthReceived;
 
     public Potions(String description, int uniqueID, int h) {
-        super(description, uniqueID);
+        super(description, true, "");
         healthReceived = h;
     }
 
