@@ -193,6 +193,7 @@ public class Game {
         System.out.println();
     }
 
+    /*
     private void dropWeapon(Command command) {
         String weapon = currentWeapon.getWeaponName();
         if (!hasWeapon) {
@@ -207,8 +208,9 @@ public class Game {
             System.out.println("I'm not sure what you mean with " + command.getSecondWord() + ("."));
         }
 
-    }
-
+    } */
+    
+    
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
