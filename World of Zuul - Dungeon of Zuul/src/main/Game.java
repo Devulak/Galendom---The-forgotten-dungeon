@@ -153,20 +153,42 @@ public class Game {
             return false;
         }
 
-        if (commandWord == CommandWord.HELP) {
+        if (commandWord == CommandWord.HELP)
+		{
             printHelp();
-        } else if (commandWord == CommandWord.MAP) {
+        }
+		else if (commandWord == CommandWord.MAP)
+		{
             printMap();
-        } else if (commandWord == CommandWord.GO) {
+        }
+		else if (commandWord == CommandWord.GO)
+		{
             goRoom(command);
-        } else if (commandWord == CommandWord.QUIT) {
+        }
+		else if (commandWord == CommandWord.QUIT)
+		{
             wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.LOOK) {
+        }
+		else if (commandWord == CommandWord.LOOK)
+		{
 			printLook();
-        } else if (commandWord == CommandWord.STATUS) {
+        }
+		else if (commandWord == CommandWord.STATUS)
+		{
             printStatus();
-        } else if (commandWord == CommandWord.STATUS) {
+        }
+		else if (commandWord == CommandWord.INVENTORY)
+		{
             
+        }
+		else if (commandWord == CommandWord.ATTACK)
+		{
+            combatAttack();
+			if(Hero == null)
+			{
+				System.out.println("You've been killed and lost the game!");
+				wantToQuit = true;
+			}
         }
         return wantToQuit;
     }
@@ -187,7 +209,7 @@ public class Game {
 	
     private void printStatus() // Prints out the character specific things to check
 	{
-        System.out.println(Hero.getHealth()); // Prints out the hero's health
+        System.out.println(Hero.printHealth()); // Prints out the hero's health
         System.out.println(Hero.getExperience()); // Prints out the hero's experience
     }
 	
@@ -195,7 +217,10 @@ public class Game {
 	{
 		System.out.println("You are " + currentRoom.getShortDescription());
 		if(currentRoom.hasMonster())
-			System.out.println("There's a monster " + currentRoom.Monster.getLevel() + " blocking your way");
+		{
+			System.out.println("There's a monster " + currentRoom.Monster.printLevel() + " blocking your way");
+            System.out.println("Monster: " + currentRoom.Monster.printHealth());
+		}
 		else
 			System.out.println(currentRoom.getExitString());
 	}
@@ -204,14 +229,46 @@ public class Game {
 	 * This method will be called when you write "map" in console. /* It will
 	 * print out the whole map and it will also include your current position.
 	 */
-    private void printMap()
+	private void printMap()
 	{
-        System.out.println("/----------------------------------------------------------------------------------------\\");
-        System.out.println("|                                              level 5a                                  |");
-        System.out.println("|            level 2  -- level 3 -- level 4 -<                                           |");
-        System.out.println("| level 1 -<                                   level 5 -- level 6 -- level 7 -- level 8  |");
-        System.out.println("|            level 2a -- level 3a -- level 4a                                            |");
-        System.out.println("\\----------------------------------------------------------------------------------------/");
+		System.out.println("/----------------------------------------------------------------------------------------\\");
+		System.out.println("|                                              level 5a                                  |");
+		System.out.println("|            level 2  -- level 3 -- level 4 -<                                           |");
+		System.out.println("| level 1 -<                                   level 5 -- level 6 -- level 7 -- level 8  |");
+		System.out.println("|            level 2a -- level 3a -- level 4a                                            |");
+		System.out.println("\\----------------------------------------------------------------------------------------/");
+	}
+	
+	
+	
+    private void combatAttack()
+	{
+		if(currentRoom.hasMonster())
+		{
+			Hero.attack(currentRoom.Monster);
+			
+			if(currentRoom.Monster.health > 0)
+			{
+				currentRoom.Monster.attack(Hero);
+				
+				if(Hero.health > 0)
+				{
+					System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth());
+					System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
+				}
+				else
+				{
+					Hero = null;
+				}
+			}
+			else
+			{
+				System.out.println("You have slain the monster (" + currentRoom.Monster.printLevel() + ")!");
+				currentRoom.Monster = null;
+			}
+		}
+		else
+			System.out.println("There's no monster to attack");
     }
 
     /*

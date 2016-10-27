@@ -9,7 +9,7 @@ public class Creature {
     private int experience = 0; // The amount of experience the creature has (this always starts with "0")
     private int experienceMax; // The max amount of experience the creature needs for a level up
 	
-    private int health; // Current health
+    protected int health; // Current health
     private int healthMax; // Maximum amount of health
 	
     private int damageMin; // Maximum amount of damage
@@ -24,12 +24,12 @@ public class Creature {
 		damageMax = level*2;
 	}
 	
-	protected String getLevel()
+	protected String printLevel()
 	{
 		return "level " + level;
 	}
 	
-	protected String getHealth()
+	protected String printHealth()
 	{
 		int blockTotal = 20;
 		int blockHealth = (int) Math.ceil((double) health/healthMax*blockTotal);
@@ -57,5 +57,10 @@ public class Creature {
 				blocks += "□";
 		}
 		return blocks + " " + experience + "/" + experienceMax + " xp";
+	}
+	
+	protected void attack(Creature Enemy)
+	{
+		Enemy.health -= (int) Math.round(Math.random()*(damageMax - damageMin)) + damageMin;
 	}
 }
