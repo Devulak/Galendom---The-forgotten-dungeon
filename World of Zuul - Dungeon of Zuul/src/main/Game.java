@@ -152,7 +152,11 @@ public class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.LOOK) {
+<<<<<<< HEAD
             currentRoom.getLongDescription();
+=======
+            System.out.println(currentRoom.getLongDescription());
+>>>>>>> origin/UI
         } else if (commandWord == CommandWord.STATUS) {
             
         }
