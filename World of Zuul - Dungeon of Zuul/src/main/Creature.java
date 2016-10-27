@@ -17,16 +17,21 @@ public class Creature {
 
     public Creature(int lvl) { //this is a constructor for the creatures
 		level = lvl;
-		experienceMax = lvl;
+		experienceMax = 400 + level*200;
 		healthMax = 8 + level*4;
 		health = healthMax;
 		damageMin = level;
 		damageMax = level*2;
 	}
 	
+	protected String getLevel()
+	{
+		return "level " + level;
+	}
+	
 	protected String getHealth()
 	{
-		int blockTotal = 10;
+		int blockTotal = 20;
 		int blockHealth = (int) Math.ceil((double) health/healthMax*blockTotal);
 		String blocks = "";
 		for (int i = 1; i <= blockTotal; i++)
@@ -37,5 +42,20 @@ public class Creature {
 				blocks += "□";
 		}
 		return blocks + " " + health + "/" + healthMax + " hp";
+	}
+	
+	protected String getExperience()
+	{
+		int blockTotal = 10;
+		int blockHealth = (int) Math.ceil((double) experience/experienceMax*blockTotal);
+		String blocks = "";
+		for (int i = 1; i <= blockTotal; i++)
+		{
+			if(blockHealth >= i)
+				blocks += "■";
+			else
+				blocks += "□";
+		}
+		return blocks + " " + experience + "/" + experienceMax + " xp";
 	}
 }

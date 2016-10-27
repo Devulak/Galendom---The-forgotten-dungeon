@@ -7,37 +7,32 @@ import java.util.Iterator;
 
 public class Room 
 {
-    private String uniqueId;
     private String description;
     private HashMap<String, Room> exits;
-	private Creature Monster;
+	protected Creature Monster;
 
-    public Room(String description, String uniqueId) 
+    public Room(String description) 
     {
         this.description = description;
-        this.uniqueId = uniqueId;
         exits = new HashMap<String, Room>();
     }
 
-    public void setCreature(Creature Creature) 
+    public void setMonster(Creature Creature) 
     {
         Monster = Creature;
+    }
+
+    public boolean hasMonster() 
+    {
+        if(Monster == null)
+			return false;
+		else
+			return true;
     }
 
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
-    }
-
-    public String isInRoom(String CheckId)
-    {
-		String RoomBlock = "*";
-		if (CheckId == this.uniqueId)
-			RoomBlock = "█";
-		if (CheckId.length() < 2)
-			return RoomBlock + "." + CheckId + " ";
-		else
-			return RoomBlock + "." + CheckId;
     }
 
     public String getShortDescription()
@@ -50,7 +45,7 @@ public class Room
         return "You are " + description + ".\n" + getExitString();
     }
 
-    private String getExitString()
+    protected String getExitString()
     {
         String returnString = "Paths:";
         Set<String> keys = exits.keySet();
