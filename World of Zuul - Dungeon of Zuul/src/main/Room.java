@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 
-public class Room 
+public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
@@ -49,7 +49,8 @@ public class Room
     {
         String returnString = "Paths:";
         Set<String> keys = exits.keySet();
-        for(String exit : keys) {
+        for(String exit : keys)
+		{
             returnString += " " + exit;
         }
         return returnString;
