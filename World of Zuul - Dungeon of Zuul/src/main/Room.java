@@ -1,15 +1,19 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import main.item.*;
 
 
 public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-	protected Creature Monster;
+	protected Creature Monster; // The monster in the room, if there's any!
+	private List<Object> inventory = new ArrayList<>(); // Inventory full of stuff (or not)!
 
     public Room(String description) 
     {
@@ -25,9 +29,13 @@ public class Room
     public boolean hasMonster() 
     {
         if(Monster == null)
+		{
 			return false;
+		}
 		else
+		{
 			return true;
+		}
     }
 
     public void setExit(String direction, Room neighbor) 
