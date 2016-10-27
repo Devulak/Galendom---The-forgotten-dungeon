@@ -5,36 +5,34 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 
-public class Room 
+public class Room
 {
-    private String uniqueId;
     private String description;
     private HashMap<String, Room> exits;
-	private Creatures NPC;
+	protected Creature Monster;
 
-    public Room(String description, String uniqueId) 
+    public Room(String description) 
     {
         this.description = description;
-        this.uniqueId = uniqueId;
         exits = new HashMap<String, Room>();
     }
 
-    public void setCreature(Creatures Creature) 
+    public void setMonster(Creature Creature) 
     {
-        NPC = Creature;
+        Monster = Creature;
+    }
+
+    public boolean hasMonster() 
+    {
+        if(Monster == null)
+			return false;
+		else
+			return true;
     }
 
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
-    }
-
-    public String isInRoom(String CheckId)
-    {
-		String RoomBlock = "*";
-		if (CheckId == this.uniqueId)
-			RoomBlock = "█";
-		return RoomBlock + "." + CheckId;
     }
 
     public String getShortDescription()
@@ -47,11 +45,12 @@ public class Room
         return "You are " + description + ".\n" + getExitString();
     }
 
-    private String getExitString()
+    protected String getExitString()
     {
         String returnString = "Paths:";
         Set<String> keys = exits.keySet();
-        for(String exit : keys) {
+        for(String exit : keys)
+		{
             returnString += " " + exit;
         }
         return returnString;
