@@ -16,18 +16,13 @@ public class Armor extends Item {
     private int armorPoints;
     private String armorName;
 
-    public Armor(String description, int uniqueID, String n, int a) {
-        super(description, uniqueID);
-	armorName = n;
-	armorPoints = a;
-    }
-
+    /* Constructor for armor in general */
     public Armor(String description, int uniqueID, int a) {
         super(description, uniqueID);
-	armorPoints = a;
+        armorPoints = a;
     }
 
     public String getArmorName() {
-	return armorName;
+        return armorName;
     }
 }

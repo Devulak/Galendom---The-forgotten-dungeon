@@ -163,8 +163,6 @@ public class Game {
             printMap();
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
-        } else if (commandWord == CommandWord.DROP) {
-            dropWeapon(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         }
@@ -193,6 +191,7 @@ public class Game {
         System.out.println();
     }
 
+    /*
     private void dropWeapon(Command command) {
         String weapon = currentWeapon.getWeaponName();
         if (!hasWeapon) {
@@ -207,8 +206,9 @@ public class Game {
             System.out.println("I'm not sure what you mean with " + command.getSecondWord() + ("."));
         }
 
-    }
-
+    } */
+    
+    
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
