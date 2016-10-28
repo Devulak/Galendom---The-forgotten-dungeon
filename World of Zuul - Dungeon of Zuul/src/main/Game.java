@@ -47,10 +47,27 @@ public class Game {
         lvl_8.setMonster(new Creature(8));
 		
         /* Give creatures some items that they may drop */
+		
+		// Potions
 		Hero.inventory.add(new Potion("Health Potion", 4)); // 4x health potions
+		
+		// Coins
+		Hero.inventory.add(new Coin("Coins", 20)); // 20 coins
+		
+		// Weapons
 		Hero.inventory.add(new Weapon("Wooden Sword", 1, 2)); // Wooden Sword
 		lvl_2.Monster.inventory.add(new Weapon("Iron Sword", 2, 4)); // Iron Sword
 		lvl_2a.Monster.inventory.add(new Weapon("Steel Sword", 4, 8)); // Steel Sword
+		
+		// Shields
+		
+		// Helmets
+		
+		// Chestplates
+		
+		// Leggings
+		
+		// Boots
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
