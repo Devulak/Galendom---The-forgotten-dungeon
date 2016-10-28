@@ -11,4 +11,14 @@ public class Weapon extends Item
 		this.damageMin = damageMin;
 		this.damageMax = damageMax;
 	}
+
+	public int getDamageMin()
+	{
+		return damageMin;
+	}
+
+	public int getDamageMax()
+	{
+		return damageMax;
+	}
 }

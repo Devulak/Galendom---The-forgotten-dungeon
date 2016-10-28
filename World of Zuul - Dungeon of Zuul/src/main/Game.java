@@ -52,7 +52,7 @@ public class Game {
 		Hero.inventory.add(new Potion("Health Potion", 4)); // 4x health potions
 		
 		// Coins
-		Hero.inventory.add(new Coin("Coins", 20)); // 20 coins
+		Hero.inventory.add(new Coin("Coin", 20)); // 20 coins
 		
 		// Weapons
 		Hero.inventory.add(new Weapon("Wooden Sword", 1, 2)); // Wooden Sword
@@ -203,8 +203,8 @@ public class Game {
 	
     private void printStatus() // Prints out the character specific things to check
 	{
-        System.out.println(Hero.printHealth()); // Prints out the hero's health
-        System.out.println(Hero.getExperience()); // Prints out the hero's experience
+        System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth()); // Prints out the hero's health
+        System.out.println("Experience points: " + Hero.getExperienceBar()); // Prints out the hero's experience
     }
 	
 	private void printLook() // Prints out what the character can see
@@ -213,7 +213,7 @@ public class Game {
 		if(currentRoom.hasMonster())
 		{
 			System.out.println("There's a monster " + currentRoom.Monster.printLevel() + " blocking your way");
-            System.out.println("Monster: " + currentRoom.Monster.printHealth());
+            System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
 		}
 		else
 		{
@@ -225,9 +225,9 @@ public class Game {
 	{
 		for (Item Item : Hero.inventory)
 		{
-			if(Item.getAmount() > 0)
+			if(Item.getAmount() > 1)
 			{
-				System.out.println(Item.getAmount() + "x " + Item.getName());
+				System.out.println(Item.getAmount() + "x " + Item.getName() + "s");
 			}
 			else
 			{
@@ -258,14 +258,17 @@ public class Game {
 		{
 			Hero.attack(currentRoom.Monster);
 			
+			System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
+			
 			if(currentRoom.Monster.health > 0)
 			{
 				currentRoom.Monster.attack(Hero);
 				
+				System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth());
+				
 				if(Hero.health > 0)
 				{
-					System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth());
-					System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
+					System.out.println("Your turn!");
 				}
 				else
 				{
@@ -313,7 +316,7 @@ public class Game {
 
         if(currentRoom.hasMonster())
 		{
-            System.out.println("The monster is blocking your way");
+            System.out.println("The monster (" + currentRoom.Monster.printLevel() + "): is blocking your way");
 		}
 		else if (nextRoom == null) // It will first check if there is a path to the next room.
 		{
