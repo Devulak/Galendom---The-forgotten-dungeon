@@ -1,28 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.item;
 
-import main.item.Item;
-
-/**
- *
- * @author Nicolai
- */
-public class Armor extends Item {
-
-    private int armorPoints;
-    private String armorName;
-
-    /* Constructor for armor in general */
-    public Armor(String description, int uniqueID, int a) {
-        super(description, true, "");
-        armorPoints = a;
-    }
-
-    public String getArmorName() {
-        return armorName;
-    }
+public class Armor extends Item
+{
+	private int armor;
+	
+	public Armor(String name, String slot, int armor) // Constructor
+	{
+		super(name, 0, slot);
+		this.armor = armor;
+	}
 }

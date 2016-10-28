@@ -31,8 +31,6 @@ public class Creature {
 		health = healthMax;
 		damageMin = level;
 		damageMax = level*2;
-		
-		inventory.add(new Weapon("Wooden Sword", false, "weapon", 1, 2));
 	}
 	
 	protected String printLevel()

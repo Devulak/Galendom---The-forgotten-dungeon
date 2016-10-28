@@ -1,10 +1,12 @@
 package main;
 
+import main.item.*;
+
 public class Game {
 
     private Parser parser;
     protected Room currentRoom;
-	private Creature Hero = new Creature(1);
+	private Creature Hero;
 
     public Game() {
         createRooms();
@@ -15,7 +17,7 @@ public class Game {
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
-        /* Give rooms descriptions. If you write "in a cave" then the game will say something like "You are in a cave" */
+        /* Adds rooms to the game, also gives them descriptions */
         lvl_1 = new Room("in level 1");
         lvl_2 = new Room("in level 2");
         lvl_2a = new Room("in level 2a");
@@ -29,7 +31,8 @@ public class Game {
         lvl_7 = new Room("in level 7");
         lvl_8 = new Room("in level 8");
 
-        /* Adds monsters to a game  */
+        /* Adds creatures to the game, number tells what level they should start at  */
+		Hero = new Creature(1);
         lvl_1.setMonster(new Creature(1));
         lvl_2.setMonster(new Creature(2));
         lvl_2a.setMonster(new Creature(2));
@@ -42,6 +45,12 @@ public class Game {
         lvl_6.setMonster(new Creature(6));
         lvl_7.setMonster(new Creature(7));
         lvl_8.setMonster(new Creature(8));
+		
+        /* Give creatures some items that they may drop */
+		Hero.inventory.add(new Potion("Health Potion", 4)); // 4x health potions
+		Hero.inventory.add(new Weapon("Wooden Sword", 1, 2)); // Wooden Sword
+		lvl_2.Monster.inventory.add(new Weapon("Iron Sword", 2, 4)); // Iron Sword
+		lvl_2a.Monster.inventory.add(new Weapon("Steel Sword", 4, 8)); // Steel Sword
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
@@ -197,9 +206,16 @@ public class Game {
 	
     private void printInventory() // Prints out the hero's current inventory
 	{
-		for (Object Item : Hero.inventory)
+		for (Item Item : Hero.inventory)
 		{
-			System.out.println(Item);
+			if(Item.getAmount() > 0)
+			{
+				System.out.println(Item.getAmount() + "x " + Item.getName());
+			}
+			else
+			{
+				System.out.println(Item.getName());
+			}
 		}
     }
 	
