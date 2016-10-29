@@ -1,12 +1,13 @@
 package main;
 
+import java.util.Iterator;
 import main.item.*;
 
 public class Game {
 
     private Parser parser;
     protected Room currentRoom;
-	private Creature Hero;
+	private Creature hero;
 
     public Game() {
         createRooms();
@@ -32,7 +33,7 @@ public class Game {
         lvl_8 = new Room("in level 8");
 
         /* Adds creatures to the game, number tells what level they should start at  */
-		Hero = new Creature(1);
+		hero = new Creature(1);
         lvl_1.setMonster(new Creature(1));
         lvl_2.setMonster(new Creature(2));
         lvl_2a.setMonster(new Creature(2));
@@ -49,17 +50,18 @@ public class Game {
         /* Give creatures some items that they may drop */
 		
 		// Potions
-		Hero.inventory.add(new Potion("Health Potion", 4)); // 4x health potions
+		hero.inventory.add(new Potion("health_potion", 4)); // 4x health potions
 		
 		// Coins
-		Hero.inventory.add(new Coin("Coin", 20)); // 20 coins
+		hero.inventory.add(new Coin("coin", 20)); // 20 coins
 		
 		// Weapons
-		Hero.inventory.add(new Weapon("Wooden Sword", 1, 2)); // Wooden Sword
-		lvl_2.Monster.inventory.add(new Weapon("Iron Sword", 2, 4)); // Iron Sword
-		lvl_2a.Monster.inventory.add(new Weapon("Steel Sword", 4, 8)); // Steel Sword
+		hero.inventory.add(new Weapon("wooden_sword", 1, 2)); // Wooden Sword
+		// lvl_2.Monster.inventory.add(new Weapon("iron_sword", 2, 4)); // Iron Sword
+		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
 		
 		// Shields
+		hero.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
 		
 		// Helmets
 		
@@ -174,15 +176,19 @@ public class Game {
 		{
             printInventory();
         }
+		else if (commandWord == CommandWord.USE)
+		{
+            useItem(command);
+        }
 		else if (commandWord == CommandWord.ATTACK)
 		{
             combatAttack();
-			if(Hero == null)
-			{
-				System.out.println("You've been killed and lost the game!");
-				wantToQuit = true;
-			}
         }
+		if(hero == null)
+		{
+			System.out.println("You've been killed and lost the game!");
+			wantToQuit = true;
+		}
         return wantToQuit;
     }
 
@@ -203,8 +209,8 @@ public class Game {
 	
     private void printStatus() // Prints out the character specific things to check
 	{
-        System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth()); // Prints out the hero's health
-        System.out.println("Experience points: " + Hero.getExperienceBar()); // Prints out the hero's experience
+        System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth()); // Prints out the hero's health
+        System.out.println("Experience points: " + hero.getExperienceBar()); // Prints out the hero's experience
     }
 	
 	private void printLook() // Prints out what the character can see
@@ -212,8 +218,8 @@ public class Game {
 		System.out.println("You are " + currentRoom.getShortDescription());
 		if(currentRoom.hasMonster())
 		{
-			System.out.println("There's a monster " + currentRoom.Monster.printLevel() + " blocking your way");
-            System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
+			System.out.println("There's a monster " + currentRoom.monster.printLevel() + " blocking your way");
+            System.out.println("Monster (" + currentRoom.monster.printLevel() + "): " + currentRoom.monster.printHealth());
 		}
 		else
 		{
@@ -223,7 +229,7 @@ public class Game {
 	
     private void printInventory() // Prints out the hero's current inventory
 	{
-		for (Item Item : Hero.inventory)
+		for (Item Item : hero.inventory)
 		{
 			if(Item.getAmount() > 1)
 			{
@@ -250,36 +256,66 @@ public class Game {
 		System.out.println("\\----------------------------------------------------------------------------------------/");
 	}
 	
-	
+	private void useItem(Command command)
+	{
+        if (!command.hasSecondWord())
+		{
+            System.out.println("Use what?");
+            return;
+        }
+		
+		String searchName = command.getSecondWord();
+
+		for (Iterator<Item> it = hero.inventory.iterator(); it.hasNext();)
+		{
+			Item item = it.next();
+			if(item.getName().equals(searchName) && item.getAmount() > 0 && item instanceof Potion)
+			{
+				System.out.println("You used a " + item.getName());
+				if(item.getAmount() == 1)
+				{
+					it.remove();
+				}
+				else
+				{
+					item.use();
+				}
+				hero.heal();
+				return;
+			}
+		}
+		
+		System.out.println("That doesn't seem to be a usable item");
+	}
 	
     private void combatAttack()
 	{
 		if(currentRoom.hasMonster())
 		{
-			Hero.attack(currentRoom.Monster);
+			hero.attack(currentRoom.monster);
 			
-			System.out.println("Monster (" + currentRoom.Monster.printLevel() + "): " + currentRoom.Monster.printHealth());
+			System.out.println("Monster (" + currentRoom.monster.printLevel() + "): " + currentRoom.monster.printHealth());
 			
-			if(currentRoom.Monster.health > 0)
+			if(currentRoom.monster.health > 0)
 			{
-				currentRoom.Monster.attack(Hero);
+				currentRoom.monster.attack(hero);
 				
-				System.out.println("Hero (" + Hero.printLevel() + "):    " + Hero.printHealth());
+				System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth());
 				
-				if(Hero.health > 0)
+				if(hero.health > 0)
 				{
 					System.out.println("Your turn!");
 				}
 				else
 				{
-					Hero = null;
+					hero = null;
 				}
 			}
 			else
 			{
-				System.out.println("You have slain the monster (" + currentRoom.Monster.printLevel() + ")!");
-				Hero.gainExperience(currentRoom.Monster);
-				currentRoom.Monster = null;
+				System.out.println("You have slain the monster (" + currentRoom.monster.printLevel() + ")!");
+				hero.gainExperience(currentRoom.monster);
+				currentRoom.monster = null;
 			}
 		}
 		else
@@ -304,8 +340,10 @@ public class Game {
     } */
     
 	/* When you write "go" in console, this method will be called. */
-    private void goRoom(Command command) {
-        if (!command.hasSecondWord()) {
+    private void goRoom(Command command)
+	{
+        if (!command.hasSecondWord())
+		{
             System.out.println("Go where?");
             return;
         }
@@ -316,7 +354,7 @@ public class Game {
 
         if(currentRoom.hasMonster())
 		{
-            System.out.println("The monster (" + currentRoom.Monster.printLevel() + "): is blocking your way");
+            System.out.println("The monster (" + currentRoom.monster.printLevel() + "): is blocking your way");
 		}
 		else if (nextRoom == null) // It will first check if there is a path to the next room.
 		{

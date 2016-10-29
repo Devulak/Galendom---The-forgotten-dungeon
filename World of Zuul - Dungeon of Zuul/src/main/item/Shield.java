@@ -6,7 +6,7 @@ public class Shield extends Armor
 	
 	public Shield(String name, int armor, int reflect) // Constructor
 	{
-		super(name, "shield", armor);
+		super(name, armor);
 		this.reflect = reflect;
 	}
 }

@@ -12,7 +12,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-	protected Creature Monster; // The monster in the room, if there's any!
+	protected Creature monster; // The monster in the room, if there's any!
 	private List<Object> inventory = new ArrayList<>(); // Inventory full of stuff (or not)!
 
     public Room(String description) 
@@ -21,14 +21,14 @@ public class Room
         exits = new HashMap<String, Room>();
     }
 
-    public void setMonster(Creature Creature) 
+    public void setMonster(Creature creature) 
     {
-        Monster = Creature;
+        monster = creature;
     }
 
     public boolean hasMonster() 
     {
-        if(Monster == null)
+        if(monster == null)
 		{
 			return false;
 		}

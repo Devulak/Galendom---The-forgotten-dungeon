@@ -4,6 +4,6 @@ public class Leggings extends Armor
 {
 	public Leggings(String name, int armor) // Constructor
 	{
-		super(name, "leggings", armor);
+		super(name, armor);
 	}
 }

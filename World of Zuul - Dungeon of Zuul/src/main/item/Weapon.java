@@ -7,7 +7,7 @@ public class Weapon extends Item
 	
 	public Weapon(String name, int damageMin, int damageMax)
 	{
-		super(name, 0, "weapon");
+		super(name, 0);
 		this.damageMin = damageMin;
 		this.damageMax = damageMax;
 	}

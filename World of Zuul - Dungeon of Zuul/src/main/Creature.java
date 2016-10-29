@@ -91,17 +91,38 @@ public class Creature {
 	{
 		int damageMinBoost = 0;
 		int damageMaxBoost = 0;
-		for (Item Item : inventory)
+		int damageReduce = 0;
+		for (Item item : inventory)
 		{
-			if("weapon".equals(Item.getCategory()))
+			if(item instanceof Weapon)
 			{
-				damageMinBoost += ((Weapon)Item).getDamageMin();
-				damageMaxBoost += ((Weapon)Item).getDamageMax();
+				damageMinBoost += ((Weapon)item).getDamageMin();
+				damageMaxBoost += ((Weapon)item).getDamageMax();
+			}
+		}
+		for (Item item : Enemy.inventory)
+		{
+			if(item instanceof Armor)
+			{
+				damageReduce += ((Armor)item).getArmor();
 			}
 		}
 		damageMaxBoost -= damageMinBoost; // Remove min damage, min damage defined outside random
-		int roll = (int) Math.round(Math.random()*(level + damageMaxBoost)) + level + damageMinBoost; // Calculation for a roll
+		int roll = (int) Math.round(Math.random()*(level + damageMaxBoost)) + level + damageMinBoost - damageReduce; // Calculation for a roll
+		if(roll < 0)
+		{
+			roll = 0;
+		}
 		System.out.println("Rolled " + roll + " dmg!");
 		Enemy.health -= roll;
+	}
+	
+	protected void heal()
+	{
+		health += healthGainAmount;
+		if(health > healthMax)
+		{
+			health = healthMax;
+		}
 	}
 }
