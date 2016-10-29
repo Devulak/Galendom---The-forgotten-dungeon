@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import main.item.*;
 
 public class Creature {
 	
@@ -18,18 +19,13 @@ public class Creature {
 	private static final int healthBaseAmount = 8; // The base amount of health you have
 	private static final int healthGainAmount = 4; // The amount of health you gain each level
 	
-    private int damageMin; // Maximum amount of damage
-    private int damageMax; // Minimum amount of damage
-	
-	private List<Object> inventory = new ArrayList<>(); // Inventory full of stuff!
+	protected List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
 
     public Creature(int lvl) { //this is a constructor for the creatures
 		level = lvl;
 		experienceMax = experienceRequiredBase + level*experienceRequiredRatio;
 		healthMax = healthBaseAmount + level*healthGainAmount;
 		health = healthMax;
-		damageMin = level;
-		damageMax = level*2;
 	}
 	
 	protected String printLevel()
@@ -64,6 +60,8 @@ public class Creature {
 		int blockTotal = 20;
 		int blockHealth = (int) Math.ceil((double) health/healthMax*blockTotal);
 		String blocks = "";
+		if (this.health < 0)
+			health = 0;
 		for (int i = 1; i <= blockTotal; i++)
 		{
 			if(blockHealth >= i)
@@ -74,7 +72,7 @@ public class Creature {
 		return blocks + " " + health + "/" + healthMax + " hp";
 	}
 	
-	protected String getExperience()
+	protected String getExperienceBar()
 	{
 		int blockTotal = 10;
 		int blockHealth = (int) Math.ceil((double) experience/experienceMax*blockTotal);
@@ -91,6 +89,40 @@ public class Creature {
 	
 	protected void attack(Creature Enemy)
 	{
-		Enemy.health -= (int) Math.round(Math.random()*(damageMax - damageMin)) + damageMin;
+		int damageMinBoost = 0;
+		int damageMaxBoost = 0;
+		int damageReduce = 0;
+		for (Item item : inventory)
+		{
+			if(item instanceof Weapon)
+			{
+				damageMinBoost += ((Weapon)item).getDamageMin();
+				damageMaxBoost += ((Weapon)item).getDamageMax();
+			}
+		}
+		for (Item item : Enemy.inventory)
+		{
+			if(item instanceof Armor)
+			{
+				damageReduce += ((Armor)item).getArmor();
+			}
+		}
+		damageMaxBoost -= damageMinBoost; // Remove min damage, min damage defined outside random
+		int roll = (int) Math.round(Math.random()*(level + damageMaxBoost)) + level + damageMinBoost - damageReduce; // Calculation for a roll
+		if(roll < 0)
+		{
+			roll = 0;
+		}
+		System.out.println("Rolled " + roll + " dmg!");
+		Enemy.health -= roll;
+	}
+	
+	protected void heal()
+	{
+		health += healthGainAmount;
+		if(health > healthMax)
+		{
+			health = healthMax;
+		}
 	}
 }
