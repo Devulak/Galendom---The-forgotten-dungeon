@@ -50,7 +50,7 @@ public class Game {
         /* Give creatures some items that they may drop */
 		
 		// Potions
-		hero.inventory.add(new Potion("health_potion", 4)); // 4x health potions
+		lvl_1.monster.inventory.add(new Potion("health_potion", 4)); // 4x health potions
 		
 		// Coins
 		hero.inventory.add(new Coin("coin", 20)); // 20 coins
@@ -180,6 +180,10 @@ public class Game {
 		{
             useItem(command);
         }
+		else if (commandWord == CommandWord.TAKE)
+		{
+            takeItem(command);
+        }
 		else if (commandWord == CommandWord.ATTACK)
 		{
             combatAttack();
@@ -223,6 +227,18 @@ public class Game {
 		}
 		else
 		{
+			System.out.println("You these things layong on the ground");
+			for (Item item : currentRoom.inventory)
+			{
+				if(item.getAmount() > 1)
+				{
+					System.out.println(item.getAmount() + "x " + item.getName() + "s");
+				}
+				else
+				{
+					System.out.println(item.getName());
+				}
+			}
 			System.out.println(currentRoom.getExitString());
 		}
 	}
@@ -288,6 +304,32 @@ public class Game {
 		System.out.println("That doesn't seem to be a usable item");
 	}
 	
+	private void takeItem(Command command)
+	{
+        if (!command.hasSecondWord())
+		{
+            System.out.println("Take what?");
+            return;
+        }
+		
+		String searchName = command.getSecondWord();
+
+		for (Iterator<Item> it = currentRoom.inventory.iterator(); it.hasNext();)
+		{
+			Item item = it.next();
+			if(item.getName().equals(searchName))
+			{
+				System.out.println("You picked up " + item.getName());
+				// Make sure it's able to stack and throw stuff that can't stack
+				hero.inventory.add(item);
+				it.remove();
+				return;
+			}
+		}
+		
+		System.out.println("Can't find that in the room");
+	}
+	
     private void combatAttack()
 	{
 		if(currentRoom.hasMonster())
@@ -315,6 +357,10 @@ public class Game {
 			{
 				System.out.println("You have slain the monster (" + currentRoom.monster.printLevel() + ")!");
 				hero.gainExperience(currentRoom.monster);
+				for (Item item : currentRoom.monster.inventory)
+				{
+					currentRoom.inventory.add(item);
+				}
 				currentRoom.monster = null;
 			}
 		}

@@ -13,7 +13,7 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
 	protected Creature monster; // The monster in the room, if there's any!
-	private List<Object> inventory = new ArrayList<>(); // Inventory full of stuff (or not)!
+	protected List<Item> inventory = new ArrayList<>(); // Inventory full of stuff (or not)!
 
     public Room(String description) 
     {
@@ -55,7 +55,7 @@ public class Room
 
     protected String getExitString()
     {
-        String returnString = "Paths:";
+        String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for(String exit : keys)
 		{
