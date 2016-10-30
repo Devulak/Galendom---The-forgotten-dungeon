@@ -61,7 +61,7 @@ public class Game {
 		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
 		
 		// Shields
-		hero.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
+		lvl_1.monster.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
 		
 		// Helmets
 		
@@ -227,7 +227,7 @@ public class Game {
 		}
 		else
 		{
-			System.out.println("You these things layong on the ground");
+			System.out.println("These things are lying on the ground");
 			for (Item item : currentRoom.inventory)
 			{
 				if(item.getAmount() > 1)
@@ -314,20 +314,48 @@ public class Game {
 		
 		String searchName = command.getSecondWord();
 
-		for (Iterator<Item> it = currentRoom.inventory.iterator(); it.hasNext();)
+		for (Iterator<Item> roomInventory = currentRoom.inventory.iterator(); roomInventory.hasNext();)
 		{
-			Item item = it.next();
+			Item item = roomInventory.next();
 			if(item.getName().equals(searchName))
 			{
-				System.out.println("You picked up " + item.getName());
+				System.out.println(item.getName() + "Has been added to your inventory");
+				
 				// Make sure it's able to stack and throw stuff that can't stack
+				for (Iterator<Item> heroInventory = hero.inventory.iterator(); heroInventory.hasNext();)
+				{
+					Item inventoryItem = heroInventory.next();
+					if(inventoryItem.getClass() == item.getClass()) // Do the item taken match anything in the hero's inventory?
+					{
+						if(item.getAmount() > 0 && inventoryItem.getAmount() > 0) // Is the items stackable with eachother?
+						{
+							inventoryItem.addAmount(item.getAmount()); // transfer the current amount to the hero inventory
+							roomInventory.remove(); // Remove the room item
+							return; // stop looking
+						}
+						else // What do we do if it's not stackable? (Works as if the things got swapped or switched)
+						{
+							System.out.println(inventoryItem.getName() + " has been dropped, you don't have room to carry both");
+							
+							// Clone the items to the correct inventories
+							hero.inventory.add(item);
+							currentRoom.inventory.add(inventoryItem);
+							
+							// Remove the items from the old inventories
+							heroInventory.remove();
+							roomInventory.remove();
+						}
+					}
+				}
+				// END
+				
 				hero.inventory.add(item);
-				it.remove();
+				roomInventory.remove();
 				return;
 			}
 		}
 		
-		System.out.println("Can't find that in the room");
+		System.out.println("Can't find that in the room"); // These aren't the droids you're looking for
 	}
 	
     private void combatAttack()
