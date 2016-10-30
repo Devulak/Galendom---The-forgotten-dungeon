@@ -22,6 +22,11 @@ public class Item
 		return amount;
 	}
 
+	public void addAmount(int add) // Get the amount of the item, if zero, means it's not stackable
+	{
+		amount += add;
+	}
+
 	public void use() // Get the amount of the item, if zero, means it's not stackable
 	{
 		amount--;

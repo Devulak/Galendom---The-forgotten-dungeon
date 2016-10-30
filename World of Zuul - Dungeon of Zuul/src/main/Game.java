@@ -50,7 +50,7 @@ public class Game {
         /* Give creatures some items that they may drop */
 		
 		// Potions
-		hero.inventory.add(new Potion("health_potion", 4)); // 4x health potions
+		lvl_1.monster.inventory.add(new Potion("health_potion", 4)); // 4x health potions
 		
 		// Coins
 		hero.inventory.add(new Coin("coin", 20)); // 20 coins
@@ -61,7 +61,7 @@ public class Game {
 		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
 		
 		// Shields
-		hero.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
+		lvl_1.monster.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
 		
 		// Helmets
 		
@@ -180,6 +180,10 @@ public class Game {
 		{
             useItem(command);
         }
+		else if (commandWord == CommandWord.TAKE)
+		{
+            takeItem(command);
+        }
 		else if (commandWord == CommandWord.ATTACK)
 		{
             combatAttack();
@@ -223,6 +227,18 @@ public class Game {
 		}
 		else
 		{
+			System.out.println("These things are lying on the ground");
+			for (Item item : currentRoom.inventory)
+			{
+				if(item.getAmount() > 1)
+				{
+					System.out.println(item.getAmount() + "x " + item.getName() + "s");
+				}
+				else
+				{
+					System.out.println(item.getName());
+				}
+			}
 			System.out.println(currentRoom.getExitString());
 		}
 	}
@@ -288,6 +304,60 @@ public class Game {
 		System.out.println("That doesn't seem to be a usable item");
 	}
 	
+	private void takeItem(Command command)
+	{
+        if (!command.hasSecondWord())
+		{
+            System.out.println("Take what?");
+            return;
+        }
+		
+		String searchName = command.getSecondWord();
+
+		for (Iterator<Item> roomInventory = currentRoom.inventory.iterator(); roomInventory.hasNext();)
+		{
+			Item item = roomInventory.next();
+			if(item.getName().equals(searchName))
+			{
+				System.out.println(item.getName() + "Has been added to your inventory");
+				
+				// Make sure it's able to stack and throw stuff that can't stack
+				for (Iterator<Item> heroInventory = hero.inventory.iterator(); heroInventory.hasNext();)
+				{
+					Item inventoryItem = heroInventory.next();
+					if(inventoryItem.getClass() == item.getClass()) // Do the item taken match anything in the hero's inventory?
+					{
+						if(item.getAmount() > 0 && inventoryItem.getAmount() > 0) // Is the items stackable with eachother?
+						{
+							inventoryItem.addAmount(item.getAmount()); // transfer the current amount to the hero inventory
+							roomInventory.remove(); // Remove the room item
+							return; // stop looking
+						}
+						else // What do we do if it's not stackable? (Works as if the things got swapped or switched)
+						{
+							System.out.println(inventoryItem.getName() + " has been dropped, you don't have room to carry both");
+							
+							// Clone the items to the correct inventories
+							hero.inventory.add(item);
+							currentRoom.inventory.add(inventoryItem);
+							
+							// Remove the items from the old inventories
+							heroInventory.remove();
+							roomInventory.remove();
+						}
+					}
+				}
+				// END
+				
+				hero.inventory.add(item);
+				roomInventory.remove();
+				return;
+			}
+		}
+		
+		System.out.println("Can't find that in the room"); // These aren't the droids you're looking for
+	}
+	
     private void combatAttack()
 	{
 		if(currentRoom.hasMonster())
@@ -315,6 +385,10 @@ public class Game {
 			{
 				System.out.println("You have slain the monster (" + currentRoom.monster.printLevel() + ")!");
 				hero.gainExperience(currentRoom.monster);
+				for (Item item : currentRoom.monster.inventory)
+				{
+					currentRoom.inventory.add(item);
+				}
 				currentRoom.monster = null;
 			}
 		}
