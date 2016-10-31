@@ -1,7 +1,6 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import main.item.*;
 
 public class Creature {
@@ -19,7 +18,7 @@ public class Creature {
 	private static final int healthBaseAmount = 8; // The base amount of health you have
 	private static final int healthGainAmount = 4; // The amount of health you gain each level
 	
-	protected List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
+	protected Inventory inventory = new Inventory(); // Inventory full of stuff (or not)!
 
     public Creature(int lvl) { //this is a constructor for the creatures
 		level = lvl;
@@ -92,7 +91,7 @@ public class Creature {
 		int damageMinBoost = 0;
 		int damageMaxBoost = 0;
 		int damageReduce = 0;
-		for (Item item : inventory)
+		for (Item item : inventory.getContent())
 		{
 			if(item instanceof Weapon)
 			{
@@ -100,7 +99,7 @@ public class Creature {
 				damageMaxBoost += ((Weapon)item).getDamageMax();
 			}
 		}
-		for (Item item : Enemy.inventory)
+		for (Item item : Enemy.inventory.getContent())
 		{
 			if(item instanceof Armor)
 			{
