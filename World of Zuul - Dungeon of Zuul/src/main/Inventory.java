@@ -6,10 +6,16 @@ import main.item.Item;
 public class Inventory
 {
 	private List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
+	private boolean nolimit = false;
 	
 	public Inventory() // Constructor
 	{
 		
+	}
+	
+	public Inventory(boolean nolimit) // Constructor
+	{
+		this.nolimit = nolimit;
 	}
 	
 	public Item add(Item item)
@@ -25,7 +31,7 @@ public class Inventory
 					inventoryItem.addAmount(item.getAmount()); // Transfer the current amount to the inventory's item
 					return null; // Return null since it doesn't give anything back
 				}
-				else // What do we do if it's not stackable? (Works as if the things got swapped or switched)
+				else if(!nolimit) // What do we do if it's not stackable? (Works as if the things got swapped or switched)
 				{
 					inventory.add(item); // Add the item
 					it.remove(); // Remove the old item
