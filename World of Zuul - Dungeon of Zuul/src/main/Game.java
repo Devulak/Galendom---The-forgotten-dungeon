@@ -57,20 +57,24 @@ public class Game {
 		
 		// Weapons
 		hero.inventory.add(new Weapon("wooden_sword", 1, 2)); // Wooden Sword
-		// lvl_2.Monster.inventory.add(new Weapon("iron_sword", 2, 4)); // Iron Sword
+                //lvl_2.monster.inventory.add(new Weapon("iron_sword", 2, 4)); // Iron Sword
 		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
 		
 		// Shields
 		lvl_1.monster.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
-		
+                
 		// Helmets
-		
+		hero.inventory.add(new Helmet("wooden_sword", 1)); // Wooden Sword
+                
 		// Chestplates
-		
+		hero.inventory.add(new Chestplate("wooden_chestplate", 1));
+                
 		// Leggings
-		
+		hero.inventory.add(new Legging("wooden_leggings", 1));
+                
 		// Boots
-
+                hero.inventory.add(new Boot("wooden_boot", 20)); // Wooden Boots
+                
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
         lvl_1.setExit("right", lvl_2a);
@@ -207,6 +211,7 @@ public class Game {
         System.out.println("look: Look around in the room for items.");
         System.out.println("Status: Your healthpoints and XP");
         System.out.println("Inventory: Look through your inventory");
+        System.out.println("Use: type use health_potion to use a potion from your inventory.");
 
         // parser.showCommands(); // This line prints out the command words.
     }
