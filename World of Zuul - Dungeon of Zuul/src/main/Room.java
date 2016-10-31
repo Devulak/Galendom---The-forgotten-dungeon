@@ -1,10 +1,6 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import main.item.*;
 
 
@@ -13,7 +9,7 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
 	protected Creature monster; // The monster in the room, if there's any!
-	protected List<Item> inventory = new ArrayList<>(); // Inventory full of stuff (or not)!
+	protected Inventory inventory = new Inventory(); // Inventory full of stuff (or not)!
 
     public Room(String description) 
     {

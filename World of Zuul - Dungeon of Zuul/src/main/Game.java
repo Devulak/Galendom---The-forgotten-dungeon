@@ -50,7 +50,7 @@ public class Game {
         /* Give creatures some items that they may drop */
 		
 		// Potions
-		lvl_1.monster.inventory.add(new Potion("health_potion", 4)); // 4x health potions
+		hero.inventory.add(new Potion("health_potion", 4)); // 4x health potions
 		
 		// Coins
 		hero.inventory.add(new Coin("coin", 20)); // 20 coins
@@ -227,35 +227,14 @@ public class Game {
 		}
 		else
 		{
-			System.out.println("These things are lying on the ground");
-			for (Item item : currentRoom.inventory)
-			{
-				if(item.getAmount() > 1)
-				{
-					System.out.println(item.getAmount() + "x " + item.getName() + "s");
-				}
-				else
-				{
-					System.out.println(item.getName());
-				}
-			}
 			System.out.println(currentRoom.getExitString());
 		}
+		currentRoom.inventory.printContent("Room items");
 	}
 	
     private void printInventory() // Prints out the hero's current inventory
 	{
-		for (Item Item : hero.inventory)
-		{
-			if(Item.getAmount() > 1)
-			{
-				System.out.println(Item.getAmount() + "x " + Item.getName() + "s");
-			}
-			else
-			{
-				System.out.println(Item.getName());
-			}
-		}
+		hero.inventory.printContent("Your inventory");
     }
 	
 	/**
@@ -282,7 +261,7 @@ public class Game {
 		
 		String searchName = command.getSecondWord();
 
-		for (Iterator<Item> it = hero.inventory.iterator(); it.hasNext();)
+		for (Iterator<Item> it = hero.inventory.getContent().iterator(); it.hasNext();)
 		{
 			Item item = it.next();
 			if(item.getName().equals(searchName) && item.getAmount() > 0 && item instanceof Potion)
@@ -314,15 +293,16 @@ public class Game {
 		
 		String searchName = command.getSecondWord();
 
-		for (Iterator<Item> roomInventory = currentRoom.inventory.iterator(); roomInventory.hasNext();)
+		for (Iterator<Item> roomInventory = currentRoom.inventory.getContent().iterator(); roomInventory.hasNext();)
 		{
 			Item item = roomInventory.next();
 			if(item.getName().equals(searchName))
 			{
-				System.out.println(item.getName() + "Has been added to your inventory");
+				System.out.println(item.getName() + " has been added to your inventory");
 				
 				// Make sure it's able to stack and throw stuff that can't stack
-				for (Iterator<Item> heroInventory = hero.inventory.iterator(); heroInventory.hasNext();)
+				// TO-DO: Rebuild with the new .add for Inventory objects
+				for (Iterator<Item> heroInventory = hero.inventory.getContent().iterator(); heroInventory.hasNext();)
 				{
 					Item inventoryItem = heroInventory.next();
 					if(inventoryItem.getClass() == item.getClass()) // Do the item taken match anything in the hero's inventory?
@@ -385,7 +365,7 @@ public class Game {
 			{
 				System.out.println("You have slain the monster (" + currentRoom.monster.printLevel() + ")!");
 				hero.gainExperience(currentRoom.monster);
-				for (Item item : currentRoom.monster.inventory)
+				for (Item item : currentRoom.monster.inventory.getContent())
 				{
 					currentRoom.inventory.add(item);
 				}
