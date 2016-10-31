@@ -1,6 +1,6 @@
 package main.item;
 
-public class Shield extends Armor
+public class Shield extends Armour
 {
 	private int reflect;
 	

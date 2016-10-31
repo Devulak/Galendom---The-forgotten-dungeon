@@ -1,6 +1,5 @@
 package main.item;
 
-
 public class Item
 {
 	private String name;

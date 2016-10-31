@@ -86,7 +86,7 @@ public class Creature {
 		return blocks + " " + experience + "/" + experienceMax + " xp";
 	}
 	
-	protected void attack(Creature Enemy)
+	protected void attack(Creature enemy)
 	{
 		int damageMinBoost = 0;
 		int damageMaxBoost = 0;
@@ -99,11 +99,11 @@ public class Creature {
 				damageMaxBoost += ((Weapon)item).getDamageMax();
 			}
 		}
-		for (Item item : Enemy.inventory.getContent())
+		for (Item item : enemy.inventory.getContent())
 		{
-			if(item instanceof Armor)
+			if(item instanceof Armour)
 			{
-				damageReduce += ((Armor)item).getArmor();
+				damageReduce += ((Armour)item).getArmour();
 			}
 		}
 		damageMaxBoost -= damageMinBoost; // Remove min damage, min damage defined outside random
@@ -113,7 +113,7 @@ public class Creature {
 			roll = 0;
 		}
 		System.out.println("Rolled " + roll + " dmg!");
-		Enemy.health -= roll;
+		enemy.health -= roll;
 	}
 	
 	protected void heal()
