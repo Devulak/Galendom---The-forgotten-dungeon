@@ -1,6 +1,6 @@
 package main.item;
 
-public class Boots extends Armor
+public class Boots extends Armour
 {
 	public Boots(String name, int armor) // Constructor
 	{
