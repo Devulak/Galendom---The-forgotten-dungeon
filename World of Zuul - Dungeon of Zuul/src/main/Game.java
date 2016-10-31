@@ -8,6 +8,8 @@ public class Game {
     private Parser parser;
     protected Room currentRoom;
 	private Creature hero;
+        
+        
 
     public Game() {
         createRooms();
@@ -46,34 +48,39 @@ public class Game {
         lvl_6.setMonster(new Creature(6));
         lvl_7.setMonster(new Creature(7));
         lvl_8.setMonster(new Creature(8));
+        
+        
+        
 		
         /* Give creatures some items that they may drop */
 		
 		// Potions
-		hero.inventory.add(new Potion("health_potion", 4)); // 4x health potions
+		hero.inventory.add(new Potion("health_potion", 6)); // 4x health potions
+                lvl_4.monster.inventory.add(new Potion("health_potion", 3)); // Wooden Shield
 		
 		// Coins
 		hero.inventory.add(new Coin("coin", 20)); // 20 coins
 		
 		// Weapons
-		hero.inventory.add(new Weapon("wooden_sword", 1, 2)); // Wooden Sword
-                //lvl_2.monster.inventory.add(new Weapon("iron_sword", 2, 4)); // Iron Sword
-		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
-		
+		hero.inventory.add(new Weapon("wooden_sword", 3, 7)); // Wooden Sword
+                //lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+                
+               		
 		// Shields
-		lvl_1.monster.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
+                lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 4,7)); // Wooden Shield
                 
 		// Helmets
-		hero.inventory.add(new Helmet("wooden_sword", 1)); // Wooden Sword
+		lvl_2.monster.inventory.add(new Helmet("iron_helmet", 2)); // Wooden Shield
                 
 		// Chestplates
-		hero.inventory.add(new Chestplate("wooden_chestplate", 1));
+		lvl_4.monster.inventory.add(new Chestplate("iron_chestplate", 4)); // Wooden Shield
                 
 		// Leggings
-		hero.inventory.add(new Legging("wooden_leggings", 1));
+		//hero.inventory.add(new Legging("wooden_leggings", 1));
                 
 		// Boots
-                hero.inventory.add(new Boot("wooden_boot", 20)); // Wooden Boots
+                //hero.inventory.add(new Boot("wooden_boot", 20)); // Wooden Boots
                 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("left", lvl_2);
