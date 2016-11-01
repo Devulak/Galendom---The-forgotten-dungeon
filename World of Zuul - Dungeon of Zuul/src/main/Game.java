@@ -8,7 +8,7 @@ public class Game {
     private Parser parser;
     protected Room currentRoom;
 	private Creature hero;
-        
+       
         
 
     public Game() {
@@ -16,7 +16,7 @@ public class Game {
         parser = new Parser();
     }
 
-    private void createRooms() {
+    public void createRooms() {
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
@@ -198,6 +198,10 @@ public class Game {
 		else if (commandWord == CommandWord.ATTACK)
 		{
             combatAttack();
+        }
+        else if (commandWord == CommandWord.FLEE)
+		{
+            
         }
 		if(hero == null)
 		{
