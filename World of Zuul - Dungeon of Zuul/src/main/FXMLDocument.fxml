@@ -5,10 +5,27 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="600" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
 	<children>
-		<Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-		<Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+		<ProgressBar layoutX="5" layoutY="5" prefHeight="30" prefWidth="485" progress="1" fx:id="healthBar" />
+		<ProgressBar layoutX="5" layoutY="40" prefHeight="5" maxHeight="5" prefWidth="485" progress="0.2" />
+		<Button layoutX="495" layoutY="5" prefHeight="300" prefWidth="300" />
+		<TextArea layoutX="495" layoutY="310" prefHeight="95" prefWidth="300" />
+		<Button layoutX="395" layoutY="310" prefHeight="45" prefWidth="45"  text="▲" />
+		<Button layoutX="445" layoutY="360" prefHeight="45" prefWidth="45"  text="►" />
+		<Button layoutX="395" layoutY="360" prefHeight="45" prefWidth="45"  text="▼" />
+		<Button layoutX="345" layoutY="360" prefHeight="45" prefWidth="45"  text="◄" />
+		<ImageView id="boxImage" layoutX="495" layoutY="5">    
+		   <image>
+			  <Image url="http://i.imgur.com/5HJTSts.png" />
+		   </image>
+		</ImageView>
+		<ListView layoutX="5" layoutY="60" prefHeight="245" prefWidth="215" />
+		<Button layoutX="225" layoutY="60" prefHeight="45" prefWidth="45"  text="&lt;--" />
+		<Button layoutX="225" layoutY="115" prefHeight="45" prefWidth="45"  text="--&gt;" />
+		<ListView layoutX="275" layoutY="60" prefHeight="245" prefWidth="215" />
+		<Button layoutX="5" layoutY="310" prefHeight="60" prefWidth="80" text="Attack" onAction="#handleButtonAction" fx:id="button" />
 	</children>
 </AnchorPane>

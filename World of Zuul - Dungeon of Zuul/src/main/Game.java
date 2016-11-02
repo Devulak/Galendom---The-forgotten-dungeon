@@ -5,9 +5,9 @@ import main.item.*;
 
 public class Game {
 
-    private Parser parser;
+    protected Parser parser;
     protected Room currentRoom;
-	private Creature hero;
+	protected Creature hero;
 
     public Game() {
         createRooms();
@@ -113,15 +113,9 @@ public class Game {
 	 * The play method will be called when the main class starts. The game will
 	 * run until you write quit in the console.
 	 */
-    public void play() {
+    public void play()
+	{
         printWelcome();
-
-		boolean finished = false;
-		while (!finished) {
-			Command command = parser.getCommand();
-			finished = processCommand(command);
-		}
-		System.out.println("Thank you for playing.  Good bye.");
 	}
 
 	/**
@@ -138,7 +132,7 @@ public class Game {
 		printLook();
     }
 
-    private boolean processCommand(Command command) {
+    protected boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -192,6 +186,10 @@ public class Game {
 		{
 			System.out.println("You've been killed and lost the game!");
 			wantToQuit = true;
+		}
+		if(wantToQuit)
+		{
+			System.out.println("Thank you for playing.  Good bye.");
 		}
         return wantToQuit;
     }

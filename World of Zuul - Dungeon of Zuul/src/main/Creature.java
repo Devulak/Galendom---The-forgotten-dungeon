@@ -5,16 +5,16 @@ import main.item.*;
 
 public class Creature {
 	
-    private int level; // The creature level, this is for scaling when created or gaining a level
-    private int experience = 0; // The amount of experience the creature has (this always starts with "0")
-    private int experienceMax; // The max amount of experience the creature needs for a level up
+    protected int level; // The creature level, this is for scaling when created or gaining a level
+    protected int experience = 0; // The amount of experience the creature has (this always starts with "0")
+    protected int experienceMax; // The max amount of experience the creature needs for a level up
 	
 	private static final int experienceRequiredBase = 400; // The amount of experience you need atleast per level
 	private static final int experienceRequiredRatio = 200; // The amount of experience you need further more per level
 	private static final int experienceGainRatio = 200; // The amount of experience you get per level of the monster
 	
     protected int health; // Current health
-    private int healthMax; // Maximum amount of health
+    protected int healthMax; // Maximum amount of health
 	private static final int healthBaseAmount = 8; // The base amount of health you have
 	private static final int healthGainAmount = 4; // The amount of health you gain each level
 	

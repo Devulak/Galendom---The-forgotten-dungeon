@@ -1,35 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
-/**
- *
- * @author ZeroXitreo
- */
 public class FXMLDocumentController implements Initializable {
 	
+	private Game game;
+	
+	
 	@FXML
-	private Label label;
+	private ProgressBar healthBar;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event) {
-		System.out.println("You clicked me!");
-		label.setText("Hello World!");
+		Command command = game.parser.getCommand("attack");
+		boolean endGame = game.processCommand(command);
+		healthBar.setProgress((double)game.hero.health/game.hero.healthMax);
+		if(endGame)
+		{	
+			Platform.exit();
+		}
 	}
 	
 	@Override
-	public void initialize(URL url, ResourceBundle rb) {
-		// TODO
+	public void initialize(URL url, ResourceBundle rb)
+	{
+		game = new Game();
+		game.play();
 	}	
 	
 }
