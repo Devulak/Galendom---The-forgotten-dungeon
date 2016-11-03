@@ -344,13 +344,13 @@ public class Game {
 			
 			System.out.println("Monster (" + currentRoom.monster.printLevel() + "): " + currentRoom.monster.printHealth());
 			
-			if(currentRoom.monster.health > 0)
+			if(currentRoom.monster.getHealth() > 0)
 			{
 				currentRoom.monster.attack(hero);
 				
 				System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth());
 				
-				if(hero.health > 0)
+				if(hero.getHealth() > 0)
 				{
 					System.out.println("Your turn!");
 				}
