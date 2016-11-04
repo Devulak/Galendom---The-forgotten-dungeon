@@ -18,7 +18,6 @@ public class FXMLDocumentController implements Initializable {
 	
 	private Game game;
 	
-	
 	@FXML
 	private ProgressBar healthBar;
 	
