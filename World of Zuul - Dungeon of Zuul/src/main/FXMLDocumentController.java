@@ -1,6 +1,7 @@
 package main;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -9,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import main.item.Item;
@@ -38,11 +38,15 @@ public class FXMLDocumentController implements Initializable {
 	private ListView playerInventory;
 	
 	@FXML
+	private ListView roomInventory;
+	
+	@FXML
 	private void handleButtonAction(ActionEvent event) {
 		Command command = game.parser.getCommand("attack");
 		boolean endGame = game.processCommand(command);
 		updateHealth();
 		updateExperience();
+		updateRoomInventory();
 		if(endGame)
 		{	
 			Platform.exit();
@@ -57,6 +61,7 @@ public class FXMLDocumentController implements Initializable {
 		updateHealth();
 		updateExperience();
 		updatePlayerInventory();
+		updateRoomInventory();
 	}
 	
 	public void updateHealth()
@@ -89,8 +94,19 @@ public class FXMLDocumentController implements Initializable {
                 }
             }
         });*/
-		ObservableList<String> itemsTemp = FXCollections.observableArrayList();
-		itemsTemp.add("as");
-		playerInventory = new ListView<>(itemsTemp);
+		List<Item> inventoryItems = game.hero.inventory.getContent();
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(inventoryItems);
+		playerInventory.setItems(itemsTemp);
+				
+		/*ObservableList<String> itemsTemp = FXCollections.observableArrayList();
+		itemsTemp.add("Hello World!");*/
+		/*playerInventory = new ListView<>(itemsTemp);*/
+	}
+	
+	public void updateRoomInventory()
+	{
+		List<Item> inventoryItems = game.currentRoom.inventory.getContent();
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(inventoryItems);
+		roomInventory.setItems(itemsTemp);
 	}
 }

@@ -16,6 +16,11 @@ public class Item
 		return name;
 	}
 
+	public String toString() // Get the writable name for inventory
+	{
+		return name;
+	}
+
 	public int getAmount() // Get the amount of the item, if zero, means it's not stackable
 	{
 		return amount;

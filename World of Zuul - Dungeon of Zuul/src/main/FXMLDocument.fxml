@@ -28,7 +28,7 @@
 		<ListView layoutX="5" layoutY="65" prefHeight="240" prefWidth="215" fx:id="playerInventory" />
 		<Button layoutX="225" layoutY="65" prefHeight="45" prefWidth="45"  text="&lt;--" />
 		<Button layoutX="225" layoutY="120" prefHeight="45" prefWidth="45"  text="--&gt;" />
-		<ListView layoutX="275" layoutY="65" prefHeight="240" prefWidth="215" />
+		<ListView layoutX="275" layoutY="65" prefHeight="240" prefWidth="215" fx:id="roomInventory" />
 		<Button layoutX="5" layoutY="310" prefHeight="45" prefWidth="95" text="Attack" onAction="#handleButtonAction" fx:id="button" />
 	</children>
 </AnchorPane>
