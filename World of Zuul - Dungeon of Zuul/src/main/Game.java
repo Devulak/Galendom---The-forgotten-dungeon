@@ -285,6 +285,8 @@ public class Game {
 	
 	private void takeItem(Command command)
 	{
+		Item throwback;
+		
         if (!command.hasSecondWord())
 		{
             System.out.println("Take what?");
@@ -299,38 +301,11 @@ public class Game {
 			if(item.getName().equals(searchName))
 			{
 				System.out.println(item.getName() + " has been added to your inventory");
-				
-				// Make sure it's able to stack and throw stuff that can't stack
-				// TO-DO: Rebuild with the new .add for Inventory objects
-				for (Iterator<Item> heroInventory = hero.inventory.getContent().iterator(); heroInventory.hasNext();)
+				throwback = hero.inventory.add(item);
+				if(throwback == null)
 				{
-					Item inventoryItem = heroInventory.next();
-					if(inventoryItem.getClass() == item.getClass()) // Do the item taken match anything in the hero's inventory?
-					{
-						if(item.getAmount() > 0 && inventoryItem.getAmount() > 0) // Is the items stackable with eachother?
-						{
-							inventoryItem.addAmount(item.getAmount()); // transfer the current amount to the hero inventory
-							roomInventory.remove(); // Remove the room item
-							return; // stop looking
-						}
-						else // What do we do if it's not stackable? (Works as if the things got swapped or switched)
-						{
-							System.out.println(inventoryItem.getName() + " has been dropped, you don't have room to carry both");
-							
-							// Clone the items to the correct inventories
-							hero.inventory.add(item);
-							currentRoom.inventory.add(inventoryItem);
-							
-							// Remove the items from the old inventories
-							heroInventory.remove();
-							roomInventory.remove();
-						}
-					}
+					roomInventory.remove();
 				}
-				// END
-				
-				hero.inventory.add(item);
-				roomInventory.remove();
 				return;
 			}
 		}

@@ -21,9 +21,9 @@ public class Inventory
 	public Item add(Item item)
 	{
 		// Check if there's something alike already in the inventory
-		for (Iterator<Item> it = inventory.iterator(); it.hasNext();)
+		for (Iterator<Item> currentInventory = inventory.iterator(); currentInventory.hasNext();)
 		{
-			Item inventoryItem = it.next();
+			Item inventoryItem = currentInventory.next();
 			if(inventoryItem.getClass() == item.getClass()) // Do the item adding match anything in the inventory?
 			{
 				if(item.getAmount() > 0 && inventoryItem.getAmount() > 0) // Is the items stackable with eachother?
@@ -33,13 +33,13 @@ public class Inventory
 				}
 				else if(!nolimit) // What do we do if it's not stackable? (Works as if the things got swapped or switched)
 				{
-					inventory.add(item); // Add the item
-					it.remove(); // Remove the old item
+					currentInventory.remove(); // Remove the old item
+					inventory.add(item); // Add the new item
 					return inventoryItem; // Return old item, since thew inventoryItem is still specified we can still use that to return
 				}
 			}
 		}
-		inventory.add(item); // Add the item
+		inventory.add(item); // Add the new item
 		return null; // Return null since it doesn't give anything back
 	}
 	
