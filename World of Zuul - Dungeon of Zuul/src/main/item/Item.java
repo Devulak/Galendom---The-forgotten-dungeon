@@ -16,7 +16,7 @@ public class Item
 		return name;
 	}
 
-	public String toString() // Get the writable name for inventory
+	public String toString() // Return value on object
 	{
 		return name;
 	}

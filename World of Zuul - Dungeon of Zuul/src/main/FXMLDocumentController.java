@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -40,6 +41,9 @@ public class FXMLDocumentController implements Initializable {
 	private ListView roomInventory;
 	
 	@FXML
+	private TextArea dialouge;
+	
+	@FXML
 	private void handleButtonAction(ActionEvent event) {
 		Command command = game.parser.getCommand("attack");
 		boolean endGame = game.processCommand(command);
@@ -50,6 +54,24 @@ public class FXMLDocumentController implements Initializable {
 		{	
 			Platform.exit();
 		}
+	}
+	
+	@FXML
+	private void takeItem(ActionEvent event)
+	{
+		Command command = game.parser.getCommand("take " + roomInventory.getSelectionModel().getSelectedItem());
+		boolean endGame = game.processCommand(command);
+		updatePlayerInventory();
+		updateRoomInventory();
+	}
+	
+	@FXML
+	private void dropItem(ActionEvent event)
+	{
+		Command command = game.parser.getCommand("drop " + playerInventory.getSelectionModel().getSelectedItem());
+		boolean endGame = game.processCommand(command);
+		updatePlayerInventory();
+		updateRoomInventory();
 	}
 	
 	@Override
@@ -78,34 +100,18 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updatePlayerInventory()
 	{
-		/*ObservableList<Item> items = FXCollections.observableArrayList();
-		items.add(new Item("Woppa", 0));
-		playerInventory = new ListView<>(items);
-        playerInventory.setCellFactory(param -> new ListCell<Item>() {
-            @Override
-            protected void updateItem(Item item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null || item.getName() == null) {
-                    setText(null);
-                } else {
-                    setText(item.getName());
-                }
-            }
-        });*/
-		List<Item> inventoryItems = game.hero.inventory.getContent();
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(inventoryItems);
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.hero.inventory.getContent());
 		playerInventory.setItems(itemsTemp);
-				
-		/*ObservableList<String> itemsTemp = FXCollections.observableArrayList();
-		itemsTemp.add("Hello World!");*/
-		/*playerInventory = new ListView<>(itemsTemp);*/
 	}
 	
 	public void updateRoomInventory()
 	{
-		List<Item> inventoryItems = game.currentRoom.inventory.getContent();
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(inventoryItems);
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.currentRoom.inventory.getContent());
 		roomInventory.setItems(itemsTemp);
+	}
+	
+	public void updateDialouge()
+	{
+		dialouge.setText(dialouge.getText());
 	}
 }

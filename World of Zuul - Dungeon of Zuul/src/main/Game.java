@@ -178,6 +178,10 @@ public class Game {
 		{
             takeItem(command);
         }
+		else if (commandWord == CommandWord.DROP)
+		{
+            dropItem(command);
+        }
 		else if (commandWord == CommandWord.ATTACK)
 		{
             combatAttack();
@@ -283,8 +287,6 @@ public class Game {
 	
 	private void takeItem(Command command)
 	{
-		Item throwback;
-		
         if (!command.hasSecondWord())
 		{
             System.out.println("Take what?");
@@ -299,7 +301,39 @@ public class Game {
 			if(item.getName().equals(searchName))
 			{
 				System.out.println(item.getName() + " has been added to your inventory");
-				throwback = hero.inventory.add(item);
+				item = hero.inventory.add(item);
+				roomInventory.remove();
+				if(item != null)
+				{
+					System.out.println(item.getName() + " has been removed from your inventory");
+					currentRoom.inventory.add(item);
+				}
+				return;
+			}
+		}
+		
+		System.out.println("Can't find that in the room"); // These aren't the droids you're looking for
+	}
+	
+	private void dropItem(Command command)
+	{
+		Item throwback;
+		
+        if (!command.hasSecondWord())
+		{
+            System.out.println("Drop what?");
+            return;
+        }
+		
+		String searchName = command.getSecondWord();
+
+		for (Iterator<Item> roomInventory = hero.inventory.getContent().iterator(); roomInventory.hasNext();)
+		{
+			Item item = roomInventory.next();
+			if(item.getName().equals(searchName))
+			{
+				System.out.println(item.getName() + " has been dropped");
+				throwback = currentRoom.inventory.add(item);
 				if(throwback == null)
 				{
 					roomInventory.remove();
@@ -308,7 +342,7 @@ public class Game {
 			}
 		}
 		
-		System.out.println("Can't find that in the room"); // These aren't the droids you're looking for
+		System.out.println("Can't find that in your inventory"); // These aren't the droids you're looking for
 	}
 	
     private void combatAttack()
