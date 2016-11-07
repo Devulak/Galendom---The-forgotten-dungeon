@@ -190,7 +190,7 @@ public class Game {
 	 */
     private void printWelcome() {
         System.out.println();
-        System.out.println("You awaken, without knowing where you are, you look to the right, and the a torch besides a skull and a Sign, which says:");
+        System.out.println("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
         System.out.println("''You're lost in the Dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
         System.out.println("You smell a disgusting stench, and look forward and see a big dark-green creature look angry you.");
         System.out.println("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
