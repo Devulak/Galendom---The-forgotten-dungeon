@@ -182,7 +182,7 @@ public class Game {
 			Command command = parser.getCommand();
 			finished = processCommand(command);
 		}
-		System.out.println("Thank you for playing.  Good bye.");
+		System.out.println("Thank you for playing the game, return anytime, when you begin feeling uncomfortable staying in the Dungeon of Zuul!");
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class Game {
     private void printWelcome() {
         System.out.println();
         System.out.println("You awaken, without knowing where you are, you look to the right, and the a torch besides a skull and a Sign, which says:");
-        System.out.println("''You're lost in the dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
+        System.out.println("''You're lost in the Dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
         System.out.println("You smell a disgusting stench, and look forward and see a big dark-green creature look angry you.");
         System.out.println("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
         System.out.println("If you manage to defeat the boss, you will win, and escape this forgotten place.");
