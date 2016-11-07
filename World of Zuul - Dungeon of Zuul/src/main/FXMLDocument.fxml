@@ -17,13 +17,13 @@
 		<Label layoutX="5" layoutY="30" prefHeight="30" prefWidth="485" alignment="CENTER" fx:id="healthStatus" />
 		<Button layoutX="495" layoutY="5" prefHeight="300" prefWidth="300" />
 		<TextArea layoutX="495" layoutY="310" prefHeight="95" prefWidth="300" editable="false" fx:id="dialouge" />
-		<Button layoutX="395" layoutY="310" prefHeight="45" prefWidth="45"  text="▲" />
-		<Button layoutX="445" layoutY="360" prefHeight="45" prefWidth="45"  text="►" />
-		<Button layoutX="395" layoutY="360" prefHeight="45" prefWidth="45"  text="▼" />
-		<Button layoutX="345" layoutY="360" prefHeight="45" prefWidth="45"  text="◄" />
+		<Button layoutX="395" layoutY="310" prefHeight="45" prefWidth="45" text="▲" />
+		<Button layoutX="445" layoutY="360" prefHeight="45" prefWidth="45" text="►" />
+		<Button layoutX="395" layoutY="360" prefHeight="45" prefWidth="45" text="▼" />
+		<Button layoutX="345" layoutY="360" prefHeight="45" prefWidth="45" text="◄" />
 		<ListView layoutX="5" layoutY="65" prefHeight="240" prefWidth="215" fx:id="playerInventory" />
-		<Button layoutX="225" layoutY="65" prefHeight="45" prefWidth="45"  text="--&gt;" onAction="#dropItem" />
-		<Button layoutX="225" layoutY="120" prefHeight="45" prefWidth="45"  text="&lt;--" onAction="#takeItem" />
+		<Button layoutX="225" layoutY="65" prefHeight="45" prefWidth="45" text="--&gt;" onAction="#dropItem" />
+		<Button layoutX="225" layoutY="120" prefHeight="45" prefWidth="45" text="&lt;--" onAction="#takeItem" />
 		<ListView layoutX="275" layoutY="65" prefHeight="240" prefWidth="215" fx:id="roomInventory" />
 		<Button layoutX="5" layoutY="310" prefHeight="45" prefWidth="95" text="Attack" onAction="#handleButtonAction" fx:id="button" />
 		<!-- Map -->

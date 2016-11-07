@@ -48,10 +48,10 @@ public class Game {
         /* Give creatures some items that they may drop */
 		
 		// Potions
-		hero.inventory.add(new Potion("health_potion", 4)); // 4x health potions
+		hero.inventory.add(new Potion("Health Potions", 4)); // 4x health potions
 		
 		// Coins
-		hero.inventory.add(new Coin("coin", 20)); // 20 coins
+		hero.inventory.add(new Coin("Coins", 20)); // 20 coins
 		
 		// Weapons
 		hero.inventory.add(new Weapon("Wooden Sword", 1, 2)); // Wooden Sword
@@ -59,7 +59,7 @@ public class Game {
 		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
 		
 		// Shields
-		lvl_1.monster.inventory.add(new Shield("wooden_shield", 1, 20)); // Wooden Shield
+		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 1, 20)); // Wooden Shield
 		
 		// Helmets
 		
