@@ -11,13 +11,12 @@ public class Item
 		this.amount = amount;
 	}
 
-	public String getName() // Get the name of the item
-	{
-		return name;
-	}
-
 	public String toString() // Return value on object
 	{
+		if(amount > 0)
+		{
+			return name + " (" + amount + ")";
+		}
 		return name;
 	}
 

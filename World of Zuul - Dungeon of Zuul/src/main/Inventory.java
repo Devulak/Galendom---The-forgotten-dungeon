@@ -18,29 +18,54 @@ public class Inventory
 		this.nolimit = nolimit;
 	}
 	
-	public Item add(Item item)
+	protected Item add(Item item)
 	{
-		// Check if there's something alike already in the inventory
-		for (Iterator<Item> currentInventory = inventory.iterator(); currentInventory.hasNext();)
+		if(item != null)
 		{
-			Item inventoryItem = currentInventory.next();
-			if(inventoryItem.getClass() == item.getClass()) // Do the item adding match anything in the inventory?
+			// Check if there's something alike already in the inventory
+			for (Iterator<Item> currentInventory = inventory.iterator(); currentInventory.hasNext();)
 			{
-				if(item.getAmount() > 0 && inventoryItem.getAmount() > 0) // Is the items stackable with eachother?
+				Item inventoryItem = currentInventory.next();
+				if(inventoryItem.getClass() == item.getClass()) // Do the item adding match anything in the inventory?
 				{
-					inventoryItem.addAmount(item.getAmount()); // Transfer the current amount to the inventory's item
-					return null; // Return null since it doesn't give anything back
+					if(item.getAmount() > 0 && inventoryItem.getAmount() > 0) // Is the items stackable with eachother?
+					{
+						inventoryItem.addAmount(item.getAmount()); // Transfer the current amount to the inventory's item
+						return null; // Return null since it doesn't give anything back
+					}
+					else if(!nolimit) // What do we do if it's not stackable? (Works as if the things got swapped or switched)
+					{
+						currentInventory.remove(); // Remove the old item
+						inventory.add(item); // Add the new item
+						return inventoryItem; // Return old item, since thew inventoryItem is still specified we can still use that to return
+					}
 				}
-				else if(!nolimit) // What do we do if it's not stackable? (Works as if the things got swapped or switched)
+			}
+			inventory.add(item); // Add the new item
+		}
+		return null; // Return null since it doesn't give anything back
+	}
+	
+	protected void remove(Item searchForItem)
+	{
+		if(searchForItem != null)
+		{
+			for (Iterator<Item> itInventory = inventory.iterator(); itInventory.hasNext();)
+			{
+				Item item = itInventory.next();
+				if(item.equals(searchForItem))
 				{
-					currentInventory.remove(); // Remove the old item
-					inventory.add(item); // Add the new item
-					return inventoryItem; // Return old item, since thew inventoryItem is still specified we can still use that to return
+					itInventory.remove();
+					return;
 				}
 			}
 		}
-		inventory.add(item); // Add the new item
-		return null; // Return null since it doesn't give anything back
+	}
+	
+	protected void swap(Item itemToRemove, Item itemToAdd)
+	{
+		remove(itemToRemove);
+		add(itemToAdd);
 	}
 	
 	public List<Item> getContent()
@@ -72,11 +97,11 @@ public class Inventory
 			{
 				if(Item.getAmount() > 1)
 				{
-					System.out.println(verticalPrefix + " " + Item.getAmount() + "x " + Item.getName() + "s");
+					System.out.println(verticalPrefix + " " + Item.getAmount() + "x " + Item.toString() + "s");
 				}
 				else
 				{
-					System.out.println(verticalPrefix + " " + Item.getName());
+					System.out.println(verticalPrefix + " " + Item.toString());
 				}
 			}
 		}

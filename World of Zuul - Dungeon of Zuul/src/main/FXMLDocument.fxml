@@ -6,8 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.canvas.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="640" prefWidth="960" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
+<AnchorPane prefHeight="640" prefWidth="960" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
 	<children>
 		<ProgressBar layoutX="90" layoutY="5" prefHeight="20" prefWidth="400" fx:id="experienceBar" />
 		<Label layoutX="95" layoutY="5" prefHeight="20" prefWidth="390" alignment="CENTER_LEFT" fx:id="experienceLevel" />
@@ -20,15 +21,19 @@
 		<Button layoutX="445" layoutY="360" prefHeight="45" prefWidth="45"  text="►" />
 		<Button layoutX="395" layoutY="360" prefHeight="45" prefWidth="45"  text="▼" />
 		<Button layoutX="345" layoutY="360" prefHeight="45" prefWidth="45"  text="◄" />
-		<ImageView id="boxImage" layoutX="495" layoutY="5">    
-		   <image>
-			  <Image url="sprays/monster.png" />
-		   </image>
-		</ImageView>
 		<ListView layoutX="5" layoutY="65" prefHeight="240" prefWidth="215" fx:id="playerInventory" />
 		<Button layoutX="225" layoutY="65" prefHeight="45" prefWidth="45"  text="--&gt;" onAction="#dropItem" />
 		<Button layoutX="225" layoutY="120" prefHeight="45" prefWidth="45"  text="&lt;--" onAction="#takeItem" />
 		<ListView layoutX="275" layoutY="65" prefHeight="240" prefWidth="215" fx:id="roomInventory" />
 		<Button layoutX="5" layoutY="310" prefHeight="45" prefWidth="95" text="Attack" onAction="#handleButtonAction" fx:id="button" />
+		<!-- Map -->
+		<ImageView id="boxImage" layoutX="495" layoutY="5">    
+		   <image>
+			  <Image url="sprays/monster.png" />
+		   </image>
+		</ImageView>
+		<Canvas layoutX="495" layoutY="5" height="45" width="95" >
+			
+		</Canvas>
 	</children>
 </AnchorPane>

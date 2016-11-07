@@ -5,13 +5,11 @@ import main.item.*;
 
 public class Game {
 
-    protected Parser parser;
     protected Room currentRoom;
 	protected Creature hero;
 
     public Game() {
         createRooms();
-        parser = new Parser();
     }
 
     private void createRooms() {
@@ -56,7 +54,7 @@ public class Game {
 		hero.inventory.add(new Coin("coin", 20)); // 20 coins
 		
 		// Weapons
-		hero.inventory.add(new Weapon("wooden_sword", 1, 2)); // Wooden Sword
+		hero.inventory.add(new Weapon("Wooden Sword", 1, 2)); // Wooden Sword
 		// lvl_2.Monster.inventory.add(new Weapon("iron_sword", 2, 4)); // Iron Sword
 		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
 		
@@ -127,12 +125,12 @@ public class Game {
         System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
         System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
         System.out.println("win, but if your health reaches zero, you will lose.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("Click on '?' if you need help.");
         System.out.println();
 		printLook();
     }
 
-    protected boolean processCommand(Command command) {
+   /* protected boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -184,7 +182,7 @@ public class Game {
         }
 		else if (commandWord == CommandWord.ATTACK)
 		{
-            combatAttack();
+            attack();
         }
 		if(hero == null)
 		{
@@ -196,7 +194,7 @@ public class Game {
 			System.out.println("Thank you for playing.  Good bye.");
 		}
         return wantToQuit;
-    }
+    }*/
 
     /* By writing "help" in console, this method will be called. */
     private void printHelp()
@@ -253,22 +251,14 @@ public class Game {
 		System.out.println("\\----------------------------------------------------------------------------------------/");
 	}
 	
-	private void useItem(Command command)
+	private void useItem(Item searchForItem)
 	{
-        if (!command.hasSecondWord())
-		{
-            System.out.println("Use what?");
-            return;
-        }
-		
-		String searchName = command.getSecondWord();
-
 		for (Iterator<Item> it = hero.inventory.getContent().iterator(); it.hasNext();)
 		{
 			Item item = it.next();
-			if(item.getName().equals(searchName) && item.getAmount() > 0 && item instanceof Potion)
+			if(item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion)
 			{
-				System.out.println("You used a " + item.getName());
+				System.out.println("You used a " + item.toString());
 				if(item.getAmount() == 1)
 				{
 					it.remove();
@@ -282,70 +272,10 @@ public class Game {
 			}
 		}
 		
-		System.out.println("That doesn't seem to be a usable item");
+		System.out.println("useItem didn't find '" + searchForItem + "'");
 	}
 	
-	private void takeItem(Command command)
-	{
-        if (!command.hasSecondWord())
-		{
-            System.out.println("Take what?");
-            return;
-        }
-		
-		String searchName = command.getSecondWord();
-
-		for (Iterator<Item> roomInventory = currentRoom.inventory.getContent().iterator(); roomInventory.hasNext();)
-		{
-			Item item = roomInventory.next();
-			if(item.getName().equals(searchName))
-			{
-				System.out.println(item.getName() + " has been added to your inventory");
-				item = hero.inventory.add(item);
-				roomInventory.remove();
-				if(item != null)
-				{
-					System.out.println(item.getName() + " has been removed from your inventory");
-					currentRoom.inventory.add(item);
-				}
-				return;
-			}
-		}
-		
-		System.out.println("Can't find that in the room"); // These aren't the droids you're looking for
-	}
-	
-	private void dropItem(Command command)
-	{
-		Item throwback;
-		
-        if (!command.hasSecondWord())
-		{
-            System.out.println("Drop what?");
-            return;
-        }
-		
-		String searchName = command.getSecondWord();
-
-		for (Iterator<Item> roomInventory = hero.inventory.getContent().iterator(); roomInventory.hasNext();)
-		{
-			Item item = roomInventory.next();
-			if(item.getName().equals(searchName))
-			{
-				System.out.println(item.getName() + " has been dropped");
-				throwback = currentRoom.inventory.add(item);
-				if(throwback == null)
-				{
-					roomInventory.remove();
-				}
-				return;
-			}
-		}
-		
-		System.out.println("Can't find that in your inventory"); // These aren't the droids you're looking for
-	}
-	
-    private void combatAttack()
+    public void attack()
 	{
 		if(currentRoom.hasMonster())
 		{
@@ -382,26 +312,9 @@ public class Game {
 		else
 			System.out.println("There's no monster to attack");
     }
-
-    /*
-    private void dropWeapon(Command command) {
-        String weapon = currentWeapon.getWeaponName();
-        if (!hasWeapon) {
-            System.out.println("You don't have any weapon to drop.");
-        } else if (!command.hasSecondWord()) {
-            System.out.println("Drop what?");
-        } else if (command.getSecondWord() == weapon) {
-            currentWeapon = null;
-            hasWeapon = false;
-            System.out.println("Successfully dropped");
-        } else {
-            System.out.println("I'm not sure what you mean with " + command.getSecondWord() + ("."));
-        }
-
-    } */
     
 	/* When you write "go" in console, this method will be called. */
-    private void goRoom(Command command)
+    /*private void goRoom(Room command)
 	{
         if (!command.hasSecondWord())
 		{
@@ -433,12 +346,8 @@ public class Game {
  * if you add a second word. Like "quit game", the game will ask you to quit what?
  * Otherwise the while loop in play() method will stop and the game will quit.
  */
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
-        } else {
-            return true;
-        }
+    private void quit()
+	{
+		
     }
 }

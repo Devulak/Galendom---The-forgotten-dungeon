@@ -44,23 +44,22 @@ public class FXMLDocumentController implements Initializable {
 	private TextArea dialouge;
 	
 	@FXML
-	private void handleButtonAction(ActionEvent event) {
-		Command command = game.parser.getCommand("attack");
-		boolean endGame = game.processCommand(command);
+	private void handleButtonAction(ActionEvent event)
+	{
+		game.attack();
 		updateHealth();
 		updateExperience();
 		updateRoomInventory();
-		if(endGame)
-		{	
-			Platform.exit();
-		}
 	}
 	
 	@FXML
 	private void takeItem(ActionEvent event)
 	{
-		Command command = game.parser.getCommand("take " + roomInventory.getSelectionModel().getSelectedItem());
-		boolean endGame = game.processCommand(command);
+		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
+		Item tempItem = game.hero.inventory.add(selectedItem);
+		game.currentRoom.inventory.swap(selectedItem, tempItem);
+		
+		// Update inventories
 		updatePlayerInventory();
 		updateRoomInventory();
 	}
@@ -68,8 +67,11 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void dropItem(ActionEvent event)
 	{
-		Command command = game.parser.getCommand("drop " + playerInventory.getSelectionModel().getSelectedItem());
-		boolean endGame = game.processCommand(command);
+		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
+		Item droppedItem = game.currentRoom.inventory.add(selectedItem);
+		game.hero.inventory.swap(selectedItem, droppedItem);
+		
+		// Update inventories
 		updatePlayerInventory();
 		updateRoomInventory();
 	}
