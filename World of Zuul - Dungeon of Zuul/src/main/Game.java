@@ -73,8 +73,8 @@ public class Game {
                 lvl_5a.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
                 lvl_5a.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
                 lvl_5a.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-                lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
-                lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
+                lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+                lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
                                               
 		// Weapons
 		hero.inventory.add(new Weapon("wooden_sword", 3, 7)); // Wooden Sword
@@ -87,31 +87,31 @@ public class Game {
                 lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
                 lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
                 lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 18, 20)); // Holy Steel Sword
-                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 20, 22)); // Holy Steel Sword
+                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 20, 22)); // Fallen Knight Sword
                 
 		// Shields
                 lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
                 lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-                lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Steel Shield 
+                lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Broken Steel Shield
                 lvl_8.monster.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
                 
                 // Helmets
 		lvl_3.monster.inventory.add(new Helmet("iron_helmet", 2)); // Iron Helmet
-                lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Steel Helmet
+                lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Broken Steel Helmet
                 lvl_7.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
                 lvl_8.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
                 
 		// Chestplates
 		lvl_4a.monster.inventory.add(new Chestplate("iron_chestplate", 4)); // Iron Chestplate
-                lvl_5a.monster.inventory.add(new Chestplate("broken_steel_chestplate", 4)); // Steel Chestplate
+                lvl_5a.monster.inventory.add(new Chestplate("broken_steel_chestplate", 4)); // Broken Steel Chestplate
                 lvl_5.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
                 lvl_6.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
                 lvl_7.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
                 lvl_8.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
                 
                 // Leggings
-		lvl_3a.monster.inventory.add(new Legging("iron_leggings", 2)); //Iron Leggings
-                lvl_5a.monster.inventory.add(new Legging("broken_steel_leggings", 2)); //Steel Leggings
+		lvl_3a.monster.inventory.add(new Legging("iron_leggings", 2)); // Iron Leggings
+                lvl_5a.monster.inventory.add(new Legging("broken_steel_leggings", 2)); // Broken Steel Leggings
                 lvl_5.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
 		lvl_6.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
                 lvl_7.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
