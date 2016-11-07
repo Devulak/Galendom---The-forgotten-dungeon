@@ -48,41 +48,89 @@ public class Game {
         lvl_6.setMonster(new Creature(6));
         lvl_7.setMonster(new Creature(7));
         lvl_8.setMonster(new Creature(8));
-        
-        
-        
-		
-        /* Give creatures some items that they may drop */
+        	
+        // Give creatures some items that they drop
 		
 		// Potions
-		hero.inventory.add(new Potion("health_potion", 6)); // 4x health potions
-                lvl_4.monster.inventory.add(new Potion("health_potion", 3)); // Wooden Shield
-		
+		hero.inventory.add(new Potion("health_potion", 3)); // x3 health potions
+                lvl_3a.monster.inventory.add(new Potion("health_potion", 8)); // x6 health potions
+		lvl_4.monster.inventory.add(new Potion("health_potion", 5)); // x5 health potions
+                lvl_4a.monster.inventory.add(new Potion("health_potion", 3)); // x3 health potions
+		lvl_5a.monster.inventory.add(new Potion("health_potion", 14)); // x14 health potions
+                lvl_7.monster.inventory.add(new Potion("health_potion", 8)); // x8 health potions
+                
 		// Coins
-		hero.inventory.add(new Coin("coin", 20)); // 20 coins
-		
+		lvl_1.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_2a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_3a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_4a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_2.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_3.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_4.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_5a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                
+                //Vendor
+                lvl_5a.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+                lvl_5a.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+                lvl_5a.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
+                lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
+                                              
 		// Weapons
 		hero.inventory.add(new Weapon("wooden_sword", 3, 7)); // Wooden Sword
-                //lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+                lvl_1.monster.inventory.add(new Weapon("broken_wooden_sword", 1, 2)); // Wooden Sword
+                lvl_2.monster.inventory.add(new Weapon("broken_wooden_sword", 2, 4)); // Wooden Sword
+                lvl_3.monster.inventory.add(new Weapon("broken_wooden_sword", 4, 6)); // Wooden Sword
+                lvl_4.monster.inventory.add(new Weapon("broken_wooden_sword", 5, 7)); // Wooden Shield
+                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
+                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
+                lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
+                lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
+                lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 18, 20)); // Holy Steel Sword
+                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 20, 22)); // Holy Steel Sword
                 
-               		
 		// Shields
                 lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 4,7)); // Wooden Shield
+                lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+                lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Steel Shield 
+                lvl_8.monster.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
                 
-		// Helmets
-		lvl_2.monster.inventory.add(new Helmet("iron_helmet", 2)); // Wooden Shield
+                // Helmets
+		lvl_3.monster.inventory.add(new Helmet("iron_helmet", 2)); // Iron Helmet
+                lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Steel Helmet
+                lvl_7.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+                lvl_8.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
                 
 		// Chestplates
-		lvl_4.monster.inventory.add(new Chestplate("iron_chestplate", 4)); // Wooden Shield
+		lvl_4a.monster.inventory.add(new Chestplate("iron_chestplate", 4)); // Iron Chestplate
+                lvl_5a.monster.inventory.add(new Chestplate("broken_steel_chestplate", 4)); // Steel Chestplate
+                lvl_5.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_6.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_7.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_8.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
                 
-		// Leggings
-		//hero.inventory.add(new Legging("wooden_leggings", 1));
+                // Leggings
+		lvl_3a.monster.inventory.add(new Legging("iron_leggings", 2)); //Iron Leggings
+                lvl_5a.monster.inventory.add(new Legging("broken_steel_leggings", 2)); //Steel Leggings
+                lvl_5.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+		lvl_6.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+                lvl_7.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+                lvl_8.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
                 
-		// Boots
-                //hero.inventory.add(new Boot("wooden_boot", 20)); // Wooden Boots
+		// Boots                
+                lvl_6.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+                lvl_7.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+                lvl_8.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
                 
-        /* This gives the player the option to move between the rooms */
+                //For testing the game and skipping the start fast, this will give you strength like room 5 (the middle of the game). Remember to change start level to 6.
+                //hero.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
+		//hero.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+                //hero.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+                //hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                //hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
+                //hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot                             
+                 
+        // This gives the player the option to move between the rooms
         lvl_1.setExit("left", lvl_2);
         lvl_1.setExit("right", lvl_2a);
 
@@ -118,6 +166,8 @@ public class Game {
         lvl_8.setExit("back", lvl_7);
 
         currentRoom = lvl_1; //The player will start in this room
+        
+        
     }
 	
 	/**
@@ -140,10 +190,10 @@ public class Game {
 	 */
     private void printWelcome() {
         System.out.println();
-        System.out.println("You're lost in a cave. You have to find the exit to win.");
-        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
-        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
-        System.out.println("win, but if your health reaches zero, you will lose.");
+        System.out.println("You're lost in the dungeon of Zuul. You have to navigate through the dark rooms to find the exits.");
+        System.out.println("Your goal is to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
+        System.out.println("If you manage to defeat the boss, you will win.");
+        System.out.println("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
 		printLook();
@@ -205,7 +255,8 @@ public class Game {
         }
 		if(hero == null)
 		{
-			System.out.println("You've been killed and lost the game!");
+			System.out.println("You've been killed...");
+                        System.out.println("Your corpse will now be used to guard the rooms against others, who may fall into the cave of Zuul...");
 			wantToQuit = true;
 		}
         return wantToQuit;
