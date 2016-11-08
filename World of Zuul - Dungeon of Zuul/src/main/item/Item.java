@@ -2,7 +2,7 @@ package main.item;
 
 public class Item
 {
-	private String name;
+	protected String name;
 	private int amount;
 
 	public Item(String name, int amount) // Constructor

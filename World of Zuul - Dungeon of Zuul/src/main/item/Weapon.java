@@ -11,6 +11,11 @@ public class Weapon extends Item
 		this.damageMin = damageMin;
 		this.damageMax = damageMax;
 	}
+	
+	public String toString() // Return value on object
+	{
+		return name + " (" + damageMin + "-" + damageMax + " dmg)";
+	}
 
 	public int getDamageMin()
 	{

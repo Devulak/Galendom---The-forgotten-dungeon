@@ -17,18 +17,18 @@ public class Game {
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
         /* Adds rooms to the game, also gives them descriptions */
-        lvl_1 = new Room("in level 1");
-        lvl_2 = new Room("in level 2");
-        lvl_2a = new Room("in level 2a");
-        lvl_3 = new Room("in level 3");
-        lvl_3a = new Room("in level 3a");
-        lvl_4 = new Room("in level 4");
-        lvl_4a = new Room("in level 4a");
-        lvl_5 = new Room("in level 5");
-        lvl_5a = new Room("in level 5a");
-        lvl_6 = new Room("in level 6");
-        lvl_7 = new Room("in level 7");
-        lvl_8 = new Room("in level 8");
+        lvl_1 = new Room("in level 1", 1, 0);
+        lvl_2 = new Room("in level 2", 2, 0);
+        lvl_2a = new Room("in level 2a", 0, 0);
+        lvl_3 = new Room("in level 3", 2, 1);
+        lvl_3a = new Room("in level 3a", 0, 1);
+        lvl_4 = new Room("in level 4", 2, 2);
+        lvl_4a = new Room("in level 4a", 1, 1);
+        lvl_5 = new Room("in level 5", 1, 2);
+        lvl_5a = new Room("in level 5a", 2, 3);
+        lvl_6 = new Room("in level 6", 0, 2);
+        lvl_7 = new Room("in level 7", 0, 3);
+        lvl_8 = new Room("in level 8", 1, 3);
 
         /* Adds creatures to the game, number tells what level they should start at  */
 		hero = new Creature(1);
@@ -70,39 +70,39 @@ public class Game {
 		// Boots
 
         /* This gives the player the option to move between the rooms */
-        lvl_1.setExit("left", lvl_2);
-        lvl_1.setExit("right", lvl_2a);
+        lvl_1.setExit(lvl_2);
+        lvl_1.setExit(lvl_2a);
 
-        lvl_2.setExit("forward", lvl_3);
-        lvl_2.setExit("back", lvl_1);
+        lvl_2.setExit(lvl_3);
+        lvl_2.setExit(lvl_1);
 
-        lvl_2a.setExit("forward", lvl_3a);
-        lvl_2a.setExit("back", lvl_1);
+        lvl_2a.setExit(lvl_3a);
+        lvl_2a.setExit(lvl_1);
 
-        lvl_3.setExit("forward", lvl_4);
-        lvl_3.setExit("back", lvl_2);
+        lvl_3.setExit(lvl_4);
+        lvl_3.setExit(lvl_2);
 
-        lvl_3a.setExit("forward", lvl_4a);
-        lvl_3a.setExit("back", lvl_2a);
+        lvl_3a.setExit(lvl_4a);
+        lvl_3a.setExit(lvl_2a);
 
-        lvl_4.setExit("right", lvl_5);
-        lvl_4.setExit("left", lvl_5a);
-        lvl_4.setExit("back", lvl_3);
+        lvl_4.setExit(lvl_5);
+        lvl_4.setExit(lvl_5a);
+        lvl_4.setExit(lvl_3);
 
-        lvl_4a.setExit("back", lvl_3a);
+        lvl_4a.setExit(lvl_3a);
 
-        lvl_5.setExit("forward", lvl_6);
-        lvl_5.setExit("back", lvl_4);
+        lvl_5.setExit(lvl_6);
+        lvl_5.setExit(lvl_4);
 
-        lvl_5a.setExit("back", lvl_4);
+        lvl_5a.setExit(lvl_4);
 
-        lvl_6.setExit("forward", lvl_7);
-        lvl_6.setExit("back", lvl_5);
+        lvl_6.setExit(lvl_7);
+        lvl_6.setExit(lvl_5);
 
-        lvl_7.setExit("forward", lvl_8);
-        lvl_7.setExit("back", lvl_6);
+        lvl_7.setExit(lvl_8);
+        lvl_7.setExit(lvl_6);
 
-        lvl_8.setExit("back", lvl_7);
+        lvl_8.setExit(lvl_7);
 
         currentRoom = lvl_1; //The player will start in this room
     }
@@ -129,72 +129,6 @@ public class Game {
         System.out.println();
 		printLook();
     }
-
-   /* protected boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-
-        CommandWord commandWord = command.getCommandWord();
-
-        if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
-
-        if (commandWord == CommandWord.HELP)
-		{
-            printHelp();
-        }
-		else if (commandWord == CommandWord.MAP)
-		{
-            printMap();
-        }
-		else if (commandWord == CommandWord.GO)
-		{
-            goRoom(command);
-        }
-		else if (commandWord == CommandWord.QUIT)
-		{
-            wantToQuit = quit(command);
-        }
-		else if (commandWord == CommandWord.LOOK)
-		{
-			printLook();
-        }
-		else if (commandWord == CommandWord.STATUS)
-		{
-            printStatus();
-        }
-		else if (commandWord == CommandWord.INVENTORY)
-		{
-            printInventory();
-        }
-		else if (commandWord == CommandWord.USE)
-		{
-            useItem(command);
-        }
-		else if (commandWord == CommandWord.TAKE)
-		{
-            takeItem(command);
-        }
-		else if (commandWord == CommandWord.DROP)
-		{
-            dropItem(command);
-        }
-		else if (commandWord == CommandWord.ATTACK)
-		{
-            attack();
-        }
-		if(hero == null)
-		{
-			System.out.println("You've been killed and lost the game!");
-			wantToQuit = true;
-		}
-		if(wantToQuit)
-		{
-			System.out.println("Thank you for playing.  Good bye.");
-		}
-        return wantToQuit;
-    }*/
 
     /* By writing "help" in console, this method will be called. */
     private void printHelp()
@@ -229,13 +163,7 @@ public class Game {
 		{
 			System.out.println(currentRoom.getExitString());
 		}
-		currentRoom.inventory.printContent("Room items");
 	}
-	
-    private void printInventory() // Prints out the hero's current inventory
-	{
-		hero.inventory.printContent("Your inventory");
-    }
 	
 	/**
 	 * This method will be called when you write "map" in console. /* It will
@@ -311,43 +239,5 @@ public class Game {
 		}
 		else
 			System.out.println("There's no monster to attack");
-    }
-    
-	/* When you write "go" in console, this method will be called. */
-    /*private void goRoom(Room command)
-	{
-        if (!command.hasSecondWord())
-		{
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if(currentRoom.hasMonster())
-		{
-            System.out.println("The monster (" + currentRoom.monster.printLevel() + "): is blocking your way");
-		}
-		else if (nextRoom == null) // It will first check if there is a path to the next room.
-		{
-            System.out.println("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
-        }
-		else
-		{
-            currentRoom = nextRoom;
-			printLook(); // It will give you a description of what's in the room
-        }
-    }
-
-/**
- * This method will run when you write quit in the console. It will first check
- * if you add a second word. Like "quit game", the game will ask you to quit what?
- * Otherwise the while loop in play() method will stop and the game will quit.
- */
-    private void quit()
-	{
-		
     }
 }
