@@ -35,7 +35,7 @@ public class Game {
         lvl_8 = new Room("in level 8");
 
         /* Adds creatures to the game, number tells what level they should start at  */
-		hero = new Creature(1);
+		hero = new Creature(112312);
         lvl_1.setMonster(new Creature(1));
         lvl_2.setMonster(new Creature(2));
         lvl_2a.setMonster(new Creature(2));
@@ -165,9 +165,9 @@ public class Game {
 
         lvl_8.setExit("back", lvl_7);
 
-        currentRoom = lvl_1; //The player will start in this room
+        currentRoom = lvl_8; //The player will start in this room
         
-        
+               
     }
 	
 	/**
@@ -183,6 +183,8 @@ public class Game {
 			finished = processCommand(command);
 		}
 		System.out.println("Thank you for playing the game, return anytime, when you begin feeling uncomfortable staying in the Dungeon of Zuul!");
+               
+                
 	}
 
 	/**
@@ -201,7 +203,7 @@ public class Game {
 		printLook();
     }
 
-    private boolean processCommand(Command command) {
+    protected boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -251,10 +253,12 @@ public class Game {
 		{
             combatAttack();
         }
-        else if (commandWord == CommandWord.FLEE)
-		{
-            
-        }
+        
+                if (Room.lvl_8.monster==null){
+                    wantToQuit = true;
+                }   
+        
+                             
 		if(hero == null)
 		{
 			System.out.println("You've been killed...");
@@ -443,6 +447,7 @@ public class Game {
 		}
 		else
 			System.out.println("There's no monster to attack");
+                
     }
 
     /*
@@ -503,4 +508,5 @@ public class Game {
             return true;
         }
     }
+    
 }
