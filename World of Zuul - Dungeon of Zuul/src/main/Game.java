@@ -8,7 +8,7 @@ public class Game {
     private Parser parser;
     protected Room currentRoom;
 	private Creature hero;
-       
+      
         
 
     public Game() {
@@ -17,6 +17,7 @@ public class Game {
     }
 
     public void createRooms() {
+        boolean wantToQuit = false;
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
@@ -35,7 +36,7 @@ public class Game {
         lvl_8 = new Room("in level 8");
 
         /* Adds creatures to the game, number tells what level they should start at  */
-		hero = new Creature(112312);
+		hero = new Creature(1);
         lvl_1.setMonster(new Creature(1));
         lvl_2.setMonster(new Creature(2));
         lvl_2a.setMonster(new Creature(2));
@@ -165,8 +166,8 @@ public class Game {
 
         lvl_8.setExit("back", lvl_7);
 
-        currentRoom = lvl_8; //The player will start in this room
-        
+        currentRoom = lvl_1; //The player will start in this room
+
                
     }
 	
@@ -203,7 +204,7 @@ public class Game {
 		printLook();
     }
 
-    protected boolean processCommand(Command command) {
+    private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -253,11 +254,7 @@ public class Game {
 		{
             combatAttack();
         }
-        
-                if (Room.lvl_8.monster==null){
-                    wantToQuit = true;
-                }   
-        
+                 
                              
 		if(hero == null)
 		{
@@ -267,7 +264,7 @@ public class Game {
 		}
         return wantToQuit;
     }
-
+    
     /* By writing "help" in console, this method will be called. */
     private void printHelp()
 	{
@@ -288,6 +285,7 @@ public class Game {
 	{
         System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth()); // Prints out the hero's health
         System.out.println("Experience points: " + hero.getExperienceBar()); // Prints out the hero's experience
+        
     }
 	
 	private void printLook() // Prints out what the character can see
@@ -508,5 +506,6 @@ public class Game {
             return true;
         }
     }
-    
+      
 }
+
