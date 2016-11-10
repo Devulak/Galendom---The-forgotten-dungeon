@@ -2,7 +2,7 @@ package main.item;
 
 public class Item
 {
-	private String name;
+	protected String name;
 	private int amount;
 
 	public Item(String name, int amount) // Constructor
@@ -11,8 +11,12 @@ public class Item
 		this.amount = amount;
 	}
 
-	public String getName() // Get the name of the item
+	public String toString() // Return value on object
 	{
+		if(amount > 0)
+		{
+			return name + " (" + amount + ")";
+		}
 		return name;
 	}
 
