@@ -5,35 +5,33 @@ import main.item.*;
 
 public class Game {
 
-    private Parser parser;
     protected Room currentRoom;
-	private Creature hero;
-      
-        
+	protected Creature hero;
 
-    public Game() {
+    public Game()
+	{
         createRooms();
-        parser = new Parser();
     }
 
-    public void createRooms() {
+    public void createRooms()
+	{
         boolean wantToQuit = false;
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
         /* Adds rooms to the game, also gives them descriptions */
-        lvl_1 = new Room("in level 1");
-        lvl_2 = new Room("in level 2");
-        lvl_2a = new Room("in level 2a");
-        lvl_3 = new Room("in level 3");
-        lvl_3a = new Room("in level 3a");
-        lvl_4 = new Room("in level 4");
-        lvl_4a = new Room("in level 4a");
-        lvl_5 = new Room("in level 5");
-        lvl_5a = new Room("in level 5a");
-        lvl_6 = new Room("in level 6");
-        lvl_7 = new Room("in level 7");
-        lvl_8 = new Room("in level 8");
+		lvl_1 = new Room("in level 1");
+		lvl_2 = new Room("in level 2");
+		lvl_2a = new Room("in level 2a");
+		lvl_3 = new Room("in level 3");
+		lvl_3a = new Room("in level 3a");
+		lvl_4 = new Room("in level 4");
+		lvl_4a = new Room("in level 4a");
+		lvl_5 = new Room("in level 5");
+		lvl_5a = new Room("in level 5a");
+		lvl_6 = new Room("in level 6");
+		lvl_7 = new Room("in level 7");
+		lvl_8 = new Room("in level 8");
 
         /* Adds creatures to the game, number tells what level they should start at  */
 		hero = new Creature(1);
@@ -129,42 +127,43 @@ public class Game {
                 //hero.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
                 //hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
                 //hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
-                //hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot                             
-                 
-        // This gives the player the option to move between the rooms
-        lvl_1.setExit("left", lvl_2);
-        lvl_1.setExit("right", lvl_2a);
+                //hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
 
-        lvl_2.setExit("forward", lvl_3);
-        lvl_2.setExit("back", lvl_1);
+        /* This gives the player the option to move between the rooms */
+        lvl_1.setExit("right", lvl_2);
+        lvl_1.setExit("left", lvl_2a);
 
-        lvl_2a.setExit("forward", lvl_3a);
-        lvl_2a.setExit("back", lvl_1);
 
-        lvl_3.setExit("forward", lvl_4);
-        lvl_3.setExit("back", lvl_2);
+        lvl_2.setExit("down", lvl_3);
+        lvl_2.setExit("left", lvl_1);
 
-        lvl_3a.setExit("forward", lvl_4a);
-        lvl_3a.setExit("back", lvl_2a);
+        lvl_2a.setExit("down", lvl_3a);
+        lvl_2a.setExit("right", lvl_1);
 
-        lvl_4.setExit("right", lvl_5);
-        lvl_4.setExit("left", lvl_5a);
-        lvl_4.setExit("back", lvl_3);
+        lvl_3.setExit("down", lvl_4);
+        lvl_3.setExit("up", lvl_2);
 
-        lvl_4a.setExit("back", lvl_3a);
+        lvl_3a.setExit("right", lvl_4a);
+        lvl_3a.setExit("up", lvl_2a);
 
-        lvl_5.setExit("forward", lvl_6);
-        lvl_5.setExit("back", lvl_4);
+        lvl_4.setExit("left", lvl_5);
+        lvl_4.setExit("down", lvl_5a);
+        lvl_4.setExit("up", lvl_3);
 
-        lvl_5a.setExit("back", lvl_4);
+        lvl_4a.setExit("left", lvl_3a);
 
-        lvl_6.setExit("forward", lvl_7);
-        lvl_6.setExit("back", lvl_5);
+        lvl_5.setExit("left", lvl_6);
+        lvl_5.setExit("right", lvl_4);
 
-        lvl_7.setExit("forward", lvl_8);
-        lvl_7.setExit("back", lvl_6);
+        lvl_5a.setExit("up", lvl_4);
 
-        lvl_8.setExit("back", lvl_7);
+        lvl_6.setExit("down", lvl_7);
+        lvl_6.setExit("right", lvl_5);
+
+        lvl_7.setExit("right", lvl_8);
+        lvl_7.setExit("up", lvl_6);
+
+        lvl_8.setExit("left", lvl_7);
 
         currentRoom = lvl_1; //The player will start in this room
 
@@ -175,17 +174,9 @@ public class Game {
 	 * The play method will be called when the main class starts. The game will
 	 * run until you write quit in the console.
 	 */
-    public void play() {
+    public void play()
+	{
         printWelcome();
-
-		boolean finished = false;
-		while (!finished) {
-			Command command = parser.getCommand();
-			finished = processCommand(command);
-		}
-		System.out.println("Thank you for playing the game, return anytime, when you begin feeling uncomfortable staying in the Dungeon of Zuul!");
-               
-                
 	}
 
 	/**
@@ -199,72 +190,15 @@ public class Game {
         System.out.println("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
         System.out.println("If you manage to defeat the boss, you will win, and escape this forgotten place.");
         System.out.println("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("You're lost in a cave. You have to find the exit to win.");
+        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
+        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
+        System.out.println("win, but if your health reaches zero, you will lose.");
+        System.out.println("Click on '?' if you need help.");
         System.out.println();
 		printLook();
     }
-
-    private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-
-        CommandWord commandWord = command.getCommandWord();
-
-        if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
-
-        if (commandWord == CommandWord.HELP)
-		{
-            printHelp();
-        }
-		else if (commandWord == CommandWord.MAP)
-		{
-            printMap();
-        }
-		else if (commandWord == CommandWord.GO)
-		{
-            goRoom(command);
-        }
-		else if (commandWord == CommandWord.QUIT)
-		{
-            wantToQuit = quit(command);
-        }
-		else if (commandWord == CommandWord.LOOK)
-		{
-			printLook();
-        }
-		else if (commandWord == CommandWord.STATUS)
-		{
-            printStatus();
-        }
-		else if (commandWord == CommandWord.INVENTORY)
-		{
-            printInventory();
-        }
-		else if (commandWord == CommandWord.USE)
-		{
-            useItem(command);
-        }
-		else if (commandWord == CommandWord.TAKE)
-		{
-            takeItem(command);
-        }
-		else if (commandWord == CommandWord.ATTACK)
-		{
-            combatAttack();
-        }
-                 
-                             
-		if(hero == null)
-		{
-			System.out.println("You've been killed...");
-                        System.out.println("Your corpse will now be used to guard the rooms against others, who may fall into the cave of Zuul...");
-			wantToQuit = true;
-		}
-        return wantToQuit;
-    }
-    
+	
     /* By writing "help" in console, this method will be called. */
     private void printHelp()
 	{
@@ -300,13 +234,7 @@ public class Game {
 		{
 			System.out.println(currentRoom.getExitString());
 		}
-		currentRoom.inventory.printContent("Room items");
 	}
-	
-    private void printInventory() // Prints out the hero's current inventory
-	{
-		hero.inventory.printContent("Your inventory");
-    }
 	
 	/**
 	 * This method will be called when you write "map" in console. /* It will
@@ -322,22 +250,14 @@ public class Game {
 		System.out.println("\\----------------------------------------------------------------------------------------/");
 	}
 	
-	private void useItem(Command command)
+	protected void useItem(Item searchForItem)
 	{
-        if (!command.hasSecondWord())
-		{
-            System.out.println("Use what?");
-            return;
-        }
-		
-		String searchName = command.getSecondWord();
-
 		for (Iterator<Item> it = hero.inventory.getContent().iterator(); it.hasNext();)
 		{
 			Item item = it.next();
-			if(item.getName().equals(searchName) && item.getAmount() > 0 && item instanceof Potion)
+			if(item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion)
 			{
-				System.out.println("You used a " + item.getName());
+				System.out.println("You used a " + item.toString());
 				if(item.getAmount() == 1)
 				{
 					it.remove();
@@ -351,65 +271,10 @@ public class Game {
 			}
 		}
 		
-		System.out.println("That doesn't seem to be a usable item");
+		System.out.println("useItem didn't find '" + searchForItem + "'");
 	}
 	
-	private void takeItem(Command command)
-	{
-        if (!command.hasSecondWord())
-		{
-            System.out.println("Take what?");
-            return;
-        }
-		
-		String searchName = command.getSecondWord();
-
-		for (Iterator<Item> roomInventory = currentRoom.inventory.getContent().iterator(); roomInventory.hasNext();)
-		{
-			Item item = roomInventory.next();
-			if(item.getName().equals(searchName))
-			{
-				System.out.println(item.getName() + " has been added to your inventory");
-				
-				// Make sure it's able to stack and throw stuff that can't stack
-				// TO-DO: Rebuild with the new .add for Inventory objects
-				for (Iterator<Item> heroInventory = hero.inventory.getContent().iterator(); heroInventory.hasNext();)
-				{
-					Item inventoryItem = heroInventory.next();
-					if(inventoryItem.getClass() == item.getClass()) // Do the item taken match anything in the hero's inventory?
-					{
-						if(item.getAmount() > 0 && inventoryItem.getAmount() > 0) // Is the items stackable with eachother?
-						{
-							inventoryItem.addAmount(item.getAmount()); // transfer the current amount to the hero inventory
-							roomInventory.remove(); // Remove the room item
-							return; // stop looking
-						}
-						else // What do we do if it's not stackable? (Works as if the things got swapped or switched)
-						{
-							System.out.println(inventoryItem.getName() + " has been dropped, you don't have room to carry both");
-							
-							// Clone the items to the correct inventories
-							hero.inventory.add(item);
-							currentRoom.inventory.add(inventoryItem);
-							
-							// Remove the items from the old inventories
-							heroInventory.remove();
-							roomInventory.remove();
-						}
-					}
-				}
-				// END
-				
-				hero.inventory.add(item);
-				roomInventory.remove();
-				return;
-			}
-		}
-		
-		System.out.println("Can't find that in the room"); // These aren't the droids you're looking for
-	}
-	
-    private void combatAttack()
+    public void attack()
 	{
 		if(currentRoom.hasMonster())
 		{
@@ -417,13 +282,13 @@ public class Game {
 			
 			System.out.println("Monster (" + currentRoom.monster.printLevel() + "): " + currentRoom.monster.printHealth());
 			
-			if(currentRoom.monster.health > 0)
+			if(currentRoom.monster.getHealth() > 0)
 			{
 				currentRoom.monster.attack(hero);
 				
 				System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth());
 				
-				if(hero.health > 0)
+				if(hero.getHealth() > 0)
 				{
 					System.out.println("Your turn!");
 				}
@@ -447,35 +312,9 @@ public class Game {
 			System.out.println("There's no monster to attack");
                 
     }
-
-    /*
-    private void dropWeapon(Command command) {
-        String weapon = currentWeapon.getWeaponName();
-        if (!hasWeapon) {
-            System.out.println("You don't have any weapon to drop.");
-        } else if (!command.hasSecondWord()) {
-            System.out.println("Drop what?");
-        } else if (command.getSecondWord() == weapon) {
-            currentWeapon = null;
-            hasWeapon = false;
-            System.out.println("Successfully dropped");
-        } else {
-            System.out.println("I'm not sure what you mean with " + command.getSecondWord() + ("."));
-        }
-
-    } */
-    
-	/* When you write "go" in console, this method will be called. */
-    private void goRoom(Command command)
+	
+    public void goRoom(String direction)
 	{
-        if (!command.hasSecondWord())
-		{
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
         Room nextRoom = currentRoom.getExit(direction);
 
         if(currentRoom.hasMonster())
@@ -492,20 +331,4 @@ public class Game {
 			printLook(); // It will give you a description of what's in the room
         }
     }
-
-/**
- * This method will run when you write quit in the console. It will first check
- * if you add a second word. Like "quit game", the game will ask you to quit what?
- * Otherwise the while loop in play() method will stop and the game will quit.
- */
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
-        } else {
-            return true;
-        }
-    }
-      
 }
-
