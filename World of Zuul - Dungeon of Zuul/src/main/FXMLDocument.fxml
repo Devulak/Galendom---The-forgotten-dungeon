@@ -23,7 +23,8 @@
 		<Button layoutX="445" layoutY="360" prefHeight="45" prefWidth="45" text="►" onAction="#right" />
 		<ListView layoutX="5" layoutY="65" prefHeight="240" prefWidth="215" fx:id="playerInventory" />
 		<Button layoutX="225" layoutY="65" prefHeight="45" prefWidth="45" text="--&gt;" onAction="#dropItem" />
-		<Button layoutX="225" layoutY="120" prefHeight="45" prefWidth="45" text="&lt;--" onAction="#takeItem" />
+		<Button layoutX="225" layoutY="115" prefHeight="45" prefWidth="45" text="&lt;--" onAction="#takeItem" />
+		<Button layoutX="225" layoutY="165" prefHeight="45" prefWidth="45" text="USE" onAction="#useItem" />
 		<ListView layoutX="275" layoutY="65" prefHeight="240" prefWidth="215" fx:id="roomInventory" />
 		<Button layoutX="5" layoutY="310" prefHeight="45" prefWidth="95" text="Attack" onAction="#handleButtonAction" fx:id="button" />
 		<!-- Map -->

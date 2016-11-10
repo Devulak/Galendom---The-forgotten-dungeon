@@ -77,27 +77,41 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
+	private void useItem(ActionEvent event)
+	{
+		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
+		game.useItem(selectedItem);
+		
+		updatePlayerInventory();
+		updateHealth();
+	}
+	
+	@FXML
 	private void up(ActionEvent event)
 	{
 		game.goRoom("up");
+		updateRoomInventory();
 	}
 	
 	@FXML
 	private void down(ActionEvent event)
 	{
 		game.goRoom("down");
+		updateRoomInventory();
 	}
 	
 	@FXML
 	private void left(ActionEvent event)
 	{
 		game.goRoom("left");
+		updateRoomInventory();
 	}
 	
 	@FXML
 	private void right(ActionEvent event)
 	{
 		game.goRoom("right");
+		updateRoomInventory();
 	}
 	
 	@Override
@@ -127,6 +141,7 @@ public class FXMLDocumentController implements Initializable {
 	public void updatePlayerInventory()
 	{
 		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.hero.inventory.getContent());
+		playerInventory.setItems(null);
 		playerInventory.setItems(itemsTemp);
 	}
 	
