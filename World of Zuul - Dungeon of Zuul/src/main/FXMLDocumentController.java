@@ -1,9 +1,7 @@
 package main;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -41,7 +40,17 @@ public class FXMLDocumentController implements Initializable {
 	private ListView roomInventory;
 	
 	@FXML
-	private TextArea dialouge;
+	private TextArea dialogue;
+	
+	@FXML
+	private AnchorPane monster;
+	
+	@FXML
+	private Label monsterLevel;
+	@FXML
+	private ProgressBar monsterHealth;
+	@FXML
+	private Label monsterHealthStatus;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event)
@@ -50,6 +59,7 @@ public class FXMLDocumentController implements Initializable {
 		updateHealth();
 		updateExperience();
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -84,6 +94,7 @@ public class FXMLDocumentController implements Initializable {
 		
 		updatePlayerInventory();
 		updateHealth();
+		updateDialouge();
 	}
 	
 	@FXML
@@ -91,6 +102,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("up");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -98,6 +110,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("down");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -105,6 +118,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("left");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -112,6 +126,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("right");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@Override
@@ -123,6 +138,7 @@ public class FXMLDocumentController implements Initializable {
 		updateExperience();
 		updatePlayerInventory();
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	public void updateHealth()
@@ -153,6 +169,29 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updateDialouge()
 	{
-		dialouge.setText(dialouge.getText());
+		dialogue.setText(game.dialogue);
+		dialogue.setScrollTop(Double.MAX_VALUE);
+		dialogue.selectPositionCaret(dialogue.getLength()); 
+		dialogue.deselect();
+	}
+	
+	public void updatePanel()
+	{
+		updateDialouge();
+		if(game.currentRoom.hasMonster())
+		{
+			monster.setVisible(true);
+			updateMonsterStatus();
+		}
+		else
+		{
+			monster.setVisible(false);
+		}
+	}
+	
+	public void updateMonsterStatus()
+	{
+		monsterHealthStatus.setText(game.currentRoom.monster.getHealth() + "/" + game.currentRoom.monster.getMaxHealth() + " HP");
+		monsterHealth.setProgress((double)game.currentRoom.monster.getHealth()/game.currentRoom.monster.getMaxHealth());
 	}
 }
