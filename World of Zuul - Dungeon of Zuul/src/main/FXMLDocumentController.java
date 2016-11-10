@@ -76,6 +76,30 @@ public class FXMLDocumentController implements Initializable {
 		updateRoomInventory();
 	}
 	
+	@FXML
+	private void up(ActionEvent event)
+	{
+		game.goRoom("up");
+	}
+	
+	@FXML
+	private void down(ActionEvent event)
+	{
+		game.goRoom("down");
+	}
+	
+	@FXML
+	private void left(ActionEvent event)
+	{
+		game.goRoom("left");
+	}
+	
+	@FXML
+	private void right(ActionEvent event)
+	{
+		game.goRoom("right");
+	}
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
