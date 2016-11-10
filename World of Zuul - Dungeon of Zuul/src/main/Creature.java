@@ -5,16 +5,16 @@ import main.item.*;
 
 public class Creature {
 	
-    private int level; // The creature level, this is for scaling when created or gaining a level
-    private int experience = 0; // The amount of experience the creature has (this always starts with "0")
-    private int experienceMax; // The max amount of experience the creature needs for a level up
+    protected int level; // The creature level, this is for scaling when created or gaining a level
+    protected int experience = 0; // The amount of experience the creature has (this always starts with "0")
+    protected int experienceMax; // The max amount of experience the creature needs for a level up
 	
 	private static final int experienceRequiredBase = 400; // The amount of experience you need atleast per level
 	private static final int experienceRequiredRatio = 200; // The amount of experience you need further more per level
 	private static final int experienceGainRatio = 200; // The amount of experience you get per level of the monster
 	
-    protected int health; // Current health
-    private int healthMax; // Maximum amount of health
+    private int health; // Current health
+    private int maxHealth; // Maximum amount of health
 	private static final int healthBaseAmount = 8; // The base amount of health you have
 	private static final int healthGainAmount = 4; // The amount of health you gain each level
 	
@@ -23,8 +23,28 @@ public class Creature {
     public Creature(int lvl) { //this is a constructor for the creatures
 		level = lvl;
 		experienceMax = experienceRequiredBase + level*experienceRequiredRatio;
-		healthMax = healthBaseAmount + level*healthGainAmount;
-		health = healthMax;
+		maxHealth = healthBaseAmount + level*healthGainAmount;
+		health = maxHealth;
+	}
+	
+	protected int getHealth()
+	{
+		return health;
+	}
+	
+	protected int getMaxHealth()
+	{
+		return maxHealth;
+	}
+	
+	protected int getExperience()
+	{
+		return experience;
+	}
+	
+	protected int getMaxExperience()
+	{
+		return experienceMax;
 	}
 	
 	protected String printLevel()
@@ -47,7 +67,7 @@ public class Creature {
 			level++;
 			experienceMax = experienceRequiredBase + level*experienceRequiredRatio;
 			
-			healthMax = healthBaseAmount + level*healthGainAmount;
+			maxHealth = healthBaseAmount + level*healthGainAmount;
 			health += healthGainAmount;
 			
 			System.out.println("You've level up to " + printLevel() + "!");
@@ -57,7 +77,7 @@ public class Creature {
 	protected String printHealth()
 	{
 		int blockTotal = 20;
-		int blockHealth = (int) Math.ceil((double) health/healthMax*blockTotal);
+		int blockHealth = (int) Math.ceil((double) health/maxHealth*blockTotal);
 		String blocks = "";
 		if (this.health < 0)
 			health = 0;
@@ -68,7 +88,7 @@ public class Creature {
 			else
 				blocks += "□";
 		}
-		return blocks + " " + health + "/" + healthMax + " hp";
+		return blocks + " " + health + "/" + maxHealth + " hp";
 	}
 	
 	protected String getExperienceBar()
@@ -119,9 +139,9 @@ public class Creature {
 	protected void heal()
 	{
 		health += healthGainAmount;
-		if(health > healthMax)
+		if(health > maxHealth)
 		{
-			health = healthMax;
+			health = maxHealth;
 		}
 	}
 }
