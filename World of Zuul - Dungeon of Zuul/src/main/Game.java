@@ -8,11 +8,14 @@ public class Game {
     protected Room currentRoom;
 	protected Creature hero;
 
-    public Game() {
+    public Game()
+	{
         createRooms();
     }
 
-    private void createRooms() {
+    public void createRooms()
+	{
+        boolean wantToQuit = false;
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
@@ -44,34 +47,92 @@ public class Game {
         lvl_6.setMonster(new Creature(6));
         lvl_7.setMonster(new Creature(7));
         lvl_8.setMonster(new Creature(8));
-		
-        /* Give creatures some items that they may drop */
+        	
+        // Give creatures some items that they drop
 		
 		// Potions
-		hero.inventory.add(new Potion("Health Potions", 4)); // 4x health potions
-		
+		hero.inventory.add(new Potion("health_potion", 3)); // x3 health potions
+                lvl_3a.monster.inventory.add(new Potion("health_potion", 8)); // x6 health potions
+		lvl_4.monster.inventory.add(new Potion("health_potion", 5)); // x5 health potions
+                lvl_4a.monster.inventory.add(new Potion("health_potion", 3)); // x3 health potions
+		lvl_5a.monster.inventory.add(new Potion("health_potion", 14)); // x14 health potions
+                lvl_7.monster.inventory.add(new Potion("health_potion", 8)); // x8 health potions
+                
 		// Coins
-		hero.inventory.add(new Coin("Coins", 20)); // 20 coins
-		
+		lvl_1.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_2a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_3a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_4a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_2.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_3.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_4.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                lvl_5a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
+                
+                //Vendor
+                lvl_5a.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+                lvl_5a.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+                lvl_5a.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+                lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+                                              
 		// Weapons
-		hero.inventory.add(new Weapon("Wooden Sword", 1, 2)); // Wooden Sword
-		// lvl_2.Monster.inventory.add(new Weapon("iron_sword", 2, 4)); // Iron Sword
-		// lvl_2a.Monster.inventory.add(new Weapon("steel_sword", 4, 8)); // Steel Sword
-		
+		hero.inventory.add(new Weapon("wooden_sword", 3, 7)); // Wooden Sword
+                lvl_1.monster.inventory.add(new Weapon("broken_wooden_sword", 1, 2)); // Wooden Sword
+                lvl_2.monster.inventory.add(new Weapon("broken_wooden_sword", 2, 4)); // Wooden Sword
+                lvl_3.monster.inventory.add(new Weapon("broken_wooden_sword", 4, 6)); // Wooden Sword
+                lvl_4.monster.inventory.add(new Weapon("broken_wooden_sword", 5, 7)); // Wooden Shield
+                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
+                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
+                lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
+                lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
+                lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 18, 20)); // Holy Steel Sword
+                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 20, 22)); // Fallen Knight Sword
+                
 		// Shields
-		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 1, 20)); // Wooden Shield
-		
-		// Helmets
-		
+                lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+                lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+                lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Broken Steel Shield
+                lvl_8.monster.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+                
+                // Helmets
+		lvl_3.monster.inventory.add(new Helmet("iron_helmet", 2)); // Iron Helmet
+                lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Broken Steel Helmet
+                lvl_7.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+                lvl_8.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+                
 		// Chestplates
-		
-		// Leggings
-		
-		// Boots
+		lvl_4a.monster.inventory.add(new Chestplate("iron_chestplate", 4)); // Iron Chestplate
+                lvl_5a.monster.inventory.add(new Chestplate("broken_steel_chestplate", 4)); // Broken Steel Chestplate
+                lvl_5.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_6.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_7.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_8.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                
+                // Leggings
+		lvl_3a.monster.inventory.add(new Legging("iron_leggings", 2)); // Iron Leggings
+                lvl_5a.monster.inventory.add(new Legging("broken_steel_leggings", 2)); // Broken Steel Leggings
+                lvl_5.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+		lvl_6.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+                lvl_7.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+                lvl_8.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+                
+		// Boots                
+                lvl_6.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+                lvl_7.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+                lvl_8.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+                
+                //For testing the game and skipping the start fast, this will give you strength like room 5 (the middle of the game). Remember to change start level to 6.
+                //hero.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
+		//hero.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+                //hero.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+                //hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                //hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
+                //hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("right", lvl_2);
         lvl_1.setExit("left", lvl_2a);
+
 
         lvl_2.setExit("down", lvl_3);
         lvl_2.setExit("left", lvl_1);
@@ -105,6 +166,8 @@ public class Game {
         lvl_8.setExit("left", lvl_7);
 
         currentRoom = lvl_1; //The player will start in this room
+
+               
     }
 	
 	/**
@@ -121,6 +184,12 @@ public class Game {
 	 */
     private void printWelcome() {
         System.out.println();
+        System.out.println("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
+        System.out.println("''You're lost in the Dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
+        System.out.println("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
+        System.out.println("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
+        System.out.println("If you manage to defeat the boss, you will win, and escape this forgotten place.");
+        System.out.println("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
         System.out.println("You're lost in a cave. You have to find the exit to win.");
         System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
         System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
@@ -129,7 +198,7 @@ public class Game {
         System.out.println();
 		printLook();
     }
-
+	
     /* By writing "help" in console, this method will be called. */
     private void printHelp()
 	{
@@ -141,6 +210,7 @@ public class Game {
         System.out.println("look: Look around in the room for items.");
         System.out.println("Status: Your healthpoints and XP");
         System.out.println("Inventory: Look through your inventory");
+        System.out.println("Use: type use health_potion to use a potion from your inventory.");
 
         // parser.showCommands(); // This line prints out the command words.
     }
@@ -149,6 +219,7 @@ public class Game {
 	{
         System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth()); // Prints out the hero's health
         System.out.println("Experience points: " + hero.getExperienceBar()); // Prints out the hero's experience
+        
     }
 	
 	private void printLook() // Prints out what the character can see
@@ -179,7 +250,7 @@ public class Game {
 		System.out.println("\\----------------------------------------------------------------------------------------/");
 	}
 	
-	private void useItem(Item searchForItem)
+	protected void useItem(Item searchForItem)
 	{
 		for (Iterator<Item> it = hero.inventory.getContent().iterator(); it.hasNext();)
 		{
@@ -239,6 +310,7 @@ public class Game {
 		}
 		else
 			System.out.println("There's no monster to attack");
+                
     }
 	
     public void goRoom(String direction)
