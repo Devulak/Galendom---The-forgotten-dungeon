@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import main.item.Item;
 
@@ -20,6 +21,18 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private ProgressBar healthBar;
+	
+	@FXML
+	private ImageView playerHealthbar;
+	
+	@FXML
+	private ImageView playerHealthbarEnd;
+	
+	@FXML
+	private ImageView playerExperiencebar;
+	
+	@FXML
+	private ImageView playerExperiencebarEnd;
 	
 	@FXML
 	private Label healthStatus;
@@ -144,14 +157,16 @@ public class FXMLDocumentController implements Initializable {
 	public void updateHealth()
 	{
 		healthStatus.setText(game.hero.getHealth() + "/" + game.hero.getMaxHealth() + " HP");
-		healthBar.setProgress((double)game.hero.getHealth()/game.hero.getMaxHealth());
+		playerHealthbar.setFitWidth((double)game.hero.getHealth()/game.hero.getMaxHealth()*342);
+		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
 	}
 	
 	public void updateExperience()
 	{
-		experienceLevel.setText("Level " + game.hero.getLevel());
+		experienceLevel.setText("" + game.hero.getLevel());
 		experienceStatus.setText(game.hero.getExperience() + "/" + game.hero.getMaxExperience() + " EXP");
-		experienceBar.setProgress((double)game.hero.getExperience()/game.hero.getMaxExperience());
+		playerExperiencebar.setFitWidth((double)game.hero.getExperience()/game.hero.getMaxExperience()*214);
+		playerExperiencebarEnd.setLayoutX(playerExperiencebar.getLayoutX()+playerExperiencebar.getFitWidth());
 	}
 	
 	public void updatePlayerInventory()

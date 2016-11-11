@@ -14,6 +14,7 @@ public class Main extends Application
 		Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 		
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add("http://fonts.googleapis.com/css?family=VT323");
 		
 		stage.setScene(scene);
 		stage.show();

@@ -23,8 +23,52 @@
 						<ProgressBar layoutX="64" layoutY="32" prefWidth="224" prefHeight="32" fx:id="experienceBar" />
 						<Label layoutX="64" layoutY="32" prefWidth="224" prefHeight="32" alignment="CENTER" fx:id="experienceStatus" />
 						
-						<Label layoutX="288" layoutY="32" prefWidth="64" prefHeight="32" alignment="CENTER" text="Armor: 2" />
-						<Label layoutX="352" layoutY="32" prefWidth="64" prefHeight="32" alignment="CENTER" text="Dmg: 3-4" />
+						<ImageView>
+						   <image>
+							  <Image url="sprites/status_bg.png" />
+						   </image>
+						</ImageView>
+						<ImageView>
+						   <image>
+							  <Image url="sprites/status_exp_bg.png" />
+						   </image>
+						</ImageView>
+						<ImageView layoutX="66" layoutY="4" fx:id="playerHealthbar" >
+						   <image>
+							  <Image url="sprites/healthbar.png" />
+						   </image>
+						</ImageView>
+						<ImageView layoutY="4"  fx:id="playerHealthbarEnd" >
+						   <image>
+							  <Image url="sprites/healthbar_end.png" />
+						   </image>
+						</ImageView>
+						<ImageView layoutX="66" layoutY="36"  fx:id="playerExperiencebar" >
+						   <image>
+							  <Image url="sprites/experiencebar.png" />
+						   </image>
+						</ImageView>
+						<ImageView layoutY="36"  fx:id="playerExperiencebarEnd" >
+						   <image>
+							  <Image url="sprites/experiencebar_end.png" />
+						   </image>
+						</ImageView>
+						<ImageView>
+						   <image>
+							  <Image url="sprites/status_fg.png" />
+						   </image>
+						</ImageView>
+						<ImageView>
+						   <image>
+							  <Image url="sprites/status_exp_fg.png" />
+						   </image>
+						</ImageView>
+						
+						<!-- Player armour -->
+						<Label layoutX="288" layoutY="32" prefWidth="64" prefHeight="32" alignment="CENTER" text="2" />
+						
+						<!-- Player strengh -->
+						<Label layoutX="352" layoutY="32" prefWidth="64" prefHeight="32" alignment="CENTER" text="3-4" />
 					</children>
 				</AnchorPane>
 				<AnchorPane layoutX="32" layoutY="128" prefWidth="416" prefHeight="256">
@@ -50,7 +94,7 @@
 			<!-- Map -->
 			<ImageView>
 			   <image>
-				  <Image url="sprays/encounter.png" />
+				  <Image url="sprites/encounter.png" />
 			   </image>
 			</ImageView>
 			<Canvas height="480" width="480" >
@@ -67,7 +111,7 @@
 			<!-- Monster encounter -->
 			<ImageView>
 			   <image>
-				  <Image url="sprays/encounter.png"/>
+				  <Image url="sprites/encounter.png"/>
 			   </image>
 			</ImageView>
 				<AnchorPane layoutX="32" layoutY="32" prefWidth="416" prefHeight="64">
