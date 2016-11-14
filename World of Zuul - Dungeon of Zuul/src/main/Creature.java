@@ -9,9 +9,9 @@ public class Creature {
     protected int experience = 0; // The amount of experience the creature has (this always starts with "0")
     protected int experienceMax; // The max amount of experience the creature needs for a level up
 	
-	private static final int experienceRequiredBase = 400; // The amount of experience you need atleast per level
-	private static final int experienceRequiredRatio = 200; // The amount of experience you need further more per level
-	private static final int experienceGainRatio = 200; // The amount of experience you get per level of the monster
+	private static final int experienceRequiredBase = 4; // The amount of experience you need atleast per level
+	private static final int experienceRequiredRatio = 2; // The amount of experience you need further more per level
+	private static final int experienceGainRatio = 2; // The amount of experience you get per level of the monster
 	
     private int health; // Current health
     private int maxHealth; // Maximum amount of health
@@ -47,11 +47,6 @@ public class Creature {
 		return experienceMax;
 	}
 	
-	protected String printLevel()
-	{
-		return "level " + level;
-	}
-	
 	protected int getLevel()
 	{
 		return level;
@@ -60,7 +55,6 @@ public class Creature {
 	protected void gainExperience(Creature Enemy)
 	{
 		experience += experienceGainRatio*Enemy.getLevel();
-		System.out.println("You've gained " + experienceGainRatio*Enemy.getLevel() + " xp");
 		while(experience >= experienceMax)
 		{
 			experience -= experienceMax;
@@ -69,79 +63,62 @@ public class Creature {
 			
 			maxHealth = healthBaseAmount + level*healthGainAmount;
 			health += healthGainAmount;
-			
-			System.out.println("You've level up to " + printLevel() + "!");
 		}
 	}
 	
-	protected String printHealth()
+	public int getArmour()
 	{
-		int blockTotal = 20;
-		int blockHealth = (int) Math.ceil((double) health/maxHealth*blockTotal);
-		String blocks = "";
-		if (this.health < 0)
-			health = 0;
-		for (int i = 1; i <= blockTotal; i++)
+		int armour = 0;
+		for (Item item : inventory.getContent())
 		{
-			if(blockHealth >= i)
-				blocks += "■";
-			else
-				blocks += "□";
+			if(item instanceof Armour)
+			{
+				armour += ((Armour)item).getArmour();
+			}
 		}
-		return blocks + " " + health + "/" + maxHealth + " hp";
+		return armour;
 	}
 	
-	protected String getExperienceBar()
+	public int getStrength()
 	{
-		int blockTotal = 10;
-		int blockHealth = (int) Math.ceil((double) experience/experienceMax*blockTotal);
-		String blocks = "";
-		for (int i = 1; i <= blockTotal; i++)
-		{
-			if(blockHealth >= i)
-				blocks += "■";
-			else
-				blocks += "□";
-		}
-		return blocks + " " + experience + "/" + experienceMax + " xp";
-	}
-	
-	protected void attack(Creature enemy)
-	{
-		int damageMinBoost = 0;
-		int damageMaxBoost = 0;
-		int damageReduce = 0;
+		int strength = level;
 		for (Item item : inventory.getContent())
 		{
 			if(item instanceof Weapon)
 			{
-				damageMinBoost += ((Weapon)item).getDamageMin();
-				damageMaxBoost += ((Weapon)item).getDamageMax();
+				strength += ((Weapon)item).getDamage();
 			}
 		}
-		for (Item item : enemy.inventory.getContent())
-		{
-			if(item instanceof Armour)
-			{
-				damageReduce += ((Armour)item).getArmour();
-			}
-		}
-		damageMaxBoost -= damageMinBoost; // Remove min damage, min damage defined outside random
-		int roll = (int) Math.round(Math.random()*(level + damageMaxBoost)) + level + damageMinBoost - damageReduce; // Calculation for a roll
-		if(roll < 0)
-		{
-			roll = 0;
-		}
-		System.out.println("Rolled " + roll + " dmg!");
-		enemy.health -= roll;
+		return strength;
 	}
 	
-	protected void heal()
+	protected int rollDamage(Creature enemy)
 	{
-		health += healthGainAmount;
-		if(health > maxHealth)
+		double hitPoints = getStrength();
+		// This will roll the amount of damage given that the creature attacks with no resistance, aka. no armor against him
+		if(Math.random() <= 0.1) // did he roll a crit (10%)
 		{
-			health = maxHealth;
+			hitPoints = hitPoints * 1.5; // 150% damage on crit, if uneven, calculate extra damage point
 		}
+		return enemy.takeDamage(hitPoints);
+	}
+	
+	protected int takeDamage(double hitPoints)
+	{
+		hitPoints = hitPoints * (1 - getArmour() / 50); // Each point of armour reduces damage by 2%
+		int hitPointsTaken = (int) Math.round(hitPoints); // Rounds to neearest point
+		health -= hitPointsTaken;
+		return hitPointsTaken;
+	}
+	
+	protected int heal()
+	{
+		int healingAmount = (int) (maxHealth * 0.4); // 40% of the max health restored, if amount is with digits, disregard those.
+		if(health+healingAmount > maxHealth)
+		{
+			healingAmount = maxHealth-health;
+		}
+		health += healingAmount;
+		return healingAmount;
 	}
 }

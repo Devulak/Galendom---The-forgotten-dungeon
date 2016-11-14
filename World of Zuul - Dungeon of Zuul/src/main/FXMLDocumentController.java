@@ -1,9 +1,7 @@
 package main;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -20,19 +20,31 @@ public class FXMLDocumentController implements Initializable {
 	private Game game;
 	
 	@FXML
-	private ProgressBar healthBar;
+	private Label playerHealth;
 	
 	@FXML
-	private Label healthStatus;
+	private ImageView playerHealthbar;
 	
 	@FXML
-	private ProgressBar experienceBar;
+	private ImageView playerHealthbarEnd;
+	
+	@FXML
+	private ImageView playerExperiencebar;
+	
+	@FXML
+	private ImageView playerExperiencebarEnd;
+	
+	@FXML
+	private Label playerArmour;
+	
+	@FXML
+	private Label playerStrength;
 	
 	@FXML
 	private Label experienceStatus;
 	
 	@FXML
-	private Label experienceLevel;
+	private Label playerLevel;
 	
 	@FXML
 	private ListView playerInventory;
@@ -41,15 +53,30 @@ public class FXMLDocumentController implements Initializable {
 	private ListView roomInventory;
 	
 	@FXML
-	private TextArea dialouge;
+	private TextArea dialogue;
+	
+	@FXML
+	private AnchorPane monster;
+	@FXML
+	private Label monsterHealth;
+	@FXML
+	private ImageView monsterHealthbar;
+	@FXML
+	private ImageView monsterHealthbarEnd;
+	@FXML
+	private Label monsterLevel;
+	@FXML
+	private Label monsterArmour;
+	@FXML
+	private Label monsterStrength;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event)
 	{
 		game.attack();
-		updateHealth();
-		updateExperience();
+		updatePlayerStatus();
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -62,6 +89,7 @@ public class FXMLDocumentController implements Initializable {
 		// Update inventories
 		updatePlayerInventory();
 		updateRoomInventory();
+		updatePlayerStatus();
 	}
 	
 	@FXML
@@ -74,6 +102,7 @@ public class FXMLDocumentController implements Initializable {
 		// Update inventories
 		updatePlayerInventory();
 		updateRoomInventory();
+		updatePlayerStatus();
 	}
 	
 	@FXML
@@ -83,7 +112,8 @@ public class FXMLDocumentController implements Initializable {
 		game.useItem(selectedItem);
 		
 		updatePlayerInventory();
-		updateHealth();
+		updatePlayerStatus();
+		updateDialouge();
 	}
 	
 	@FXML
@@ -91,6 +121,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("up");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -98,6 +129,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("down");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -105,6 +137,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("left");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@FXML
@@ -112,6 +145,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom("right");
 		updateRoomInventory();
+		updatePanel();
 	}
 	
 	@Override
@@ -119,23 +153,49 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game = new Game();
 		game.play();
-		updateHealth();
-		updateExperience();
+		updatePlayerStatus();
 		updatePlayerInventory();
 		updateRoomInventory();
+		updatePanel();
 	}
 	
-	public void updateHealth()
+	public void updatePlayerStatus()
 	{
-		healthStatus.setText(game.hero.getHealth() + "/" + game.hero.getMaxHealth() + " HP");
-		healthBar.setProgress((double)game.hero.getHealth()/game.hero.getMaxHealth());
-	}
-	
-	public void updateExperience()
-	{
-		experienceLevel.setText("Level " + game.hero.getLevel());
+		// Health
+		playerHealth.setText(game.hero.getHealth() + "/" + game.hero.getMaxHealth() + " HP");
+		playerHealthbar.setFitWidth((double)game.hero.getHealth()/game.hero.getMaxHealth()*342);
+		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
+		
+		// Experience
 		experienceStatus.setText(game.hero.getExperience() + "/" + game.hero.getMaxExperience() + " EXP");
-		experienceBar.setProgress((double)game.hero.getExperience()/game.hero.getMaxExperience());
+		playerExperiencebar.setFitWidth((double)game.hero.getExperience()/game.hero.getMaxExperience()*214);
+		playerExperiencebarEnd.setLayoutX(playerExperiencebar.getLayoutX()+playerExperiencebar.getFitWidth());
+		
+		// Level
+		playerLevel.setText(String.format("%d", game.hero.getLevel()));
+		
+		// Strength
+		playerStrength.setText(String.format("%d", game.hero.getStrength()));
+		
+		// Armour
+		playerArmour.setText(String.format("%d", game.hero.getArmour()));
+	}
+	
+	public void updateMonsterStatus()
+	{
+		// Health
+		monsterHealth.setText(game.currentRoom.monster.getHealth() + "/" + game.currentRoom.monster.getMaxHealth() + " HP");
+		monsterHealthbar.setFitWidth((double)game.currentRoom.monster.getHealth()/game.currentRoom.monster.getMaxHealth()*342);
+		monsterHealthbarEnd.setLayoutX(monsterHealthbar.getLayoutX()+monsterHealthbar.getFitWidth());
+		
+		// Level
+		monsterLevel.setText(String.format("%d", game.currentRoom.monster.getLevel()));
+		
+		// Strength
+		monsterStrength.setText(String.format("%d", game.currentRoom.monster.getStrength()));
+		
+		// Armour
+		monsterArmour.setText(String.format("%d", game.currentRoom.monster.getArmour()));
 	}
 	
 	public void updatePlayerInventory()
@@ -153,6 +213,23 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updateDialouge()
 	{
-		dialouge.setText(dialouge.getText());
+		dialogue.setText(game.dialogue);
+		dialogue.setScrollTop(Double.MAX_VALUE);
+		dialogue.selectPositionCaret(dialogue.getLength()); 
+		dialogue.deselect();
+	}
+	
+	public void updatePanel()
+	{
+		updateDialouge();
+		if(game.currentRoom.hasMonster())
+		{
+			monster.setVisible(true);
+			updateMonsterStatus();
+		}
+		else
+		{
+			monster.setVisible(false);
+		}
 	}
 }

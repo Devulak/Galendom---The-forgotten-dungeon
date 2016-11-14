@@ -7,34 +7,121 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="640" prefWidth="960" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
-	<children>
-		<ProgressBar layoutX="90" layoutY="5" prefHeight="20" prefWidth="400" fx:id="experienceBar" />
-		<Label layoutX="95" layoutY="5" prefHeight="20" prefWidth="390" alignment="CENTER_LEFT" fx:id="experienceLevel" />
-		<Label layoutX="95" layoutY="5" prefHeight="20" prefWidth="390" alignment="CENTER_RIGHT" fx:id="experienceStatus" />
-		<ProgressBar layoutX="5" layoutY="30" prefHeight="30" prefWidth="485" fx:id="healthBar" />
-		<Label layoutX="5" layoutY="30" prefHeight="30" prefWidth="485" alignment="CENTER" fx:id="healthStatus" />
-		<Button layoutX="495" layoutY="5" prefHeight="300" prefWidth="300" />
-		<TextArea layoutX="495" layoutY="310" prefHeight="95" prefWidth="300" editable="false" fx:id="dialouge" />
-		<Button layoutX="395" layoutY="310" prefHeight="45" prefWidth="45" text="▲" onAction="#up" />
-		<Button layoutX="395" layoutY="360" prefHeight="45" prefWidth="45" text="▼" onAction="#down" />
-		<Button layoutX="345" layoutY="360" prefHeight="45" prefWidth="45" text="◄" onAction="#left" />
-		<Button layoutX="445" layoutY="360" prefHeight="45" prefWidth="45" text="►" onAction="#right" />
-		<ListView layoutX="5" layoutY="65" prefHeight="240" prefWidth="215" fx:id="playerInventory" />
-		<Button layoutX="225" layoutY="65" prefHeight="45" prefWidth="45" text="--&gt;" onAction="#dropItem" />
-		<Button layoutX="225" layoutY="115" prefHeight="45" prefWidth="45" text="&lt;--" onAction="#takeItem" />
-		<Button layoutX="225" layoutY="165" prefHeight="45" prefWidth="45" text="USE" onAction="#useItem" />
-		<ListView layoutX="275" layoutY="65" prefHeight="240" prefWidth="215" fx:id="roomInventory" />
-		<Button layoutX="5" layoutY="310" prefHeight="45" prefWidth="95" text="Attack" onAction="#handleButtonAction" fx:id="button" />
+<AnchorPane prefWidth="960" prefHeight="640" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
+	
+	<!-- Left static -->
+	<AnchorPane prefWidth="480" prefHeight="640">
+	
+		<!-- Status -->
+		<AnchorPane layoutX="32" layoutY="32" prefWidth="416" prefHeight="64">
+			<ImageView>
+				<Image url="sprites/status_bg.png" />
+			</ImageView>
+			<ImageView>
+				<Image url="sprites/status_exp_bg.png" />
+			</ImageView>
+			<ImageView layoutX="66" layoutY="4" fx:id="playerHealthbar" >
+				<Image url="sprites/healthbar.png" />
+			</ImageView>
+			<ImageView layoutY="4"  fx:id="playerHealthbarEnd" >
+				<Image url="sprites/healthbar_end.png" />
+			</ImageView>
+			<ImageView layoutX="66" layoutY="36"  fx:id="playerExperiencebar" >
+				<Image url="sprites/experiencebar.png" />
+			</ImageView>
+			<ImageView layoutY="36"  fx:id="playerExperiencebarEnd" >
+				<Image url="sprites/experiencebar_end.png" />
+			</ImageView>
+			<ImageView>
+				<Image url="sprites/status_fg.png" />
+			</ImageView>
+			<ImageView>
+				<Image url="sprites/status_exp_fg.png" />
+			</ImageView>
+
+			<Label styleClass="big" layoutX="10" layoutY="10" prefWidth="44" prefHeight="44" fx:id="playerLevel" />
+			<Label layoutX="72" prefWidth="184" prefHeight="32" fx:id="playerHealth" />
+			<Label layoutX="72" layoutY="32"  prefWidth="184" prefHeight="32" fx:id="experienceStatus" />
+
+			<!-- Armour -->
+			<Label layoutX="324" layoutY="36" prefWidth="20" prefHeight="20" fx:id="playerStrength" />
+
+			<!-- Strength -->
+			<Label layoutX="388" layoutY="36" prefWidth="20" prefHeight="20" fx:id="playerArmour" />
+			
+		</AnchorPane>
+		
+		<!-- Inventory -->
+		<AnchorPane layoutX="32" layoutY="128" prefWidth="416" prefHeight="256">
+			<ListView prefWidth="176" prefHeight="256" fx:id="playerInventory" />
+
+			<Button layoutX="176" prefWidth="64" prefHeight="64" text="&lt;Drop" onAction="#dropItem" />
+			<Button layoutX="176" layoutY="64" prefWidth="64" prefHeight="64" text="Take&gt;" onAction="#takeItem" />
+			<Button layoutX="176" layoutY="128" prefWidth="64" prefHeight="64" text="&lt;Use" onAction="#useItem" />
+			<Label layoutX="176" layoutY="192" prefWidth="64" prefHeight="64" alignment="CENTER" text="Coins: ??" />
+
+			<ListView layoutX="240" prefWidth="176" prefHeight="256" fx:id="roomInventory" />
+		</AnchorPane>
+		
+		<!-- Dialogue -->
+		<TextArea layoutX="32" layoutY="416" prefWidth="416" prefHeight="160" editable="false" wrapText="true"  fx:id="dialogue" />
+		<Button layoutX="32" layoutY="576" prefWidth="64" prefHeight="32" text="Quit" />
+		<Button layoutX="384" layoutY="576" prefWidth="64" prefHeight="32" text="Help" />
+	</AnchorPane>
+
+	<!-- Right map -->
+	<AnchorPane layoutX="480" prefWidth="480" prefHeight="640">
 		<!-- Map -->
-		<ImageView id="boxImage" layoutX="495" layoutY="5">    
+		<ImageView>
 		   <image>
-			  <Image url="sprays/monster.png" />
+			  <Image url="sprites/encounter.png" />
 		   </image>
 		</ImageView>
-		<Canvas layoutX="495" layoutY="5" height="45" width="95" >
-			
+		<Canvas height="480" width="480" >
+
 		</Canvas>
-	</children>
+		<Button layoutX="208" layoutY="480" prefHeight="64" prefWidth="64" text="▲" onAction="#up" />
+		<Button layoutX="144" layoutY="544" prefHeight="64" prefWidth="64" text="◄" onAction="#left" />
+		<Button layoutX="208" layoutY="544" prefHeight="64" prefWidth="64" text="▼" onAction="#down" />
+		<Button layoutX="272" layoutY="544" prefHeight="64" prefWidth="64" text="►" onAction="#right" />
+	</AnchorPane>
+
+	<!-- Right monster -->
+	<AnchorPane layoutX="480" prefWidth="480" prefHeight="640" visible="true" fx:id="monster">
+		
+		<!-- Image -->
+		<ImageView>
+			<Image url="sprites/encounter.png"/>
+		</ImageView>
+	
+		<!-- Status -->
+		<AnchorPane layoutX="32" layoutY="32" prefWidth="416" prefHeight="64">
+			<ImageView>
+				<Image url="sprites/status_bg.png" />
+			</ImageView>
+			<ImageView layoutX="66" layoutY="4" fx:id="monsterHealthbar" >
+				<Image url="sprites/healthbar.png" />
+			</ImageView>
+			<ImageView layoutY="4"  fx:id="monsterHealthbarEnd" >
+				<Image url="sprites/healthbar_end.png" />
+			</ImageView>
+			<ImageView>
+				<Image url="sprites/status_fg.png" />
+			</ImageView>
+
+			<Label styleClass="big" layoutX="10" layoutY="10" prefWidth="44" prefHeight="44" fx:id="monsterLevel" />
+			<Label layoutX="72" prefWidth="184" prefHeight="32" fx:id="monsterHealth" />
+
+			<!-- Armour -->
+			<Label layoutX="324" layoutY="36" prefWidth="20" prefHeight="20" fx:id="monsterStrength" />
+
+			<!-- Strength -->
+			<Label layoutX="388" layoutY="36" prefWidth="20" prefHeight="20" fx:id="monsterArmour" />
+			
+		</AnchorPane>
+		
+		<Button layoutX="32" layoutY="480" prefWidth="416" prefHeight="64" text="Attack" onAction="#handleButtonAction" fx:id="button" />
+	</AnchorPane>
 </AnchorPane>

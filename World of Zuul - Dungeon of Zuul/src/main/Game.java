@@ -7,10 +7,22 @@ public class Game {
 
     protected Room currentRoom;
 	protected Creature hero;
+	protected String dialogue = "";
+	protected int score = 0;
 
     public Game()
 	{
         createRooms();
+    }
+
+    public void addDialogue()
+	{
+		dialogue += "\n";
+    }
+
+    public void addDialogue(String string)
+	{
+		dialogue += string + "\n";
     }
 
     public void createRooms()
@@ -51,42 +63,42 @@ public class Game {
         // Give creatures some items that they drop
 		
 		// Potions
-		hero.inventory.add(new Potion("health_potion", 3)); // x3 health potions
-                lvl_3a.monster.inventory.add(new Potion("health_potion", 8)); // x6 health potions
-		lvl_4.monster.inventory.add(new Potion("health_potion", 5)); // x5 health potions
-                lvl_4a.monster.inventory.add(new Potion("health_potion", 3)); // x3 health potions
-		lvl_5a.monster.inventory.add(new Potion("health_potion", 14)); // x14 health potions
-                lvl_7.monster.inventory.add(new Potion("health_potion", 8)); // x8 health potions
+		lvl_1.inventory.add(new Potion(3)); // x3 health potions
+                lvl_3a.monster.inventory.add(new Potion(8)); // x6 health potions
+		lvl_4.monster.inventory.add(new Potion(5)); // x5 health potions
+                lvl_4a.monster.inventory.add(new Potion(3)); // x3 health potions
+		lvl_5a.monster.inventory.add(new Potion(14)); // x14 health potions
+                lvl_7.monster.inventory.add(new Potion(8)); // x8 health potions
                 
 		// Coins
-		lvl_1.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                lvl_2a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                lvl_3a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                lvl_4a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                lvl_2.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                lvl_3.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                lvl_4.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                lvl_5a.monster.inventory.add(new Coin("coins", 10)); // 10 coins
-                
-                //Vendor
-                lvl_5a.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
-                lvl_5a.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
-                lvl_5a.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-                lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-                lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+		lvl_1.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_2a.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_3a.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_4a.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_2.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_3.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_4.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_5a.monster.inventory.add(new Coin(10)); // 10 coins
+
+		//Vendor
+		lvl_5a.inventory.add(new Shield("steel_shield", 4, 0)); // Steel Shield
+		lvl_5a.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+		lvl_5a.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+		lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+		lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
                                               
 		// Weapons
-		hero.inventory.add(new Weapon("wooden_sword", 3, 7)); // Wooden Sword
-                lvl_1.monster.inventory.add(new Weapon("broken_wooden_sword", 1, 2)); // Wooden Sword
-                lvl_2.monster.inventory.add(new Weapon("broken_wooden_sword", 2, 4)); // Wooden Sword
-                lvl_3.monster.inventory.add(new Weapon("broken_wooden_sword", 4, 6)); // Wooden Sword
-                lvl_4.monster.inventory.add(new Weapon("broken_wooden_sword", 5, 7)); // Wooden Shield
-                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
-                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
-                lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
-                lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
-                lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 18, 20)); // Holy Steel Sword
-                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 20, 22)); // Fallen Knight Sword
+		lvl_1.inventory.add(new Weapon("Wooden Sword", 2)); // Wooden Sword
+                lvl_1.monster.inventory.add(new Weapon("Broken Wooden Sword", 1)); // Wooden Sword
+                lvl_2.monster.inventory.add(new Weapon("Broken Wooden Sword", 3)); // Wooden Sword
+                lvl_3.monster.inventory.add(new Weapon("Broken Wooden Sword", 5)); // Wooden Sword
+                lvl_4.monster.inventory.add(new Weapon("Broken Wooden Sword", 6)); // Wooden Shield
+                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
+                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
+                lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
+                lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
+                lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 19)); // Holy Steel Sword
+                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 21)); // Fallen Knight Sword
                 
 		// Shields
                 lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
@@ -183,71 +195,49 @@ public class Game {
 	 * This method will print out when you start the game 
 	 */
     private void printWelcome() {
-        System.out.println();
-        System.out.println("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
-        System.out.println("''You're lost in the Dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
-        System.out.println("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
-        System.out.println("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
-        System.out.println("If you manage to defeat the boss, you will win, and escape this forgotten place.");
-        System.out.println("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
-        System.out.println("You're lost in a cave. You have to find the exit to win.");
-        System.out.println("Your goal is to move to the end of the map. At the end of the map, you");
-        System.out.println("will face the boss that you have to defeat. If you defeat the boss, you will");
-        System.out.println("win, but if your health reaches zero, you will lose.");
-        System.out.println("Click on '?' if you need help.");
-        System.out.println();
+        addDialogue();
+        addDialogue("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
+        addDialogue("''You're lost in the Dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
+        addDialogue("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
+        addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
+        addDialogue("If you manage to defeat the boss, you will win, and escape this forgotten place.");
+        addDialogue("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
+        addDialogue("You're lost in a cave. You have to find the exit to win.");
+        addDialogue("Your goal is to move to the end of the map. At the end of the map, you");
+        addDialogue("will face the boss that you have to defeat. If you defeat the boss, you will");
+        addDialogue("win, but if your health reaches zero, you will lose.");
+        addDialogue("Click on '?' if you need help.");
+        addDialogue();
 		printLook();
     }
 	
     /* By writing "help" in console, this method will be called. */
     private void printHelp()
 	{
-        System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println("go: This gives you the option to move around. The command is: go \"direction\".");
-        System.out.println("map: The console will print out a map and your current whereabouts.");
-        System.out.println("quit: The game will quit.");
-        System.out.println("look: Look around in the room for items.");
-        System.out.println("Status: Your healthpoints and XP");
-        System.out.println("Inventory: Look through your inventory");
-        System.out.println("Use: type use health_potion to use a potion from your inventory.");
+        addDialogue();
+        addDialogue("Your command words are:");
+        addDialogue("go: This gives you the option to move around. The command is: go \"direction\".");
+        addDialogue("map: The console will print out a map and your current whereabouts.");
+        addDialogue("quit: The game will quit.");
+        addDialogue("look: Look around in the room for items.");
+        addDialogue("Status: Your healthpoints and XP");
+        addDialogue("Inventory: Look through your inventory");
+        addDialogue("Use: type use health_potion to use a potion from your inventory.");
 
         // parser.showCommands(); // This line prints out the command words.
     }
 	
-    private void printStatus() // Prints out the character specific things to check
-	{
-        System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth()); // Prints out the hero's health
-        System.out.println("Experience points: " + hero.getExperienceBar()); // Prints out the hero's experience
-        
-    }
-	
 	private void printLook() // Prints out what the character can see
 	{
-		System.out.println("You are " + currentRoom.getShortDescription());
+		addDialogue("You are " + currentRoom.getShortDescription());
 		if(currentRoom.hasMonster())
 		{
-			System.out.println("There's a monster " + currentRoom.monster.printLevel() + " blocking your way");
-            System.out.println("Monster (" + currentRoom.monster.printLevel() + "): " + currentRoom.monster.printHealth());
+			addDialogue("There's a monster level " + currentRoom.monster.getLevel() + " blocking your way");
 		}
 		else
 		{
-			System.out.println(currentRoom.getExitString());
+			addDialogue(currentRoom.getExitString());
 		}
-	}
-	
-	/**
-	 * This method will be called when you write "map" in console. /* It will
-	 * print out the whole map and it will also include your current position.
-	 */
-	private void printMap()
-	{
-		System.out.println("/----------------------------------------------------------------------------------------\\");
-		System.out.println("|                                              level 5a                                  |");
-		System.out.println("|            level 2  -- level 3 -- level 4 -<                                           |");
-		System.out.println("| level 1 -<                                   level 5 -- level 6 -- level 7 -- level 8  |");
-		System.out.println("|            level 2a -- level 3a -- level 4a                                            |");
-		System.out.println("\\----------------------------------------------------------------------------------------/");
 	}
 	
 	protected void useItem(Item searchForItem)
@@ -257,7 +247,6 @@ public class Game {
 			Item item = it.next();
 			if(item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion)
 			{
-				System.out.println("You used a " + item.toString());
 				if(item.getAmount() == 1)
 				{
 					it.remove();
@@ -266,40 +255,30 @@ public class Game {
 				{
 					item.use();
 				}
-				hero.heal();
+				addDialogue("You were healed for " + hero.heal() + " HP (max 40% of your max health)");
 				return;
 			}
 		}
-		
-		System.out.println("useItem didn't find '" + searchForItem + "'");
 	}
 	
     public void attack()
 	{
 		if(currentRoom.hasMonster())
 		{
-			hero.attack(currentRoom.monster);
-			
-			System.out.println("Monster (" + currentRoom.monster.printLevel() + "): " + currentRoom.monster.printHealth());
+			addDialogue("You rolled " + hero.rollDamage(currentRoom.monster) + "dmg");
 			
 			if(currentRoom.monster.getHealth() > 0)
 			{
-				currentRoom.monster.attack(hero);
+				addDialogue("Monster rolled " + currentRoom.monster.rollDamage(hero) + "dmg");
 				
-				System.out.println("Hero (" + hero.printLevel() + "):    " + hero.printHealth());
-				
-				if(hero.getHealth() > 0)
-				{
-					System.out.println("Your turn!");
-				}
-				else
+				if(hero.getHealth() <= 0)
 				{
 					hero = null;
 				}
 			}
 			else
 			{
-				System.out.println("You have slain the monster (" + currentRoom.monster.printLevel() + ")!");
+				addDialogue("You have slain the monster (level " + currentRoom.monster.getLevel() + ")!");
 				hero.gainExperience(currentRoom.monster);
 				for (Item item : currentRoom.monster.inventory.getContent())
 				{
@@ -309,7 +288,7 @@ public class Game {
 			}
 		}
 		else
-			System.out.println("There's no monster to attack");
+			addDialogue("There's no monster to attack");
                 
     }
 	
@@ -319,11 +298,11 @@ public class Game {
 
         if(currentRoom.hasMonster())
 		{
-            System.out.println("The monster (" + currentRoom.monster.printLevel() + "): is blocking your way");
+            addDialogue("The monster (level " + currentRoom.monster.getLevel() + "): is blocking your way");
 		}
 		else if (nextRoom == null) // It will first check if there is a path to the next room.
 		{
-            System.out.println("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
+            addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
         }
 		else
 		{
