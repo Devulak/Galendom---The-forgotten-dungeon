@@ -74,43 +74,24 @@ public class Creature {
 		}
 	}
 	
-	protected String printHealth()
+	public int getArmour()
 	{
-		int blockTotal = 20;
-		int blockHealth = (int) Math.ceil((double) health/maxHealth*blockTotal);
-		String blocks = "";
-		if (this.health < 0)
-			health = 0;
-		for (int i = 1; i <= blockTotal; i++)
+		int armour = 0;
+		for (Item item : inventory.getContent())
 		{
-			if(blockHealth >= i)
-				blocks += "■";
-			else
-				blocks += "□";
+			if(item instanceof Armour)
+			{
+				armour += ((Armour)item).getArmour();
+			}
 		}
-		return blocks + " " + health + "/" + maxHealth + " hp";
+		return armour;
 	}
 	
-	protected String getExperienceBar()
+	public int getStrength()
 	{
-		int blockTotal = 10;
-		int blockHealth = (int) Math.ceil((double) experience/experienceMax*blockTotal);
-		String blocks = "";
-		for (int i = 1; i <= blockTotal; i++)
-		{
-			if(blockHealth >= i)
-				blocks += "■";
-			else
-				blocks += "□";
-		}
-		return blocks + " " + experience + "/" + experienceMax + " xp";
-	}
-	
-	protected void attack(Creature enemy)
-	{
+		int strength = 0;
 		int damageMinBoost = 0;
 		int damageMaxBoost = 0;
-		int damageReduce = 0;
 		for (Item item : inventory.getContent())
 		{
 			if(item instanceof Weapon)
@@ -119,11 +100,20 @@ public class Creature {
 				damageMaxBoost += ((Weapon)item).getDamageMax();
 			}
 		}
-		for (Item item : enemy.inventory.getContent())
+		return strength;
+	}
+	
+	protected int attack(Creature enemy)
+	{
+		int damageMinBoost = 0;
+		int damageMaxBoost = 0;
+		int damageReduce = getArmour();
+		for (Item item : inventory.getContent())
 		{
-			if(item instanceof Armour)
+			if(item instanceof Weapon)
 			{
-				damageReduce += ((Armour)item).getArmour();
+				damageMinBoost += ((Weapon)item).getDamageMin();
+				damageMaxBoost += ((Weapon)item).getDamageMax();
 			}
 		}
 		damageMaxBoost -= damageMinBoost; // Remove min damage, min damage defined outside random
@@ -132,16 +122,24 @@ public class Creature {
 		{
 			roll = 0;
 		}
-		System.out.println("Rolled " + roll + " dmg!");
 		enemy.health -= roll;
+		return roll;
 	}
 	
-	protected void heal()
+	protected int takeDamage()
 	{
-		health += healthGainAmount;
-		if(health > maxHealth)
+		getArmour();
+		return 0;
+	}
+	
+	protected int heal()
+	{
+		int healingAmount = (int) (maxHealth * 0.4); // 40% of the max health restored, if amount is with digits, disregard those.
+		if(health+healingAmount > maxHealth)
 		{
-			health = maxHealth;
+			healingAmount = maxHealth-health;
 		}
+		health += healingAmount;
+		return healingAmount;
 	}
 }

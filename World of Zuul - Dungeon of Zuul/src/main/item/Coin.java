@@ -2,8 +2,8 @@ package main.item;
 
 public class Coin extends Item
 {
-	public Coin(String name, int amount)
+	public Coin(int amount)
 	{
-		super(name, amount);
+		super("Coins", amount);
 	}
 }

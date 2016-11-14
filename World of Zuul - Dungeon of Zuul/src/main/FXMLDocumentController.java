@@ -20,7 +20,7 @@ public class FXMLDocumentController implements Initializable {
 	private Game game;
 	
 	@FXML
-	private ProgressBar healthBar;
+	private Label playerHealth;
 	
 	@FXML
 	private ImageView playerHealthbar;
@@ -35,16 +35,16 @@ public class FXMLDocumentController implements Initializable {
 	private ImageView playerExperiencebarEnd;
 	
 	@FXML
-	private Label healthStatus;
+	private Label playerArmour;
 	
 	@FXML
-	private ProgressBar experienceBar;
+	private Label playerStrength;
 	
 	@FXML
 	private Label experienceStatus;
 	
 	@FXML
-	private Label experienceLevel;
+	private Label playerLevel;
 	
 	@FXML
 	private ListView playerInventory;
@@ -57,20 +57,24 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private AnchorPane monster;
-	
+	@FXML
+	private Label monsterHealth;
+	@FXML
+	private ImageView monsterHealthbar;
+	@FXML
+	private ImageView monsterHealthbarEnd;
 	@FXML
 	private Label monsterLevel;
 	@FXML
-	private ProgressBar monsterHealth;
+	private Label monsterArmour;
 	@FXML
-	private Label monsterHealthStatus;
+	private Label monsterStrength;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event)
 	{
 		game.attack();
-		updateHealth();
-		updateExperience();
+		updatePlayerStatus();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -85,6 +89,7 @@ public class FXMLDocumentController implements Initializable {
 		// Update inventories
 		updatePlayerInventory();
 		updateRoomInventory();
+		updatePlayerStatus();
 	}
 	
 	@FXML
@@ -97,6 +102,7 @@ public class FXMLDocumentController implements Initializable {
 		// Update inventories
 		updatePlayerInventory();
 		updateRoomInventory();
+		updatePlayerStatus();
 	}
 	
 	@FXML
@@ -106,7 +112,7 @@ public class FXMLDocumentController implements Initializable {
 		game.useItem(selectedItem);
 		
 		updatePlayerInventory();
-		updateHealth();
+		updatePlayerStatus();
 		updateDialouge();
 	}
 	
@@ -147,26 +153,49 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game = new Game();
 		game.play();
-		updateHealth();
-		updateExperience();
+		updatePlayerStatus();
 		updatePlayerInventory();
 		updateRoomInventory();
 		updatePanel();
 	}
 	
-	public void updateHealth()
+	public void updatePlayerStatus()
 	{
-		healthStatus.setText(game.hero.getHealth() + "/" + game.hero.getMaxHealth() + " HP");
+		// Health
+		playerHealth.setText(game.hero.getHealth() + "/" + game.hero.getMaxHealth() + " HP");
 		playerHealthbar.setFitWidth((double)game.hero.getHealth()/game.hero.getMaxHealth()*342);
 		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
-	}
-	
-	public void updateExperience()
-	{
-		experienceLevel.setText("" + game.hero.getLevel());
+		
+		// Experience
 		experienceStatus.setText(game.hero.getExperience() + "/" + game.hero.getMaxExperience() + " EXP");
 		playerExperiencebar.setFitWidth((double)game.hero.getExperience()/game.hero.getMaxExperience()*214);
 		playerExperiencebarEnd.setLayoutX(playerExperiencebar.getLayoutX()+playerExperiencebar.getFitWidth());
+		
+		// Level
+		playerLevel.setText(String.format("%d", game.hero.getLevel()));
+		
+		// Strength
+		playerStrength.setText(String.format("%d", game.hero.getStrength()));
+		
+		// Armour
+		playerArmour.setText(String.format("%d", game.hero.getArmour()));
+	}
+	
+	public void updateMonsterStatus()
+	{
+		// Health
+		monsterHealth.setText(game.currentRoom.monster.getHealth() + "/" + game.currentRoom.monster.getMaxHealth() + " HP");
+		monsterHealthbar.setFitWidth((double)game.currentRoom.monster.getHealth()/game.currentRoom.monster.getMaxHealth()*342);
+		monsterHealthbarEnd.setLayoutX(monsterHealthbar.getLayoutX()+monsterHealthbar.getFitWidth());
+		
+		// Level
+		monsterLevel.setText(String.format("%d", game.currentRoom.monster.getLevel()));
+		
+		// Strength
+		monsterStrength.setText(String.format("%d", game.currentRoom.monster.getStrength()));
+		
+		// Armour
+		monsterArmour.setText(String.format("%d", game.currentRoom.monster.getArmour()));
 	}
 	
 	public void updatePlayerInventory()
@@ -202,11 +231,5 @@ public class FXMLDocumentController implements Initializable {
 		{
 			monster.setVisible(false);
 		}
-	}
-	
-	public void updateMonsterStatus()
-	{
-		monsterHealthStatus.setText(game.currentRoom.monster.getHealth() + "/" + game.currentRoom.monster.getMaxHealth() + " HP");
-		monsterHealth.setProgress((double)game.currentRoom.monster.getHealth()/game.currentRoom.monster.getMaxHealth());
 	}
 }
