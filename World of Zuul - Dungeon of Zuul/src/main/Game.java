@@ -8,6 +8,7 @@ public class Game {
     protected Room currentRoom;
 	protected Creature hero;
 	protected String dialogue = "";
+	protected int score = 0;
 
     public Game()
 	{
@@ -62,7 +63,7 @@ public class Game {
         // Give creatures some items that they drop
 		
 		// Potions
-		hero.inventory.add(new Potion(3)); // x3 health potions
+		lvl_1.inventory.add(new Potion(3)); // x3 health potions
                 lvl_3a.monster.inventory.add(new Potion(8)); // x6 health potions
 		lvl_4.monster.inventory.add(new Potion(5)); // x5 health potions
                 lvl_4a.monster.inventory.add(new Potion(3)); // x3 health potions
@@ -87,17 +88,17 @@ public class Game {
 		lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
                                               
 		// Weapons
-		hero.inventory.add(new Weapon("wooden_sword", 3, 7)); // Wooden Sword
-                lvl_1.monster.inventory.add(new Weapon("Broken Wooden Sword", 1, 2)); // Wooden Sword
-                lvl_2.monster.inventory.add(new Weapon("Broken Wooden Sword", 2, 4)); // Wooden Sword
-                lvl_3.monster.inventory.add(new Weapon("Broken Wooden Sword", 4, 6)); // Wooden Sword
-                lvl_4.monster.inventory.add(new Weapon("Broken Wooden Sword", 5, 7)); // Wooden Shield
-                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
-                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
-                lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
-                lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 16, 18)); // Demonic Steel Sword
-                lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 18, 20)); // Holy Steel Sword
-                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 20, 22)); // Fallen Knight Sword
+		lvl_1.inventory.add(new Weapon("Wooden Sword", 2)); // Wooden Sword
+                lvl_1.monster.inventory.add(new Weapon("Broken Wooden Sword", 1)); // Wooden Sword
+                lvl_2.monster.inventory.add(new Weapon("Broken Wooden Sword", 3)); // Wooden Sword
+                lvl_3.monster.inventory.add(new Weapon("Broken Wooden Sword", 5)); // Wooden Sword
+                lvl_4.monster.inventory.add(new Weapon("Broken Wooden Sword", 6)); // Wooden Shield
+                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
+                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
+                lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
+                lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
+                lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 19)); // Holy Steel Sword
+                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 21)); // Fallen Knight Sword
                 
 		// Shields
                 lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
@@ -231,7 +232,7 @@ public class Game {
 		addDialogue("You are " + currentRoom.getShortDescription());
 		if(currentRoom.hasMonster())
 		{
-			addDialogue("There's a monster " + currentRoom.monster.printLevel() + " blocking your way");
+			addDialogue("There's a monster level " + currentRoom.monster.getLevel() + " blocking your way");
 		}
 		else
 		{
@@ -264,11 +265,11 @@ public class Game {
 	{
 		if(currentRoom.hasMonster())
 		{
-			addDialogue("You rolled " + hero.attack(currentRoom.monster) + "dmg");
+			addDialogue("You rolled " + hero.rollDamage(currentRoom.monster) + "dmg");
 			
 			if(currentRoom.monster.getHealth() > 0)
 			{
-				addDialogue("Monster rolled " + currentRoom.monster.attack(hero) + "dmg");
+				addDialogue("Monster rolled " + currentRoom.monster.rollDamage(hero) + "dmg");
 				
 				if(hero.getHealth() <= 0)
 				{
@@ -277,7 +278,7 @@ public class Game {
 			}
 			else
 			{
-				addDialogue("You have slain the monster (" + currentRoom.monster.printLevel() + ")!");
+				addDialogue("You have slain the monster (level " + currentRoom.monster.getLevel() + ")!");
 				hero.gainExperience(currentRoom.monster);
 				for (Item item : currentRoom.monster.inventory.getContent())
 				{
@@ -297,7 +298,7 @@ public class Game {
 
         if(currentRoom.hasMonster())
 		{
-            addDialogue("The monster (" + currentRoom.monster.printLevel() + "): is blocking your way");
+            addDialogue("The monster (level " + currentRoom.monster.getLevel() + "): is blocking your way");
 		}
 		else if (nextRoom == null) // It will first check if there is a path to the next room.
 		{

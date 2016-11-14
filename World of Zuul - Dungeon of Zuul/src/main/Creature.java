@@ -9,9 +9,9 @@ public class Creature {
     protected int experience = 0; // The amount of experience the creature has (this always starts with "0")
     protected int experienceMax; // The max amount of experience the creature needs for a level up
 	
-	private static final int experienceRequiredBase = 400; // The amount of experience you need atleast per level
-	private static final int experienceRequiredRatio = 200; // The amount of experience you need further more per level
-	private static final int experienceGainRatio = 200; // The amount of experience you get per level of the monster
+	private static final int experienceRequiredBase = 4; // The amount of experience you need atleast per level
+	private static final int experienceRequiredRatio = 2; // The amount of experience you need further more per level
+	private static final int experienceGainRatio = 2; // The amount of experience you get per level of the monster
 	
     private int health; // Current health
     private int maxHealth; // Maximum amount of health
@@ -47,11 +47,6 @@ public class Creature {
 		return experienceMax;
 	}
 	
-	protected String printLevel()
-	{
-		return "level " + level;
-	}
-	
 	protected int getLevel()
 	{
 		return level;
@@ -60,7 +55,6 @@ public class Creature {
 	protected void gainExperience(Creature Enemy)
 	{
 		experience += experienceGainRatio*Enemy.getLevel();
-		System.out.println("You've gained " + experienceGainRatio*Enemy.getLevel() + " xp");
 		while(experience >= experienceMax)
 		{
 			experience -= experienceMax;
@@ -69,8 +63,6 @@ public class Creature {
 			
 			maxHealth = healthBaseAmount + level*healthGainAmount;
 			health += healthGainAmount;
-			
-			System.out.println("You've level up to " + printLevel() + "!");
 		}
 	}
 	
@@ -89,47 +81,34 @@ public class Creature {
 	
 	public int getStrength()
 	{
-		int strength = 0;
-		int damageMinBoost = 0;
-		int damageMaxBoost = 0;
+		int strength = level;
 		for (Item item : inventory.getContent())
 		{
 			if(item instanceof Weapon)
 			{
-				damageMinBoost += ((Weapon)item).getDamageMin();
-				damageMaxBoost += ((Weapon)item).getDamageMax();
+				strength += ((Weapon)item).getDamage();
 			}
 		}
 		return strength;
 	}
 	
-	protected int attack(Creature enemy)
+	protected int rollDamage(Creature enemy)
 	{
-		int damageMinBoost = 0;
-		int damageMaxBoost = 0;
-		int damageReduce = getArmour();
-		for (Item item : inventory.getContent())
+		double hitPoints = getStrength();
+		// This will roll the amount of damage given that the creature attacks with no resistance, aka. no armor against him
+		if(Math.random() <= 0.1) // did he roll a crit (10%)
 		{
-			if(item instanceof Weapon)
-			{
-				damageMinBoost += ((Weapon)item).getDamageMin();
-				damageMaxBoost += ((Weapon)item).getDamageMax();
-			}
+			hitPoints = hitPoints * 1.5; // 150% damage on crit, if uneven, calculate extra damage point
 		}
-		damageMaxBoost -= damageMinBoost; // Remove min damage, min damage defined outside random
-		int roll = (int) Math.round(Math.random()*(level + damageMaxBoost)) + level + damageMinBoost - damageReduce; // Calculation for a roll
-		if(roll < 0)
-		{
-			roll = 0;
-		}
-		enemy.health -= roll;
-		return roll;
+		return enemy.takeDamage(hitPoints);
 	}
 	
-	protected int takeDamage()
+	protected int takeDamage(double hitPoints)
 	{
-		getArmour();
-		return 0;
+		hitPoints = hitPoints * (1 - getArmour() / 50); // Each point of armour reduces damage by 2%
+		int hitPointsTaken = (int) Math.round(hitPoints); // Rounds to neearest point
+		health -= hitPointsTaken;
+		return hitPointsTaken;
 	}
 	
 	protected int heal()
