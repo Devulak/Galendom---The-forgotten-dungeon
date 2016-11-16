@@ -6,7 +6,7 @@ import main.item.*;
 public class Game {
 
     protected Room currentRoom;
-	protected Creature hero;
+	protected Creature player;
 	protected String dialogue = "";
 	protected int score = 0;
 
@@ -27,26 +27,25 @@ public class Game {
 
     public void createRooms()
 	{
-        boolean wantToQuit = false;
         /* Creating rooms */
         Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
         /* Adds rooms to the game, also gives them descriptions */
-		lvl_1 = new Room("in level 1");
-		lvl_2 = new Room("in level 2");
-		lvl_2a = new Room("in level 2a");
-		lvl_3 = new Room("in level 3");
-		lvl_3a = new Room("in level 3a");
-		lvl_4 = new Room("in level 4");
-		lvl_4a = new Room("in level 4a");
-		lvl_5 = new Room("in level 5");
-		lvl_5a = new Room("in level 5a");
-		lvl_6 = new Room("in level 6");
-		lvl_7 = new Room("in level 7");
-		lvl_8 = new Room("in level 8");
+		lvl_1 = new Room("in level 1", 1, 0);
+		lvl_2 = new Room("in level 2", 2, 0);
+		lvl_2a = new Room("in level 2a", 0, 0);
+		lvl_3 = new Room("in level 3", 2, 1);
+		lvl_3a = new Room("in level 3a", 0, 1);
+		lvl_4 = new Room("in level 4", 2, 2);
+		lvl_4a = new Room("in level 4a", 1, 1);
+		lvl_5 = new Room("in level 5", 1, 2);
+		lvl_5a = new Room("in level 5a", 2, 3);
+		lvl_6 = new Room("in level 6", 0, 2);
+		lvl_7 = new Room("in level 7", 0, 3);
+		lvl_8 = new Room("in level 8", 1, 3);
 
         /* Adds creatures to the game, number tells what level they should start at  */
-		hero = new Creature(1);
+		player = new Creature(1);
         lvl_1.setMonster(new Creature(1));
         lvl_2.setMonster(new Creature(2));
         lvl_2a.setMonster(new Creature(2));
@@ -63,12 +62,12 @@ public class Game {
         // Give creatures some items that they drop
 		
 		// Potions
-		lvl_1.inventory.add(new Potion(3)); // x3 health potions
-                lvl_3a.monster.inventory.add(new Potion(8)); // x6 health potions
+		player.inventory.add(new Potion(3)); // x3 health potions
+		lvl_3a.monster.inventory.add(new Potion(8)); // x6 health potions
 		lvl_4.monster.inventory.add(new Potion(5)); // x5 health potions
-                lvl_4a.monster.inventory.add(new Potion(3)); // x3 health potions
+		lvl_4a.monster.inventory.add(new Potion(3)); // x3 health potions
 		lvl_5a.monster.inventory.add(new Potion(14)); // x14 health potions
-                lvl_7.monster.inventory.add(new Potion(8)); // x8 health potions
+		lvl_7.monster.inventory.add(new Potion(8)); // x8 health potions
                 
 		// Coins
 		lvl_1.monster.inventory.add(new Coin(10)); // 10 coins
@@ -88,58 +87,50 @@ public class Game {
 		lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
                                               
 		// Weapons
-		lvl_1.inventory.add(new Weapon("Wooden Sword", 2)); // Wooden Sword
-                lvl_1.monster.inventory.add(new Weapon("Broken Wooden Sword", 1)); // Wooden Sword
-                lvl_2.monster.inventory.add(new Weapon("Broken Wooden Sword", 3)); // Wooden Sword
-                lvl_3.monster.inventory.add(new Weapon("Broken Wooden Sword", 5)); // Wooden Sword
-                lvl_4.monster.inventory.add(new Weapon("Broken Wooden Sword", 6)); // Wooden Shield
-                lvl_4a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
-                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
-                lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
-                lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
-                lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 19)); // Holy Steel Sword
-                lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 21)); // Fallen Knight Sword
+		player.inventory.add(new Weapon("Wooden Sword", 2)); // Wooden Sword
+		lvl_1.monster.inventory.add(new Weapon("Broken Wooden Sword", 1)); // Wooden Sword
+		lvl_2.monster.inventory.add(new Weapon("Broken Wooden Sword", 3)); // Wooden Sword
+		lvl_3.monster.inventory.add(new Weapon("Broken Wooden Sword", 5)); // Wooden Sword
+		lvl_4.monster.inventory.add(new Weapon("Broken Wooden Sword", 6)); // Wooden Shield
+		lvl_4a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
+		lvl_5a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
+		lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
+		lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
+		lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 19)); // Holy Steel Sword
+		lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 21)); // Fallen Knight Sword
                 
 		// Shields
-                lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-                lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-                lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Broken Steel Shield
-                lvl_8.monster.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+		lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+		lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
+		lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Broken Steel Shield
+		lvl_8.monster.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
                 
                 // Helmets
 		lvl_3.monster.inventory.add(new Helmet("iron_helmet", 2)); // Iron Helmet
-                lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Broken Steel Helmet
-                lvl_7.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
-                lvl_8.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+		lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Broken Steel Helmet
+		lvl_7.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+		lvl_8.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
                 
 		// Chestplates
 		lvl_4a.monster.inventory.add(new Chestplate("iron_chestplate", 4)); // Iron Chestplate
-                lvl_5a.monster.inventory.add(new Chestplate("broken_steel_chestplate", 4)); // Broken Steel Chestplate
-                lvl_5.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-                lvl_6.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-                lvl_7.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-                lvl_8.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+		lvl_5a.monster.inventory.add(new Chestplate("broken_steel_chestplate", 4)); // Broken Steel Chestplate
+		lvl_5.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+		lvl_6.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+		lvl_7.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+		lvl_8.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
                 
-                // Leggings
+		// Leggings
 		lvl_3a.monster.inventory.add(new Legging("iron_leggings", 2)); // Iron Leggings
-                lvl_5a.monster.inventory.add(new Legging("broken_steel_leggings", 2)); // Broken Steel Leggings
-                lvl_5.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+		lvl_5a.monster.inventory.add(new Legging("broken_steel_leggings", 2)); // Broken Steel Leggings
+		lvl_5.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
 		lvl_6.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-                lvl_7.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-                lvl_8.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+		lvl_7.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+		lvl_8.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
                 
 		// Boots                
-                lvl_6.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
-                lvl_7.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
-                lvl_8.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
-                
-                //For testing the game and skipping the start fast, this will give you strength like room 5 (the middle of the game). Remember to change start level to 6.
-                //hero.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
-		//hero.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
-                //hero.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
-                //hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-                //hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
-                //hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
+		lvl_6.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+		lvl_7.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+		lvl_8.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("right", lvl_2);
@@ -242,7 +233,7 @@ public class Game {
 	
 	protected void useItem(Item searchForItem)
 	{
-		for (Iterator<Item> it = hero.inventory.getContent().iterator(); it.hasNext();)
+		for (Iterator<Item> it = player.inventory.getContent().iterator(); it.hasNext();)
 		{
 			Item item = it.next();
 			if(item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion)
@@ -255,7 +246,7 @@ public class Game {
 				{
 					item.use();
 				}
-				addDialogue("You were healed for " + hero.heal() + " HP (max 40% of your max health)");
+				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health)");
 				return;
 			}
 		}
@@ -265,21 +256,21 @@ public class Game {
 	{
 		if(currentRoom.hasMonster())
 		{
-			addDialogue("You rolled " + hero.rollDamage(currentRoom.monster) + "dmg");
+			addDialogue("You rolled " + player.rollDamage(currentRoom.monster) + "dmg");
 			
 			if(currentRoom.monster.getHealth() > 0)
 			{
-				addDialogue("Monster rolled " + currentRoom.monster.rollDamage(hero) + "dmg");
+				addDialogue("Monster rolled " + currentRoom.monster.rollDamage(player) + "dmg");
 				
-				if(hero.getHealth() <= 0)
+				if(player.getHealth() <= 0)
 				{
-					hero = null;
+					player = null;
 				}
 			}
 			else
 			{
 				addDialogue("You have slain the monster (level " + currentRoom.monster.getLevel() + ")!");
-				hero.gainExperience(currentRoom.monster);
+				player.gainExperience(currentRoom.monster);
 				for (Item item : currentRoom.monster.inventory.getContent())
 				{
 					currentRoom.inventory.add(item);

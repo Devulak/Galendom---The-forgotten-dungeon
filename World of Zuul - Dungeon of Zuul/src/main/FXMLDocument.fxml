@@ -17,28 +17,28 @@
 		<!-- Status -->
 		<AnchorPane layoutX="32" layoutY="32" prefWidth="416" prefHeight="64">
 			<ImageView>
-				<Image url="sprites/status_bg.png" />
+				<Image url="@../sprites/status_bg.png" />
 			</ImageView>
 			<ImageView>
-				<Image url="sprites/status_exp_bg.png" />
+				<Image url="@../sprites/status_exp_bg.png" />
 			</ImageView>
 			<ImageView layoutX="66" layoutY="4" fx:id="playerHealthbar" >
-				<Image url="sprites/healthbar.png" />
+				<Image url="@../sprites/healthbar.png" />
 			</ImageView>
 			<ImageView layoutY="4"  fx:id="playerHealthbarEnd" >
-				<Image url="sprites/healthbar_end.png" />
+				<Image url="@../sprites/healthbar_end.png" />
 			</ImageView>
 			<ImageView layoutX="66" layoutY="36"  fx:id="playerExperiencebar" >
-				<Image url="sprites/experiencebar.png" />
+				<Image url="@../sprites/experiencebar.png" />
 			</ImageView>
 			<ImageView layoutY="36"  fx:id="playerExperiencebarEnd" >
-				<Image url="sprites/experiencebar_end.png" />
+				<Image url="@../sprites/experiencebar_end.png" />
 			</ImageView>
 			<ImageView>
-				<Image url="sprites/status_fg.png" />
+				<Image url="@../sprites/status_fg.png" />
 			</ImageView>
 			<ImageView>
-				<Image url="sprites/status_exp_fg.png" />
+				<Image url="@../sprites/status_exp_fg.png" />
 			</ImageView>
 
 			<Label styleClass="big" layoutX="10" layoutY="10" prefWidth="44" prefHeight="44" fx:id="playerLevel" />
@@ -76,7 +76,7 @@
 		<!-- Map -->
 		<ImageView>
 		   <image>
-			  <Image url="sprites/encounter.png" />
+			  <Image url="@../sprites/map.png" />
 		   </image>
 		</ImageView>
 		<Canvas height="480" width="480" >
@@ -93,22 +93,22 @@
 		
 		<!-- Image -->
 		<ImageView>
-			<Image url="sprites/encounter.png"/>
+			<Image url="@../sprites/encounter.png"/>
 		</ImageView>
 	
 		<!-- Status -->
 		<AnchorPane layoutX="32" layoutY="32" prefWidth="416" prefHeight="64">
 			<ImageView>
-				<Image url="sprites/status_bg.png" />
+				<Image url="@../sprites/status_bg.png" />
 			</ImageView>
 			<ImageView layoutX="66" layoutY="4" fx:id="monsterHealthbar" >
-				<Image url="sprites/healthbar.png" />
+				<Image url="@../sprites/healthbar.png" />
 			</ImageView>
 			<ImageView layoutY="4"  fx:id="monsterHealthbarEnd" >
-				<Image url="sprites/healthbar_end.png" />
+				<Image url="@../sprites/healthbar_end.png" />
 			</ImageView>
 			<ImageView>
-				<Image url="sprites/status_fg.png" />
+				<Image url="@../sprites/status_fg.png" />
 			</ImageView>
 
 			<Label styleClass="big" layoutX="10" layoutY="10" prefWidth="44" prefHeight="44" fx:id="monsterLevel" />
