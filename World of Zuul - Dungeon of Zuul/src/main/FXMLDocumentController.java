@@ -83,7 +83,7 @@ public class FXMLDocumentController implements Initializable {
 	private void takeItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
-		Item tempItem = game.hero.inventory.add(selectedItem);
+		Item tempItem = game.player.inventory.add(selectedItem);
 		game.currentRoom.inventory.swap(selectedItem, tempItem);
 		
 		// Update inventories
@@ -97,7 +97,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
 		Item droppedItem = game.currentRoom.inventory.add(selectedItem);
-		game.hero.inventory.swap(selectedItem, droppedItem);
+		game.player.inventory.swap(selectedItem, droppedItem);
 		
 		// Update inventories
 		updatePlayerInventory();
@@ -162,23 +162,23 @@ public class FXMLDocumentController implements Initializable {
 	public void updatePlayerStatus()
 	{
 		// Health
-		playerHealth.setText(game.hero.getHealth() + "/" + game.hero.getMaxHealth() + " HP");
-		playerHealthbar.setFitWidth((double)game.hero.getHealth()/game.hero.getMaxHealth()*342);
+		playerHealth.setText(game.player.getHealth() + "/" + game.player.getMaxHealth() + " HP");
+		playerHealthbar.setFitWidth((double)game.player.getHealth()/game.player.getMaxHealth()*342);
 		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
 		
 		// Experience
-		experienceStatus.setText(game.hero.getExperience() + "/" + game.hero.getMaxExperience() + " EXP");
-		playerExperiencebar.setFitWidth((double)game.hero.getExperience()/game.hero.getMaxExperience()*214);
+		experienceStatus.setText(game.player.getExperience() + "/" + game.player.getMaxExperience() + " EXP");
+		playerExperiencebar.setFitWidth((double)game.player.getExperience()/game.player.getMaxExperience()*214);
 		playerExperiencebarEnd.setLayoutX(playerExperiencebar.getLayoutX()+playerExperiencebar.getFitWidth());
 		
 		// Level
-		playerLevel.setText(String.format("%d", game.hero.getLevel()));
+		playerLevel.setText(String.format("%d", game.player.getLevel()));
 		
 		// Strength
-		playerStrength.setText(String.format("%d", game.hero.getStrength()));
+		playerStrength.setText(String.format("%d", game.player.getStrength()));
 		
 		// Armour
-		playerArmour.setText(String.format("%d", game.hero.getArmour()));
+		playerArmour.setText(String.format("%d", game.player.getArmour()));
 	}
 	
 	public void updateMonsterStatus()
@@ -200,7 +200,7 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updatePlayerInventory()
 	{
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.hero.inventory.getContent());
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.player.inventory.getContent());
 		playerInventory.setItems(null);
 		playerInventory.setItems(itemsTemp);
 	}

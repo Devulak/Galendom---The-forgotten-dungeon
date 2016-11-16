@@ -7,13 +7,16 @@ import main.item.*;
 public class Room
 {
     private String description;
+    private int posX, posY;
     private HashMap<String, Room> exits;
 	protected Creature monster; // The monster in the room, if there's any!
 	protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
 
-    public Room(String description) 
+    public Room(String description, int posX, int posY) 
     {
         this.description = description;
+        this.posX = posX;
+        this.posY = posY;
         exits = new HashMap<String, Room>();
     }
 
