@@ -91,6 +91,17 @@ public class Creature {
 		}
 		return strength;
 	}
+	public boolean hasKey()
+	{
+		for (Item item : inventory.getContent())
+		{
+			if(item instanceof Key)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	protected int rollDamage(Creature enemy)
 	{
