@@ -2,28 +2,21 @@ package main.item;
 
 public class Weapon extends Item
 {
-	private int damageMin;
-	private int damageMax;
+	private int damage;
 	
-	public Weapon(String name, int damageMin, int damageMax)
+	public Weapon(String name, int damage)
 	{
 		super(name, 0);
-		this.damageMin = damageMin;
-		this.damageMax = damageMax;
+		this.damage = damage;
 	}
 	
 	public String toString() // Return value on object
 	{
-		return name + " (" + damageMin + "-" + damageMax + " dmg)";
+		return name + " (" + damage + " dmg)";
 	}
 
-	public int getDamageMin()
+	public int getDamage()
 	{
-		return damageMin;
-	}
-
-	public int getDamageMax()
-	{
-		return damageMax;
+		return damage;
 	}
 }

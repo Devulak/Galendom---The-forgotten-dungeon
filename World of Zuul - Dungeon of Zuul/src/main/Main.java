@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application
@@ -11,10 +12,19 @@ public class Main extends Application
 	@Override
 	public void start(Stage stage) throws Exception
 	{
+		// Init of stage
+		stage.setTitle("Dungeon of Zull");
+		stage.getIcons().add(new Image("/sprites/icon.png"));
+		/*stage.setWidth(960);
+		stage.setHeight(640);
+		stage.setResizable(false);*/
+		
+		// game scene
 		Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-		
 		Scene scene = new Scene(root);
-		
+		scene.getStylesheets().add("http://fonts.googleapis.com/css?family=VT323");
+		scene.getStylesheets().add("stylesheet.css");
+		// Show game scene
 		stage.setScene(scene);
 		stage.show();
 	}
