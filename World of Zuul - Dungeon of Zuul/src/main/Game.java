@@ -5,10 +5,13 @@ import main.item.*;
 
 public class Game {
 
-    protected Room currentRoom;
+	protected Room currentRoom;
 	protected Creature player;
 	protected String dialogue = "";
 	protected int score = 0;
+	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
+			
+
 
 	public Game() {
 		createRooms();
@@ -22,12 +25,11 @@ public class Game {
 		dialogue += string + "\n";
 	}
 
-    public void createRooms()
-	{
-        /* Creating rooms */
-        Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
+	public void createRooms() {
+		/* Creating rooms */
 
-        /* Adds rooms to the game, also gives them descriptions */
+		/* Adds rooms to the game, also gives them descriptions */
+		
 		lvl_1 = new Room("in level 1", 1, 0);
 		lvl_2 = new Room("in level 2", 2, 0);
 		lvl_2a = new Room("in level 2a", 0, 0);
@@ -41,24 +43,22 @@ public class Game {
 		lvl_7 = new Room("in level 7", 0, 3);
 		lvl_8 = new Room("in level 8", 1, 3);
 
-        /* Adds creatures to the game, number tells what level they should start at  */
-		player = new Creature(1);
-        lvl_1.setMonster(new Creature(1));
-        lvl_2.setMonster(new Creature(2));
-        lvl_2a.setMonster(new Creature(2));
-        lvl_3.setMonster(new Creature(3));
-        lvl_3a.setMonster(new Creature(3));
-        lvl_4.setMonster(new Creature(4));
-        lvl_4a.setMonster(new Creature(4));
-        lvl_5.setMonster(new Creature(5));
-        lvl_5a.setMonster(new Creature(5));
-        lvl_6.setMonster(new Creature(6));
-        lvl_7.setMonster(new Creature(7));
-        lvl_8.setMonster(new Creature(8));
-        	
+		/* Adds creatures to the game, number tells what level they should start at  */
+		player = new Creature(10);
+		lvl_1.setMonster(new Creature(1));
+		lvl_2.setMonster(new Creature(2));
+		lvl_2a.setMonster(new Creature(2));
+		lvl_3.setMonster(new Creature(3));
+		lvl_3a.setMonster(new Creature(3));
+		lvl_4.setMonster(new Creature(4));
+		lvl_4a.setMonster(new Creature(4));
+		lvl_5.setMonster(new Creature(5));
+		lvl_5a.setMonster(new Creature(5));
+		lvl_6.setMonster(new Creature(6));
+		lvl_7.setMonster(new Creature(7));
+		lvl_8.setMonster(new Creature(8));
 		
-        // Give creatures some items that they drop
-		
+		// Give creatures some items that they drop
 		// Potions
 		player.inventory.add(new Potion(3)); // x3 health potions
 		lvl_3a.monster.inventory.add(new Potion(8)); // x6 health potions
@@ -97,21 +97,20 @@ public class Game {
 		lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
 		lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 19)); // Holy Steel Sword
 		lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 21)); // Fallen Knight Sword
-		
+
 		// Shields
 		lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1, 0)); // Wooden Shield
 		lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1, 0)); // Wooden Shield
 		lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3, 0)); // Broken Steel Shield
 		lvl_8.monster.inventory.add(new Shield("steel_shield", 4, 0)); // Steel Shield
 
-
 		// Shields
-		lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-		lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-		lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Broken Steel Shield
-		lvl_8.monster.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
-                
-        // Helmets
+		lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1, 0)); // Wooden Shield
+		lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1, 0)); // Wooden Shield
+		lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3, 0)); // Broken Steel Shield
+		lvl_8.monster.inventory.add(new Shield("steel_shield", 4, 0)); // Steel Shield
+
+		// Helmets
 		lvl_3.monster.inventory.add(new Helmet("iron_helmet", 2)); // Iron Helmet
 		lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Broken Steel Helmet
 		lvl_7.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
@@ -145,11 +144,11 @@ public class Game {
 		//hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
 		//hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
 		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
-
 		// Others
-		lvl_5a.setDoor(new Door("door"));
+		lvl_5a.setDoor(new Door("Door"));
+		lvl_4a.setTeleporter(new Teleporter("Teleporter"));
 		lvl_4a.monster.inventory.add(new Key("Key", 1));
-		
+
 		/* This gives the player the option to move between the rooms */
 		lvl_1.setExit("right", lvl_2);
 		lvl_1.setExit("left", lvl_2a);
@@ -232,24 +231,19 @@ public class Game {
 		// parser.showCommands(); // This line prints out the command words.
 	}
 
-
 	private void printLook() // Prints out what the character can see
 	{
 		addDialogue("You are " + currentRoom.getShortDescription());
-		if (currentRoom.hasMonster()) 
-		{
+		if (currentRoom.hasMonster()) {
 			addDialogue("There's a monster level " + currentRoom.monster.getLevel() + " blocking your way");
-		} 
-		else 
-		{
-			addDialogue(currentRoom.getExitString());
+		}
+		if (currentRoom.hasTeleporter()) {
+			addDialogue("There is a teleporter in the room");
 		}
 	}
-	
-	protected void useItem(Item searchForItem)
-	{
-		for (Iterator<Item> it = player.inventory.getContent().iterator(); it.hasNext();)
-		{
+
+	protected void useItem(Item searchForItem) {
+		for (Iterator<Item> it = player.inventory.getContent().iterator(); it.hasNext();) {
 			Item item = it.next();
 			if (item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion) {
 				if (item.getAmount() == 1) {
@@ -259,63 +253,46 @@ public class Game {
 				}
 				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health)");
 				return;
-			}
-			else if(item.equals(searchForItem) && item instanceof Key)
-			{
-				if(currentRoom.getExit("down").hasLockedDoor())
-				{
+			} else if (item.equals(searchForItem) && item instanceof Key) {
+				if (currentRoom.getExit("down").hasLockedDoor()) {
 					currentRoom.getExit("down").unlockDoor();
 					addDialogue("The door has been unlocked!");
 					it.remove();
-				}
-				else
-				{
+				} else {
 					addDialogue("There is no door to unlock!");
 				}
 			}
 		}
 	}
 
-    public void attack()
-	{
-		if(currentRoom.hasMonster())
-		{
+	public void attack() {
+		if (currentRoom.hasMonster()) {
 			int playerRolled = player.rollDamage(currentRoom.monster);
-			if(playerRolled == 0)
-			{
+			if (playerRolled == 0) {
 				addDialogue("Monster blocked your attack");
-			}
-			else
-			{
+			} else {
 				addDialogue("You rolled " + playerRolled + "dmg");
 			}
-			
-			if(currentRoom.monster.getHealth() > 0)
-			{
+
+			if (currentRoom.monster.getHealth() > 0) {
 				int monsterRolled = currentRoom.monster.rollDamage(player);
-				if(monsterRolled == 0)
-				{
+				if (monsterRolled == 0) {
 					addDialogue("You blocked the monsters attack");
-				}
-				else
-				{
+				} else {
 					addDialogue("The monster rolled " + monsterRolled + "dmg");
 				}
-				
-				if(player.getHealth() <= 0)
-				{
+
+				if (player.getHealth() <= 0) {
 					player = null;
 				}
-			}
-			else
-			{
+			} else {
 				player.gainExperience(currentRoom.monster);
-				for (Item item : currentRoom.monster.inventory.getContent())
-				{
+				for (Item item : currentRoom.monster.inventory.getContent()) {
 					currentRoom.inventory.add(item);
 				}
 				currentRoom.monster = null;
 				addDialogue("You have slain the monster!");
+				addDialogue(currentRoom.getExitString());
 			}
 		} else {
 			addDialogue("There's no monster to attack");
@@ -325,20 +302,14 @@ public class Game {
 
 	public void goRoom(String direction) {
 		Room nextRoom = currentRoom.getExit(direction);
-		if (currentRoom.hasMonster()) 
-		{
+		if (currentRoom.hasMonster()) {
 			addDialogue("The monster (level " + currentRoom.monster.getLevel() + "): is blocking your way");
-		}
-		else if(nextRoom.hasLockedDoor()) 
-		{
+		} else if (nextRoom.hasLockedDoor()) {
 			addDialogue("There is a locked door blocking your way");
-		}
-		else if (nextRoom == null) // It will first check if there is a path to the next room.
+		} else if (nextRoom == null) // It will first check if there is a path to the next room.
 		{
 			addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
-		}
-		else
-		{
+		} else {
 			currentRoom = nextRoom;
 			printLook(); // It will give you a description of what's in the room
 		}
