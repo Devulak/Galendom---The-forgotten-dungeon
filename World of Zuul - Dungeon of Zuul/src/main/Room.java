@@ -12,11 +12,12 @@ public class Room
 <<<<<<< HEAD
     protected Creature monster; // The monster in the room, if there's any!
     protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
-    private Door door;
+    protected Door door;
     
     public Room(String description) 
     {
         this.description = description;
+<<<<<<< HEAD
         exits = new HashMap<>();
 =======
 	protected Creature monster; // The monster in the room, if there's any!
@@ -29,6 +30,9 @@ public class Room
         this.posY = posY;
         exits = new HashMap<String, Room>();
 >>>>>>> refs/remotes/origin/master
+=======
+        exits = new HashMap<String, Room>();
+>>>>>>> parent of 5bb50b7... Locked door V.0.2
     }
 
     public void setMonster(Creature creature) 
