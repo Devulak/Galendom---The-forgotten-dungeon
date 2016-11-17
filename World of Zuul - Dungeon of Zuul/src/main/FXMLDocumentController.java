@@ -169,6 +169,38 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 	}
 	
+	@FXML
+	private void useTeleporter()
+	{
+		if(game.currentRoom.hasMonster() && game.currentRoom.hasTeleporter())
+		{
+		game.addDialogue("You have to defeat the monster first before you can use the teleporter");
+		}
+		else if(game.currentRoom.hasMonster())
+		{
+			game.addDialogue("There is no teleporter in the room");
+		}
+		else if(!game.currentRoom.hasTeleporter())
+		{
+			game.addDialogue("There is no teleporter in the room");
+		}
+		else if(game.currentRoom.hasTeleporter())
+		{
+			game.currentRoom.removeTeleporter();
+			game.currentRoom = game.lvl_1;
+			game.addDialogue("The teleporter sent you to back to start");
+			game.addDialogue("The teleporter has disappeared");
+		}
+		else
+		{
+			game.addDialogue("Error");
+		}
+		updatePlayerInventory();
+		updateRoomInventory();
+		updatePlayerStatus();
+		updatePanel();
+	}
+	
 	public void updatePlayerStatus()
 	{
 		// Health
