@@ -174,10 +174,16 @@ public class FXMLDocumentController implements Initializable {
 		{
 			game.addDialogue("There is no teleporter in the room");
 		}
-		else
+		else if(game.currentRoom.hasTeleporter())
 		{
+			game.currentRoom.removeTeleporter();
 			game.currentRoom = game.lvl_1;
 			game.addDialogue("The teleporter sent you to back to start");
+			game.addDialogue("The teleporter has disappeared");
+		}
+		else
+		{
+			game.addDialogue("Error");
 		}
 		updatePlayerInventory();
 		updateRoomInventory();

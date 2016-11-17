@@ -62,7 +62,8 @@ public class Room
 		}
     }
 	
-	public void unlockDoor(){
+	public void unlockDoor()
+	{
 		door = null;
 	}
     
@@ -82,6 +83,11 @@ public class Room
 			return true;
 		}
     }
+	
+	public void removeTeleporter()
+	{
+		teleporter = null;
+	}
 	
     public void setExit(String direction, Room neighbor) 
     {
