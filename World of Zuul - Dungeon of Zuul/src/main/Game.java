@@ -44,7 +44,7 @@ public class Game {
 		lvl_8 = new Room("in level 8", 1, 3);
 
 		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Creature(10);
+		player = new Creature(1);
 		lvl_1.setMonster(new Creature(1));
 		lvl_2.setMonster(new Creature(2));
 		lvl_2a.setMonster(new Creature(2));
