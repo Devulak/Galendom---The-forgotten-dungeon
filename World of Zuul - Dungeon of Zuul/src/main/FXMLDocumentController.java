@@ -159,7 +159,7 @@ public class FXMLDocumentController implements Initializable {
 		updatePanel();
 	}
 	
-	private void updatePlayerStatus()
+	public void updatePlayerStatus()
 	{
 		// Health
 		playerHealth.setText(game.player.getHealth() + "/" + game.player.getMaxHealth() + " HP");
@@ -181,7 +181,7 @@ public class FXMLDocumentController implements Initializable {
 		playerArmour.setText(String.format("%d", game.player.getArmour()));
 	}
 	
-	private void updateMonsterStatus()
+	public void updateMonsterStatus()
 	{
 		// Health
 		monsterHealth.setText(game.currentRoom.monster.getHealth() + "/" + game.currentRoom.monster.getMaxHealth() + " HP");
@@ -198,20 +198,20 @@ public class FXMLDocumentController implements Initializable {
 		monsterArmour.setText(String.format("%d", game.currentRoom.monster.getArmour()));
 	}
 	
-	private void updatePlayerInventory()
+	public void updatePlayerInventory()
 	{
 		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.player.inventory.getContent());
 		playerInventory.setItems(null);
 		playerInventory.setItems(itemsTemp);
 	}
 	
-	private void updateRoomInventory()
+	public void updateRoomInventory()
 	{
 		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.currentRoom.inventory.getContent());
 		roomInventory.setItems(itemsTemp);
 	}
 	
-	private void updateDialouge()
+	public void updateDialouge()
 	{
 		dialogue.setText(game.dialogue);
 		dialogue.setScrollTop(Double.MAX_VALUE);
@@ -219,7 +219,7 @@ public class FXMLDocumentController implements Initializable {
 		dialogue.deselect();
 	}
 	
-	private void updatePanel()
+	public void updatePanel()
 	{
 		updateDialouge();
 		if(game.currentRoom.hasMonster())
