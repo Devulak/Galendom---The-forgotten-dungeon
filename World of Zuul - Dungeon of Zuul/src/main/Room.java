@@ -12,6 +12,7 @@ public class Room
     protected Creature monster; // The monster in the room, if there's any!
     protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
     protected Door door;
+	protected Teleporter teleporter;
     
     public Room(String description) 
     {
@@ -65,6 +66,23 @@ public class Room
 		door = null;
 	}
     
+	public void setTeleporter(Teleporter teleporter)
+	{
+		this.teleporter = teleporter;
+	}
+	
+    public boolean hasTeleporter() 
+    {
+        if(teleporter == null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+    }
+	
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);

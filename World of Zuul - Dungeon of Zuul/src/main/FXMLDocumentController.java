@@ -159,6 +159,32 @@ public class FXMLDocumentController implements Initializable {
 		updatePanel();
 	}
 	
+	@FXML
+	private void useTeleporter()
+	{
+		if(game.currentRoom.hasMonster() && game.currentRoom.hasTeleporter())
+		{
+		game.addDialogue("You have to defeat the monster first before you can use the teleporter");
+		}
+		else if(game.currentRoom.hasMonster())
+		{
+			game.addDialogue("There is no teleporter in the room");
+		}
+		else if(!game.currentRoom.hasTeleporter())
+		{
+			game.addDialogue("There is no teleporter in the room");
+		}
+		else
+		{
+			game.currentRoom = game.lvl_1;
+			game.addDialogue("The teleporter sent you to back to start");
+		}
+		updatePlayerInventory();
+		updateRoomInventory();
+		updatePlayerStatus();
+		updatePanel();
+	}
+	
 	public void updatePlayerStatus()
 	{
 		// Health
@@ -232,4 +258,5 @@ public class FXMLDocumentController implements Initializable {
 			monster.setVisible(false);
 		}
 	}
+	
 }
