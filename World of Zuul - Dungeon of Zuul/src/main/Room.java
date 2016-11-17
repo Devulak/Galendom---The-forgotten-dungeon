@@ -9,8 +9,16 @@ public class Room
     private String description;
     private int posX, posY;
     private HashMap<String, Room> exits;
-	protected Creature monster; // The monster in the room, if there's any!
-	protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
+    protected Creature monster; // The monster in the room, if there's any!
+    protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
+    protected Door door;
+	protected Teleporter teleporter;
+    
+    public Room(String description) 
+    {
+        this.description = description;
+        exits = new HashMap<>();
+	}
 
     public Room(String description, int posX, int posY) 
     {
@@ -36,7 +44,51 @@ public class Room
 			return true;
 		}
     }
+	
+	public void setDoor(Door door)
+	{
+		this.door = door;
+	}
 
+    public boolean hasLockedDoor()
+	{
+		if(door == null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+    }
+	
+	public void unlockDoor()
+	{
+		door = null;
+	}
+    
+	public void setTeleporter(Teleporter teleporter)
+	{
+		this.teleporter = teleporter;
+	}
+	
+    public boolean hasTeleporter() 
+    {
+        if(teleporter == null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+    }
+	
+	public void removeTeleporter()
+	{
+		teleporter = null;
+	}
+	
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
