@@ -23,7 +23,6 @@ public class Game {
 	}
 
 	public void createRooms() {
-		boolean wantToQuit = false;
 		/* Creating rooms */
 		Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 
@@ -237,7 +236,8 @@ public class Game {
 	protected void useItem(Item searchForItem) {
 		for (Iterator<Item> it = hero.inventory.getContent().iterator(); it.hasNext();) {
 			Item item = it.next();
-			if (item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion) {
+			if (item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion) 
+			{
 				if (item.getAmount() == 1) {
 					it.remove();
 				} else {
@@ -246,6 +246,20 @@ public class Game {
 				addDialogue("You were healed for " + hero.heal() + " HP (max 40% of your max health)");
 				return;
 			}
+			else if(item.equals(searchForItem) && item instanceof Key)
+			{
+				if(currentRoom.getExit("down").hasLockedDoor())
+				{
+					currentRoom.getExit("down").unlockDoor();
+					addDialogue("The door has been unlocked!");
+					it.remove();
+				}
+				else
+				{
+					addDialogue("There is no door to unlock!");
+				}
+			}
+		
 		}
 	}
 
@@ -279,13 +293,13 @@ public class Game {
 		{
 			addDialogue("The monster (level " + currentRoom.monster.getLevel() + "): is blocking your way");
 		}
-			else if(nextRoom.hasLockedDoor())
+		else if(nextRoom.hasLockedDoor())
 			{
-			if(hero.hasKey()){
+			/* if(hero.hasKey()){
 				addDialogue("Door unlocked!");
 				nextRoom.unlockDoor();
 			}
-			else
+			else */
 			{
 			addDialogue("There is a locked door blocking your way");
 			}

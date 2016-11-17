@@ -10,12 +10,12 @@ public class Room
     private HashMap<String, Room> exits;
     protected Creature monster; // The monster in the room, if there's any!
     protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
-    protected Door door;
+    private Door door;
     
     public Room(String description) 
     {
         this.description = description;
-        exits = new HashMap<String, Room>();
+        exits = new HashMap<>();
     }
 
     public void setMonster(Creature creature) 
