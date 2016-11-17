@@ -276,11 +276,27 @@ public class Game {
 	{
 		if(currentRoom.hasMonster())
 		{
-			addDialogue("You rolled " + player.rollDamage(currentRoom.monster) + "dmg");
+			int playerRolled = player.rollDamage(currentRoom.monster);
+			if(playerRolled == 0)
+			{
+				addDialogue("Monster blocked your attack");
+			}
+			else
+			{
+				addDialogue("You rolled " + playerRolled + "dmg");
+			}
 			
 			if(currentRoom.monster.getHealth() > 0)
 			{
-				addDialogue("Monster rolled " + currentRoom.monster.rollDamage(player) + "dmg");
+				int monsterRolled = currentRoom.monster.rollDamage(player);
+				if(monsterRolled == 0)
+				{
+					addDialogue("You blocked the monsters attack");
+				}
+				else
+				{
+					addDialogue("The monster rolled " + monsterRolled + "dmg");
+				}
 				
 				if(player.getHealth() <= 0)
 				{
