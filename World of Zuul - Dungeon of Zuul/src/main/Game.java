@@ -147,7 +147,7 @@ public class Game
 		// Shields
 		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2)); //Wooden Shield
 		lvl_4.monster.inventory.add(new Shield("Iron Shield", 4)); //Iron Shield
-		lvl_8.monster.inventory.add(new Helmet("Steel Shield", 6)); //Steel Shield
+		lvl_8.monster.inventory.add(new Shield("Steel Shield", 6)); //Steel Shield
                 
                 // Helmets
 		lvl_2a.monster.inventory.add(new Helmet("Leather Helmet", 2)); //Leather Helmet
