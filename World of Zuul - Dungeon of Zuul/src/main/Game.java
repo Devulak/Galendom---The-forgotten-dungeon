@@ -202,22 +202,6 @@ public class Game {
 		printLook();
     }
 	
-    /* By writing "help" in console, this method will be called. */
-    private void printHelp()
-	{
-        addDialogue();
-        addDialogue("Your command words are:");
-        addDialogue("go: This gives you the option to move around. The command is: go \"direction\".");
-        addDialogue("map: The console will print out a map and your current whereabouts.");
-        addDialogue("quit: The game will quit.");
-        addDialogue("look: Look around in the room for items.");
-        addDialogue("Status: Your healthpoints and XP");
-        addDialogue("Inventory: Look through your inventory");
-        addDialogue("Use: type use health_potion to use a potion from your inventory.");
-
-        // parser.showCommands(); // This line prints out the command words.
-    }
-	
 	private void printLook() // Prints out what the character can see
 	{
 		addDialogue("You are " + currentRoom.getShortDescription());
@@ -269,13 +253,13 @@ public class Game {
 			}
 			else
 			{
-				addDialogue("You have slain the monster (level " + currentRoom.monster.getLevel() + ")!");
 				player.gainExperience(currentRoom.monster);
 				for (Item item : currentRoom.monster.inventory.getContent())
 				{
 					currentRoom.inventory.add(item);
 				}
 				currentRoom.monster = null;
+				addDialogue("You have slain the monster!");
 			}
 		}
 		else
