@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Rectangle;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -72,7 +73,7 @@ public class FXMLDocumentController implements Initializable {
 	private Label monsterStrength;
 	
 	@FXML
-	private ImageView map;
+	private ImageView playerPos;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event)
@@ -244,9 +245,9 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updateMap()
 	{
-		int blockSize = 160;
+		int blockSize = 104;
 		int[] pos = game.currentRoom.getPos();
-		map.setLayoutX(blockSize-pos[0]*blockSize);
-		map.setLayoutY(blockSize-pos[1]*blockSize);
+		playerPos.setLayoutX(200-blockSize+pos[0]*blockSize);
+		playerPos.setLayoutY(24+pos[1]*blockSize);
 	}
 }
