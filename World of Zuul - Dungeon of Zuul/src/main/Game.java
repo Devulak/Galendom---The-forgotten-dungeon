@@ -55,82 +55,93 @@ public class Game {
         lvl_4a.setMonster(new Creature(4));
         lvl_5.setMonster(new Creature(5));
         lvl_5a.setMonster(new Creature(5));
-        lvl_6.setMonster(new Creature(6));
+        lvl_6.setMonster(new Creature(7));
         lvl_7.setMonster(new Creature(7));
-        lvl_8.setMonster(new Creature(8));
+        lvl_8.setMonster(new Creature(11));
         	
         // Give creatures some items that they drop
 		
 		// Potions
-		player.inventory.add(new Potion(3)); // x3 health potions
-		lvl_3a.monster.inventory.add(new Potion(8)); // x6 health potions
-		lvl_4.monster.inventory.add(new Potion(5)); // x5 health potions
-		lvl_4a.monster.inventory.add(new Potion(3)); // x3 health potions
-		lvl_5a.monster.inventory.add(new Potion(14)); // x14 health potions
-		lvl_7.monster.inventory.add(new Potion(8)); // x8 health potions
+		player.inventory.add(new Potion(5)); // x5 health potions
+                lvl_3a.monster.inventory.add(new Potion(5));
+                lvl_3.monster.inventory.add(new Potion(4));
+                lvl_4.monster.inventory.add(new Potion(5));
+                lvl_5a.monster.inventory.add(new Potion(5));
+                lvl_7.monster.inventory.add(new Potion(5));
                 
 		// Coins
-		lvl_1.monster.inventory.add(new Coin(10)); // 10 coins
-		lvl_2a.monster.inventory.add(new Coin(10)); // 10 coins
-		lvl_3a.monster.inventory.add(new Coin(10)); // 10 coins
-		lvl_4a.monster.inventory.add(new Coin(10)); // 10 coins
-		lvl_2.monster.inventory.add(new Coin(10)); // 10 coins
-		lvl_3.monster.inventory.add(new Coin(10)); // 10 coins
-		lvl_4.monster.inventory.add(new Coin(10)); // 10 coins
+		lvl_1.monster.inventory.add(new Coin(1)); // 10 coins
+		lvl_2a.monster.inventory.add(new Coin(2)); // 10 coins
+		lvl_3a.monster.inventory.add(new Coin(3)); // 10 coins
+		lvl_4a.monster.inventory.add(new Coin(5)); // 10 coins
+		lvl_2.monster.inventory.add(new Coin(7)); // 10 coins
+		lvl_3.monster.inventory.add(new Coin(8)); // 10 coins
+		lvl_4.monster.inventory.add(new Coin(9)); // 10 coins
 		lvl_5a.monster.inventory.add(new Coin(10)); // 10 coins
+                
 
 		//Vendor
-		lvl_5a.inventory.add(new Shield("steel_shield", 4, 0)); // Steel Shield
-		lvl_5a.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
-		lvl_5a.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-		lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-		lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
-                                              
+		lvl_5a.inventory.add(new Shield("Steel Shield", 6));
+		lvl_5a.inventory.add(new Helmet("Steel Helmet", 7));
+		lvl_5a.inventory.add(new Chestplate("Steel Chestplate", 8));
+		lvl_5a.inventory.add(new Legging("Steel Leggings", 7));
+		lvl_5a.inventory.add(new Boot("Steel Boots", 5));
+                lvl_5a.inventory.add(new Weapon("Steel Sword", 5));
+                                                              
 		// Weapons
-		player.inventory.add(new Weapon("Wooden Sword", 2)); // Wooden Sword
-		lvl_1.monster.inventory.add(new Weapon("Broken Wooden Sword", 1)); // Wooden Sword
-		lvl_2.monster.inventory.add(new Weapon("Broken Wooden Sword", 3)); // Wooden Sword
-		lvl_3.monster.inventory.add(new Weapon("Broken Wooden Sword", 5)); // Wooden Sword
-		lvl_4.monster.inventory.add(new Weapon("Broken Wooden Sword", 6)); // Wooden Shield
-		lvl_4a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
-		lvl_5a.monster.inventory.add(new Weapon("iron_sword", 6)); // Iron Sword
-		lvl_5.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
-		lvl_6.monster.inventory.add(new Weapon("demonic_steel_sword", 17)); // Demonic Steel Sword
-		lvl_7.monster.inventory.add(new Weapon("holy_steel_sword", 19)); // Holy Steel Sword
-		lvl_8.monster.inventory.add(new Weapon("fallen_knight_sword", 21)); // Fallen Knight Sword
+		player.inventory.add(new Weapon("Wooden Sword", 1));
+                lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3));
+                lvl_5a.monster.inventory.add(new Weapon("Iron Sword", 3));
+                lvl_5.monster.inventory.add(new Weapon("Steel Sword", 5));
+                lvl_6.monster.inventory.add(new Weapon("Steel Sword", 5));
+                lvl_7.monster.inventory.add(new Weapon("Steel Sword", 5));
+                lvl_8.monster.inventory.add(new Weapon("Steel Sword", 5));
                 
 		// Shields
-		lvl_2a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-		lvl_4a.monster.inventory.add(new Shield("wooden_shield", 1,0)); // Wooden Shield
-		lvl_5a.monster.inventory.add(new Shield("broken_steel_shield", 3,0)); // Broken Steel Shield
-		lvl_8.monster.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2));
+                lvl_4.monster.inventory.add(new Shield("Iron Shield", 4));
+                //lvl_5a.monster.inventory.add(new Shield("Iron Shield", 4));
+                lvl_8.monster.inventory.add(new Helmet("Steel Shield", 6));
                 
                 // Helmets
-		lvl_3.monster.inventory.add(new Helmet("iron_helmet", 2)); // Iron Helmet
-		lvl_6.monster.inventory.add(new Helmet("broken_steel_helmet", 2)); // Broken Steel Helmet
-		lvl_7.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
-		lvl_8.monster.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+		lvl_2a.monster.inventory.add(new Helmet("Leather Helmet", 2));
+                lvl_3a.monster.inventory.add(new Helmet("Iron Helmet", 5 ));
+                lvl_5a.monster.inventory.add(new Helmet("Iron Helmet", 5 ));
+                lvl_6.monster.inventory.add(new Helmet("Steel Helmet", 7 ));
+                lvl_7.monster.inventory.add(new Helmet("Steel Helmet", 7 ));
+                lvl_8.monster.inventory.add(new Helmet("Steel Helmet", 7 ));
                 
 		// Chestplates
-		lvl_4a.monster.inventory.add(new Chestplate("iron_chestplate", 4)); // Iron Chestplate
-		lvl_5a.monster.inventory.add(new Chestplate("broken_steel_chestplate", 4)); // Broken Steel Chestplate
-		lvl_5.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-		lvl_6.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-		lvl_7.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-		lvl_8.monster.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+                lvl_2a.monster.inventory.add(new Chestplate("Leather Chestplate", 4));
+                lvl_4.monster.inventory.add(new Chestplate("Iron Chestplate", 6));
+                lvl_5a.monster.inventory.add(new Chestplate("Iron Chestplate", 6));                               
+	        lvl_8.monster.inventory.add(new Chestplate("Steel Chestplate", 8));
                 
 		// Leggings
-		lvl_3a.monster.inventory.add(new Legging("iron_leggings", 2)); // Iron Leggings
-		lvl_5a.monster.inventory.add(new Legging("broken_steel_leggings", 2)); // Broken Steel Leggings
-		lvl_5.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-		lvl_6.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-		lvl_7.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-		lvl_8.monster.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
+		lvl_2.monster.inventory.add(new Legging("Leather Leggings", 3));
+                lvl_4a.monster.inventory.add(new Legging("Iron Leggings", 5));
+                lvl_5a.monster.inventory.add(new Legging("Iron Leggings", 5));                              
+                lvl_7.monster.inventory.add(new Legging("Steel Leggings", 7));
+                lvl_8.monster.inventory.add(new Legging("Steel Leggings", 7));
                 
-		// Boots                
-		lvl_6.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
-		lvl_7.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
-		lvl_8.monster.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
+		// Boots          
+                lvl_2.monster.inventory.add(new Boot("Leather Boots", 1));
+                lvl_3.monster.inventory.add(new Boot("Iron Boots", 3));
+                lvl_5a.monster.inventory.add(new Boot("Iron Boots", 3));
+                lvl_5.monster.inventory.add(new Boot("Steel Boots", 5));
+                lvl_6.monster.inventory.add(new Boot("Steel Boots", 5));
+                lvl_7.monster.inventory.add(new Boot("Steel Boots", 5));
+                lvl_8.monster.inventory.add(new Boot("Steel Boots", 5));
+                
+                //Skip to lvl_6, which is mid of the game(set start level to 6 and player level to level 5)
+                //player.inventory.add(new Weapon("Steel Sword", 5));
+                //player.inventory.add(new Shield("Steel Shield", 6));
+                //player.inventory.add(new Helmet("Iron Helmet", 5 ));
+                //player.inventory.add(new Chestplate("Steel Chestplate", 8));
+                //player.inventory.add(new Legging("Iron Leggings", 5));
+                //player.inventory.add(new Boot("Iron Boots", 3));
+                //player.inventory.add(new Boot("Steel Boots", 5));
+                //player.inventory.add(new Weapon("Steel Sword", 5));
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("right", lvl_2);
