@@ -4,11 +4,13 @@ import java.util.Iterator;
 import main.item.*;
 
 public class Game {
+  
 
     protected Room currentRoom;
 	protected Creature player;
 	protected String dialogue = "";
 	protected int score = 0;
+        
 
     public Game()
 	{
@@ -24,7 +26,8 @@ public class Game {
 	{
 		dialogue += string + "\n";
     }
-
+    
+    
     public void createRooms()
 	{
         /* Creating rooms */
@@ -55,58 +58,90 @@ public class Game {
         lvl_4a.setMonster(new Creature(4));
         lvl_5.setMonster(new Creature(5));
         lvl_5a.setMonster(new Creature(5));
-        lvl_6.setMonster(new Creature(6));
+        lvl_6.setMonster(new Creature(7));
         lvl_7.setMonster(new Creature(7));
-        lvl_8.setMonster(new Creature(8));
+        lvl_8.setMonster(new Creature(11));
         	
         // Give creatures some items that they drop
 		
 		// Potions
-		player.inventory.add(new Potion(5)); // x5 health potions		
+		player.inventory.add(new Potion(5)); // x5 health potions
+                lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
+                lvl_3.monster.inventory.add(new Potion(4)); // x4 health potions
+                lvl_4.monster.inventory.add(new Potion(5)); // x5 health potions
+                lvl_5a.monster.inventory.add(new Potion(5)); // x5 health potions
+                lvl_7.monster.inventory.add(new Potion(5)); // x5 health potions
                 
-		// Coins
-		lvl_1.monster.inventory.add(new Coin(1)); // 10 coins
-		lvl_2a.monster.inventory.add(new Coin(2)); // 10 coins
-		lvl_3a.monster.inventory.add(new Coin(3)); // 10 coins
-		lvl_4a.monster.inventory.add(new Coin(5)); // 10 coins
-		lvl_2.monster.inventory.add(new Coin(7)); // 10 coins
-		lvl_3.monster.inventory.add(new Coin(8)); // 10 coins
-		lvl_4.monster.inventory.add(new Coin(9)); // 10 coins
-		lvl_5a.monster.inventory.add(new Coin(10)); // 10 coins
-                lvl_5a.monster.inventory.add(new Weapon("iron_sword", 6)); // Steel Sword
+		// Coins		
+		lvl_2a.monster.inventory.add(new Coin(2)); // 2 coins
+		lvl_3a.monster.inventory.add(new Coin(3)); // 3 coins
+		lvl_4a.monster.inventory.add(new Coin(4)); // 4 coins
+		lvl_2.monster.inventory.add(new Coin(5)); // 5 coins
+		lvl_3.monster.inventory.add(new Coin(6)); // 6 coins
+		lvl_4.monster.inventory.add(new Coin(7)); // 7 coins
+		lvl_5a.monster.inventory.add(new Coin(8)); // 8 coins
+                
 
 		//Vendor
-		lvl_5a.inventory.add(new Shield("Steel Shield", 6));
-		lvl_5a.inventory.add(new Helmet("Steel Helmet", 7));
-		lvl_5a.inventory.add(new Chestplate("Steel Chestplate", 8));
-		lvl_5a.inventory.add(new Legging("Steel Leggings", 7));
-		lvl_5a.inventory.add(new Boot("Steel Boots", 5));
-                lvl_5a.inventory.add(new Weapon("Steel Sword", 5));
-                lvl_5a.inventory.add(new Shield("Steel Shield", 6));
-                                              
+		lvl_5a.inventory.add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor
+		lvl_5a.inventory.add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor
+		lvl_5a.inventory.add(new Chestplate("Steel Chestplate", 8)); //Steel Chestplate from Vendor
+		lvl_5a.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor
+		lvl_5a.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor                
+                                                              
 		// Weapons
-		player.inventory.add(new Weapon("Wooden Sword", 1));
-                lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3));
+		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
+                lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
+                lvl_5a.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
+                lvl_5.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
+                lvl_6.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
+                lvl_7.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
+                lvl_8.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
                 
 		// Shields
-		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2));
-                lvl_4.monster.inventory.add(new Shield("Iron Shield", 4));
+		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2)); //Wooden Shield
+                lvl_4.monster.inventory.add(new Shield("Iron Shield", 4)); //Iron Shield
+                lvl_8.monster.inventory.add(new Helmet("Steel Shield", 6)); //Steel Shield
                 
                 // Helmets
-		lvl_2a.monster.inventory.add(new Helmet("Leather Helmet", 2));
-                lvl_3a.monster.inventory.add(new Helmet("Iron Helmet", 5 ));
+		lvl_2a.monster.inventory.add(new Helmet("Leather Helmet", 2)); //Leather Helmet
+                lvl_3a.monster.inventory.add(new Helmet("Iron Helmet", 5 )); //Iron Helmet
+                lvl_5a.monster.inventory.add(new Helmet("Iron Helmet", 5 )); //Iron Helmet
+                lvl_6.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+                lvl_7.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+                lvl_8.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
                 
 		// Chestplates
-                lvl_2a.monster.inventory.add(new Chestplate("Leather Chestplate", 4));
-                lvl_4.monster.inventory.add(new Chestplate("Iron Chestplate", 6));
-	                
+                lvl_2a.monster.inventory.add(new Chestplate("Leather Chestplate", 4)); //Leather Chestplate
+                lvl_4.monster.inventory.add(new Chestplate("Iron Chestplate", 6)); //Iron Chestplate
+                lvl_5a.monster.inventory.add(new Chestplate("Iron Chestplate", 6)); //Iron Chestplate                               
+	        lvl_8.monster.inventory.add(new Chestplate("Steel Chestplate", 8)); //Steel Chestplate
+                
 		// Leggings
-		lvl_2.monster.inventory.add(new Legging("Leather Leggings", 3));
-                lvl_4a.monster.inventory.add(new Legging("Iron Leggings", 5));
+		lvl_2.monster.inventory.add(new Legging("Leather Leggings", 3)); //Leather Leggings
+                lvl_4a.monster.inventory.add(new Legging("Iron Leggings", 5)); //Iron Leggings
+                lvl_5a.monster.inventory.add(new Legging("Iron Leggings", 5)); //Iron Leggings                             
+                lvl_7.monster.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings
+                lvl_8.monster.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings
                 
 		// Boots          
-                lvl_2.monster.inventory.add(new Boot("Leather Boots", 1));
-                lvl_3.monster.inventory.add(new Boot("Iron Boots", 3));
+                lvl_2.monster.inventory.add(new Boot("Leather Boots", 1)); //Leather Boots
+                lvl_3.monster.inventory.add(new Boot("Iron Boots", 3)); //Iron Boots
+                lvl_5a.monster.inventory.add(new Boot("Iron Boots", 3)); //Iron Boots
+                lvl_5.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
+                lvl_6.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
+                lvl_7.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
+                lvl_8.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
+                
+                //Skip to lvl_6, which is mid of the game(set start level to 6 and player level to level 5)
+                //player.inventory.add(new Weapon("Steel Sword", 5));
+                //player.inventory.add(new Shield("Steel Shield", 6));
+                //player.inventory.add(new Helmet("Iron Helmet", 5 ));
+                //player.inventory.add(new Chestplate("Steel Chestplate", 8));
+                //player.inventory.add(new Legging("Iron Leggings", 5));
+                //player.inventory.add(new Boot("Iron Boots", 3));
+                //player.inventory.add(new Boot("Steel Boots", 5));
+                //player.inventory.add(new Weapon("Steel Sword", 5));
 
         /* This gives the player the option to move between the rooms */
         lvl_1.setExit("right", lvl_2);
@@ -148,6 +183,7 @@ public class Game {
 
                
     }
+    
 	
 	/**
 	 * The play method will be called when the main class starts. The game will
@@ -190,6 +226,7 @@ public class Game {
 			addDialogue(currentRoom.getExitString());
 		}
 	}
+        
 	
 	protected void useItem(Item searchForItem)
 	{
@@ -216,18 +253,27 @@ public class Game {
 	{
 		if(currentRoom.hasMonster())
 		{
-			addDialogue("You rolled " + player.rollDamage(currentRoom.monster) + " dmg");
-                        
-                        if(player.rollDamage(currentRoom.monster) == 0){
-                            addDialogue ("The Monster Blocked your attack.");
-                        }
-                        if (currentRoom.monster.rollDamage(player) == 0){
-                            addDialogue("You blocked the Monsters attack.");
-                        }
+			int playerRolled = player.rollDamage(currentRoom.monster);
+			if(playerRolled == 0)
+			{
+				addDialogue("Monster blocked your attack");
+			}
+			else
+			{
+				addDialogue("You rolled " + playerRolled + "dmg");
+			}
 			
 			if(currentRoom.monster.getHealth() > 0)
 			{
-				addDialogue("Monster rolled " + currentRoom.monster.rollDamage(player) + " dmg");
+				int monsterRolled = currentRoom.monster.rollDamage(player);
+				if(monsterRolled == 0)
+				{
+					addDialogue("You blocked the monsters attack");
+				}
+				else
+				{
+					addDialogue("The monster rolled " + monsterRolled + " dmg");
+				}
 				
 				if(player.getHealth() <= 0)
 				{
@@ -244,12 +290,14 @@ public class Game {
 				currentRoom.monster = null;
 				addDialogue("You have slain the monster!");
 			}
+                          
+                         
 		}
 		else
 			addDialogue("There's no monster to attack");
                 
+                
     }
-   
 	
     public void goRoom(String direction)
 	{
@@ -269,4 +317,11 @@ public class Game {
 			printLook(); // It will give you a description of what's in the room
         }
     }
+    
+   
 }
+   
+    
+     
+
+
