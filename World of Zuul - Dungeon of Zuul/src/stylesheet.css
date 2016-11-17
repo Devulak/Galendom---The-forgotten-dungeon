@@ -1,8 +1,8 @@
 .root
 {
-	-fx-font-family: VT323;
+	-fx-font-family: 'VT323', monospace;
 	-fx-font-size: 16px;
-	-fx-background-color: #efd176;
+	-fx-background-color: #4e4a4e;
 }
 .label
 {
@@ -13,4 +13,8 @@
 .label.big
 {
 	-fx-font-size: 32px;
+}
+.backcover
+{
+	-fx-background-color: #140c1c;
 }

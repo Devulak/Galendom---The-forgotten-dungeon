@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Rectangle;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -56,7 +58,7 @@ public class FXMLDocumentController implements Initializable {
 	private TextArea dialogue;
 	
 	@FXML
-	private AnchorPane monster;
+	private Pane monster;
 	@FXML
 	private Label monsterHealth;
 	@FXML
@@ -69,6 +71,9 @@ public class FXMLDocumentController implements Initializable {
 	private Label monsterArmour;
 	@FXML
 	private Label monsterStrength;
+	
+	@FXML
+	private ImageView playerPos;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event)
@@ -120,6 +125,7 @@ public class FXMLDocumentController implements Initializable {
 	private void up(ActionEvent event)
 	{
 		game.goRoom("up");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -128,6 +134,7 @@ public class FXMLDocumentController implements Initializable {
 	private void down(ActionEvent event)
 	{
 		game.goRoom("down");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -136,6 +143,7 @@ public class FXMLDocumentController implements Initializable {
 	private void left(ActionEvent event)
 	{
 		game.goRoom("left");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -144,6 +152,7 @@ public class FXMLDocumentController implements Initializable {
 	private void right(ActionEvent event)
 	{
 		game.goRoom("right");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -156,6 +165,39 @@ public class FXMLDocumentController implements Initializable {
 		updatePlayerStatus();
 		updatePlayerInventory();
 		updateRoomInventory();
+		updatePanel();
+		updateMap();
+	}
+	
+	@FXML
+	private void useTeleporter()
+	{
+		if(game.currentRoom.hasMonster() && game.currentRoom.hasTeleporter())
+		{
+		game.addDialogue("You have to defeat the monster first before you can use the teleporter");
+		}
+		else if(game.currentRoom.hasMonster())
+		{
+			game.addDialogue("There is no teleporter in the room");
+		}
+		else if(!game.currentRoom.hasTeleporter())
+		{
+			game.addDialogue("There is no teleporter in the room");
+		}
+		else if(game.currentRoom.hasTeleporter())
+		{
+			game.currentRoom.removeTeleporter();
+			game.currentRoom = game.lvl_1;
+			game.addDialogue("The teleporter sent you to back to start");
+			game.addDialogue("The teleporter has disappeared");
+		}
+		else
+		{
+			game.addDialogue("Error");
+		}
+		updatePlayerInventory();
+		updateRoomInventory();
+		updatePlayerStatus();
 		updatePanel();
 	}
 	
@@ -231,5 +273,13 @@ public class FXMLDocumentController implements Initializable {
 		{
 			monster.setVisible(false);
 		}
+	}
+	
+	public void updateMap()
+	{
+		int blockSize = 104;
+		int[] pos = game.currentRoom.getPos();
+		playerPos.setLayoutX(200-blockSize+pos[0]*blockSize);
+		playerPos.setLayoutY(24+pos[1]*blockSize);
 	}
 }
