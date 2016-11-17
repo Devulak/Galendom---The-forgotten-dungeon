@@ -10,7 +10,7 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="640" prefWidth="960" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="main.FXMLDocumentController">
+<AnchorPane prefHeight="640" prefWidth="960" stylesheets="@../stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
    <children>
    	<ImageView fitHeight="640" layoutX="478">
       <image>
@@ -100,25 +100,6 @@
       </children>
    	</Pane>
    
-   	<!-- Right map -->
-   	<Pane layoutX="480" prefHeight="640" prefWidth="480">
-      <children>
-      		<!-- Map -->
-      		<ImageView fx:id="map">
-      		   <image>
-      			  <Image url="@../sprites/map.png" />
-      		   </image>
-      		</ImageView>
-      		<Canvas height="480" width="480">
-
-		</Canvas>
-      		<Button layoutX="208" layoutY="480" onAction="#up" prefHeight="64" prefWidth="64" text="▲" />
-      		<Button layoutX="144" layoutY="544" onAction="#left" prefHeight="64" prefWidth="64" text="◄" />
-      		<Button layoutX="208" layoutY="544" onAction="#down" prefHeight="64" prefWidth="64" text="▼" />
-      		<Button layoutX="272" layoutY="544" onAction="#right" prefHeight="64" prefWidth="64" text="►" />
-      </children>
-   	</Pane>
-   
    	<!-- Right monster -->
    	<Pane fx:id="monster" layoutX="480" prefHeight="640" prefWidth="480" visible="true">
       <children>
@@ -167,6 +148,29 @@
       		</Pane>
       		
       		<Button fx:id="button" layoutX="32" layoutY="480" onAction="#handleButtonAction" prefHeight="64" prefWidth="416" text="Attack" />
+      </children>
+   	</Pane>
+   
+         	<!-- Right map -->
+   	<Pane layoutX="480.0" prefHeight="640" prefWidth="480">
+      <children>
+            <Pane layoutY="90.0" prefHeight="320.0" prefWidth="324.0">
+               <children>
+            		<!-- Map -->
+            		<ImageView fx:id="map">
+            		   <image>
+            			  <Image url="@../sprites/map.png" />
+            		   </image>
+            		</ImageView>
+               </children>
+            </Pane>
+      		<Canvas height="480" width="480">
+
+		</Canvas>
+      		<Button layoutX="208" layoutY="480" onAction="#up" prefHeight="64" prefWidth="64" text="▲" />
+      		<Button layoutX="144" layoutY="544" onAction="#left" prefHeight="64" prefWidth="64" text="◄" />
+      		<Button layoutX="208" layoutY="544" onAction="#down" prefHeight="64" prefWidth="64" text="▼" />
+      		<Button layoutX="272" layoutY="544" onAction="#right" prefHeight="64" prefWidth="64" text="►" />
       </children>
    	</Pane>
    </children>
