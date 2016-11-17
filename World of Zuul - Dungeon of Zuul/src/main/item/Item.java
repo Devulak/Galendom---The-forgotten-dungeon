@@ -1,13 +1,13 @@
 package main.item;
 
-public class Item
+public abstract class Item
 {
 	protected String name;
 	private int amount;
 
 	public Item(String name, int amount) // Constructor
 	{
-		this.name = name;
+        this.name = name;
 		this.amount = amount;
 	}
 
