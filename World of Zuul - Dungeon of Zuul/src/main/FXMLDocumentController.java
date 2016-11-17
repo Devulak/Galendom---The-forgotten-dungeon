@@ -13,6 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -56,7 +57,7 @@ public class FXMLDocumentController implements Initializable {
 	private TextArea dialogue;
 	
 	@FXML
-	private AnchorPane monster;
+	private Pane monster;
 	@FXML
 	private Label monsterHealth;
 	@FXML
@@ -69,6 +70,9 @@ public class FXMLDocumentController implements Initializable {
 	private Label monsterArmour;
 	@FXML
 	private Label monsterStrength;
+	
+	@FXML
+	private ImageView map;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event)
@@ -120,6 +124,7 @@ public class FXMLDocumentController implements Initializable {
 	private void up(ActionEvent event)
 	{
 		game.goRoom("up");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -128,6 +133,7 @@ public class FXMLDocumentController implements Initializable {
 	private void down(ActionEvent event)
 	{
 		game.goRoom("down");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -136,6 +142,7 @@ public class FXMLDocumentController implements Initializable {
 	private void left(ActionEvent event)
 	{
 		game.goRoom("left");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -144,6 +151,7 @@ public class FXMLDocumentController implements Initializable {
 	private void right(ActionEvent event)
 	{
 		game.goRoom("right");
+		updateMap();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -157,6 +165,7 @@ public class FXMLDocumentController implements Initializable {
 		updatePlayerInventory();
 		updateRoomInventory();
 		updatePanel();
+		updateMap();
 	}
 	
 	public void updatePlayerStatus()
@@ -231,5 +240,13 @@ public class FXMLDocumentController implements Initializable {
 		{
 			monster.setVisible(false);
 		}
+	}
+	
+	public void updateMap()
+	{
+		int blockSize = 160;
+		int[] pos = game.currentRoom.getPos();
+		map.setLayoutX(blockSize-pos[0]*blockSize);
+		map.setLayoutY(blockSize-pos[1]*blockSize);
 	}
 }

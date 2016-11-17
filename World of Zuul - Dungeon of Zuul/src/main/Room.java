@@ -67,5 +67,11 @@ public class Room
     {
         return exits.get(direction);
     }
+
+    public int[] getPos() // gets the position of the room
+    {
+		int[] pos = {posX, posY};
+		return pos;
+    }
 }
 
