@@ -56,6 +56,7 @@ public class Game {
         lvl_7.setMonster(new Creature(7));
         lvl_8.setMonster(new Creature(8));
         	
+		
         // Give creatures some items that they drop
 		
 		// Potions
@@ -145,7 +146,10 @@ public class Game {
 		//hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
 		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
 
-
+		// Others
+		lvl_5a.setDoor(new Door("door"));
+		lvl_4a.monster.inventory.add(new Key("Key", 1));
+		
 		/* This gives the player the option to move between the rooms */
 		lvl_1.setExit("right", lvl_2);
 		lvl_1.setExit("left", lvl_2a);
