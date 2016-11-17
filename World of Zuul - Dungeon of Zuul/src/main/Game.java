@@ -76,29 +76,33 @@ public class Game {
                 lvl_5a.monster.inventory.add(new Weapon("iron_sword", 6)); // Steel Sword
 
 		//Vendor
-		lvl_5a.inventory.add(new Shield("steel_shield", 4)); // Steel Shield
-		lvl_5a.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
-		lvl_5a.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-		lvl_5a.inventory.add(new Legging("steel_leggings", 3)); // Steel Leggings
-		lvl_5a.inventory.add(new Boot("steel_boots", 2)); // Steel Boots
-                lvl_5a.inventory.add(new Weapon("Steel_sword", 6)); // Steel Sword
-                lvl_5a.inventory.add(new Shield("Steel Shield", 2)); //Steel Shield
+		lvl_5a.inventory.add(new Shield("Steel Shield", 6));
+		lvl_5a.inventory.add(new Helmet("Steel Helmet", 7));
+		lvl_5a.inventory.add(new Chestplate("Steel Chestplate", 8));
+		lvl_5a.inventory.add(new Legging("Steel Leggings", 7));
+		lvl_5a.inventory.add(new Boot("Steel Boots", 5));
+                lvl_5a.inventory.add(new Weapon("Steel Sword", 5));
+                lvl_5a.inventory.add(new Shield("Steel Shield", 6));
                                               
 		// Weapons
-		player.inventory.add(new Weapon("Wooden Sword", 1)); // Wooden Sword
+		player.inventory.add(new Weapon("Wooden Sword", 1));
+                lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3));
                 
 		// Shields
 		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2));
+                lvl_4.monster.inventory.add(new Shield("Iron Shield", 4));
                 
                 // Helmets
 		lvl_2a.monster.inventory.add(new Helmet("Leather Helmet", 2));
-                lvl_3a.monster.inventory.add(new Helmet("Leather Helmet", 3 ));
+                lvl_3a.monster.inventory.add(new Helmet("Iron Helmet", 5 ));
                 
 		// Chestplates
                 lvl_2a.monster.inventory.add(new Chestplate("Leather Chestplate", 4));
+                lvl_4.monster.inventory.add(new Chestplate("Iron Chestplate", 6));
 	                
 		// Leggings
 		lvl_2.monster.inventory.add(new Legging("Leather Leggings", 3));
+                lvl_4a.monster.inventory.add(new Legging("Iron Leggings", 5));
                 
 		// Boots          
                 lvl_2.monster.inventory.add(new Boot("Leather Boots", 1));
