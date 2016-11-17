@@ -128,7 +128,7 @@ public class Creature {
 	
 	protected int takeDamage(double hitPoints)
 	{
-		hitPoints = hitPoints * (1 - getArmour() / 50); // Each point of armour reduces damage by 2% (max 40 armour (80% reduction) may be possible)
+		hitPoints = hitPoints * (1 - (double) getArmour() / 50); // Each point of armour reduces damage by 2% (max 40 armour (80% reduction) may be possible)
 		int hitPointsTaken = (int) Math.round(hitPoints); // Rounds to neearest point
 		if(hasShield() && Math.random() <= 0.1) // Did he roll a block (10%)
 		{
