@@ -15,8 +15,8 @@ public class Creature {
 	
     private int health; // Current health
     private int maxHealth; // Maximum amount of health
-	private static final int healthBaseAmount = 8; // The base amount of health you have
-	private static final int healthGainAmount = 4; // The amount of health you gain each level
+	private static final int healthBaseAmount = 80; // The base amount of health you have
+	private static final int healthGainAmount = 40; // The amount of health you gain each level
 	
 	protected Inventory inventory = new Inventory(); // Inventory full of stuff (or not)!
 
@@ -121,7 +121,7 @@ public class Creature {
 		int hitPointsTaken = (int) Math.round(hitPoints); // Rounds to neearest point
 		if(hasShield() && Math.random() <= 0.1) // Did he roll a block (10%)
 		{
-			hitPoints = 0;
+			hitPointsTaken = 0;
 		}
 		health -= hitPointsTaken;
 		return hitPointsTaken;
