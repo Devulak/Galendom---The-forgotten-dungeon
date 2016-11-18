@@ -250,6 +250,7 @@ public class FXMLDocumentController implements Initializable {
 	public void updateRoomInventory()
 	{
 		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.currentRoom.inventory.getContent());
+		roomInventory.setItems(null);
 		roomInventory.setItems(itemsTemp);
 	}
 	

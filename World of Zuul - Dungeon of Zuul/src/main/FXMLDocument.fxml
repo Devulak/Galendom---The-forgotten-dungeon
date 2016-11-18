@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import java.net.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
@@ -11,11 +12,11 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:controller="main.FXMLDocumentController" prefHeight="640" prefWidth="960" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="640" prefWidth="960" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
     <children>
         <ImageView fitHeight="640" layoutX="478">
             <image>
-                <Image url="@../sprites/splitter.png"/>
+                <Image url="@../sprites/splitter.png" />
             </image>
         </ImageView>
         <!-- Left static -->
@@ -26,68 +27,68 @@
                     <children>
                         <ImageView>
                             <image>
-                                <Image url="@../sprites/status_bg.png"/>
+                                <Image url="@../sprites/status_bg.png" />
                             </image>
                         </ImageView>
                         <ImageView>
                             <image>
-                                <Image url="@../sprites/status_exp_bg.png"/>
+                                <Image url="@../sprites/status_exp_bg.png" />
                             </image>
                         </ImageView>
                         <ImageView fx:id="playerHealthbar" layoutX="66" layoutY="4">
                             <image>
-                                <Image url="@../sprites/healthbar.png"/>
+                                <Image url="@../sprites/healthbar.png" />
                             </image>
                         </ImageView>
                         <ImageView fx:id="playerHealthbarEnd" layoutY="4">
                             <image>
-                                <Image url="@../sprites/healthbar_end.png"/>
+                                <Image url="@../sprites/healthbar_end.png" />
                             </image>
                         </ImageView>
                         <ImageView fx:id="playerExperiencebar" layoutX="66" layoutY="36">
                             <image>
-                                <Image url="@../sprites/experiencebar.png"/>
+                                <Image url="@../sprites/experiencebar.png" />
                             </image>
                         </ImageView>
                         <ImageView fx:id="playerExperiencebarEnd" layoutY="36">
                             <image>
-                                <Image url="@../sprites/experiencebar_end.png"/>
+                                <Image url="@../sprites/experiencebar_end.png" />
                             </image>
                         </ImageView>
                         <ImageView>
                             <image>
-                                <Image url="@../sprites/status_fg.png"/>
+                                <Image url="@../sprites/status_fg.png" />
                             </image>
                         </ImageView>
                         <ImageView>
                             <image>
-                                <Image url="@../sprites/status_exp_fg.png"/>
+                                <Image url="@../sprites/status_exp_fg.png" />
                             </image>
                         </ImageView>
-                        <Label fx:id="playerLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44" styleClass="big"/>
-                        <Label fx:id="playerHealth" layoutX="72" prefHeight="32" prefWidth="184"/>
-                        <Label fx:id="experienceStatus" layoutX="72" layoutY="32" prefHeight="32" prefWidth="184"/>
+                        <Label fx:id="playerLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44" styleClass="big" />
+                        <Label fx:id="playerHealth" layoutX="72" prefHeight="32" prefWidth="184" />
+                        <Label fx:id="experienceStatus" layoutX="72" layoutY="32" prefHeight="32" prefWidth="184" />
                         <!-- Armour -->
-                        <Label fx:id="playerStrength" layoutX="324" layoutY="36" prefHeight="20" prefWidth="20"/>
+                        <Label fx:id="playerStrength" layoutX="324" layoutY="36" prefHeight="20" prefWidth="20" />
                         <!-- Strength -->
-                        <Label fx:id="playerArmour" layoutX="388" layoutY="36" prefHeight="20" prefWidth="20"/>
+                        <Label fx:id="playerArmour" layoutX="388" layoutY="36" prefHeight="20" prefWidth="20" />
                     </children>
                 </Pane>
                 <!-- Inventory -->
                 <Pane layoutX="32" layoutY="128" prefHeight="256" prefWidth="416">
                     <children>
-                        <ListView fx:id="playerInventory" prefHeight="256" prefWidth="176"/>
-                        <Button layoutX="176" onAction="#dropItem" prefHeight="64" prefWidth="64" text="&lt;Drop"/>
-                        <Button layoutX="176" layoutY="64" onAction="#takeItem" prefHeight="64" prefWidth="64" text="Take&gt;"/>
-                        <Button layoutX="176" layoutY="128" onAction="#useItem" prefHeight="64" prefWidth="64" text="&lt;Use"/>
-                        <Label alignment="CENTER" layoutX="176" layoutY="192" prefHeight="64" prefWidth="64" text="Coins: ??"/>
-                        <ListView fx:id="roomInventory" layoutX="240" prefHeight="256" prefWidth="176"/>
+                        <ListView fx:id="playerInventory" prefHeight="256" prefWidth="176" />
+                        <Button layoutX="176" onAction="#dropItem" prefHeight="64" prefWidth="64" text="&lt;Drop" />
+                        <Button layoutX="176" layoutY="64" onAction="#takeItem" prefHeight="64" prefWidth="64" text="Take&gt;" />
+                        <Button layoutX="176" layoutY="128" onAction="#useItem" prefHeight="64" prefWidth="64" text="&lt;Use" />
+                        <Label alignment="CENTER" layoutX="176" layoutY="192" prefHeight="64" prefWidth="64" text="Coins: ??" />
+                        <ListView fx:id="roomInventory" layoutX="240" prefHeight="256" prefWidth="176" />
                     </children>
                 </Pane>
                 <!-- Dialogue -->
-                <TextArea editable="false" fx:id="dialogue" layoutX="32" layoutY="416" prefHeight="160" prefWidth="416" wrapText="true"/>
-                <Button layoutX="32" layoutY="576" prefHeight="32" prefWidth="64" text="Quit"/>
-                <Button layoutX="384" layoutY="576" prefHeight="32" prefWidth="64" text="Help"/>
+                <TextArea fx:id="dialogue" editable="false" layoutX="32" layoutY="416" prefHeight="160" prefWidth="416" wrapText="true" />
+                <Button layoutX="32" layoutY="576" prefHeight="32" prefWidth="64" text="Quit" />
+                <Button layoutX="384" layoutY="576" prefHeight="32" prefWidth="64" text="Help" />
             </children>
         </Pane>
         <!-- Right map -->
@@ -98,20 +99,29 @@
                         <!-- Map -->
                         <ImageView layoutX="52.0">
                             <image>
-                                <Image url="@../sprites/map.png"/>
+                                <Image url="@../sprites/map.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="32.0" fitWidth="16.0" fx:id="playerPos" layoutX="200.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="playerPos" fitHeight="32.0" fitWidth="16.0" layoutX="200.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../sprites/player.gif"/>
+                                <Image url="@../sprites/player.gif" />
                             </image>
                         </ImageView>
                     </children>
                 </Pane>
-                <Button layoutX="208" layoutY="480" onAction="#up" prefHeight="64" prefWidth="64" text="▲"/>
-                <Button layoutX="144" layoutY="544" onAction="#left" prefHeight="64" prefWidth="64" text="◄"/>
-                <Button layoutX="208" layoutY="544" onAction="#down" prefHeight="64" prefWidth="64" text="▼"/>
-                <Button layoutX="272" layoutY="544" onAction="#right" prefHeight="64" prefWidth="64" text="►"/>
+            <Pane layoutX="144.0" layoutY="480.0" prefHeight="128.0" prefWidth="192.0">
+               <children>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../sprites/arrows.png" />
+                     </image>
+                  </ImageView>
+                      <Button layoutX="72.0" layoutY="8.0" onAction="#up" opacity="0.0" prefHeight="48.0" prefWidth="48.0" />
+                      <Button layoutX="8.0" layoutY="72.0" onAction="#left" opacity="0.0" prefHeight="48.0" prefWidth="48.0" />
+                      <Button layoutX="72.0" layoutY="72.0" onAction="#down" opacity="0.0" prefHeight="48.0" prefWidth="48.0" />
+                      <Button layoutX="136.0" layoutY="72.0" onAction="#right" opacity="0.0" prefHeight="48.0" prefWidth="48.0" />
+               </children>
+            </Pane>
             </children>
         </Pane>
         <!-- Right monster -->
@@ -120,7 +130,7 @@
                 <!-- Image -->
                 <ImageView>
                     <image>
-                        <Image url="@../sprites/encounter.png"/>
+                        <Image url="@../sprites/encounter.png" />
                     </image>
                 </ImageView>
                 <!-- Status -->
@@ -128,38 +138,66 @@
                     <children>
                         <ImageView>
                             <image>
-                                <Image url="@../sprites/status_bg.png"/>
+                                <Image url="@../sprites/status_bg.png" />
                             </image>
                         </ImageView>
                         <ImageView fx:id="monsterHealthbar" layoutX="66" layoutY="4">
                             <image>
-                                <Image url="@../sprites/healthbar.png"/>
+                                <Image url="@../sprites/healthbar.png" />
                             </image>
                         </ImageView>
                         <ImageView fx:id="monsterHealthbarEnd" layoutY="4">
                             <image>
-                                <Image url="@../sprites/healthbar_end.png"/>
+                                <Image url="@../sprites/healthbar_end.png" />
                             </image>
                         </ImageView>
                         <ImageView>
                             <image>
-                                <Image url="@../sprites/status_fg.png"/>
+                                <Image url="@../sprites/status_fg.png" />
                             </image>
                         </ImageView>
-                        <Label fx:id="monsterLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44" styleClass="big"/>
-                        <Label fx:id="monsterHealth" layoutX="72" prefHeight="32" prefWidth="184"/>
+                        <Label fx:id="monsterLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44" styleClass="big" />
+                        <Label fx:id="monsterHealth" layoutX="72" prefHeight="32" prefWidth="184" />
                         <!-- Armour -->
-                        <Label fx:id="monsterStrength" layoutX="324" layoutY="36" prefHeight="20" prefWidth="20"/>
+                        <Label fx:id="monsterStrength" layoutX="324" layoutY="36" prefHeight="20" prefWidth="20" />
                         <!-- Strength -->
-                        <Label fx:id="monsterArmour" layoutX="388" layoutY="36" prefHeight="20" prefWidth="20"/>
+                        <Label fx:id="monsterArmour" layoutX="388" layoutY="36" prefHeight="20" prefWidth="20" />
                     </children>
                 </Pane>
-                <Button fx:id="button" layoutX="32" layoutY="480" onAction="#handleButtonAction" prefHeight="64" prefWidth="416" text="Attack"/>
+                <Button fx:id="button" layoutX="32" layoutY="480" onAction="#handleButtonAction" prefHeight="64" prefWidth="416" text="Attack" />
             </children>
         </Pane>
+      <GridPane disable="true" prefHeight="640.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
     </children>
     <stylesheets>
-        <URL value="http://fonts.googleapis.com/css?family=VT323"/>
-        <URL value="@../stylesheet.css"/>
+        <URL value="http://fonts.googleapis.com/css?family=VT323" />
+        <URL value="@../stylesheet.css" />
     </stylesheets>
 </AnchorPane>
