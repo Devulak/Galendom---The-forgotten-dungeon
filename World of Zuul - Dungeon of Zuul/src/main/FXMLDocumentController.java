@@ -8,12 +8,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import main.item.Item;
 
@@ -58,7 +61,12 @@ public class FXMLDocumentController implements Initializable {
 	private TextArea dialogue;
 	
 	@FXML
-	private Pane monster;
+	private GridPane navigation;
+	@FXML
+	private ImageView map;
+	
+	@FXML
+	private GridPane monster;
 	@FXML
 	private Label monsterHealth;
 	@FXML
@@ -73,10 +81,7 @@ public class FXMLDocumentController implements Initializable {
 	private Label monsterStrength;
 	
 	@FXML
-	private ImageView playerPos;
-	
-	@FXML
-	private void handleButtonAction(ActionEvent event)
+	private void attack(ActionEvent event)
 	{
 		game.attack();
 		updatePlayerStatus();
@@ -250,6 +255,7 @@ public class FXMLDocumentController implements Initializable {
 	public void updateRoomInventory()
 	{
 		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.currentRoom.inventory.getContent());
+		roomInventory.setItems(null);
 		roomInventory.setItems(itemsTemp);
 	}
 	
@@ -266,20 +272,28 @@ public class FXMLDocumentController implements Initializable {
 		updateDialouge();
 		if(game.currentRoom.hasMonster())
 		{
+			navigation.setVisible(false);
 			monster.setVisible(true);
 			updateMonsterStatus();
 		}
 		else
 		{
+			navigation.setVisible(true);
 			monster.setVisible(false);
 		}
 	}
 	
 	public void updateMap()
 	{
-		int blockSize = 104;
-		int[] pos = game.currentRoom.getPos();
-		playerPos.setLayoutX(200-blockSize+pos[0]*blockSize);
-		playerPos.setLayoutY(24+pos[1]*blockSize);
+		int[] grid = {3, 4}; // Grid size (change this with the size of the map; maybe make this automatic?)
+		int[] pos = game.currentRoom.getPos(); // Position on the map
+		double[] viewSize = {map.getViewport().getWidth(), map.getViewport().getHeight()}; // Get the map size
+		double[] mapSize = {map.getImage().getWidth(), map.getImage().getHeight()}; // Get the map image size
+		
+		// Calculations for position of the map image
+		double x = mapSize[0]/(double)grid[0]*((double)pos[0] + 0.5) - viewSize[0]/2;
+		double y = mapSize[1]/(double)grid[1]*((double)pos[1] + 0.5) - viewSize[1]/2;
+		
+		map.setViewport(new Rectangle2D(x, y, viewSize[0], viewSize[1])); // set the new view and movement
 	}
 }

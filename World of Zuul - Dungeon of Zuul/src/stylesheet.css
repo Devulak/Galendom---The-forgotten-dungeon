@@ -1,8 +1,11 @@
-.root
+AnchorPane
 {
 	-fx-font-family: 'VT323', monospace;
 	-fx-font-size: 16px;
 	-fx-background-color: #4e4a4e;
+    -fx-background-image: url("sprites/splitter.png");
+	-fx-background-repeat: repeat-y;
+    -fx-background-position: center;
 }
 .label
 {
@@ -17,4 +20,50 @@
 .backcover
 {
 	-fx-background-color: #140c1c;
+}
+.cover
+{
+	-fx-background-color: #4e4a4e;
+}
+TextArea
+{
+}
+Button
+{
+	-fx-background-color: transparent;
+	-fx-background-radius: 0;
+	-fx-font-size: 20px;
+	-fx-text-fill: white;
+	-fx-alignment: CENTER;
+	-fx-border-width: 2;
+	-fx-border-color: #757473 #3f3a41 #3f3a41 #757473;
+	-fx-padding: 0;
+}
+Button:pressed
+{
+	-fx-border-color: #3f3a41 #757473 #757473 #3f3a41;
+}
+.up
+{
+    -fx-background-image: url("sprites/arrow_up.png");
+    -fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+}
+.down
+{
+    -fx-background-image: url("sprites/arrow_down.png");
+    -fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+}
+.left
+{
+    -fx-background-image: url("sprites/arrow_left.png");
+    -fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+}
+.right
+{
+    -fx-background-image: url("sprites/arrow_right.png");
+    -fx-background-position: center;
+	-fx-background-repeat: no-repeat;
 }

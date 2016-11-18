@@ -15,13 +15,13 @@ public class Main extends Application
 		// Init of stage
 		stage.setTitle("Dungeon of Zull");
 		stage.getIcons().add(new Image("/sprites/icon.png"));
-		/*stage.setWidth(960);
-		stage.setHeight(640);
-		stage.setResizable(false);*/
+		stage.setMinWidth(960);
+		stage.setMinHeight(640);
 		
 		// game scene
 		Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 		Scene scene = new Scene(root);
+		
 		// Show game scene
 		stage.setScene(scene);
 		stage.show();
