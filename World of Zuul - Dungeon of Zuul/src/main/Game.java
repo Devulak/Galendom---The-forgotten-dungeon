@@ -7,13 +7,18 @@ public class Game
 {
 	protected Room currentRoom;
 	protected Creature player;
-	protected String dialogue = "";
+	private String dialogue = "";
 	protected int score = 0;
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	
 	public Game()
 	{
 		createRooms();
+	}
+
+	public String getDialogue()
+	{
+		return dialogue;
 	}
 
 	public void addDialogue()
@@ -23,7 +28,14 @@ public class Game
 
 	public void addDialogue(String string)
 	{
-		dialogue += string + "\n";
+		if(dialogue.length() == 0)
+		{
+			dialogue += string;
+		}
+		else
+		{
+			dialogue += "\n" + string;
+		}
 	}
 
 	public void createRooms()
@@ -43,7 +55,7 @@ public class Game
 		lvl_8 = new Room("in level 8", 1, 3);
 
 		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Creature(10);
+		player = new Creature(1);
 		
 		// Give creatures some items that they drop
 		// Potions
@@ -131,7 +143,7 @@ public class Game
 		//Vendor
 		lvl_5a.inventory.add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor
 		lvl_5a.inventory.add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor
-		lvl_5a.inventory.add(new Chestplate("Steel Chestplate", 8)); //Steel Chestplate from Vendor
+		lvl_5a.inventory.add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor
 		lvl_5a.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor
 		lvl_5a.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor                
                                                               
@@ -158,10 +170,10 @@ public class Game
 		lvl_8.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
                 
 		// Chestplates
-		lvl_2a.monster.inventory.add(new Chestplate("Leather Chestplate", 4)); //Leather Chestplate
-		lvl_4.monster.inventory.add(new Chestplate("Iron Chestplate", 6)); //Iron Chestplate
-		lvl_5a.monster.inventory.add(new Chestplate("Iron Chestplate", 6)); //Iron Chestplate                               
-		lvl_8.monster.inventory.add(new Chestplate("Steel Chestplate", 8)); //Steel Chestplate
+		lvl_2a.monster.inventory.add(new Armour("Leather Armour", 4)); //Leather Chestplate
+		lvl_4.monster.inventory.add(new Armour("Iron Armour", 6)); //Iron Chestplate
+		lvl_5a.monster.inventory.add(new Armour("Iron Armour", 6)); //Iron Chestplate                               
+		lvl_8.monster.inventory.add(new Armour("Steel Armour", 8)); //Steel Chestplate
                 
 		// Leggings
 		lvl_2.monster.inventory.add(new Legging("Leather Leggings", 3)); //Leather Leggings
@@ -183,7 +195,7 @@ public class Game
 		//player.inventory.add(new Weapon("Steel Sword", 5));
 		//player.inventory.add(new Shield("Steel Shield", 6));
 		//player.inventory.add(new Helmet("Iron Helmet", 5 ));
-		//player.inventory.add(new Chestplate("Steel Chestplate", 8));
+		//player.inventory.add(new Armour("Steel Armour", 8));
 		//player.inventory.add(new Legging("Iron Leggings", 5));
 		//player.inventory.add(new Boot("Iron Boots", 3));
 		//player.inventory.add(new Boot("Steel Boots", 5));
@@ -204,7 +216,6 @@ public class Game
 	 */
 	private void printWelcome()
 	{
-		addDialogue();
 		addDialogue("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
 		addDialogue("''You're lost in the Dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
 		addDialogue("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
@@ -293,7 +304,7 @@ public class Game
 			}
 			else
 			{
-				addDialogue("You rolled " + playerRolled + "dmg");
+				addDialogue("You rolled " + playerRolled + " dmg");
 			}
 
 			if (currentRoom.monster.getHealth() > 0)
@@ -305,7 +316,7 @@ public class Game
 				}
 				else
 				{
-					addDialogue("The monster rolled " + monsterRolled + "dmg");
+					addDialogue("The monster rolled " + monsterRolled + " dmg");
 				}
 
 				if (player.getHealth() <= 0)
@@ -322,7 +333,6 @@ public class Game
 				}
 				currentRoom.monster = null;
 				addDialogue("You have slain the monster!");
-				addDialogue(currentRoom.getExitString());
 			}
 		}
 		else

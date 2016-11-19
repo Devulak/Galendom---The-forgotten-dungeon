@@ -131,7 +131,8 @@
                                  <styleClass>
                                     <String fx:value="status" />
                                     <String fx:value="big" />
-                                 </styleClass></Label>
+                                 </styleClass>
+                              </Label>
                                     <Label fx:id="playerHealth" layoutX="72" prefHeight="32" prefWidth="184" styleClass="status" />
                                     <Label fx:id="experienceStatus" layoutX="72" layoutY="32" prefHeight="32" prefWidth="184" styleClass="status" />
                                     <!-- Armour -->
@@ -145,19 +146,18 @@
                             <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Quit" GridPane.columnSpan="2" GridPane.rowIndex="17" />
                             <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Help" GridPane.columnIndex="11" GridPane.columnSpan="2147483647" GridPane.rowIndex="17" />
                             <!-- Inventory -->
-                            <Pane prefHeight="256" prefWidth="416" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="8">
+                            <Pane prefHeight="256" prefWidth="416" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="10">
                                 <children>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../sprites/inventory.png" />
                                  </image>
                               </ImageView>
-                                    <ListView fx:id="playerInventory" layoutX="8.0" layoutY="8.0" prefHeight="240.0" prefWidth="168.0" />
-                                    <Button layoutX="184.0" layoutY="8.0" onAction="#dropItem" prefHeight="48.0" prefWidth="48.0" styleClass="right" />
-                                    <Button layoutX="184.0" layoutY="72.0" onAction="#takeItem" prefHeight="48.0" prefWidth="48.0" styleClass="left" />
-                                    <Button layoutX="184.0" layoutY="136.0" onAction="#useItem" prefHeight="48.0" prefWidth="48.0" text="&lt;Use" />
-                                    <Label alignment="CENTER" layoutX="184.0" layoutY="200.0" prefHeight="48.0" prefWidth="48.0" text="Coins: ??" />
-                                    <ListView fx:id="roomInventory" layoutX="240.0" layoutY="8.0" prefHeight="240.0" prefWidth="168.0" />
+                                    <ListView fx:id="playerInventory" layoutX="8.0" layoutY="8.0" prefHeight="240.0" prefWidth="192.0" />
+                                    <Button layoutX="152.0" layoutY="264.0" onAction="#dropItem" prefHeight="48.0" prefWidth="48.0" styleClass="moveRight" />
+                                    <Button layoutX="216.0" layoutY="264.0" onAction="#takeItem" prefHeight="48.0" prefWidth="48.0" styleClass="moveLeft" />
+                                    <Button layoutX="8.0" layoutY="264.0" onAction="#useItem" prefHeight="48.0" prefWidth="48.0" styleClass="status" text="USE" />
+                                    <ListView fx:id="roomInventory" layoutX="216.0" layoutY="8.0" prefHeight="240.0" prefWidth="192.0" />
                                 </children>
                             </Pane>
                      </children>
@@ -303,7 +303,8 @@
                                  <styleClass>
                                     <String fx:value="status" />
                                     <String fx:value="big" />
-                                 </styleClass></Label>
+                                 </styleClass>
+                              </Label>
                               <Label fx:id="monsterHealth" layoutX="72" prefHeight="32" prefWidth="184" styleClass="status" />
                               <Label fx:id="monsterStrength" layoutX="324" layoutY="36" prefHeight="20" prefWidth="20" styleClass="status" />
                               <Label fx:id="monsterArmour" layoutX="388" layoutY="36" prefHeight="20" prefWidth="20" styleClass="status" />
