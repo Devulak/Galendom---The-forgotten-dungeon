@@ -1,19 +1,111 @@
+/* All elements */
+*
+{
+	-fx-text-fill: #e9f3e3;
+}
+
+
+
+/* root */
 AnchorPane
 {
 	-fx-font-family: 'VT323', monospace;
-	-fx-font-size: 16px;
 	-fx-background-color: #4e4a4e;
     -fx-background-image: url("sprites/splitter.png");
 	-fx-background-repeat: repeat-y;
     -fx-background-position: center;
+	-fx-font-size: 16px;
 }
-.label
+
+
+
+/* Scroll bars */
+.scroll-bar
+{
+	-fx-background-color: transparent;
+	-fx-padding: 0 0 0 2;
+	-fx-border: 0;
+	-fx-background-insets: 0;
+}
+.scroll-bar .track
+{
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+	-fx-border: 0;
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button
+{
+	-fx-padding: 0 4 0 0;
+	-fx-border: 0;
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow
+{
+	-fx-shape: "";
+	-fx-padding: 0;
+	-fx-border: 0;
+}
+.scroll-bar .thumb
+{
+	-fx-background-color: #757473;
+	-fx-background-radius: 0;
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+	-fx-border: 0;
+}
+
+
+
+/* ListView */
+.list-view
+{
+	-fx-background-color: transparent;
+	-fx-border-width: 2;
+	-fx-border-color: #3f3a41 #757473 #757473 #3f3a41;
+	-fx-padding: 2;
+	-fx-background-insets: 0;
+}
+.list-view .list-cell
+{
+	-fx-background-color: transparent;
+	-fx-padding: 0 0 0 8;
+	-fx-cell-size: 29;
+}
+.list-view .list-cell:selected
+{
+	-fx-background-color: #757473;
+}
+/* TextArea */
+.text-area
+{
+	-fx-background-color: transparent;
+	-fx-border-width: 2;
+	-fx-border-color: #3f3a41 #757473 #757473 #3f3a41;
+	-fx-padding: 2;
+}
+.text-area .scroll-pane
+{
+	-fx-padding: 0;
+}
+.text-area .scroll-pane .viewport
+{
+	-fx-background-color: inherit;
+}
+.text-area .scroll-pane .viewport .content
+{
+	-fx-background-color: inherit;
+	-fx-padding: 0;
+}
+
+
+
+.status
 {
 	-fx-font-size: 20px;
-	-fx-text-fill: white;
 	-fx-alignment: CENTER;
 }
-.label.big
+.status.big
 {
 	-fx-font-size: 32px;
 }
@@ -25,14 +117,10 @@ AnchorPane
 {
 	-fx-background-color: #4e4a4e;
 }
-TextArea
-{
-}
 Button
 {
 	-fx-background-color: transparent;
 	-fx-background-radius: 0;
-	-fx-font-size: 20px;
 	-fx-text-fill: white;
 	-fx-alignment: CENTER;
 	-fx-border-width: 2;
@@ -43,27 +131,38 @@ Button:pressed
 {
 	-fx-border-color: #3f3a41 #757473 #757473 #3f3a41;
 }
+
+.up,
+.down,
+.left,
+.right,
+.moveRight,
+.moveLeft
+{
+    -fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+}
 .up
 {
     -fx-background-image: url("sprites/arrow_up.png");
-    -fx-background-position: center;
-	-fx-background-repeat: no-repeat;
 }
 .down
 {
     -fx-background-image: url("sprites/arrow_down.png");
-    -fx-background-position: center;
-	-fx-background-repeat: no-repeat;
 }
 .left
 {
     -fx-background-image: url("sprites/arrow_left.png");
-    -fx-background-position: center;
-	-fx-background-repeat: no-repeat;
 }
 .right
 {
     -fx-background-image: url("sprites/arrow_right.png");
-    -fx-background-position: center;
-	-fx-background-repeat: no-repeat;
+}
+.moveRight
+{
+    -fx-background-image: url("sprites/moveRight.png");
+}
+.moveLeft
+{
+    -fx-background-image: url("sprites/moveLeft.png");
 }

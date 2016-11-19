@@ -261,7 +261,7 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updateDialouge()
 	{
-		dialogue.setText(game.dialogue);
+		dialogue.setText(game.getDialogue());
 		dialogue.setScrollTop(Double.MAX_VALUE);
 		dialogue.selectPositionCaret(dialogue.getLength());
 		dialogue.deselect();
