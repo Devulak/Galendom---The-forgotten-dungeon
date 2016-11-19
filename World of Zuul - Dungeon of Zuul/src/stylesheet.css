@@ -1,19 +1,22 @@
+*
+{
+	-fx-text-fill: white;
+}
 AnchorPane
 {
 	-fx-font-family: 'VT323', monospace;
-	-fx-font-size: 16px;
 	-fx-background-color: #4e4a4e;
     -fx-background-image: url("sprites/splitter.png");
 	-fx-background-repeat: repeat-y;
     -fx-background-position: center;
+	-fx-font-size: 16px;
 }
-.label
+.status
 {
 	-fx-font-size: 20px;
-	-fx-text-fill: white;
 	-fx-alignment: CENTER;
 }
-.label.big
+.status.big
 {
 	-fx-font-size: 32px;
 }
@@ -27,12 +30,25 @@ AnchorPane
 }
 TextArea
 {
+	-fx-background-color: transparent;
+	-fx-control-inner-background: transparent;
+}
+ListView
+{
+	-fx-background-color: transparent;
+	-fx-control-background: transparent;
+	-fx-control-inner-background: transparent;
+	-fx-border-width: 2;
+	-fx-border-color: #3f3a41 #757473 #757473 #3f3a41;
+}
+ListView > * > * > * > *
+{
+	-fx-padding: 0;
 }
 Button
 {
 	-fx-background-color: transparent;
 	-fx-background-radius: 0;
-	-fx-font-size: 20px;
 	-fx-text-fill: white;
 	-fx-alignment: CENTER;
 	-fx-border-width: 2;
@@ -66,4 +82,8 @@ Button:pressed
     -fx-background-image: url("sprites/arrow_right.png");
     -fx-background-position: center;
 	-fx-background-repeat: no-repeat;
+}
+.scroll-bar
+{
+	
 }
