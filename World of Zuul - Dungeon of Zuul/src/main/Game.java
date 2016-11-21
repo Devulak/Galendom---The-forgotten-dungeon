@@ -8,6 +8,7 @@ public class Game
 	protected Room currentRoom;
 	protected Creature player;
 	private String dialogue = "";
+	private Item usingKey;
 	protected int score = 0;
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	protected Room[][] rooms = new Room[3][4];
@@ -69,7 +70,7 @@ public class Game
 		lvl_8 = rooms[1][3];
 
 		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Creature(1);
+		player = new Creature(100);
 		
 		// Give creatures some items that they drop
 		// Potions
