@@ -129,7 +129,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void up(ActionEvent event)
 	{
-		game.goRoom(new int[]{0, -1});
+		game.goRoom("up");
 		updateMap();
 		updateRoomInventory();
 		updatePanel();
@@ -138,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void down(ActionEvent event)
 	{
-		game.goRoom(new int[]{0, 1});
+		game.goRoom("down");
 		updateMap();
 		updateRoomInventory();
 		updatePanel();
@@ -147,7 +147,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void left(ActionEvent event)
 	{
-		game.goRoom(new int[]{-1, 0});
+		game.goRoom("left");
 		updateMap();
 		updateRoomInventory();
 		updatePanel();
@@ -156,7 +156,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void right(ActionEvent event)
 	{
-		game.goRoom(new int[]{1, 0});
+		game.goRoom("right");
 		updateMap();
 		updateRoomInventory();
 		updatePanel();
@@ -285,8 +285,8 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updateMap()
 	{
-		int[] pos = game.getPlayerPosition(); // player position on the map
 		int[] grid = {3, 4}; // Grid size (change this with the size of the map; maybe make this automatic?)
+		int[] pos = game.currentRoom.getPos(); // Position on the map
 		double[] viewSize = {map.getViewport().getWidth(), map.getViewport().getHeight()}; // Get the map size
 		double[] mapSize = {map.getImage().getWidth(), map.getImage().getHeight()}; // Get the map image size
 		
