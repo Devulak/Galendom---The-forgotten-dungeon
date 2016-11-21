@@ -109,6 +109,14 @@ AnchorPane
 {
 	-fx-font-size: 32px;
 }
+.status.bottomLeft
+{
+	-fx-alignment: BOTTOM_LEFT;
+}
+.status.bottomRight
+{
+	-fx-alignment: BOTTOM_RIGHT;
+}
 .backcover
 {
 	-fx-background-color: #140c1c;
