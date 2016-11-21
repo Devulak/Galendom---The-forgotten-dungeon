@@ -7,25 +7,15 @@ import main.item.*;
 public class Room
 {
     private String description;
-    private int posX, posY;
-    private HashMap<String, Room> exits;
+	private List<Room> exits = new ArrayList<>();
     protected Creature monster; // The monster in the room, if there's any!
     protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
-    protected Door door;
+    private boolean locked = false;
 	protected Teleporter teleporter;
-    
-    public Room(String description) 
-    {
-        this.description = description;
-        exits = new HashMap<>();
-	}
 
-    public Room(String description, int posX, int posY) 
+    public Room(String description)
     {
         this.description = description;
-        this.posX = posX;
-        this.posY = posY;
-        exits = new HashMap<String, Room>();
     }
 
     public void setMonster(Creature creature) 
@@ -45,26 +35,14 @@ public class Room
 		}
     }
 	
-	public void setDoor(Door door)
+	protected void locked(boolean lock)
 	{
-		this.door = door;
+		locked = lock;
 	}
-
-    public boolean hasLockedDoor()
-	{
-		if(door == null)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-    }
 	
-	public void unlockDoor()
+	public boolean getLocked()
 	{
-		door = null;
+		return locked;
 	}
     
 	public void setTeleporter(Teleporter teleporter)
@@ -89,9 +67,9 @@ public class Room
 		teleporter = null;
 	}
 	
-    public void setExit(String direction, Room neighbor) 
+    public void setExit(Room exit) 
     {
-        exits.put(direction, neighbor);
+        exits.add(exit);
     }
 
     public String getShortDescription()
@@ -99,31 +77,22 @@ public class Room
         return description;
     }
 
-    public String getLongDescription()
+	// find out if the exit pointing at can be accessed
+    public boolean hasExit(Room exitLookingFor)
     {
-        return "You are " + description + ".\n" + getExitString();
-    }
-
-    protected String getExitString()
-    {
-        String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for(String exit : keys)
+		for (Room exit : exits)
 		{
-            returnString += " " + exit;
-        }
-        return returnString;
+			if(exitLookingFor == exit)
+			{
+				return true;
+			}
+		}
+		return false;
     }
-
-    public Room getExit(String direction) 
+	
+    protected List<Room> getExits() 
     {
-        return exits.get(direction);
-    }
-
-    public int[] getPos() // gets the position of the room
-    {
-		int[] pos = {posX, posY};
-		return pos;
+        return exits;
     }
 }
 
