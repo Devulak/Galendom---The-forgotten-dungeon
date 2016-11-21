@@ -6,9 +6,9 @@ import main.item.*;
 public class Game
 {
 	protected Room currentRoom;
+	protected Room lastRoom;
 	protected Creature player;
 	private String dialogue = "";
-	private Item usingKey;
 	protected int score = 0;
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	protected Room[][] rooms = new Room[3][4];
@@ -16,6 +16,7 @@ public class Game
 	public Game()
 	{
 		createRooms();
+		currentRoom = lvl_1; //The player will start in this room
 	}
 
 	public String getDialogue()
@@ -135,8 +136,6 @@ public class Game
 		lvl_7.setExit(lvl_6);
 
 		lvl_8.setExit(lvl_7);
-
-		currentRoom = lvl_1; //The player will start in this room
 
 		player.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
@@ -287,7 +286,7 @@ public class Game
 				for(Iterator<Room> rooms = currentRoom.getExits().iterator(); rooms.hasNext();)
 				{
 					Room room = rooms.next(); // It's like a copy of the element
-					if(room.getLocked() && it != null)
+					if(room.getLocked())
 					{
 						if (item.getAmount() == 1)
 						{
@@ -307,16 +306,51 @@ public class Game
 
 	public void attack()
 	{
+		attack(true);
+	}
+
+	public void flee()
+	{
+		attack(false);
+	}
+
+	public void attack(boolean wantToStay)
+	{
 		if (currentRoom.hasMonster())
 		{
-			int playerRolled = player.rollDamage(currentRoom.monster);
-			if (playerRolled == 0)
+			if(!wantToStay)
 			{
-				addDialogue("Monster blocked your attack");
+				if(Math.random() <= 0.5) // roll to check your flee success (0.5 = 50% chance)
+				{
+					addDialogue("Your atempt to flee was successful!");
+					if(lastRoom == null)
+					{
+						addDialogue("... although, you have no place you run, you find a shiny new stick laying around");
+						currentRoom.inventory.add(new Weapon("GASPOWERED STICK", 1));
+					}
+					else
+					{
+						currentRoom = lastRoom;
+					}
+					lastRoom = currentRoom;
+					return;
+				}
+				else
+				{
+					addDialogue("The monster caught you fleeing");
+				}
 			}
 			else
 			{
-				addDialogue("You rolled " + playerRolled + " dmg");
+				int playerRolled = player.rollDamage(currentRoom.monster);
+				if (playerRolled == 0)
+				{
+					addDialogue("Monster blocked your attack");
+				}
+				else
+				{
+					addDialogue("You rolled " + playerRolled + " dmg");
+				}
 			}
 
 			if (currentRoom.monster.getHealth() > 0)
@@ -379,6 +413,7 @@ public class Game
 				}
 				else
 				{
+					lastRoom = currentRoom;
 					currentRoom = nextRoom;
 					printLook(); // It will give you a description of what's in the room
 				}
@@ -405,5 +440,14 @@ public class Game
 			}
 		}
 		return null;
+	}
+	
+	public void useTeleporter()
+	{
+		if(currentRoom.getTeleporter() != null && currentRoom.getMonster() == null) // is there even a teleporter and isthere a monster blocking?
+		{
+			lastRoom = currentRoom;
+			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
+		}
 	}
 }
