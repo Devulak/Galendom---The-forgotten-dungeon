@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -62,6 +63,9 @@ public class FXMLDocumentController implements Initializable {
 	private ImageView map;
 	
 	@FXML
+	private GridPane vendor;
+	
+	@FXML
 	private GridPane teleporter;
 	
 	@FXML
@@ -98,6 +102,12 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
+	private void leaveVendor(ActionEvent event)
+	{
+		
+	}
+	
+	@FXML
 	private void teleport(ActionEvent event)
 	{
 		game.useTeleporter();
@@ -112,7 +122,7 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void takeItem(ActionEvent event)
+	private void takeItem(MouseEvent event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
 		Item tempItem = game.player.inventory.add(selectedItem);
@@ -125,7 +135,7 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void dropItem(ActionEvent event)
+	private void dropItem(MouseEvent event)
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
 		Item droppedItem = game.currentRoom.inventory.add(selectedItem);
