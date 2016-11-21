@@ -142,9 +142,7 @@
                                 </children>
                             </Pane>
                             <!-- Dialogue -->
-                            <TextArea fx:id="dialogue" editable="false" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="3" />
-                            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Quit" GridPane.columnSpan="2" GridPane.rowIndex="17" />
-                            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Help" GridPane.columnIndex="11" GridPane.columnSpan="2147483647" GridPane.rowIndex="17" />
+                            <TextArea fx:id="dialogue" editable="false" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2147483647" />
                             <!-- Inventory -->
                             <Pane prefHeight="256" prefWidth="416" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="10">
                                 <children>
