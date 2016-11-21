@@ -84,6 +84,29 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
+	private void flee(ActionEvent event)
+	{
+		game.flee();
+		updatePlayerStatus();
+		updateRoomInventory();
+		updatePanel();
+	}
+	
+	@FXML
+	private void teleport(ActionEvent event)
+	{
+		game.useTeleporter();
+		updatePanel();
+	}
+	
+	@FXML
+	private void destroyTeleporter(ActionEvent event)
+	{
+		game.currentRoom.setTeleporter(null);
+		updatePanel();
+	}
+	
+	@FXML
 	private void takeItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
@@ -234,14 +257,23 @@ public class FXMLDocumentController implements Initializable {
 		updateDialouge();
 		if(game.currentRoom.hasMonster())
 		{
-			navigation.setVisible(false);
 			monster.setVisible(true);
+			teleporter.setVisible(false);
+			navigation.setVisible(false);
 			updateMonsterStatus();
+		}
+		else if(game.currentRoom.getTeleporter() != null)
+		{
+			monster.setVisible(false);
+			teleporter.setVisible(true);
+			navigation.setVisible(false);
 		}
 		else
 		{
-			navigation.setVisible(true);
 			monster.setVisible(false);
+			teleporter.setVisible(false);
+			navigation.setVisible(true);
+			updateMap();
 		}
 	}
 	

@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Room
 {
-    private String description;
+    private final String description;
 	private List<Room> exits = new ArrayList<>();
     protected Creature monster; // The monster in the room, if there's any!
     protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
@@ -33,6 +33,11 @@ public class Room
 			return true;
 		}
     }
+
+    public Creature getMonster() 
+    {
+		return monster;
+    }
 	
 	protected void locked(boolean lock)
 	{
@@ -52,6 +57,13 @@ public class Room
     public Room getTeleporter() 
     {
 		return teleporter;
+    }
+	
+    public Room useTeleporter() 
+    {
+		Room tempRoom = teleporter; // Keep the teleporter point in a seperate variable while deleting the teleporter
+		teleporter = null;
+		return tempRoom;
     }
 	
     public void setExit(Room exit) 
