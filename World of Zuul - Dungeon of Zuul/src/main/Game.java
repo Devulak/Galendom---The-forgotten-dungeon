@@ -8,8 +8,10 @@ public class Game
 	protected Room currentRoom;
 	protected Creature player;
 	private String dialogue = "";
+	private Item usingKey;
 	protected int score = 0;
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
+	protected Room[][] rooms = new Room[3][4];
 	
 	public Game()
 	{
@@ -41,21 +43,34 @@ public class Game
 	public void createRooms()
 	{
 		/* Adds rooms to the game, also gives them descriptions */
-		lvl_1 = new Room("in level 1", 1, 0);
-		lvl_2 = new Room("in level 2", 2, 0);
-		lvl_2a = new Room("in level 2a", 0, 0);
-		lvl_3 = new Room("in level 3", 2, 1);
-		lvl_3a = new Room("in level 3a", 0, 1);
-		lvl_4 = new Room("in level 4", 2, 2);
-		lvl_4a = new Room("in level 4a", 1, 1);
-		lvl_5 = new Room("in level 5", 1, 2);
-		lvl_5a = new Room("in level 5a", 2, 3);
-		lvl_6 = new Room("in level 6", 0, 2);
-		lvl_7 = new Room("in level 7", 0, 3);
-		lvl_8 = new Room("in level 8", 1, 3);
+		rooms[1][0] = new Room("in level 1");
+		rooms[2][0] = new Room("in level 2");
+		rooms[0][0] = new Room("in level 2a");
+		rooms[2][1] = new Room("in level 3");
+		rooms[0][1] = new Room("in level 3a");
+		rooms[2][2] = new Room("in level 4");
+		rooms[1][1] = new Room("in level 4a");
+		rooms[1][2] = new Room("in level 5");
+		rooms[2][3] = new Room("in level 5a");
+		rooms[0][2] = new Room("in level 6");
+		rooms[0][3] = new Room("in level 7");
+		rooms[1][3] = new Room("in level 8");
+		
+		lvl_1 = rooms[1][0];
+		lvl_2 = rooms[2][0];
+		lvl_2a = rooms[0][0];
+		lvl_3 = rooms[2][1];
+		lvl_3a = rooms[0][1];
+		lvl_4 = rooms[2][2];
+		lvl_4a = rooms[1][1];
+		lvl_5 = rooms[1][2];
+		lvl_5a = rooms[2][3];
+		lvl_6 = rooms[0][2];
+		lvl_7 = rooms[0][3];
+		lvl_8 = rooms[1][3];
 
 		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Creature(1);
+		player = new Creature(100);
 		
 		// Give creatures some items that they drop
 		// Potions
@@ -82,44 +97,44 @@ public class Game
 		//hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
 		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
 		// Others
-		lvl_5a.setDoor(new Door("Door"));
+		lvl_5a.locked(true);
 		lvl_4a.setTeleporter(new Teleporter("Teleporter"));
 		lvl_4a.monster.inventory.add(new Key("Key", 1));
 
 		/* This gives the player the option to move between the rooms */
-		lvl_1.setExit("right", lvl_2);
-		lvl_1.setExit("left", lvl_2a);
+		lvl_1.setExit(lvl_2);
+		lvl_1.setExit(lvl_2a);
 
-		lvl_2.setExit("down", lvl_3);
-		lvl_2.setExit("left", lvl_1);
+		lvl_2.setExit(lvl_3);
+		lvl_2.setExit(lvl_1);
 
-		lvl_2a.setExit("down", lvl_3a);
-		lvl_2a.setExit("right", lvl_1);
+		lvl_2a.setExit(lvl_3a);
+		lvl_2a.setExit(lvl_1);
 
-		lvl_3.setExit("down", lvl_4);
-		lvl_3.setExit("up", lvl_2);
+		lvl_3.setExit(lvl_4);
+		lvl_3.setExit(lvl_2);
 
-		lvl_3a.setExit("right", lvl_4a);
-		lvl_3a.setExit("up", lvl_2a);
+		lvl_3a.setExit(lvl_4a);
+		lvl_3a.setExit(lvl_2a);
 
-		lvl_4.setExit("left", lvl_5);
-		lvl_4.setExit("down", lvl_5a);
-		lvl_4.setExit("up", lvl_3);
+		lvl_4.setExit(lvl_5);
+		lvl_4.setExit(lvl_5a);
+		lvl_4.setExit(lvl_3);
 
-		lvl_4a.setExit("left", lvl_3a);
+		lvl_4a.setExit(lvl_3a);
 
-		lvl_5.setExit("left", lvl_6);
-		lvl_5.setExit("right", lvl_4);
+		lvl_5.setExit(lvl_6);
+		lvl_5.setExit(lvl_4);
 
-		lvl_5a.setExit("up", lvl_4);
+		lvl_5a.setExit(lvl_4);
 
-		lvl_6.setExit("down", lvl_7);
-		lvl_6.setExit("right", lvl_5);
+		lvl_6.setExit(lvl_7);
+		lvl_6.setExit(lvl_5);
 
-		lvl_7.setExit("right", lvl_8);
-		lvl_7.setExit("up", lvl_6);
+		lvl_7.setExit(lvl_8);
+		lvl_7.setExit(lvl_6);
 
-		lvl_8.setExit("left", lvl_7);
+		lvl_8.setExit(lvl_7);
 
 		currentRoom = lvl_1; //The player will start in this room
 
@@ -217,17 +232,11 @@ public class Game
 	private void printWelcome()
 	{
 		addDialogue("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
-		addDialogue("''You're lost in the Dungeon of Zuul. You have to navigate through the dark rooms to find the exits.''");
+		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.''");
 		addDialogue("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
 		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
 		addDialogue("If you manage to defeat the boss, you will win, and escape this forgotten place.");
 		addDialogue("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
-		addDialogue("You're lost in a cave. You have to find the exit to win.");
-		addDialogue("Your goal is to move to the end of the map. At the end of the map, you");
-		addDialogue("will face the boss that you have to defeat. If you defeat the boss, you will");
-		addDialogue("win, but if your health reaches zero, you will lose.");
-		addDialogue("Click on '?' if you need help.");
-		addDialogue();
 		printLook();
 	}
 
@@ -279,15 +288,22 @@ public class Game
 			}
 			else if (item.equals(searchForItem) && item instanceof Key)
 			{
-				if (currentRoom.getExit("down").hasLockedDoor())
+				for(Iterator<Room> rooms = currentRoom.getExits().iterator(); rooms.hasNext();)
 				{
-					currentRoom.getExit("down").unlockDoor();
-					addDialogue("The door has been unlocked!");
-					it.remove();
-				}
-				else
-				{
-					addDialogue("There is no door to unlock!");
+					Room room = rooms.next(); // It's like a copy of the element
+					if(room.getLocked() && it != null)
+					{
+						if (item.getAmount() == 1)
+						{
+							it.remove();
+						}
+						else
+						{
+							item.use();
+						}
+						room.locked(false);
+						addDialogue("You've unlocked the door with your key"); // If the door is locked
+					}
 				}
 			}
 		}
@@ -340,26 +356,58 @@ public class Game
 			addDialogue("There's no monster to attack");
 		}
 	}
-
-	public void goRoom(String direction)
+	
+	public void goRoom(int[] direction)
 	{
-		Room nextRoom = currentRoom.getExit(direction);
 		if (currentRoom.hasMonster())
 		{
 			addDialogue("The monster (level " + currentRoom.monster.getLevel() + "): is blocking your way");
 		}
-		else if (nextRoom.hasLockedDoor())
-		{
-			addDialogue("There is a locked door blocking your way");
-		}
-		else if (nextRoom == null) // It will first check if there is a path to the next room.
-		{
-			addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
-		}
 		else
 		{
-			currentRoom = nextRoom;
-			printLook(); // It will give you a description of what's in the room
-		}  
+			// get the room the directions are pointing at if any
+			Room nextRoom = null;
+			int[] newPosition = {getPlayerPosition()[0] + direction[0], getPlayerPosition()[1] + direction[1]};
+			
+			if(newPosition[0] >= 0 && newPosition[0] < rooms.length && newPosition[1] >= 0 && newPosition[1] < rooms[0].length) // make sure not to exceed limits
+			{
+				nextRoom = rooms[getPlayerPosition()[0] + direction[0]][getPlayerPosition()[1] + direction[1]];
+			}
+			
+			if (currentRoom.hasExit(nextRoom)) // It will first check if the door exists
+			{
+				// See if the door is locked or not
+				if(nextRoom.getLocked())
+				{
+					addDialogue("The door seem to be locked, obtain a key to open it"); // If the door is locked
+				}
+				else
+				{
+					currentRoom = nextRoom;
+					printLook(); // It will give you a description of what's in the room
+				}
+			}
+			else
+			{
+				addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
+			}
+		}
+	}
+	
+	public int[] getPlayerPosition()
+	{
+		// Make predictions and find the current room's position
+		for (int i = 0; i < rooms.length; i++)
+		{
+			for (int j = 0; j < rooms[i].length; j++)
+			{
+				if(rooms[i][j] == currentRoom)
+				{
+					// Set position on the map
+					return new int[]{i, j};
+				}
+			}
+		}
+		return null;
 	}
 }
