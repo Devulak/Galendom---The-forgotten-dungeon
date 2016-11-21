@@ -1,6 +1,6 @@
 package main;
 
-import java.util.Iterator;
+import java.util.*;
 import main.item.*;
 
 public class Game
@@ -98,7 +98,7 @@ public class Game
 		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
 		// Others
 		lvl_5a.locked(true);
-		lvl_4a.setTeleporter(new Teleporter("Teleporter"));
+		lvl_4a.setTeleporter(lvl_1);
 		lvl_4a.monster.inventory.add(new Key("Key", 1));
 
 		/* This gives the player the option to move between the rooms */
@@ -262,10 +262,6 @@ public class Game
 		if (currentRoom.hasMonster())
 		{
 			addDialogue("There's a monster level " + currentRoom.monster.getLevel() + " blocking your way");
-		}
-		if (currentRoom.hasTeleporter())
-		{
-			addDialogue("There is a teleporter in the room");
 		}
 	}
 	protected void useItem(Item searchForItem)
