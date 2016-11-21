@@ -11,7 +11,7 @@ public class Room
     protected Creature monster; // The monster in the room, if there's any!
     protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
     private boolean locked = false;
-	protected Teleporter teleporter;
+	protected Room teleporter;
 
     public Room(String description)
     {
@@ -45,27 +45,15 @@ public class Room
 		return locked;
 	}
     
-	public void setTeleporter(Teleporter teleporter)
+	protected void setTeleporter(Room teleportTo)
 	{
-		this.teleporter = teleporter;
+		teleporter = teleportTo;
 	}
 	
-    public boolean hasTeleporter() 
+    public Room getTeleporter() 
     {
-        if(teleporter == null)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		return teleporter;
     }
-	
-	public void removeTeleporter()
-	{
-		teleporter = null;
-	}
 	
     public void setExit(Room exit) 
     {
