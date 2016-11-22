@@ -76,6 +76,9 @@ AnchorPane
 {
 	-fx-background-color: #757473;
 }
+
+
+
 /* TextArea */
 .text-area
 {
@@ -100,14 +103,30 @@ AnchorPane
 
 
 
+/**/
+.label
+{
+	-fx-alignment: CENTER;
+}
+
+
+
+/**/
 .status
 {
 	-fx-font-size: 20px;
-	-fx-alignment: CENTER;
 }
 .status.big
 {
 	-fx-font-size: 32px;
+}
+.status.bottomLeft
+{
+	-fx-alignment: BOTTOM_LEFT;
+}
+.status.bottomRight
+{
+	-fx-alignment: BOTTOM_RIGHT;
 }
 .backcover
 {

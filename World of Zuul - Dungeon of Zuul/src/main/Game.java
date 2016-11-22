@@ -5,10 +5,14 @@ import main.item.*;
 
 public class Game
 {
+	private int points;
+	private int turns;
+	private String dialogue = "";
+	protected Creature player;
 	protected Room currentRoom;
 	protected Room lastRoom;
-	protected Creature player;
-	private String dialogue = "";
+	protected Creature vendor;
+	protected Room currentVendorRoom;
 	protected int score = 0;
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	protected Room[][] rooms = new Room[3][4];
@@ -17,6 +21,22 @@ public class Game
 	{
 		createRooms();
 		currentRoom = lvl_1; //The player will start in this room
+		currentVendorRoom = lvl_5a; //The vendor will start in this room
+	}
+
+	public int getTurns()
+	{
+		return turns;
+	}
+
+	public void addTurn()
+	{
+		turns++;
+	}
+
+	public int getPoints()
+	{
+		return points;
 	}
 
 	public String getDialogue()
@@ -413,6 +433,7 @@ public class Game
 				}
 				else
 				{
+					addTurn();
 					lastRoom = currentRoom;
 					currentRoom = nextRoom;
 					printLook(); // It will give you a description of what's in the room
@@ -446,6 +467,7 @@ public class Game
 	{
 		if(currentRoom.getTeleporter() != null && currentRoom.getMonster() == null) // is there even a teleporter and isthere a monster blocking?
 		{
+			addTurn();
 			lastRoom = currentRoom;
 			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
 		}
