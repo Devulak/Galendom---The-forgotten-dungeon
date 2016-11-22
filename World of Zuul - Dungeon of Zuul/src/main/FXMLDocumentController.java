@@ -122,7 +122,7 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void takeItem(MouseEvent event)
+	private void takeItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
 		Item tempItem = game.player.inventory.add(selectedItem);
@@ -135,7 +135,7 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void dropItem(MouseEvent event)
+	private void dropItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
 		Item droppedItem = game.currentRoom.inventory.add(selectedItem);
@@ -286,6 +286,7 @@ public class FXMLDocumentController implements Initializable {
 		{
 			monster.setVisible(true);
 			teleporter.setVisible(false);
+			vendor.setVisible(false);
 			navigation.setVisible(false);
 			updateMonsterStatus();
 		}
@@ -293,12 +294,21 @@ public class FXMLDocumentController implements Initializable {
 		{
 			monster.setVisible(false);
 			teleporter.setVisible(true);
+			vendor.setVisible(false);
+			navigation.setVisible(false);
+		}
+		else if(game.currentRoom == game.currentVendorRoom)
+		{
+			monster.setVisible(false);
+			teleporter.setVisible(false);
+			vendor.setVisible(true);
 			navigation.setVisible(false);
 		}
 		else
 		{
 			monster.setVisible(false);
 			teleporter.setVisible(false);
+			vendor.setVisible(false);
 			navigation.setVisible(true);
 			updateMap();
 		}
