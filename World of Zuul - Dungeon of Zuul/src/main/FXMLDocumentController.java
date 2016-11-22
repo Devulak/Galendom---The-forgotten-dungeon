@@ -64,6 +64,8 @@ public class FXMLDocumentController implements Initializable {
 	
 	@FXML
 	private GridPane vendor;
+	@FXML
+	private ListView vendorInventory;
 	
 	@FXML
 	private GridPane teleporter;
@@ -243,6 +245,13 @@ public class FXMLDocumentController implements Initializable {
 		
 		// Armour
 		monsterArmour.setText(String.format("%d", game.currentRoom.monster.getArmour()));
+	}
+	
+	public void updateVendorInventory()
+	{
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.vendor.inventory.getContent());
+		vendorInventory.setItems(null);
+		vendorInventory.setItems(itemsTemp);
 	}
 	
 	public void updatePlayerInventory()

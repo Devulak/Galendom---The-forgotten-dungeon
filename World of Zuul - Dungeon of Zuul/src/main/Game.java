@@ -11,7 +11,7 @@ public class Game
 	protected Creature player;
 	protected Room currentRoom;
 	protected Room lastRoom;
-	protected Creature vendor;
+	protected Creature vendor = new Creature(0);
 	protected Room currentVendorRoom;
 	protected int score = 0;
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
