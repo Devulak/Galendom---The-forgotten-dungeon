@@ -282,7 +282,7 @@ public class Game
 			addDialogue("There's a monster level " + currentRoom.monster.getLevel() + " blocking your way");
 		}
 	}
-	protected void useItem(Item searchForItem)
+	protected boolean useItem(Item searchForItem)
 	{
 		for(Iterator<Item> it = player.inventory.getContent().iterator(); it.hasNext();)
 		{
@@ -298,7 +298,7 @@ public class Game
 					item.use();
 				}
 				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health)");
-				return;
+				return true;
 			}
 			else if (item.equals(searchForItem) && item instanceof Key)
 			{
@@ -317,10 +317,12 @@ public class Game
 						}
 						room.locked(false);
 						addDialogue("You've unlocked the door with your key"); // If the door is locked
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
 
 	public void attack()

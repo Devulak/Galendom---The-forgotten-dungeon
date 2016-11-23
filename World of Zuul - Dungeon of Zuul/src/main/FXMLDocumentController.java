@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -56,6 +57,10 @@ public class FXMLDocumentController implements Initializable {
 	private GridPane navigation;
 	@FXML
 	private ImageView map;
+	@FXML
+	private Pane showTeleporter;
+	@FXML
+	private Pane showVendor;
 	
 	@FXML
 	private GridPane vendor;
@@ -99,9 +104,25 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void leaveVendor(ActionEvent event)
+	private void showVendor(ActionEvent event)
 	{
-		
+		updateVendorInventory();
+		vendor.setVisible(true);
+		navigation.setVisible(false);
+	}
+	
+	@FXML
+	private void closeVendor(ActionEvent event)
+	{
+		vendor.setVisible(false);
+		navigation.setVisible(true);
+	}
+	
+	@FXML
+	private void showTeleporter(ActionEvent event)
+	{
+		teleporter.setVisible(true);
+		navigation.setVisible(false);
 	}
 	
 	@FXML
@@ -112,10 +133,22 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void destroyTeleporter(ActionEvent event)
+	private void closeTeleporter(ActionEvent event)
 	{
-		game.currentRoom.setTeleporter(null);
-		updatePanel();
+		teleporter.setVisible(false);
+		navigation.setVisible(true);
+	}
+	
+	@FXML
+	private void buyItem(Event event)
+	{
+		Item selectedItem = (Item) vendorInventory.getSelectionModel().getSelectedItem();
+		Item tempItem = game.currentRoom.inventory.add(selectedItem);
+		game.vendor.inventory.swap(selectedItem, tempItem);
+		
+		// Update inventories
+		updateVendorInventory();
+		updateRoomInventory();
 	}
 	
 	@FXML
@@ -135,22 +168,15 @@ public class FXMLDocumentController implements Initializable {
 	private void dropItem(Event event)
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
-		Item droppedItem = game.currentRoom.inventory.add(selectedItem);
-		game.player.inventory.swap(selectedItem, droppedItem);
+		if(!game.useItem(selectedItem)) // checks to see if it's an item that's suppose to be used
+		{
+			Item droppedItem = game.currentRoom.inventory.add(selectedItem);
+			game.player.inventory.swap(selectedItem, droppedItem);
+		}
 		
 		// Update inventories
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePlayerStatus();
-	}
-	
-	@FXML
-	private void useItem(ActionEvent event)
-	{
-		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
-		game.useItem(selectedItem);
-		
-		updatePlayerInventory();
 		updatePlayerStatus();
 		updateDialouge();
 	}
@@ -286,6 +312,28 @@ public class FXMLDocumentController implements Initializable {
 		updateDialouge();
 		updatePoints();
 		updateTurns();
+		
+		// Show teleporter option
+		if(game.currentRoom.getTeleporter() != null)
+		{
+			showTeleporter.setVisible(true);
+		}
+		else
+		{
+			showTeleporter.setVisible(false);
+		}
+		
+		// Show vendor option
+		if(game.currentRoom == game.currentVendorRoom)
+		{
+			showVendor.setVisible(true);
+		}
+		else
+		{
+			showVendor.setVisible(false);
+		}
+		
+		// Show combat
 		if(game.currentRoom.hasMonster())
 		{
 			monster.setVisible(true);
@@ -293,21 +341,6 @@ public class FXMLDocumentController implements Initializable {
 			vendor.setVisible(false);
 			navigation.setVisible(false);
 			updateMonsterStatus();
-		}
-		else if(game.currentRoom.getTeleporter() != null)
-		{
-			monster.setVisible(false);
-			teleporter.setVisible(true);
-			vendor.setVisible(false);
-			navigation.setVisible(false);
-		}
-		else if(game.currentRoom == game.currentVendorRoom)
-		{
-			monster.setVisible(false);
-			teleporter.setVisible(false);
-			vendor.setVisible(true);
-			navigation.setVisible(false);
-			updateVendorInventory();
 		}
 		else
 		{
