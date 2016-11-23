@@ -312,6 +312,7 @@ public class FXMLDocumentController implements Initializable {
 			teleporter.setVisible(false);
 			vendor.setVisible(true);
 			navigation.setVisible(false);
+			updateVendorInventory();
 		}
 		else
 		{

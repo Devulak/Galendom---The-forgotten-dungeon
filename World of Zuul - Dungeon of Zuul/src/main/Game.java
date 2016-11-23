@@ -20,7 +20,7 @@ public class Game
 	public Game()
 	{
 		createRooms();
-		currentRoom = lvl_1; //The player will start in this room
+		currentRoom = lvl_5a; //The player will start in this room
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
 	}
 
