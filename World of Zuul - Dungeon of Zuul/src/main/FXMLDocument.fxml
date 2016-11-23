@@ -180,11 +180,11 @@
                                     <Image url="@../sprites/inventory.png" />
                                  </image>
                               </ImageView>
-                                    <ListView fx:id="playerInventory" layoutX="8.0" layoutY="8.0" prefHeight="240.0" prefWidth="192.0" />
+                                    <ListView fx:id="playerInventory" layoutX="8.0" layoutY="8.0" onMouseClicked="#dropItem" prefHeight="240.0" prefWidth="192.0" />
                                     <Button layoutX="152.0" layoutY="264.0" onAction="#dropItem" prefHeight="48.0" prefWidth="48.0" styleClass="moveRight" />
-                                    <Button layoutX="216.0" layoutY="264.0" onAction="#takeItem" prefHeight="48.0" prefWidth="48.0" styleClass="moveLeft" />
+                                    <Button layoutX="216.0" layoutY="264.0" prefHeight="48.0" prefWidth="48.0" styleClass="moveLeft" />
                                     <Button layoutX="8.0" layoutY="264.0" onAction="#useItem" prefHeight="48.0" prefWidth="48.0" styleClass="status" text="USE" />
-                                    <ListView fx:id="roomInventory" layoutX="216.0" layoutY="8.0" prefHeight="240.0" prefWidth="192.0" />
+                                    <ListView fx:id="roomInventory" layoutX="216.0" layoutY="8.0" onMouseClicked="#takeItem" prefHeight="240.0" prefWidth="192.0" />
                                 </children>
                             </Pane>
                      </children>

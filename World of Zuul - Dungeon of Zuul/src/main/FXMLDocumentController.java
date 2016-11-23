@@ -1,24 +1,19 @@
 package main;
 
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
+import javafx.event.Event;
+import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -124,7 +119,7 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void takeItem(ActionEvent event)
+	private void takeItem(Event event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
 		Item tempItem = game.player.inventory.add(selectedItem);
@@ -137,7 +132,7 @@ public class FXMLDocumentController implements Initializable {
 	}
 	
 	@FXML
-	private void dropItem(ActionEvent event)
+	private void dropItem(Event event)
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
 		Item droppedItem = game.currentRoom.inventory.add(selectedItem);
