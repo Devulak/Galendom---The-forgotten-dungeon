@@ -129,6 +129,7 @@ public class FXMLDocumentController implements Initializable {
 	private void teleport(ActionEvent event)
 	{
 		game.useTeleporter();
+		updateRoomInventory();
 		updatePanel();
 	}
 	

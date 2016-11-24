@@ -416,6 +416,7 @@ public class Game
 					addTurn();
 					lastRoom = currentRoom;
 					currentRoom = nextRoom;
+					goVendor();
 					printLook(); // It will give you a description of what's in the room
 				}
 			}
