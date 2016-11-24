@@ -23,7 +23,7 @@ import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
 	
-	private Game game;
+	GameInterface game = new Game();
 	
 	@FXML
 	private Label points;
@@ -117,7 +117,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void destroyTeleporter(ActionEvent event)
 	{
-		game.currentRoom.setTeleporter(null);
+		game.getCurrentRoom().setTeleporter(null);
 		updatePanel();
 	}
 	
@@ -125,8 +125,8 @@ public class FXMLDocumentController implements Initializable {
 	private void takeItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
-		Item tempItem = game.player.inventory.add(selectedItem);
-		game.currentRoom.inventory.swap(selectedItem, tempItem);
+		Item tempItem = game.getPlayer().inventory.add(selectedItem);
+		game.getCurrentRoom().getInventory().swap(selectedItem, tempItem);
 		
 		// Update inventories
 		updatePlayerInventory();
@@ -138,8 +138,8 @@ public class FXMLDocumentController implements Initializable {
 	private void dropItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
-		Item droppedItem = game.currentRoom.inventory.add(selectedItem);
-		game.player.inventory.swap(selectedItem, droppedItem);
+		Item droppedItem = game.getCurrentRoom().getInventory().add(selectedItem);
+		game.getCurrentRoom().getInventory().swap(selectedItem, droppedItem);
 		
 		// Update inventories
 		updatePlayerInventory();
@@ -209,52 +209,52 @@ public class FXMLDocumentController implements Initializable {
 	public void updatePlayerStatus()
 	{
 		// Health
-		playerHealth.setText(game.player.getHealth() + " / " + game.player.getMaxHealth() + " HP");
-		playerHealthbar.setFitWidth((double)game.player.getHealth()/game.player.getMaxHealth()*342);
+		playerHealth.setText(game.getPlayer().getHealth() + " / " + game.getPlayer().getMaxHealth() + " HP");
+		playerHealthbar.setFitWidth((double)game.getPlayer().getHealth()/game.getPlayer().getMaxHealth()*342);
 		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
 		
 		// Experience
-		experienceStatus.setText(game.player.getExperience() + " / " + game.player.getMaxExperience() + " EXP");
-		playerExperiencebar.setFitWidth((double)game.player.getExperience()/game.player.getMaxExperience()*214);
+		experienceStatus.setText(game.getPlayer().getExperience() + " / " + game.getPlayer().getMaxExperience() + " EXP");
+		playerExperiencebar.setFitWidth((double)game.getPlayer().getExperience()/game.getPlayer().getMaxExperience()*214);
 		playerExperiencebarEnd.setLayoutX(playerExperiencebar.getLayoutX()+playerExperiencebar.getFitWidth());
 		
 		// Level
-		playerLevel.setText(String.format("%d", game.player.getLevel()));
+		playerLevel.setText(String.format("%d", game.getPlayer().getLevel()));
 		
 		// Strength
-		playerStrength.setText(String.format("%d", game.player.getStrength()));
+		playerStrength.setText(String.format("%d", game.getPlayer().getStrength()));
 		
 		// Armour
-		playerArmour.setText(String.format("%d", game.player.getArmour()));
+		playerArmour.setText(String.format("%d", game.getPlayer().getArmour()));
 	}
 	
 	public void updateMonsterStatus()
 	{
 		// Health
-		monsterHealth.setText(game.currentRoom.monster.getHealth() + " / " + game.currentRoom.monster.getMaxHealth() + " HP");
-		monsterHealthbar.setFitWidth((double)game.currentRoom.monster.getHealth()/game.currentRoom.monster.getMaxHealth()*342);
+		monsterHealth.setText(game.getCurrentRoom().getMonster().getHealth() + " / " + game.getCurrentRoom().getMonster().getMaxHealth() + " HP");
+		monsterHealthbar.setFitWidth((double)game.getCurrentRoom().getMonster().getHealth()/game.getCurrentRoom().getMonster().getMaxHealth()*342);
 		monsterHealthbarEnd.setLayoutX(monsterHealthbar.getLayoutX()+monsterHealthbar.getFitWidth());
 		
 		// Level
-		monsterLevel.setText(String.format("%d", game.currentRoom.monster.getLevel()));
+		monsterLevel.setText(String.format("%d", game.getCurrentRoom().getMonster().getLevel()));
 		
 		// Strength
-		monsterStrength.setText(String.format("%d", game.currentRoom.monster.getStrength()));
+		monsterStrength.setText(String.format("%d", game.getCurrentRoom().getMonster().getStrength()));
 		
 		// Armour
-		monsterArmour.setText(String.format("%d", game.currentRoom.monster.getArmour()));
+		monsterArmour.setText(String.format("%d", game.getCurrentRoom().getMonster().getArmour()));
 	}
 	
 	public void updatePlayerInventory()
 	{
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.player.inventory.getContent());
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getPlayer().inventory.getContent());
 		playerInventory.setItems(null);
 		playerInventory.setItems(itemsTemp);
 	}
 	
 	public void updateRoomInventory()
 	{
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.currentRoom.inventory.getContent());
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getCurrentRoom().getInventory().getContent());
 		roomInventory.setItems(null);
 		roomInventory.setItems(itemsTemp);
 	}
@@ -282,7 +282,7 @@ public class FXMLDocumentController implements Initializable {
 		updateDialouge();
 		updatePoints();
 		updateTurns();
-		if(game.currentRoom.hasMonster())
+		if(game.getCurrentRoom().hasMonster())
 		{
 			monster.setVisible(true);
 			teleporter.setVisible(false);
@@ -290,14 +290,14 @@ public class FXMLDocumentController implements Initializable {
 			navigation.setVisible(false);
 			updateMonsterStatus();
 		}
-		else if(game.currentRoom.getTeleporter() != null)
+		else if(game.getCurrentRoom().getTeleporter() != null)
 		{
 			monster.setVisible(false);
 			teleporter.setVisible(true);
 			vendor.setVisible(false);
 			navigation.setVisible(false);
 		}
-		else if(game.currentRoom == game.currentVendorRoom)
+		else if(game.getCurrentRoom() == game.getCurrentVendorRoom())
 		{
 			monster.setVisible(false);
 			teleporter.setVisible(false);

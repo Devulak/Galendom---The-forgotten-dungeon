@@ -1,11 +1,11 @@
-package main;
+package main.creature;
 
 import java.util.*;
 import main.item.*;
 
 public class Inventory
 {
-	protected List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
+	private List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
 	private boolean nolimit = false;
 	
 	public Inventory() // Constructor
@@ -18,7 +18,7 @@ public class Inventory
 		this.nolimit = nolimit;
 	}
 	
-	protected Item add(Item item)
+	public Item add(Item item)
 	{
 		if(item != null)
 		{
@@ -46,7 +46,7 @@ public class Inventory
 		return null; // Return null since it doesn't give anything back
 	}
 	
-	protected void remove(Item searchForItem)
+	public void remove(Item searchForItem)
 	{
 		if(searchForItem != null)
 		{
@@ -62,7 +62,7 @@ public class Inventory
 		}
 	}
 	
-	protected void swap(Item itemToRemove, Item itemToAdd)
+	public void swap(Item itemToRemove, Item itemToAdd)
 	{
 		remove(itemToRemove);
 		add(itemToAdd);
