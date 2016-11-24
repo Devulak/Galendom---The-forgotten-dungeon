@@ -86,7 +86,6 @@ public class Inventory
 		{
 			if(searchClass.isInstance(item))
 			{
-				System.out.println(item);
 				return item;
 			}
 		}
