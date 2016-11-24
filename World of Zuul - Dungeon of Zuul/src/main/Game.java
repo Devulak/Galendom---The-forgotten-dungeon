@@ -5,15 +5,14 @@ import main.item.*;
 
 public class Game
 {
-	private int points;
+	private int points =0;
 	private int turns;
 	private String dialogue = "";
 	protected Creature player;
 	protected Room currentRoom;
 	protected Room lastRoom;
 	protected Creature vendor = new Creature(0);
-	protected Room currentVendorRoom;
-	protected int score = 0;
+	protected Room currentVendorRoom;	
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	protected Room[][] rooms = new Room[3][4];
 	protected Boolean[][] roomsSeen = new Boolean[3][4];
@@ -37,8 +36,11 @@ public class Game
 
 	public int getPoints()
 	{
-		return points;
-	}
+              
+              return points;
+        }
+        
+        
 
 	public String getDialogue()
 	{
@@ -127,6 +129,7 @@ public class Game
 		//hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
 		//hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
 		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
+                
 		// Others
 		lvl_5a.locked(true);
 		lvl_4a.setTeleporter(lvl_1);
@@ -170,6 +173,7 @@ public class Game
 		// Potions
 		player.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
+                lvl_2.monster.inventory.add(new Potion(2)); // x2 health potions
 		lvl_3.monster.inventory.add(new Potion(2)); // x2 health potions
 		lvl_4.monster.inventory.add(new Potion(2)); // x2 health potions
 		lvl_5a.monster.inventory.add(new Potion(3)); // x3 health potions
@@ -192,13 +196,14 @@ public class Game
 		vendor.inventory.add(new Boot("Steel Boots", 5, 5)); //Steel Boots from Vendor, 5 coins     
 		
 		// Weapons
-		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
+		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
 		lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5a.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_6.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_7.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_8.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
+                
 		
 		// Shields
 		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2)); //Wooden Shield
@@ -261,8 +266,9 @@ public class Game
 	 */
 	private void printWelcome()
 	{
-		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.");
+		addDialogue("You're lost in the Dungeon of Zuul.");
 		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss.");
+                addDialogue("If you dwell too long in the cave and exceed 25 turns, you will grow weak by the toxic gass and take more damage.");
 		addDialogue("If you manage to defeat the boss, you will win.");
 		addDialogue("But if your health reaches zero, you will lose!\n");
 		printLook();
@@ -299,12 +305,21 @@ public class Game
 		{
 			if(player.inventory.useItem(searchForItem))
 			{
-				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points." + " You score is now: " + score + " points.");
-				score -= player.level;
+				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points." + " You score is now: " + points + " points.");
+                                points -= player.level*2;
 				return true;
 			}
 		}
+                if(searchForItem instanceof Gassmask){
+                    if(player.inventory.useItem(searchForItem))
+			{
+				addDialogue("You got 5 extra turns");
+                                turns+=5;
+				return true;
+			}
+                }
 		return false;
+                
 	}
 	
 	protected void buyItem(Item itemToBuy)
@@ -395,7 +410,7 @@ public class Game
 				{
 					player = null;
 				}
-			}
+                        }
 			else
 			{
 				player.gainExperience(currentRoom.monster);
@@ -410,31 +425,32 @@ public class Game
 		else
 		{
 			addDialogue("There's no monster to attack");
-		}
-		
-		if (currentRoom.monster == null)
-		{
-			score+=10;
-			addDialogue("You gained 10 points, your score is now: " + score + " points!");
-		}
-		
-		if (currentRoom.monster == null && currentRoom == lvl_8)
-		{
-			addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.");
-			addDialogue("Please exit the game.");
-		}
-		
-		if (player == null)
-		{
-			System.out.println("You died, thanks for playing.");
-			Runtime.getRuntime().exit(0);
-		}
-		
-		if (currentRoom == lvl_7 && currentRoom.monster == null)
-		{
-			addDialogue("You see something big moving in the shadows ahead.");
-		}
-	}
+		}   
+                if(currentRoom.monster==null)
+                {
+                    points+=player.level*5;
+                    addDialogue("You gained 10 points, your score is now: " + points + " points!");
+                }
+                         
+                if(currentRoom.monster==null && currentRoom == lvl_8){
+                    addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.\nPlease exit the game.");
+                }    
+                if(player==null){
+                    addDialogue("You died, thanks for playing.");
+                    Runtime.getRuntime().exit(0);                     
+                }
+                 if (currentRoom==lvl_7 && currentRoom.monster==null){
+                    addDialogue("You see something big moving in the shadows ahead.");
+                }
+                 if(turns>=1)//The Player will grow weaker for each turn he takes after max turns
+                 {
+                     player.health=player.level;                         
+                     addDialogue("You have been in the cave for too long, you have grown weaker by the toxic gass and take more damage.");
+                 } 
+                 if(player.getHealth() <= 0){
+                     player = null;
+                 }                 
+        }
 	
 	public void goRoom(int[] direction)
 	{
@@ -482,8 +498,10 @@ public class Game
 			{
 				addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
 			}
+                        
 		}
 	}
+        
 	
 	/**
 	 * Makes the vendor walk "again", vendor cannot move outside a locked
@@ -550,10 +568,6 @@ public class Game
 			lastRoom = currentRoom;
 			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
 		}
-	}
-	
-	public static Item woa(Boolean asdfka, Item item)
-	{
-		return null;
-	}
+                
+	}                   
 }
