@@ -125,8 +125,8 @@ public class FXMLDocumentController implements Initializable {
 	private void takeItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
-		Item tempItem = game.getPlayer().inventory.add(selectedItem);
-		game.getCurrentRoom().getInventory().swap(selectedItem, tempItem);
+		Item tempItem = game.getPlayer().getCreaturesInventory().add(selectedItem);
+		game.getCurrentRoom().getRoomsInventory().swap(selectedItem, tempItem);
 		
 		// Update inventories
 		updatePlayerInventory();
@@ -138,8 +138,8 @@ public class FXMLDocumentController implements Initializable {
 	private void dropItem(ActionEvent event)
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
-		Item droppedItem = game.getCurrentRoom().getInventory().add(selectedItem);
-		game.getCurrentRoom().getInventory().swap(selectedItem, droppedItem);
+		Item droppedItem = game.getCurrentRoom().getRoomsInventory().add(selectedItem);
+		game.getCurrentRoom().getRoomsInventory().swap(selectedItem, droppedItem);
 		
 		// Update inventories
 		updatePlayerInventory();
@@ -247,14 +247,14 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updatePlayerInventory()
 	{
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getPlayer().inventory.getContent());
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getPlayer().getCreaturesInventory().getContent());
 		playerInventory.setItems(null);
 		playerInventory.setItems(itemsTemp);
 	}
 	
 	public void updateRoomInventory()
 	{
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getCurrentRoom().getInventory().getContent());
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getCurrentRoom().getRoomsInventory().getContent());
 		roomInventory.setItems(null);
 		roomInventory.setItems(itemsTemp);
 	}

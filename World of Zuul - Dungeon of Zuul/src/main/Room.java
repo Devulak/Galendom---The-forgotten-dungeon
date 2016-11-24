@@ -57,7 +57,7 @@ public class Room
 	{
 		if(hasMonster())
 		{
-			return getMonster().inventory.add(item);
+			return getMonster().getCreaturesInventory().add(item);
 		}
 		else
 		{
@@ -68,7 +68,7 @@ public class Room
 	
 
 	
-	public Inventory getInventory()
+	public Inventory getRoomsInventory()
 	{
 		return inventory;
 	}
