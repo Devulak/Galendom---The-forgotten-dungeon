@@ -183,16 +183,18 @@ public class Game
 		vendor.inventory.add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor, 5 coins
 		vendor.inventory.add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor, 20 coins
 		vendor.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor, 10 coins
-		vendor.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor, 5 coins     
-		
+		vendor.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor, 5 coins
+                vendor.inventory.add(new Gassmask("Mask", 5)); //Gassmask
+		lvl_1.inventory.add(new Gassmask("Mask", 6)); //Wooden Sword, which the player has in the start of the game
 		// Weapons
-		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
+		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
 		lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5a.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_6.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_7.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_8.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
+                
 		
 		// Shields
 		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2)); //Wooden Shield
@@ -297,7 +299,16 @@ public class Game
 				return true;
 			}
 		}
+                if(searchForItem instanceof Gassmask){
+                    if(player.inventory.useItem(searchForItem))
+			{
+				addDialogue("You got 5 extra turns");
+                                turns+=5;
+				return true;
+			}
+                }
 		return false;
+                
 	}
 
 	public void attack()
@@ -493,9 +504,5 @@ public class Game
 			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
 		}
                 
-	}
-        public void event()
-        {
-                   
-        }
+	}                   
 }
