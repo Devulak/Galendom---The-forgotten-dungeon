@@ -30,21 +30,37 @@ public abstract class LevelAbleCreature extends Creature implements Levelable, S
 		super(lvl);
 	}
 
+	/**
+	* Returns the health of the creature.
+	* @return The health of one specific creature will be returned
+	*/
 	public int getHealth()
 	{
 		return health;
 	}
 	
+	/**
+	* Returns the maximum health of the creature.
+	* @return The maximum health of one specific creature will be returned
+	*/
 	public int getMaxHealth()
 	{
 		return maxHealth;
 	}
 	
+	/**
+	* Returns the amount experience of the creature.
+	* @return The amount of experience of one specific creature will be returned
+	*/
 	public int getExperience()
 	{
 		return experience;
 	}
 	
+	/**
+	* Returns the maximum experience of the creature.
+	* @return The maximum experience of one specific creature will be returned
+	*/
 	public int getMaxExperience()
 	{
 		return experienceMax;

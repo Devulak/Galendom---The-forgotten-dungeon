@@ -180,7 +180,6 @@ public class Game implements GameInterface
 		lvl_4.addItemToMonster(new Potion(5)); // x5 health potions
 		lvl_5a.addItemToMonster(new Potion(5)); // x5 health potions
 		lvl_7.addItemToMonster(new Potion(5)); // x5 health potions
-
 		
 		// Coins		
 		lvl_2a.addItemToMonster(new Coin(2)); // 2 coins
@@ -207,7 +206,7 @@ public class Game implements GameInterface
 		lvl_6.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_7.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_8.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
-                
+		
 		// Shields
 		lvl_1.addItemToMonster(new Shield("Wooden Shield", 2)); //Wooden Shield
 		lvl_4.addItemToMonster(new Shield("Iron Shield", 4)); //Iron Shield
@@ -279,7 +278,6 @@ public class Game implements GameInterface
 	}
 
 	/* By writing "help" in console, this method will be called. */
-
 
 	private void printLook() // Prints out what the character can see
 	{

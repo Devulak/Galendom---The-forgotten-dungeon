@@ -48,10 +48,25 @@ public class Room
 		return monster;
     }
 	
+	/**
+	* Returns an item to the monsters inventory in the specific room if there is any.
+	* @param item	the item you want to add into the monsters inventory
+	* @return		if there is a monster in the room, the item will be added
+	*/
 	public Item addItemToMonster(Item item) 
 	{
-		return getMonster().inventory.add(item);
+		if(hasMonster())
+		{
+			return getMonster().inventory.add(item);
+		}
+		else
+		{
+			System.out.println("Error: The game cannot give a monster an item. The monster does not exist");
+			return null;
+		}
 	}
+	
+
 	
 	public Inventory getInventory()
 	{
