@@ -1,5 +1,6 @@
 package main;
 
+import main.creature.*;
 import java.util.*;
 import main.item.*;
 
@@ -8,7 +9,7 @@ public class Game
 	private int points;
 	private int turns;
 	private String dialogue = "";
-	protected Creature player;
+	protected Player player;
 	protected Room currentRoom;
 	protected Room lastRoom;
 	protected Creature vendor;
@@ -91,22 +92,22 @@ public class Game
 		lvl_8 = rooms[1][3];
 
 		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Creature(100);
+		player = new Player(100);
 		
 		// Give creatures some items that they drop
 		// Potions
-        lvl_1.setMonster(new Creature(1));
-        lvl_2.setMonster(new Creature(2));
-        lvl_2a.setMonster(new Creature(2));
-        lvl_3.setMonster(new Creature(3));
-        lvl_3a.setMonster(new Creature(3));
-        lvl_4.setMonster(new Creature(4));
-        lvl_4a.setMonster(new Creature(4));
-        lvl_5.setMonster(new Creature(5));
-        lvl_5a.setMonster(new Creature(5));
-        lvl_6.setMonster(new Creature(7));
-        lvl_7.setMonster(new Creature(7));
-        lvl_8.setMonster(new Creature(11));
+        lvl_1.setMonster(new Monster(1));
+        lvl_2.setMonster(new Monster(2));
+        lvl_2a.setMonster(new Monster(2));
+        lvl_3.setMonster(new Monster(3));
+        lvl_3a.setMonster(new Monster(3));
+        lvl_4.setMonster(new Monster(4));
+        lvl_4a.setMonster(new Monster(4));
+        lvl_5.setMonster(new Monster(5));
+        lvl_5a.setMonster(new Monster(5));
+        lvl_6.setMonster(new Monster(7));
+        lvl_7.setMonster(new Monster(7));
+        lvl_8.setMonster(new Boss(11));
         	
         // Give creatures some items that they drop
 
@@ -397,8 +398,10 @@ public class Game
 				{
 					currentRoom.inventory.add(item);
 				}
+				score += currentRoom.monster.givePlayerPoints();
 				currentRoom.monster = null;
 				addDialogue("You have slain the monster!");
+				System.out.println(score);
 			}
 		}
 		else

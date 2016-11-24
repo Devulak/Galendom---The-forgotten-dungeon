@@ -1,5 +1,8 @@
 package main;
 
+import main.creature.Creature;
+import main.creature.Inventory;
+import main.creature.LevelAbleCreature;
 import java.util.*;
 
 
@@ -7,7 +10,7 @@ public class Room
 {
     private final String description;
 	private List<Room> exits = new ArrayList<>();
-    protected Creature monster; // The monster in the room, if there's any!
+    protected LevelAbleCreature monster; // The monster in the room, if there's any!
     protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
     private boolean locked = false;
 	protected Room teleporter;
@@ -17,7 +20,7 @@ public class Room
         this.description = description;
     }
 
-    public void setMonster(Creature creature) 
+    public void setMonster(LevelAbleCreature creature) 
     {
         monster = creature;
     }
@@ -33,7 +36,7 @@ public class Room
 			return true;
 		}
     }
-
+	
     public Creature getMonster() 
     {
 		return monster;
