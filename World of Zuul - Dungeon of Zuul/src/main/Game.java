@@ -185,7 +185,7 @@ public class Game
 		vendor.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor, 10 coins
 		vendor.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor, 5 coins
                 vendor.inventory.add(new Gassmask("Mask", 5)); //Gassmask
-		lvl_1.inventory.add(new Gassmask("Mask", 6)); //Wooden Sword, which the player has in the start of the game
+		
 		// Weapons
 		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
 		lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
@@ -376,7 +376,7 @@ public class Game
 				{
 					player = null;
 				}
-			}
+                        }
 			else
 			{
 				player.gainExperience(currentRoom.monster);
@@ -410,9 +410,12 @@ public class Game
                 }
                  if(turns>=1)//The Player will grow weaker for each turn he takes after max turns
                  {
-                            player.health-=player.level;                            
-                            addDialogue("You have been in the cave for too long, you have grown weaker by the toxic gass and take more damage.");
-                 }                
+                     player.health=player.level;                         
+                     addDialogue("You have been in the cave for too long, you have grown weaker by the toxic gass and take more damage.");
+                 } 
+                 if(player.getHealth() <= 0){
+                     player = null;
+                 }                 
         }
 	
 	public void goRoom(int[] direction)
