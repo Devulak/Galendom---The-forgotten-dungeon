@@ -287,7 +287,8 @@ public class Game
 		{
 			if(player.inventory.useItem(searchForItem))
 			{
-				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health)");
+				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points." + " You score is now: " + score + " points.");
+                                score -= player.level;
 				return true;
 			}
 		}
