@@ -250,12 +250,10 @@ public class Game
 	 */
 	private void printWelcome()
 	{
-		addDialogue("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
-		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.''");
-		addDialogue("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
-		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
-		addDialogue("If you manage to defeat the boss, you will win, and escape this forgotten place.");
-		addDialogue("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
+		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.");
+		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss.");
+		addDialogue("If you manage to defeat the boss, you will win.");
+		addDialogue("But if your health reaches zero, you will lose!\n");
 		printLook();
 	}
 
