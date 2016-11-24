@@ -446,7 +446,7 @@ public class Game
 			{
 				addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
 			}
-                        if(turns>=20)//The Player will grow weaker for each turn he takes after max turns
+                        if(turns>=25)//The Player will grow weaker for each turn he takes after max turns
                         {
                             player.health=player.level;
                             player.maxHealth=player.level;
