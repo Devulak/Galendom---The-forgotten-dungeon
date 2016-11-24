@@ -154,9 +154,9 @@ public class Game
 
 		lvl_7.setExit(lvl_8);
 		lvl_7.setExit(lvl_6);
-
+		
 		lvl_8.setExit(lvl_7);
-
+		
 		player.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3.monster.inventory.add(new Potion(4)); // x4 health potions
@@ -164,7 +164,7 @@ public class Game
 		lvl_5a.monster.inventory.add(new Potion(5)); // x5 health potions
 		lvl_7.monster.inventory.add(new Potion(5)); // x5 health potions
 		
-		// Coins		
+		// Coins
 		lvl_2a.monster.inventory.add(new Coin(2)); // 2 coins
 		lvl_3a.monster.inventory.add(new Coin(3)); // 3 coins
 		lvl_4a.monster.inventory.add(new Coin(4)); // 4 coins
@@ -284,42 +284,12 @@ public class Game
 	}
 	protected boolean useItem(Item searchForItem)
 	{
-		for(Iterator<Item> it = player.inventory.getContent().iterator(); it.hasNext();)
+		if(searchForItem instanceof Potion)
 		{
-			Item item = it.next();
-			if (item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion)
+			if(player.inventory.useItem(searchForItem))
 			{
-				if (item.getAmount() == 1)
-				{
-					it.remove();
-				}
-				else
-				{
-					item.use();
-				}
 				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health)");
 				return true;
-			}
-			else if (item.equals(searchForItem) && item instanceof Key)
-			{
-				for(Iterator<Room> rooms = currentRoom.getExits().iterator(); rooms.hasNext();)
-				{
-					Room room = rooms.next(); // It's like a copy of the element
-					if(room.getLocked())
-					{
-						if (item.getAmount() == 1)
-						{
-							it.remove();
-						}
-						else
-						{
-							item.use();
-						}
-						room.locked(false);
-						addDialogue("You've unlocked the door with your key"); // If the door is locked
-						return true;
-					}
-				}
 			}
 		}
 		return false;
@@ -430,7 +400,16 @@ public class Game
 				// See if the door is locked or not
 				if(nextRoom.getLocked())
 				{
-					addDialogue("The door seem to be locked, obtain a key to open it"); // If the door is locked
+					// Searches for items that have key as class and then uses it if possible, this also checks to see if it was successful to use the item
+					if(player.inventory.useItem(player.inventory.searchItem(Key.class)))
+					{
+						nextRoom.locked(false);
+						addDialogue("You've unlocked the door with your key"); // You can now enter the room!
+					}
+					else
+					{
+						addDialogue("The door seem to be locked, obtain a key to open it"); // If the door is locked
+					}
 				}
 				else
 				{
@@ -445,6 +424,18 @@ public class Game
 				addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
 			}
 		}
+	}
+	
+	/**
+	 * Makes the vendor walk "again", vendor cannot move outside a locked
+	 * room, nor can he move into locked rooms.
+	 * The vendor travels at random exits, so he might go forward and back
+	 * between two of the same rooms, but that's okay,
+	 * he may be a bit silly but he's our silly!
+	 */
+	private void goVendor()
+	{
+		
 	}
 	
 	public int[] getPlayerPosition()

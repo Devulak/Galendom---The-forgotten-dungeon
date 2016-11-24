@@ -30,7 +30,7 @@ public abstract class Item
 		amount += add;
 	}
 
-	public void use() // Get the amount of the item, if zero, means it's not stackable
+	public void use()
 	{
 		amount--;
 	}

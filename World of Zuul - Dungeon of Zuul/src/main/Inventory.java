@@ -68,9 +68,52 @@ public class Inventory
 		add(itemToAdd);
 	}
 	
-	public List<Item> getContent()
+	protected List<Item> getContent()
 	{
 		return inventory;
 	}
+	/**
+	 * Returns an Item object that is found in the inventory with the given
+	 * class to search, remember to put ".class" after naming what class you
+	 * would like to search for
+	 * 
+	 * @param searchClass
+	 * @return the Item found in the inventory or null if nothing found
+	 */
+	protected Item searchItem(Class searchClass)
+	{
+		for (Item item : inventory)
+		{
+			if(searchClass.isInstance(item))
+			{
+				System.out.println(item);
+				return item;
+			}
+		}
+		return null;
+	}
 	
+	protected boolean useItem(Item searchForItem)
+	{
+		if(searchForItem != null)
+		{
+			for (Iterator<Item> itInventory = inventory.iterator(); itInventory.hasNext();)
+			{
+				Item item = itInventory.next();
+				if(item.equals(searchForItem) && item.getAmount() > 0) // Check to see if the item match and if it's usable
+				{
+					if (item.getAmount() > 1)
+					{
+						item.use();
+					}
+					else
+					{
+						itInventory.remove();
+					}
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

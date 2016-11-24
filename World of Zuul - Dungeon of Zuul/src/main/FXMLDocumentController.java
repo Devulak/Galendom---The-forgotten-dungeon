@@ -186,6 +186,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom(new int[]{0, -1});
 		updateMap();
+		updatePlayerInventory();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -195,6 +196,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom(new int[]{0, 1});
 		updateMap();
+		updatePlayerInventory();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -204,6 +206,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom(new int[]{-1, 0});
 		updateMap();
+		updatePlayerInventory();
 		updateRoomInventory();
 		updatePanel();
 	}
@@ -213,6 +216,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		game.goRoom(new int[]{1, 0});
 		updateMap();
+		updatePlayerInventory();
 		updateRoomInventory();
 		updatePanel();
 	}
