@@ -254,9 +254,9 @@ public class Game
 	 */
 	private void printWelcome()
 	{
-		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.");
+		addDialogue("You're lost in the Dungeon of Zuul.");
 		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss.");
-                addDialogue("If you dwell too long in the cave, you will grow weak by the toxic gass.");
+                addDialogue("If you dwell too long in the cave and exceed 25 turns, you will grow weak by the toxic gass and take more damage.");
 		addDialogue("If you manage to defeat the boss, you will win.");
 		addDialogue("But if your health reaches zero, you will lose!\n");
 		printLook();
@@ -396,8 +396,12 @@ public class Game
                 }
                  if (currentRoom==lvl_7 && currentRoom.monster==null){
                     addDialogue("You see something big moving in the shadows ahead.");
-                }                
-                 
+                }
+                 if(turns>=1)//The Player will grow weaker for each turn he takes after max turns
+                 {
+                            player.health-=player.level;                            
+                            addDialogue("You have been in the cave for too long, you have grown weaker by the toxic gass and take more damage.");
+                 }                
         }
 	
 	public void goRoom(int[] direction)
@@ -446,12 +450,7 @@ public class Game
 			{
 				addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
 			}
-                        if(turns>=25)//The Player will grow weaker for each turn he takes after max turns
-                        {
-                            player.health=player.level;
-                            player.maxHealth=player.level;
-                            addDialogue("You have been in the cave for too long, you have grown weaker by the toxic gass.");
-                        }                        
+                        
 		}
 	}
         
