@@ -15,6 +15,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
@@ -57,7 +61,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private GridPane navigation;
 	@FXML
-	private ImageView map;
+	private Canvas canvasMap;
 	@FXML
 	private Pane showTeleporter;
 	@FXML
@@ -93,6 +97,7 @@ public class FXMLDocumentController implements Initializable {
 		updatePlayerStatus();
 		updateRoomInventory();
 		updatePanel();
+                
 	}
 	
 	@FXML
@@ -141,12 +146,15 @@ public class FXMLDocumentController implements Initializable {
 	private void buyItem(Event event)
 	{
 		Item selectedItem = (Item) vendorInventory.getSelectionModel().getSelectedItem();
-		Item tempItem = game.currentRoom.inventory.add(selectedItem);
-		game.vendor.inventory.swap(selectedItem, tempItem);
+		game.buyItem(selectedItem);
+		/*Item tempItem = game.currentRoom.inventory.add(selectedItem);
+		game.vendor.inventory.swap(selectedItem, tempItem);*/
 		
 		// Update inventories
+		updatePlayerInventory();
 		updateVendorInventory();
 		updateRoomInventory();
+		updateDialouge();
 	}
 	
 	@FXML
@@ -160,6 +168,7 @@ public class FXMLDocumentController implements Initializable {
 		updatePlayerInventory();
 		updateRoomInventory();
 		updatePlayerStatus();
+                
 	}
 	
 	@FXML
@@ -177,6 +186,9 @@ public class FXMLDocumentController implements Initializable {
 		updateRoomInventory();
 		updatePlayerStatus();
 		updateDialouge();
+		updatePoints();
+		updateTurns();
+                
 	}
 	
 	@FXML
@@ -186,7 +198,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();               
 	}
 	
 	@FXML
@@ -196,7 +208,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();                
 	}
 	
 	@FXML
@@ -206,7 +218,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();                
 	}
 	
 	@FXML
@@ -216,7 +228,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();                   
 	}
 	
 	@Override
@@ -233,11 +245,12 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updatePlayerStatus()
 	{
+            
 		// Health
 		playerHealth.setText(game.player.getHealth() + " / " + game.player.getMaxHealth() + " HP");
 		playerHealthbar.setFitWidth((double)game.player.getHealth()/game.player.getMaxHealth()*342);
 		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
-		
+                		
 		// Experience
 		experienceStatus.setText(game.player.getExperience() + " / " + game.player.getMaxExperience() + " EXP");
 		playerExperiencebar.setFitWidth((double)game.player.getExperience()/game.player.getMaxExperience()*214);
@@ -293,12 +306,14 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updatePoints()
 	{
-		points.setText(String.format("%05d", game.getPoints()) + " POINTS");
+		int pointsAmount = game.getPoints();
+		points.setText(String.format("%05d", pointsAmount) + " POINT" + (pointsAmount != 1 ? "S" : false));
 	}
 	
 	public void updateTurns()
 	{
-		turns.setText("TURN " + String.format("%02d", game.getTurns()) + " / " + String.format("%02d", game.getTurns()));
+		turns.setText("TURN " + String.format("%02d", game.getTurns()) + " / " + String.format("%02d", game.getTurnsLimit()));
+                               
 	}
 	
 	public void updateDialouge()
@@ -313,7 +328,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		updateDialouge();
 		updatePoints();
-		updateTurns();
+		updateTurns();                
 		
 		// Show combat
 		if(game.currentRoom.hasMonster())
@@ -360,15 +375,93 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updateMap()
 	{
-		int[] pos = game.getPlayerPosition(); // player position on the map
-		int[] grid = {3, 4}; // Grid size (change this with the size of the map; maybe make this automatic?)
-		double[] viewSize = {map.getViewport().getWidth(), map.getViewport().getHeight()}; // Get the map size
-		double[] mapSize = {map.getImage().getWidth(), map.getImage().getHeight()}; // Get the map image size
+		// Init
+		GraphicsContext mapGC = canvasMap.getGraphicsContext2D();
+		double[] viewHalf = {canvasMap.getWidth()/2, canvasMap.getHeight()/2}; // Get the view size
 		
-		// Calculations for position of the map image
-		double x = mapSize[0]/(double)grid[0]*((double)pos[0] + 0.5) - viewSize[0]/2;
-		double y = mapSize[1]/(double)grid[1]*((double)pos[1] + 0.5) - viewSize[1]/2;
+		Image room = new Image("sprites/map_room.png");
+		double[] roomSize = {room.getWidth(), room.getHeight()};
+		double[] roomHalf = {roomSize[0]/2, roomSize[1]/2};
 		
-		map.setViewport(new Rectangle2D(x, y, viewSize[0], viewSize[1])); // set the new view and movement
+		Image doorV = new Image("sprites/map_door_vertical.png");
+		double[] doorVHalf = {doorV.getWidth()/2, doorV.getHeight()/2};
+		
+		Image doorH = new Image("sprites/map_door_horizontal.png");
+		double[] doorHHalf = {doorH.getWidth()/2, doorH.getHeight()/2};
+		
+		Image lock = new Image("sprites/lock.png");
+		double[] lockHalf = {lock.getWidth()/2, lock.getHeight()/2};
+		
+		int[] playerPos = game.getPlayerPosition(); // player position on the map
+		double[] globalPos = {room.getWidth()*(-0.5 - playerPos[0]) + viewHalf[0], room.getHeight()*(-0.5 - playerPos[1]) + viewHalf[1]}; // global movement of the map
+		
+		Image vendorImage = new Image("sprites/vendor.png");
+		double[] vendorSize = {vendorImage.getWidth(), vendorImage.getHeight()};
+		double[] vendorHalf = {vendorSize[0]/2, vendorSize[1]/2};
+		int[] vendorPos = game.getVendorPosition(); // vendor position on the map
+		double[] vendorCal = new double[2]; // sets the position calculation base
+		vendorCal[0] = globalPos[0] + roomSize[0]*((double)vendorPos[0] + 0.5) - vendorHalf[0];
+		vendorCal[1] = globalPos[1] + roomSize[1]*((double)vendorPos[1] + 0.5) + 4;
+		
+		Image frame = new Image("sprites/map_frame.png");
+		
+		
+		// clear canvas
+		mapGC.clearRect(0, 0, canvasMap.getWidth(), canvasMap.getHeight());
+		
+		// put down all rooms
+		for (int i = 0; i < game.rooms.length; i++)
+		{
+			for (int j = 0; j < game.rooms[i].length; j++)
+			{
+				if (game.rooms[i][j] != null && game.roomsSeen[i][j])
+				{
+					mapGC.drawImage(room, globalPos[0] + i*roomSize[0], globalPos[1] + j*roomSize[1]);
+					
+					// Add the "so called" respected doors to the room
+					for (Room exit : game.rooms[i][j].getExits())
+					{
+						if (j > 0 && exit == game.rooms[i][j - 1]) // door up
+						{
+							mapGC.drawImage(doorV, globalPos[0] + i*roomSize[0] + roomHalf[0] - doorVHalf[0], globalPos[1] + j*roomSize[1] - doorVHalf[1]);
+							if(exit.getLocked()) // is the room locked?
+							{
+								mapGC.drawImage(lock, globalPos[0] + i*roomSize[0] + roomHalf[0] - lockHalf[0], globalPos[1] + j*roomSize[1] - lockHalf[1]);
+							}
+						}
+						if (j < game.rooms[i].length-1 && exit == game.rooms[i][j + 1]) // door down
+						{
+							mapGC.drawImage(doorV, globalPos[0] + i*roomSize[0] + roomHalf[0] - doorVHalf[0], globalPos[1] + (j+1)*roomSize[1] - doorVHalf[1]);
+							if(exit.getLocked()) // is the room locked?
+							{
+								mapGC.drawImage(lock, globalPos[0] + i*roomSize[0] + roomHalf[0] - lockHalf[0], globalPos[1] + (j+1)*roomSize[1] - lockHalf[1]);
+							}
+						}
+						if (i > 0 && exit == game.rooms[i - 1][j]) // door left
+						{
+							mapGC.drawImage(doorH, globalPos[0] + i*roomSize[0] - doorHHalf[0], globalPos[1] + j*roomSize[1] + roomHalf[1] - doorHHalf[1]);
+							if(exit.getLocked()) // is the room locked?
+							{
+								mapGC.drawImage(lock, globalPos[0] + i*roomSize[0] - lockHalf[0], globalPos[1] + j*roomSize[1] + roomHalf[1] - lockHalf[1]);
+							}
+						}
+						if (i < game.rooms.length-1 && exit == game.rooms[i + 1][j]) // door right
+						{
+							mapGC.drawImage(doorH, globalPos[0] + (i+1)*roomSize[0] - doorHHalf[0], globalPos[1] + j*roomSize[1] + roomHalf[1] - doorHHalf[1]);
+							if(exit.getLocked()) // is the room locked?
+							{
+								mapGC.drawImage(lock, globalPos[0] + (i+1)*roomSize[0] - lockHalf[0], globalPos[1] + j*roomSize[1] + roomHalf[1] - lockHalf[1]);
+							}
+						}
+					}
+					
+					if (game.currentVendorRoom == game.rooms[i][j]) // see if the vendor is in a visible room
+					{
+						mapGC.drawImage(vendorImage, vendorCal[0], vendorCal[1]); // Draw vendor
+					}
+				}
+			}
+		}
+		mapGC.drawImage(frame, 0, 0); // Draw frame
 	}
 }

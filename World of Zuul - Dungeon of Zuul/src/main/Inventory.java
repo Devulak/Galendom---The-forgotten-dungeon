@@ -72,6 +72,7 @@ public class Inventory
 	{
 		return inventory;
 	}
+	
 	/**
 	 * Returns an Item object that is found in the inventory with the given
 	 * class to search, remember to put ".class" after naming what class you
@@ -92,18 +93,34 @@ public class Inventory
 		return null;
 	}
 	
+	/**
+	 * Uses an usable item in the inventory that's equal to it's parameter.
+	 * Returns true or false depending on if using the item was successful
+	 * 
+	 * @param searchForItem
+	 * @return true if the item provided can and has been used, false otherwise
+	 */
 	protected boolean useItem(Item searchForItem)
 	{
-		if(searchForItem != null)
+		return useItem(searchForItem, 1);
+	}
+	
+	/**
+	 * @param searchForItem
+	 * @param amount
+	 */
+	protected boolean useItem(Item searchForItem, int amount)
+	{
+		if (searchForItem != null)
 		{
 			for (Iterator<Item> itInventory = inventory.iterator(); itInventory.hasNext();)
 			{
 				Item item = itInventory.next();
-				if(item.equals(searchForItem) && item.getAmount() > 0) // Check to see if the item match and if it's usable
+				if (item.equals(searchForItem) && item.getAmount() >= amount) // Check to see if the item match and if it's usable, by how many
 				{
-					if (item.getAmount() > 1)
+					if (item.getAmount() > amount)
 					{
-						item.use();
+						item.use(amount);
 					}
 					else
 					{
