@@ -174,7 +174,7 @@ public class Game implements GameInterface
 
 		lvl_8.setExit(lvl_7);
 
-		player.inventory.add(new Potion(5)); // x5 health potions
+		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
 		lvl_3a.addItemToMonster(new Potion(5)); // x5 health potions
 		lvl_3.addItemToMonster(new Potion(4)); // x4 health potions
 		lvl_4.addItemToMonster(new Potion(5)); // x5 health potions
@@ -192,14 +192,14 @@ public class Game implements GameInterface
                 
 
 		//Vendor
-		lvl_5a.getInventory().add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor
-		lvl_5a.getInventory().add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor
-		lvl_5a.getInventory().add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor
-		lvl_5a.getInventory().add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor
-		lvl_5a.getInventory().add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor                
+		lvl_5a.getRoomsInventory().add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor
+		lvl_5a.getRoomsInventory().add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor
+		lvl_5a.getRoomsInventory().add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor
+		lvl_5a.getRoomsInventory().add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor
+		lvl_5a.getRoomsInventory().add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor                
                                                               
 		// Weapons
-		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
+		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
 		lvl_4.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5a.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
@@ -289,7 +289,7 @@ public class Game implements GameInterface
 	}
 	public void useItem(Item searchForItem)
 	{
-		for(Iterator<Item> it = player.inventory.getContent().iterator(); it.hasNext();)
+		for(Iterator<Item> it = player.getCreaturesInventory().getContent().iterator(); it.hasNext();)
 		{
 			Item item = it.next();
 			if (item.equals(searchForItem) && item.getAmount() > 0 && item instanceof Potion)
@@ -353,7 +353,7 @@ public class Game implements GameInterface
 					if(lastRoom == null)
 					{
 						addDialogue("... although, you have no place you run, you find a shiny new stick laying around");
-						currentRoom.getInventory().add(new Weapon("GASPOWERED STICK", 1));
+						currentRoom.getRoomsInventory().add(new Weapon("GASPOWERED STICK", 1));
 					}
 					else
 					{
@@ -400,9 +400,9 @@ public class Game implements GameInterface
 			else
 			{
 				player.gainExperience(currentRoom.getMonster());
-				for (Item item : currentRoom.getMonster().inventory.getContent())
+				for (Item item : currentRoom.getMonster().getCreaturesInventory().getContent())
 				{
-					currentRoom.getInventory().add(item);
+					currentRoom.getRoomsInventory().add(item);
 				}
 				score += currentRoom.getMonster().givePlayerPoints();
 				currentRoom.setMonsterToNull();
