@@ -5,15 +5,14 @@ import main.item.*;
 
 public class Game
 {
-	private int points;
+	private int points =0;
 	private int turns;
 	private String dialogue = "";
 	protected Creature player;
 	protected Room currentRoom;
 	protected Room lastRoom;
 	protected Creature vendor = new Creature(0);
-	protected Room currentVendorRoom;
-	protected int score = 0;
+	protected Room currentVendorRoom;	
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	protected Room[][] rooms = new Room[3][4];
 	
@@ -36,8 +35,11 @@ public class Game
 
 	public int getPoints()
 	{
-		return points;
-	}
+              
+              return points;
+        }
+        
+        
 
 	public String getDialogue()
 	{
@@ -287,8 +289,8 @@ public class Game
 		{
 			if(player.inventory.useItem(searchForItem))
 			{
-				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points." + " You score is now: " + score + " points.");
-                                score -= player.level;
+				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points." + " You score is now: " + points + " points.");
+                                points -= player.level*2;
 				return true;
 			}
 		}
@@ -375,12 +377,12 @@ public class Game
 		else
 		{
 			addDialogue("There's no monster to attack");
-		}
-                 if(currentRoom.monster==null)
+		}   
+                if(currentRoom.monster==null)
                 {
-                    score+=10;
-                    addDialogue("You gained 10 points, your score is now: " + score + " points!");
-                }                
+                    points+=player.level*5;
+                    addDialogue("You gained 10 points, your score is now: " + points + " points!");
+                }
                 if(currentRoom.monster==null && currentRoom == lvl_8){
                     addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.\nPlease exit the game.");
                 }    

@@ -177,6 +177,7 @@ public class FXMLDocumentController implements Initializable {
 		updateRoomInventory();
 		updatePlayerStatus();
 		updateDialouge();
+                updatePoints();
 	}
 	
 	@FXML
