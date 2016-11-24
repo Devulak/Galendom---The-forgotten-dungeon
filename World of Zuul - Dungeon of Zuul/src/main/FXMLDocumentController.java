@@ -20,6 +20,7 @@ import main.item.Item;
 public class FXMLDocumentController implements Initializable {
 	
 	private Game game;
+	private GridPane activeMenu;
 	
 	@FXML
 	private Label points;
@@ -107,22 +108,19 @@ public class FXMLDocumentController implements Initializable {
 	private void showVendor(ActionEvent event)
 	{
 		updateVendorInventory();
-		vendor.setVisible(true);
-		navigation.setVisible(false);
+		switchMenu(vendor);
 	}
 	
 	@FXML
 	private void closeVendor(ActionEvent event)
 	{
-		vendor.setVisible(false);
-		navigation.setVisible(true);
+		switchMenu(navigation);
 	}
 	
 	@FXML
 	private void showTeleporter(ActionEvent event)
 	{
-		teleporter.setVisible(true);
-		navigation.setVisible(false);
+		switchMenu(teleporter);
 	}
 	
 	@FXML
@@ -136,8 +134,7 @@ public class FXMLDocumentController implements Initializable {
 	@FXML
 	private void closeTeleporter(ActionEvent event)
 	{
-		teleporter.setVisible(false);
-		navigation.setVisible(true);
+		switchMenu(navigation);
 	}
 	
 	@FXML
@@ -318,43 +315,47 @@ public class FXMLDocumentController implements Initializable {
 		updatePoints();
 		updateTurns();
 		
-		// Show teleporter option
-		if(game.currentRoom.getTeleporter() != null)
-		{
-			showTeleporter.setVisible(true);
-		}
-		else
-		{
-			showTeleporter.setVisible(false);
-		}
-		
-		// Show vendor option
-		if(game.currentRoom == game.currentVendorRoom)
-		{
-			showVendor.setVisible(true);
-		}
-		else
-		{
-			showVendor.setVisible(false);
-		}
-		
 		// Show combat
 		if(game.currentRoom.hasMonster())
 		{
-			monster.setVisible(true);
-			teleporter.setVisible(false);
-			vendor.setVisible(false);
-			navigation.setVisible(false);
+			switchMenu(monster);
 			updateMonsterStatus();
 		}
 		else
 		{
-			monster.setVisible(false);
-			teleporter.setVisible(false);
-			vendor.setVisible(false);
-			navigation.setVisible(true);
+			switchMenu(navigation);
 			updateMap();
+		
+			// Show teleporter option
+			if(game.currentRoom.getTeleporter() != null)
+			{
+				showTeleporter.setVisible(true);
+			}
+			else
+			{
+				showTeleporter.setVisible(false);
+			}
+
+			// Show vendor option
+			if(game.currentRoom == game.currentVendorRoom)
+			{
+				showVendor.setVisible(true);
+			}
+			else
+			{
+				showVendor.setVisible(false);
+			}
 		}
+	}
+	
+	public void switchMenu(GridPane switchTo)
+	{
+		if(activeMenu != null)
+		{
+			activeMenu.setVisible(false);
+		}
+		activeMenu = switchTo;
+		activeMenu.setVisible(true);
 	}
 	
 	public void updateMap()

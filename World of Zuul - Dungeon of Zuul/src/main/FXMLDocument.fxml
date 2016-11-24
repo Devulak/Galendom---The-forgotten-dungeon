@@ -455,7 +455,7 @@
                         </Pane>
                      </children>
                   </GridPane>
-                  <GridPane fx:id="vendor" alignment="CENTER" GridPane.columnIndex="1">
+                  <GridPane fx:id="vendor" alignment="CENTER" visible="false" GridPane.columnIndex="1">
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" GridPane.rowSpan="10">
                            <children>
