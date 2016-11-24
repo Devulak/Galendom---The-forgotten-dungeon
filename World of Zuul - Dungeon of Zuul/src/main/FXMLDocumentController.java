@@ -186,8 +186,8 @@ public class FXMLDocumentController implements Initializable {
 		updateRoomInventory();
 		updatePlayerStatus();
 		updateDialouge();
-                updatePoints();
-                updateTurns();
+		updatePoints();
+		updateTurns();
                 
 	}
 	
@@ -312,7 +312,7 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updateTurns()
 	{
-		turns.setText("TURN " + String.format("%02d", game.getTurns()) + " / " + String.format("%02d", game.getTurns()));
+		turns.setText("TURN " + String.format("%02d", game.getTurns()) + " / " + String.format("%02d", game.getTurnsLimit()));
                                
 	}
 	
