@@ -20,7 +20,7 @@ public class Game
 	public Game()
 	{
 		createRooms();
-		currentRoom = lvl_5a; //The player will start in this room
+		currentRoom = lvl_1; //The player will start in this room
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
 	}
 
@@ -91,7 +91,7 @@ public class Game
 		lvl_8 = rooms[1][3];
 
 		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Creature(100);
+		player = new Creature(1);
 		
 		// Give creatures some items that they drop
 		// Potions
