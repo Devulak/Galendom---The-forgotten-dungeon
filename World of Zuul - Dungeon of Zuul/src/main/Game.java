@@ -157,11 +157,12 @@ public class Game
 		
 		lvl_8.setExit(lvl_7);
 		
+                // Potions
 		player.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
-		lvl_3.monster.inventory.add(new Potion(4)); // x4 health potions
-		lvl_4.monster.inventory.add(new Potion(5)); // x5 health potions
-		lvl_5a.monster.inventory.add(new Potion(5)); // x5 health potions
+		lvl_3.monster.inventory.add(new Potion(2)); // x2 health potions
+		lvl_4.monster.inventory.add(new Potion(2)); // x2 health potions
+		lvl_5a.monster.inventory.add(new Potion(3)); // x3 health potions
 		lvl_7.monster.inventory.add(new Potion(5)); // x5 health potions
 		
 		// Coins
