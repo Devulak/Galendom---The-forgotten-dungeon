@@ -16,11 +16,12 @@ public class Game
 	protected int score = 0;
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	protected Room[][] rooms = new Room[3][4];
+	protected Boolean[][] roomsSeen = new Boolean[3][4];
 	
 	public Game()
 	{
 		createRooms();
-		currentRoom = lvl_5a; //The player will start in this room
+		currentRoom = lvl_1; //The player will start in this room
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
 	}
 
@@ -63,6 +64,15 @@ public class Game
 
 	public void createRooms()
 	{
+		// Darkens all the rooms
+		for (int i = 0; i < roomsSeen.length; i++)
+		{
+			for (int j = 0; j < roomsSeen[i].length; j++)
+			{
+				roomsSeen[i][j] = false;
+			}
+		}
+		
 		/* Adds rooms to the game, also gives them descriptions */
 		rooms[1][0] = new Room("in level 1");
 		rooms[2][0] = new Room("in level 2");
@@ -90,11 +100,11 @@ public class Game
 		lvl_7 = rooms[0][3];
 		lvl_8 = rooms[1][3];
 
-		/* Adds creatures to the game, number tells what level they should start at  */
+		// Adds creatures to the game, number tells what level they should start at
 		player = new Creature(100);
 		
 		// Give creatures some items that they drop
-		// Potions
+		// Monsters
         lvl_1.setMonster(new Creature(1));
         lvl_2.setMonster(new Creature(2));
         lvl_2a.setMonster(new Creature(2));
@@ -120,9 +130,9 @@ public class Game
 		// Others
 		lvl_5a.locked(true);
 		lvl_4a.setTeleporter(lvl_1);
-		lvl_4a.monster.inventory.add(new Key("Key", 1));
+		lvl_4a.monster.inventory.add(new Key(1));
 
-		/* This gives the player the option to move between the rooms */
+		// This gives the player the option to move between the rooms
 		lvl_1.setExit(lvl_2);
 		lvl_1.setExit(lvl_2a);
 
@@ -157,7 +167,7 @@ public class Game
 		
 		lvl_8.setExit(lvl_7);
 		
-                // Potions
+		// Potions
 		player.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3.monster.inventory.add(new Potion(2)); // x2 health potions
@@ -175,11 +185,11 @@ public class Game
 		lvl_5a.monster.inventory.add(new Coin(8)); // 8 coins
 		
 		//Vendor
-		vendor.inventory.add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor, 15 coins
-		vendor.inventory.add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor, 5 coins
-		vendor.inventory.add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor, 20 coins
-		vendor.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor, 10 coins
-		vendor.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor, 5 coins     
+		vendor.inventory.add(new Shield("Steel Shield", 6, 15)); //Steel Shield from Vendor, 15 coins
+		vendor.inventory.add(new Helmet("Steel Helmet", 7, 5)); //Steel Helmet from Vendor, 5 coins
+		vendor.inventory.add(new Chestplate("Steel Armour", 8, 20)); //Steel Chestplate from Vendor, 20 coins
+		vendor.inventory.add(new Legging("Steel Leggings", 7, 10)); //Steel Leggings from Vendor, 10 coins
+		vendor.inventory.add(new Boot("Steel Boots", 5, 5)); //Steel Boots from Vendor, 5 coins     
 		
 		// Weapons
 		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
@@ -204,10 +214,10 @@ public class Game
 		lvl_8.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
 		
 		// Chestplates
-		lvl_2a.monster.inventory.add(new Armour("Leather Armour", 4)); //Leather Chestplate
-		lvl_4.monster.inventory.add(new Armour("Iron Armour", 6)); //Iron Chestplate
-		lvl_5a.monster.inventory.add(new Armour("Iron Armour", 6)); //Iron Chestplate                               
-		lvl_8.monster.inventory.add(new Armour("Steel Armour", 8)); //Steel Chestplate
+		lvl_2a.monster.inventory.add(new Chestplate("Leather Armour", 4)); //Leather Chestplate
+		lvl_4.monster.inventory.add(new Chestplate("Iron Armour", 6)); //Iron Chestplate
+		lvl_5a.monster.inventory.add(new Chestplate("Iron Armour", 6)); //Iron Chestplate                               
+		lvl_8.monster.inventory.add(new Chestplate("Steel Armour", 8)); //Steel Chestplate
 		
 		// Leggings
 		lvl_2.monster.inventory.add(new Legging("Leather Leggings", 3)); //Leather Leggings
@@ -229,11 +239,12 @@ public class Game
 		//player.inventory.add(new Weapon("Steel Sword", 5));
 		//player.inventory.add(new Shield("Steel Shield", 6));
 		//player.inventory.add(new Helmet("Iron Helmet", 5 ));
-		//player.inventory.add(new Armour("Steel Armour", 8));
+		//player.inventory.add(new Chestplate("Steel Armour", 8));
 		//player.inventory.add(new Legging("Iron Leggings", 5));
 		//player.inventory.add(new Boot("Iron Boots", 3));
 		//player.inventory.add(new Boot("Steel Boots", 5));
 		//player.inventory.add(new Weapon("Steel Sword", 5));
+		/* placeholder to outcomment all above in 1 line */
 	}
 	
 	/**
@@ -281,6 +292,7 @@ public class Game
 			addDialogue("There's a monster level " + currentRoom.monster.getLevel() + " blocking your way");
 		}
 	}
+	
 	protected boolean useItem(Item searchForItem)
 	{
 		if(searchForItem instanceof Potion)
@@ -288,11 +300,34 @@ public class Game
 			if(player.inventory.useItem(searchForItem))
 			{
 				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points." + " You score is now: " + score + " points.");
-                                score -= player.level;
+				score -= player.level;
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	protected void buyItem(Item itemToBuy)
+	{
+		
+		for (Item item : vendor.inventory.getContent())
+		{
+			if(item == itemToBuy)
+			{
+				if(player.inventory.useItem(player.inventory.searchItem(Coin.class), itemToBuy.getPrice()))
+				{
+					currentRoom.inventory.add(itemToBuy);
+					vendor.inventory.remove(itemToBuy);
+					addDialogue("Vendor> Splendid! I put it on the ground for you.");
+					return;
+				}
+				else
+				{
+					addDialogue("Vendor> I'm sorry, but you don't seem to have the coin.");
+					return;
+				}
+			}
+		}
 	}
 
 	public void attack()
@@ -376,22 +411,30 @@ public class Game
 		{
 			addDialogue("There's no monster to attack");
 		}
-                 if(currentRoom.monster==null)
-                {
-                    score+=10;
-                    addDialogue("You gained 10 points, your score is now: " + score + " points!");
-                }                
-                if(currentRoom.monster==null && currentRoom == lvl_8){
-                    addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.\nPlease exit the game.");
-                }    
-                if(player==null){
-                    addDialogue("You died, thanks for playing.");
-                    Runtime.getRuntime().exit(0);                     
-                }
-                 if (currentRoom==lvl_7 && currentRoom.monster==null){
-                    addDialogue("You see something big moving in the shadows ahead.");
+		
+		if (currentRoom.monster == null)
+		{
+			score+=10;
+			addDialogue("You gained 10 points, your score is now: " + score + " points!");
+		}
+		
+		if (currentRoom.monster == null && currentRoom == lvl_8)
+		{
+			addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.");
+			addDialogue("Please exit the game.");
+		}
+		
+		if (player == null)
+		{
+			System.out.println("You died, thanks for playing.");
+			Runtime.getRuntime().exit(0);
+		}
+		
+		if (currentRoom == lvl_7 && currentRoom.monster == null)
+		{
+			addDialogue("You see something big moving in the shadows ahead.");
+		}
 	}
-        }
 	
 	public void goRoom(int[] direction)
 	{
@@ -451,7 +494,15 @@ public class Game
 	 */
 	private void goVendor()
 	{
-		
+		if (currentVendorRoom != currentRoom && !currentVendorRoom.getLocked()) // make sure the player isn't in the same room and the room itself is unlocked
+		{
+			int index = new Random().nextInt(currentVendorRoom.getExits().size()); // randomizes which exit to use
+			Room roomToGo = currentVendorRoom.getExits().get(index); // selects the room from the exit
+			if (!roomToGo.getLocked()) // Make sure the vendor can't go in locked rooms
+			{
+				currentVendorRoom = roomToGo; // goto that room
+			}
+		}
 	}
 	
 	public int[] getPlayerPosition()
@@ -462,6 +513,26 @@ public class Game
 			for (int j = 0; j < rooms[i].length; j++)
 			{
 				if(rooms[i][j] == currentRoom)
+				{
+					// Set the room as visible
+					roomsSeen[i][j] = true;
+					
+					// Set position on the map
+					return new int[]{i, j};
+				}
+			}
+		}
+		return null;
+	}
+	
+	public int[] getVendorPosition()
+	{
+		// Make predictions and find the current room's position
+		for (int i = 0; i < rooms.length; i++)
+		{
+			for (int j = 0; j < rooms[i].length; j++)
+			{
+				if(rooms[i][j] == currentVendorRoom)
 				{
 					// Set position on the map
 					return new int[]{i, j};
@@ -479,5 +550,10 @@ public class Game
 			lastRoom = currentRoom;
 			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
 		}
+	}
+	
+	public static Item woa(Boolean asdfka, Item item)
+	{
+		return null;
 	}
 }
