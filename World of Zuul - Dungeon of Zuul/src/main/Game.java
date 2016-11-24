@@ -1,5 +1,6 @@
 package main;
 
+import java.io.*;
 import java.util.*;
 import main.item.*;
 
@@ -17,6 +18,7 @@ public class Game
 	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	protected Room[][] rooms = new Room[3][4];
 	
+    
 	public Game()
 	{
 		createRooms();
@@ -479,5 +481,20 @@ public class Game
 			lastRoom = currentRoom;
 			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
 		}
-	}
+    }
+
+    public void pointstoFile() {
+        if (currentRoom.monster == null && currentRoom == lvl_8) {
+            try {
+                File file = new File("Points.txt");
+                PrintWriter writer;
+                writer = new PrintWriter(new FileWriter(file, true));
+                writer.println("Player current points" + points);
+                writer.close();
+
+            } catch (Exception a) {
+
+            }
+        }
+    }
 }
