@@ -93,6 +93,7 @@ public class FXMLDocumentController implements Initializable {
 		updatePlayerStatus();
 		updateRoomInventory();
 		updatePanel();
+                
 	}
 	
 	@FXML
@@ -178,6 +179,7 @@ public class FXMLDocumentController implements Initializable {
 		updatePlayerStatus();
 		updateDialouge();
                 updatePoints();
+                
 	}
 	
 	@FXML
@@ -187,7 +189,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();               
 	}
 	
 	@FXML
@@ -197,7 +199,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();                
 	}
 	
 	@FXML
@@ -207,7 +209,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();                
 	}
 	
 	@FXML
@@ -217,7 +219,7 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();
+		updatePanel();                   
 	}
 	
 	@Override
@@ -234,11 +236,12 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updatePlayerStatus()
 	{
+            
 		// Health
 		playerHealth.setText(game.player.getHealth() + " / " + game.player.getMaxHealth() + " HP");
 		playerHealthbar.setFitWidth((double)game.player.getHealth()/game.player.getMaxHealth()*342);
 		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
-		
+                		
 		// Experience
 		experienceStatus.setText(game.player.getExperience() + " / " + game.player.getMaxExperience() + " EXP");
 		playerExperiencebar.setFitWidth((double)game.player.getExperience()/game.player.getMaxExperience()*214);
@@ -300,6 +303,7 @@ public class FXMLDocumentController implements Initializable {
 	public void updateTurns()
 	{
 		turns.setText("TURN " + String.format("%02d", game.getTurns()) + " / " + String.format("%02d", game.getTurns()));
+                               
 	}
 	
 	public void updateDialouge()
@@ -314,7 +318,7 @@ public class FXMLDocumentController implements Initializable {
 	{
 		updateDialouge();
 		updatePoints();
-		updateTurns();
+		updateTurns();                
 		
 		// Show combat
 		if(game.currentRoom.hasMonster())

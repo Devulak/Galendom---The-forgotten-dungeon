@@ -13,8 +13,8 @@ public class Creature {
 	private static final int experienceRequiredRatio = 2; // The amount of experience you need further more per level
 	private static final int experienceGainRatio = 2; // The amount of experience you get per level of the monster
 	
-    private int health; // Current health
-    private int maxHealth; // Maximum amount of health
+    protected int health; // Current health
+    protected int maxHealth; // Maximum amount of health
 	private static final int healthBaseAmount = 8; // The base amount of health you have
 	private static final int healthGainAmount = 4; // The amount of health you gain each level
 	

@@ -119,6 +119,7 @@ public class Game
 		//hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
 		//hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
 		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
+                
 		// Others
 		lvl_5a.locked(true);
 		lvl_4a.setTeleporter(lvl_1);
@@ -162,6 +163,7 @@ public class Game
                 // Potions
 		player.inventory.add(new Potion(5)); // x5 health potions
 		lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
+                lvl_2.monster.inventory.add(new Potion(2)); // x2 health potions
 		lvl_3.monster.inventory.add(new Potion(2)); // x2 health potions
 		lvl_4.monster.inventory.add(new Potion(2)); // x2 health potions
 		lvl_5a.monster.inventory.add(new Potion(3)); // x3 health potions
@@ -254,6 +256,7 @@ public class Game
 	{
 		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.");
 		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss.");
+                addDialogue("If you dwell too long in the cave, you will grow weak by the toxic gass.");
 		addDialogue("If you manage to defeat the boss, you will win.");
 		addDialogue("But if your health reaches zero, you will lose!\n");
 		printLook();
@@ -383,6 +386,7 @@ public class Game
                     points+=player.level*5;
                     addDialogue("You gained 10 points, your score is now: " + points + " points!");
                 }
+                         
                 if(currentRoom.monster==null && currentRoom == lvl_8){
                     addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.\nPlease exit the game.");
                 }    
@@ -392,7 +396,8 @@ public class Game
                 }
                  if (currentRoom==lvl_7 && currentRoom.monster==null){
                     addDialogue("You see something big moving in the shadows ahead.");
-	}
+                }                
+                 
         }
 	
 	public void goRoom(int[] direction)
@@ -441,8 +446,15 @@ public class Game
 			{
 				addDialogue("There is no door!"); // If there is no path to the next room, the game will tell you that you can't go that way.
 			}
+                        if(turns>=20)//The Player will grow weaker for each turn he takes after max turns
+                        {
+                            player.health=player.level;
+                            player.maxHealth=player.level;
+                            addDialogue("You have been in the cave for too long, you have grown weaker by the toxic gass.");
+                        }                        
 		}
 	}
+        
 	
 	/**
 	 * Makes the vendor walk "again", vendor cannot move outside a locked
@@ -481,5 +493,10 @@ public class Game
 			lastRoom = currentRoom;
 			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
 		}
+                
 	}
+        public void event()
+        {
+                   
+        }
 }
