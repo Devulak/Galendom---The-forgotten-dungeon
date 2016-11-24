@@ -21,9 +21,10 @@ public class Game
     
 	public Game()
 	{
-		createRooms();
+		createRooms(); 
 		currentRoom = lvl_5a; //The player will start in this room
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
+        pointstoFile();
 	}
 
 	public int getTurns()
@@ -482,19 +483,15 @@ public class Game
 			currentRoom = currentRoom.useTeleporter(); // teleport and destroy teleporter
 		}
     }
-
     public void pointstoFile() {
-        if (currentRoom.monster == null && currentRoom == lvl_8) {
-            try {
-                File file = new File("Points.txt");
-                PrintWriter writer;
-                writer = new PrintWriter(new FileWriter(file, true));
-                writer.println("Player current points" + points);
-                writer.close();
+        try {
+            File file = new File("Points.txt");
+            PrintWriter writer;
+            writer = new PrintWriter(new FileWriter(file, true));
+            writer.println("Player current points:" + points);
+            writer.close();
 
-            } catch (Exception a) {
-
-            }
+        } catch (Exception a) {
         }
     }
 }
