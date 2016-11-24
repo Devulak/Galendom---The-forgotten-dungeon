@@ -175,11 +175,11 @@ public class Game
 		lvl_5a.monster.inventory.add(new Coin(8)); // 8 coins
 		
 		//Vendor
-		vendor.inventory.add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor
-		vendor.inventory.add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor
-		vendor.inventory.add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor
-		vendor.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor
-		vendor.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor
+		vendor.inventory.add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor, 15 coins
+		vendor.inventory.add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor, 5 coins
+		vendor.inventory.add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor, 20 coins
+		vendor.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor, 10 coins
+		vendor.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor, 5 coins     
 		
 		// Weapons
 		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
