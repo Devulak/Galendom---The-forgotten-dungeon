@@ -376,7 +376,22 @@ public class Game
 		{
 			addDialogue("There's no monster to attack");
 		}
+                 if(currentRoom.monster==null)
+                {
+                    score+=10;
+                    addDialogue("You gained 10 points, your score is now: " + score + " points!");
+                }                
+                if(currentRoom.monster==null && currentRoom == lvl_8){
+                    addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.\nPlease exit the game.");
+                }    
+                if(player==null){
+                    addDialogue("You died, thanks for playing.");
+                    Runtime.getRuntime().exit(0);                     
+                }
+                 if (currentRoom==lvl_7 && currentRoom.monster==null){
+                    addDialogue("You see something big moving in the shadows ahead.");
 	}
+        }
 	
 	public void goRoom(int[] direction)
 	{
