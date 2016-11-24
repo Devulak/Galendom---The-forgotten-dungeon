@@ -15,8 +15,15 @@ import main.item.Weapon;
  *
  * @author Nicolai
  */
-public abstract class LevelAbleCreature extends Creature implements HasLevel, CanGivePoints {
-
+public abstract class LevelAbleCreature extends Creature implements Levelable, Scoreable {
+	
+	protected int level; // The creature level, this is for scaling when created or gaining a level
+    protected int experience = 0; // The amount of experience the creature has (this always starts with "0")
+    protected int experienceMax; // The max amount of experience the creature needs for a level up
+	
+    protected int health; // Current health
+    protected int maxHealth; // Maximum amount of health
+	
 	private int maxPoints;
 	
 	public LevelAbleCreature(int lvl) {

@@ -5,7 +5,7 @@ import main.item.*;
 
 public class Inventory
 {
-	protected List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
+	private List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
 	private boolean nolimit = false;
 	
 	public Inventory() // Constructor

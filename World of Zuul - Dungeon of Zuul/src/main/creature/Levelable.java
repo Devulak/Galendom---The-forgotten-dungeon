@@ -9,7 +9,7 @@ package main.creature;
  *
  * @author Nicolai
  */
-public interface HasLevel 
+public interface Levelable 
 {
 
 	static final int EXP_BASE = 4; // The amount of experience you need atleast per level

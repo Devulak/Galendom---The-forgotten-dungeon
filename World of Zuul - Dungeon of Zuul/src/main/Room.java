@@ -4,16 +4,17 @@ import main.creature.Creature;
 import main.creature.Inventory;
 import main.creature.LevelAbleCreature;
 import java.util.*;
+import main.item.*;
 
 
 public class Room
 {
     private final String description;
 	private List<Room> exits = new ArrayList<>();
-    protected LevelAbleCreature monster; // The monster in the room, if there's any!
-    protected Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
+    private LevelAbleCreature monster; // The monster in the room, if there's any!
+    private Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
     private boolean locked = false;
-	protected Room teleporter;
+	private Room teleporter;
 
     public Room(String description)
     {
@@ -37,10 +38,25 @@ public class Room
 		}
     }
 	
-    public Creature getMonster() 
+	public void setMonsterToNull() 
+	{
+		monster = null;
+	}
+	
+    public LevelAbleCreature getMonster() 
     {
 		return monster;
     }
+	
+	public Item addItemToMonster(Item item) 
+	{
+		return getMonster().inventory.add(item);
+	}
+	
+	public Inventory getInventory()
+	{
+		return inventory;
+	}
 	
 	protected void locked(boolean lock)
 	{

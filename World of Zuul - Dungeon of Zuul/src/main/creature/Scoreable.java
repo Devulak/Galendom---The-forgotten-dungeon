@@ -9,7 +9,7 @@ package main.creature;
  *
  * @author nicol
  */
-public interface CanGivePoints 
+public interface Scoreable 
 {
 
 	static final int POINTS = 2;
