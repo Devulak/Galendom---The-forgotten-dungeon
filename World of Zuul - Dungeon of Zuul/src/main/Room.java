@@ -1,5 +1,6 @@
 package main;
 
+import java.io.Serializable;
 import main.creature.Creature;
 import main.creature.Inventory;
 import main.creature.LevelAbleCreature;
@@ -7,7 +8,7 @@ import java.util.*;
 import main.item.*;
 
 
-public class Room
+public class Room implements Serializable
 {
     private final String description;
 	private List<Room> exits = new ArrayList<>();

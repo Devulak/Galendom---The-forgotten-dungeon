@@ -1,7 +1,14 @@
 package main;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import main.creature.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.item.*;
 
 public class Game implements GameInterface
@@ -9,7 +16,7 @@ public class Game implements GameInterface
 	private int points;
 	private int turns;
 	private String dialogue = "";
-	private Player player;
+	private Player player = new Player(1);
 	private Room currentRoom;
 	private Room lastRoom;
 	private Creature vendor;
@@ -20,11 +27,39 @@ public class Game implements GameInterface
 	
 	public Game()
 	{
-		createRooms();
-		currentRoom = lvl_1; //The player will start in this room
-		currentVendorRoom = lvl_5a; //The vendor will start in this room
-	}
+		try {
+			deSerialization();
+			currentRoom = rooms[1][0];
+			currentVendorRoom = lvl_5a;
+		} catch (IOException | ClassNotFoundException ex) {
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		givePlayerItems();
 
+	}
+	
+	public void serialization() throws IOException
+	{
+		try (FileOutputStream fout = new FileOutputStream("gamescenarios\\GameScenario1.ser")) {  
+		ObjectOutputStream out = new ObjectOutputStream(fout);  
+
+		out.writeObject(rooms);
+		out.close();
+		}
+		System.out.println("Serialization succesful");
+	}
+	
+	public void deSerialization() throws IOException, ClassNotFoundException
+	{
+		try (FileInputStream fileIn = new FileInputStream("gamescenarios\\GameScenario1.ser")) {
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			rooms = (Room[][]) in.readObject();
+			in.close();
+			fileIn.close();
+		}
+		System.out.println("Deserialization succesful");
+	}
+	
 	@Override
 	public Room getCurrentRoom()
 	{
@@ -115,9 +150,6 @@ public class Game implements GameInterface
 		lvl_7 = rooms[0][3];
 		lvl_8 = rooms[1][3];
 		
-		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Player(100);
-		
 		// Give creatures some items that they drop
 		// Potions
         lvl_1.setMonster(new Monster(1));
@@ -174,7 +206,6 @@ public class Game implements GameInterface
 
 		lvl_8.setExit(lvl_7);
 
-		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
 		lvl_3a.addItemToMonster(new Potion(5)); // x5 health potions
 		lvl_3.addItemToMonster(new Potion(4)); // x4 health potions
 		lvl_4.addItemToMonster(new Potion(5)); // x5 health potions
@@ -199,7 +230,6 @@ public class Game implements GameInterface
 		lvl_5a.getRoomsInventory().add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor                
                                                               
 		// Weapons
-		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
 		lvl_4.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5a.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
@@ -251,6 +281,13 @@ public class Game implements GameInterface
 		//player.inventory.add(new Boot("Iron Boots", 3));
 		//player.inventory.add(new Boot("Steel Boots", 5));
 		//player.inventory.add(new Weapon("Steel Sword", 5));
+	}
+	
+	public void givePlayerItems()
+	{
+		player.setPlayerLevel(100);
+		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
+		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
 	}
 	
 	/**

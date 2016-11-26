@@ -2,8 +2,11 @@ package main;
 
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -197,7 +200,6 @@ public class FXMLDocumentController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		game = new Game();
 		game.play();
 		updatePlayerStatus();
 		updatePlayerInventory();
