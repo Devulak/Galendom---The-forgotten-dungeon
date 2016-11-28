@@ -311,13 +311,14 @@ public class Game implements GameInterface {
 		}
 	}
 
-	protected boolean useItem(Item searchForItem)
+	@Override
+	public boolean useItem(Item searchForItem)
 	{
 		if(searchForItem instanceof Potion)
 		{
 			if(player.getCreaturesInventory().useItem(searchForItem))
 			{
-				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points.");
+				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.getLevel()+ " points.");
 				points -= player.getLevel()*2;
 				return true;
 			}
