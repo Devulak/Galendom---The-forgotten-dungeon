@@ -177,8 +177,9 @@ public class FXMLDocumentController implements Initializable {
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
 		if(!game.useItem(selectedItem)) // checks to see if it's an item that's suppose to be used
 		{
-			Item droppedItem = game.currentRoom.inventory.add(selectedItem);
+			Item droppedItem = game.currentRoom.addItemToMonster(selectedItem);
 			game.player.inventory.swap(selectedItem, droppedItem);
+			game.get
 		}
 		
 		// Update inventories

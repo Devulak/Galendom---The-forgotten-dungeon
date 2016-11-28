@@ -2,21 +2,22 @@ package main;
 
 import java.util.*;
 import main.item.*;
+import main.creature.*;
 
-public class Game
+public class Game implements GameInterface
 {
 	private int points;
 	private int turns;
 	private int turnsLimit;
 	private String dialogue = "";
-	protected Creature player;
-	protected Room currentRoom;
-	protected Room lastRoom;
-	protected Creature vendor = new Creature(0);
-	protected Room currentVendorRoom;
-	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
-	protected Room[][] rooms = new Room[3][4];
-	protected Boolean[][] roomsSeen = new Boolean[3][4];
+	private Creature player;
+	private Room currentRoom;
+	private Room lastRoom;
+	private Creature vendor = new Monster(0);
+	private Room currentVendorRoom;
+	private Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
+	private Room[][] rooms = new Room[3][4];
+	private Boolean[][] roomsSeen = new Boolean[3][4];
 	
 	public Game()
 	{
