@@ -122,8 +122,8 @@ public class Game implements GameInterface {
 	}
 
 	@Override
-	public void createRooms() 
-		{
+	public void createRooms()
+	{
 		// Darkens all the rooms
 		for (int i = 0; i < roomsSeen.length; i++)
 		{
@@ -132,6 +132,7 @@ public class Game implements GameInterface {
 				roomsSeen[i][j] = false;
 			}
 		}
+		
 		/* Adds rooms to the game, also gives them descriptions */
 		rooms[1][0] = new Room("in level 1");
 		rooms[2][0] = new Room("in level 2");
@@ -145,7 +146,7 @@ public class Game implements GameInterface {
 		rooms[0][2] = new Room("in level 6");
 		rooms[0][3] = new Room("in level 7");
 		rooms[1][3] = new Room("in level 8");
-
+		
 		lvl_1 = rooms[1][0];
 		lvl_2 = rooms[2][0];
 		lvl_2a = rooms[0][0];
@@ -159,31 +160,40 @@ public class Game implements GameInterface {
 		lvl_7 = rooms[0][3];
 		lvl_8 = rooms[1][3];
 
-		/* Adds creatures to the game, number tells what level they should start at  */
-		player = new Player(100);
-
+		// Adds creatures to the game, number tells what level they should start at
+		player = new Player(1);
+		
 		// Give creatures some items that they drop
-		// Potions
-		lvl_1.setMonster(new Monster(1));
-		lvl_2.setMonster(new Monster(2));
-		lvl_2a.setMonster(new Monster(2));
-		lvl_3.setMonster(new Monster(3));
-		lvl_3a.setMonster(new Monster(3));
-		lvl_4.setMonster(new Monster(4));
-		lvl_4a.setMonster(new Monster(4));
-		lvl_5.setMonster(new Monster(5));
-		lvl_5a.setMonster(new Monster(5));
-		lvl_6.setMonster(new Monster(7));
-		lvl_7.setMonster(new Monster(7));
-		lvl_8.setMonster(new Boss(11));
+		// Monsters
+        lvl_1.setMonster(new Monster(1));
+        lvl_2.setMonster(new Monster(2));
+        lvl_2a.setMonster(new Monster(2));
+        lvl_3.setMonster(new Monster(3));
+        lvl_3a.setMonster(new Monster(3));
+        lvl_4.setMonster(new Monster(4));
+        lvl_4a.setMonster(new Monster(4));
+        lvl_5.setMonster(new Monster(5));
+        lvl_5a.setMonster(new Monster(5));
+        lvl_6.setMonster(new Monster(7));
+        lvl_7.setMonster(new Monster(7));
+        lvl_8.setMonster(new Monster(11));
+        	
+        // Give creatures some items that they drop
 
-		// Give creatures some items that they drop
+		//For testing the game and skipping the start fast, this will give you strength like room 5 (the middle of the game). Remember to change start level to 6.
+		//hero.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
+		//hero.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
+		//hero.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
+		//hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
+		//hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
+		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
+                
 		// Others
 		lvl_5a.locked(true);
 		lvl_4a.setTeleporter(lvl_1);
-		lvl_4a.addItemToMonster(new Key("Key", 1));
+		lvl_4a.addItemToMonster(new Key(1));
 
-		/* This gives the player the option to move between the rooms */
+		// This gives the player the option to move between the rooms
 		lvl_1.setExit(lvl_2);
 		lvl_1.setExit(lvl_2a);
 
@@ -215,17 +225,19 @@ public class Game implements GameInterface {
 
 		lvl_7.setExit(lvl_8);
 		lvl_7.setExit(lvl_6);
-
+		
 		lvl_8.setExit(lvl_7);
-
+		
+		// Potions
 		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
 		lvl_3a.addItemToMonster(new Potion(5)); // x5 health potions
-		lvl_3.addItemToMonster(new Potion(4)); // x4 health potions
-		lvl_4.addItemToMonster(new Potion(5)); // x5 health potions
-		lvl_5a.addItemToMonster(new Potion(5)); // x5 health potions
+		lvl_2.addItemToMonster(new Potion(2)); // x2 health potions
+		lvl_3.addItemToMonster(new Potion(2)); // x2 health potions
+		lvl_4.addItemToMonster(new Potion(2)); // x2 health potions
+		lvl_5a.addItemToMonster(new Potion(3)); // x3 health potions
 		lvl_7.addItemToMonster(new Potion(5)); // x5 health potions
-
-		// Coins		
+		
+		// Coins
 		lvl_2a.addItemToMonster(new Coin(2)); // 2 coins
 		lvl_3a.addItemToMonster(new Coin(3)); // 3 coins
 		lvl_4a.addItemToMonster(new Coin(4)); // 4 coins
@@ -233,49 +245,51 @@ public class Game implements GameInterface {
 		lvl_3.addItemToMonster(new Coin(6)); // 6 coins
 		lvl_4.addItemToMonster(new Coin(7)); // 7 coins
 		lvl_5a.addItemToMonster(new Coin(8)); // 8 coins
-
+		
 		//Vendor
-		lvl_5a.getRoomsInventory().add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor
-		lvl_5a.getRoomsInventory().add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor
-		lvl_5a.getRoomsInventory().add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor
-		lvl_5a.getRoomsInventory().add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor
-		lvl_5a.getRoomsInventory().add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor                
-
+		vendor.getCreaturesInventory().add(new Shield("Steel Shield", 6, 15)); //Steel Shield from Vendor, 15 coins
+		vendor.getCreaturesInventory().add(new Helmet("Steel Helmet", 7, 5)); //Steel Helmet from Vendor, 5 coins
+		vendor.getCreaturesInventory().add(new Chestplate("Steel Armour", 8, 20)); //Steel Chestplate from Vendor, 20 coins
+		vendor.getCreaturesInventory().add(new Legging("Steel Leggings", 7, 10)); //Steel Leggings from Vendor, 10 coins
+		vendor.getCreaturesInventory().add(new Boot("Steel Boots", 5, 5)); //Steel Boots from Vendor, 5 coins
+		vendor.getCreaturesInventory().add(new GasMask(5, 5)); //Gassmask
+		
 		// Weapons
-		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
+		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
 		lvl_4.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5a.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_6.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_7.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_8.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
-
+                
+		
 		// Shields
 		lvl_1.addItemToMonster(new Shield("Wooden Shield", 2)); //Wooden Shield
 		lvl_4.addItemToMonster(new Shield("Iron Shield", 4)); //Iron Shield
 		lvl_8.addItemToMonster(new Shield("Steel Shield", 6)); //Steel Shield
-
+		
 		// Helmets
 		lvl_2a.addItemToMonster(new Helmet("Leather Helmet", 2)); //Leather Helmet
-		lvl_3a.addItemToMonster(new Helmet("Iron Helmet", 5)); //Iron Helmet
-		lvl_5a.addItemToMonster(new Helmet("Iron Helmet", 5)); //Iron Helmet
-		lvl_6.addItemToMonster(new Helmet("Steel Helmet", 7)); //Steel Helmet
-		lvl_7.addItemToMonster(new Helmet("Steel Helmet", 7)); //Steel Helmet
-		lvl_8.addItemToMonster(new Helmet("Steel Helmet", 7)); //Steel Helmet
-
+		lvl_3a.addItemToMonster(new Helmet("Iron Helmet", 5 )); //Iron Helmet
+		lvl_5a.addItemToMonster(new Helmet("Iron Helmet", 5 )); //Iron Helmet
+		lvl_6.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+		lvl_7.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+		lvl_8.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+		
 		// Chestplates
-		lvl_2a.addItemToMonster(new Armour("Leather Armour", 4)); //Leather Chestplate
-		lvl_4.addItemToMonster(new Armour("Iron Armour", 6)); //Iron Chestplate
-		lvl_5a.addItemToMonster(new Armour("Iron Armour", 6)); //Iron Chestplate                               
-		lvl_8.addItemToMonster(new Armour("Steel Armour", 8)); //Steel Chestplate
-
+		lvl_2a.addItemToMonster(new Chestplate("Leather Armour", 4)); //Leather Chestplate
+		lvl_4.addItemToMonster(new Chestplate("Iron Armour", 6)); //Iron Chestplate
+		lvl_5a.addItemToMonster(new Chestplate("Iron Armour", 6)); //Iron Chestplate                               
+		lvl_8.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
+		
 		// Leggings
 		lvl_2.addItemToMonster(new Legging("Leather Leggings", 3)); //Leather Leggings
 		lvl_4a.addItemToMonster(new Legging("Iron Leggings", 5)); //Iron Leggings
 		lvl_5a.addItemToMonster(new Legging("Iron Leggings", 5)); //Iron Leggings                             
 		lvl_7.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
 		lvl_8.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
-
+		
 		// Boots          
 		lvl_2.addItemToMonster(new Boot("Leather Boots", 1)); //Leather Boots
 		lvl_3.addItemToMonster(new Boot("Iron Boots", 3)); //Iron Boots
@@ -284,16 +298,7 @@ public class Game implements GameInterface {
 		lvl_6.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
 		lvl_7.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
 		lvl_8.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
-
-		//Skip to lvl_6, which is mid of the game(set start level to 6 and player level to level 5)
-		//player.inventory.add(new Weapon("Steel Sword", 5));
-		//player.inventory.add(new Shield("Steel Shield", 6));
-		//player.inventory.add(new Helmet("Iron Helmet", 5 ));
-		//player.inventory.add(new Armour("Steel Armour", 8));
-		//player.inventory.add(new Legging("Iron Leggings", 5));
-		//player.inventory.add(new Boot("Iron Boots", 3));
-		//player.inventory.add(new Boot("Steel Boots", 5));
-		//player.inventory.add(new Weapon("Steel Sword", 5));
+		/* placeholder to outcomment all above in 1 line */
 	}
 
 	/**
