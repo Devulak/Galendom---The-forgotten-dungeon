@@ -4,7 +4,7 @@ public abstract class Item
 {
 	protected String name;
 	private int amount;
-	private String extra;
+	protected String extra;
 	private int price;
 
 	public Item(String name, int amount, int price) // Constructor
