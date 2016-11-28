@@ -347,6 +347,7 @@ public class Game
 			{
 				if(player.inventory.useItem(player.inventory.searchItem(Coin.class), itemToBuy.getPrice()))
 				{
+					itemToBuy.clearPrice();
 					currentRoom.inventory.add(itemToBuy);
 					vendor.inventory.remove(itemToBuy);
 					addDialogue("Vendor> Splendid! I put it on the ground for you.");
