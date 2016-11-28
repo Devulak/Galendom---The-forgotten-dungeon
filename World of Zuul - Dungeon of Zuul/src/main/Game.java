@@ -210,7 +210,7 @@ public class Game
 		vendor.inventory.add(new Chestplate("Steel Armour", 8, 20)); //Steel Chestplate from Vendor, 20 coins
 		vendor.inventory.add(new Legging("Steel Leggings", 7, 10)); //Steel Leggings from Vendor, 10 coins
 		vendor.inventory.add(new Boot("Steel Boots", 5, 5)); //Steel Boots from Vendor, 5 coins
-		vendor.inventory.add(new Gassmask(5, 5)); //Gassmask
+		vendor.inventory.add(new GasMask(5, 5)); //Gassmask
 		
 		// Weapons
 		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
@@ -285,7 +285,6 @@ public class Game
 	{
 		addDialogue("You're lost in the Dungeon of Zuul.");
 		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss.");
-		addDialogue("If you dwell too long in the cave and exceed 25 turns, you will grow weak by the toxic gass and take more damage.");
 		addDialogue("If you manage to defeat the boss, you will win.");
 		addDialogue("But if your health reaches zero, you will lose!\n");
 		printLook();
@@ -327,7 +326,7 @@ public class Game
 				return true;
 			}
 		}
-		if(searchForItem instanceof Gassmask)
+		if(searchForItem instanceof GasMask)
 		{
 			if(player.inventory.useItem(searchForItem))
 			{
