@@ -2,13 +2,8 @@ package main.item;
 
 public class Legging extends Armour
 {
-	public Legging(String name, int armour, int price) // Constructor
+	public Legging(String name, int armor) // Constructor
 	{
-		super(name, armour, price);
-	}
-	
-	public Legging(String name, int armour) // Constructor
-	{
-		this(name, armour, 0);
+		super(name, armor);
 	}
 }

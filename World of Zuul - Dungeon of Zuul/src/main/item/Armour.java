@@ -2,22 +2,21 @@ package main.item;
 
 public class Armour extends Item
 {
-	private int armour;
+	private int amour;
 	
-	public Armour(String name, int armour, int price) // Constructor
+	public Armour(String name, int armor) // Constructor
 	{
-		super(name, 0, price);
-		this.armour = armour;
-		this.extra = armour + " def";
+		super(name, 0);
+		this.amour = armor;
 	}
 	
-	public Armour(String name, int armour) // Constructor
+	public String toString() // Return value on object
 	{
-		this(name, armour, 0);
+		return name + " (" + amour + " def)";
 	}
 
 	public int getArmour() // Get the category of an item, the category makes sure you can't pick up more than one of each
 	{
-		return armour;
+		return amour;
 	}
 }
