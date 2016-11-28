@@ -27,11 +27,14 @@ public class Game implements GameInterface
 	
 	public Game()
 	{
-		try {
+		try 
+		{
 			deSerialization();
 			currentRoom = rooms[1][0];
 			currentVendorRoom = lvl_5a;
-		} catch (IOException | ClassNotFoundException ex) {
+		} 
+		catch (IOException | ClassNotFoundException ex) 
+		{
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		givePlayerItems();
@@ -40,7 +43,8 @@ public class Game implements GameInterface
 	
 	public void serialization() throws IOException
 	{
-		try (FileOutputStream fout = new FileOutputStream("gamescenarios\\GameScenario1.ser")) {  
+		try (FileOutputStream fout = new FileOutputStream("gamescenarios\\GameScenario1.ser")) 
+		{  
 		ObjectOutputStream out = new ObjectOutputStream(fout);  
 
 		out.writeObject(rooms);
@@ -51,7 +55,8 @@ public class Game implements GameInterface
 	
 	public void deSerialization() throws IOException, ClassNotFoundException
 	{
-		try (FileInputStream fileIn = new FileInputStream("gamescenarios\\GameScenario1.ser")) {
+		try (FileInputStream fileIn = new FileInputStream("gamescenarios\\GameScenario1.ser")) 
+		{
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			rooms = (Room[][]) in.readObject();
 			in.close();
