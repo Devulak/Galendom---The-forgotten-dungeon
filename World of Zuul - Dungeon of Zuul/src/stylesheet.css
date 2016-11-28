@@ -71,6 +71,7 @@ AnchorPane
 	-fx-background-color: transparent;
 	-fx-padding: 0 0 0 8;
 	-fx-cell-size: 29;
+	-fx-cell-size: 33;
 }
 .list-view .list-cell:selected
 {
@@ -103,7 +104,7 @@ AnchorPane
 
 
 
-/**/
+/* label */
 .label
 {
 	-fx-alignment: CENTER;
@@ -136,7 +137,7 @@ AnchorPane
 {
 	-fx-background-color: #4e4a4e;
 }
-Button
+.button
 {
 	-fx-background-color: transparent;
 	-fx-background-radius: 0;
@@ -146,7 +147,7 @@ Button
 	-fx-border-color: #757473 #3f3a41 #3f3a41 #757473;
 	-fx-padding: 0;
 }
-Button:pressed
+.button:pressed
 {
 	-fx-border-color: #3f3a41 #757473 #757473 #3f3a41;
 }
@@ -176,12 +177,4 @@ Button:pressed
 .right
 {
     -fx-background-image: url("sprites/arrow_right.png");
-}
-.moveRight
-{
-    -fx-background-image: url("sprites/moveRight.png");
-}
-.moveLeft
-{
-    -fx-background-image: url("sprites/moveLeft.png");
 }
