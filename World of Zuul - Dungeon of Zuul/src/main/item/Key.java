@@ -9,15 +9,15 @@ package main.item;
  *
  * @author Nicolai
  */
-public class Key extends Item {
-    
-    public Key(String name, int amount) 
+public class Key extends Item
+{
+	public Key(int amount, int price)
 	{
-		super("Key", amount);
-    }
-    
-	public boolean hasKey(){
-		return true;
+		super("Keys", amount, price);
 	}
-    
+	
+	public Key(int amount)
+	{
+		this(amount, 0);
+	}
 }
