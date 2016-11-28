@@ -1,87 +1,113 @@
 package main;
 
+import main.creature.*;
 import java.util.*;
 import main.item.*;
 
-public class Game
-{
+public class Game implements GameInterface {
+
 	private int points;
 	private int turns;
 	private int turnsLimit;
 	private String dialogue = "";
-	protected Creature player;
-	protected Room currentRoom;
-	protected Room lastRoom;
-	protected Creature vendor = new Creature(0);
-	protected Room currentVendorRoom;
-	protected Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
-	protected Room[][] rooms = new Room[3][4];
-	protected Boolean[][] roomsSeen = new Boolean[3][4];
-	
-	public Game()
+	private Player player;
+	private Room currentRoom;
+	private Room lastRoom;
+	private Creature vendor;
+	private Room currentVendorRoom;
+	private int score = 0;
+	private Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
+	private Room[][] rooms = new Room[3][4];
+	private Boolean[][] roomsSeen = new Boolean[3][4];
+
+	public Game() 
 	{
 		createRooms();
 		turnsLimit = 20;
 		currentRoom = lvl_1; //The player will start in this room
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
 	}
-	
-	public int getTurns()
+
+	public int getTurns() 
 	{
 		return turns;
 	}
-	
-	public int getTurnsLimit()
+
+	public int getTurnsLimit() 
 	{
 		return turnsLimit;
 	}
-	
-	public void addTurn()
+
+	@Override
+	public Room getCurrentRoom() 
+	{
+		return currentRoom;
+	}
+
+	@Override
+	public Player getPlayer() 
+	{
+		return player;
+	}
+
+	@Override
+	public Room getCurrentVendorRoom() 
+	{
+		return currentVendorRoom;
+	}
+
+	@Override
+
+	public void addTurn() 
 	{
 		turns++;
-		if(turns == turnsLimit) //The Player will grow weaker for each turn he takes after max turns
+		if (turns == turnsLimit) //The Player will grow weaker for each turn he takes after max turns
 		{
 			addDialogue("You have been in the cave for too long, gas has been released and killing you");
 		}
-		if(turns > turnsLimit)
+		if (turns > turnsLimit) 
 		{
-			player.takeDamage((turns - turnsLimit)^2);
-			if(player.health <= 0)
+			player.takeDamage((turns - turnsLimit) ^ 2);
+			if (player.getHealth() <= 0) 
 			{
 				lose();
 			}
 		}
 	}
-	
-	public int getPoints()
+
+	@Override
+	public int getPoints() 
 	{
 		return points;
 	}
-	
-	public String getDialogue()
+
+	@Override
+	public String getDialogue() 
 	{
 		return dialogue;
 	}
-	
-	public void addDialogue()
+
+	@Override
+	public void addDialogue() 
 	{
 		dialogue += "\n";
 	}
 
-	public void addDialogue(String string)
+	@Override
+	public void addDialogue(String string) 
 	{
-		if(dialogue.length() == 0)
+		if (dialogue.length() == 0)
 		{
 			dialogue += string;
-		}
-		else
+		} else 
 		{
 			dialogue += "\n" + string;
 		}
 	}
 
-	public void createRooms()
-	{
+	@Override
+	public void createRooms() 
+		{
 		// Darkens all the rooms
 		for (int i = 0; i < roomsSeen.length; i++)
 		{
@@ -90,7 +116,6 @@ public class Game
 				roomsSeen[i][j] = false;
 			}
 		}
-		
 		/* Adds rooms to the game, also gives them descriptions */
 		rooms[1][0] = new Room("in level 1");
 		rooms[2][0] = new Room("in level 2");
@@ -104,7 +129,7 @@ public class Game
 		rooms[0][2] = new Room("in level 6");
 		rooms[0][3] = new Room("in level 7");
 		rooms[1][3] = new Room("in level 8");
-		
+
 		lvl_1 = rooms[1][0];
 		lvl_2 = rooms[2][0];
 		lvl_2a = rooms[0][0];
@@ -118,40 +143,31 @@ public class Game
 		lvl_7 = rooms[0][3];
 		lvl_8 = rooms[1][3];
 
-		// Adds creatures to the game, number tells what level they should start at
-		player = new Creature(1);
-		
-		// Give creatures some items that they drop
-		// Monsters
-        lvl_1.setMonster(new Creature(1));
-        lvl_2.setMonster(new Creature(2));
-        lvl_2a.setMonster(new Creature(2));
-        lvl_3.setMonster(new Creature(3));
-        lvl_3a.setMonster(new Creature(3));
-        lvl_4.setMonster(new Creature(4));
-        lvl_4a.setMonster(new Creature(4));
-        lvl_5.setMonster(new Creature(5));
-        lvl_5a.setMonster(new Creature(5));
-        lvl_6.setMonster(new Creature(7));
-        lvl_7.setMonster(new Creature(7));
-        lvl_8.setMonster(new Creature(11));
-        	
-        // Give creatures some items that they drop
+		/* Adds creatures to the game, number tells what level they should start at  */
+		player = new Player(100);
 
-		//For testing the game and skipping the start fast, this will give you strength like room 5 (the middle of the game). Remember to change start level to 6.
-		//hero.inventory.add(new Weapon("iron_sword", 5, 7)); // Iron Sword
-		//hero.inventory.add(new Shield("steel_shield", 4,0)); // Steel Shield
-		//hero.inventory.add(new Helmet("steel_helmet", 3)); // Steel Helmet
-		//hero.inventory.add(new Chestplate("steel_chestplate", 5)); // Steel Chestplate
-		//hero.inventory.add(new Legging("steel_leggings", 3)); // Steel Legging
-		//hero.inventory.add(new Boot("steel_boots", 2)); // Steel Boot
-                
+		// Give creatures some items that they drop
+		// Potions
+		lvl_1.setMonster(new Monster(1));
+		lvl_2.setMonster(new Monster(2));
+		lvl_2a.setMonster(new Monster(2));
+		lvl_3.setMonster(new Monster(3));
+		lvl_3a.setMonster(new Monster(3));
+		lvl_4.setMonster(new Monster(4));
+		lvl_4a.setMonster(new Monster(4));
+		lvl_5.setMonster(new Monster(5));
+		lvl_5a.setMonster(new Monster(5));
+		lvl_6.setMonster(new Monster(7));
+		lvl_7.setMonster(new Monster(7));
+		lvl_8.setMonster(new Boss(11));
+
+		// Give creatures some items that they drop
 		// Others
 		lvl_5a.locked(true);
 		lvl_4a.setTeleporter(lvl_1);
-		lvl_4a.monster.inventory.add(new Key(1));
+		lvl_4a.addItemToMonster(new Key("Key", 1));
 
-		// This gives the player the option to move between the rooms
+		/* This gives the player the option to move between the rooms */
 		lvl_1.setExit(lvl_2);
 		lvl_1.setExit(lvl_2a);
 
@@ -183,152 +199,132 @@ public class Game
 
 		lvl_7.setExit(lvl_8);
 		lvl_7.setExit(lvl_6);
-		
+
 		lvl_8.setExit(lvl_7);
-		
-		// Potions
-		player.inventory.add(new Potion(5)); // x5 health potions
-		lvl_3a.monster.inventory.add(new Potion(5)); // x5 health potions
-		lvl_2.monster.inventory.add(new Potion(2)); // x2 health potions
-		lvl_3.monster.inventory.add(new Potion(2)); // x2 health potions
-		lvl_4.monster.inventory.add(new Potion(2)); // x2 health potions
-		lvl_5a.monster.inventory.add(new Potion(3)); // x3 health potions
-		lvl_7.monster.inventory.add(new Potion(5)); // x5 health potions
-		
-		// Coins
-		lvl_2a.monster.inventory.add(new Coin(2)); // 2 coins
-		lvl_3a.monster.inventory.add(new Coin(3)); // 3 coins
-		lvl_4a.monster.inventory.add(new Coin(4)); // 4 coins
-		lvl_2.monster.inventory.add(new Coin(5)); // 5 coins
-		lvl_3.monster.inventory.add(new Coin(6)); // 6 coins
-		lvl_4.monster.inventory.add(new Coin(7)); // 7 coins
-		lvl_5a.monster.inventory.add(new Coin(8)); // 8 coins
-		
+
+		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
+		lvl_3a.addItemToMonster(new Potion(5)); // x5 health potions
+		lvl_3.addItemToMonster(new Potion(4)); // x4 health potions
+		lvl_4.addItemToMonster(new Potion(5)); // x5 health potions
+		lvl_5a.addItemToMonster(new Potion(5)); // x5 health potions
+		lvl_7.addItemToMonster(new Potion(5)); // x5 health potions
+
+		// Coins		
+		lvl_2a.addItemToMonster(new Coin(2)); // 2 coins
+		lvl_3a.addItemToMonster(new Coin(3)); // 3 coins
+		lvl_4a.addItemToMonster(new Coin(4)); // 4 coins
+		lvl_2.addItemToMonster(new Coin(5)); // 5 coins
+		lvl_3.addItemToMonster(new Coin(6)); // 6 coins
+		lvl_4.addItemToMonster(new Coin(7)); // 7 coins
+		lvl_5a.addItemToMonster(new Coin(8)); // 8 coins
+
 		//Vendor
-		vendor.inventory.add(new Shield("Steel Shield", 6, 15)); //Steel Shield from Vendor, 15 coins
-		vendor.inventory.add(new Helmet("Steel Helmet", 7, 5)); //Steel Helmet from Vendor, 5 coins
-		vendor.inventory.add(new Chestplate("Steel Armour", 8, 20)); //Steel Chestplate from Vendor, 20 coins
-		vendor.inventory.add(new Legging("Steel Leggings", 7, 10)); //Steel Leggings from Vendor, 10 coins
-		vendor.inventory.add(new Boot("Steel Boots", 5, 5)); //Steel Boots from Vendor, 5 coins
-		vendor.inventory.add(new GasMask(5, 5)); //Gassmask
-		
+		lvl_5a.getRoomsInventory().add(new Shield("Steel Shield", 6)); //Steel Shield from Vendor
+		lvl_5a.getRoomsInventory().add(new Helmet("Steel Helmet", 7)); //Steel Helmet from Vendor
+		lvl_5a.getRoomsInventory().add(new Armour("Steel Armour", 8)); //Steel Chestplate from Vendor
+		lvl_5a.getRoomsInventory().add(new Legging("Steel Leggings", 7)); //Steel Leggings from Vendor
+		lvl_5a.getRoomsInventory().add(new Boot("Steel Boots", 5)); //Steel Boots from Vendor                
+
 		// Weapons
-		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
-		lvl_4.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
-		lvl_5a.monster.inventory.add(new Weapon("Iron Sword", 3)); //Iron Sword
-		lvl_5.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
-		lvl_6.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
-		lvl_7.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
-		lvl_8.monster.inventory.add(new Weapon("Steel Sword", 5)); //Steel Sword
-                
-		
+		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game
+		lvl_4.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
+		lvl_5a.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
+		lvl_5.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
+		lvl_6.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
+		lvl_7.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
+		lvl_8.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
+
 		// Shields
-		lvl_1.monster.inventory.add(new Shield("Wooden Shield", 2)); //Wooden Shield
-		lvl_4.monster.inventory.add(new Shield("Iron Shield", 4)); //Iron Shield
-		lvl_8.monster.inventory.add(new Shield("Steel Shield", 6)); //Steel Shield
-		
+		lvl_1.addItemToMonster(new Shield("Wooden Shield", 2)); //Wooden Shield
+		lvl_4.addItemToMonster(new Shield("Iron Shield", 4)); //Iron Shield
+		lvl_8.addItemToMonster(new Shield("Steel Shield", 6)); //Steel Shield
+
 		// Helmets
-		lvl_2a.monster.inventory.add(new Helmet("Leather Helmet", 2)); //Leather Helmet
-		lvl_3a.monster.inventory.add(new Helmet("Iron Helmet", 5 )); //Iron Helmet
-		lvl_5a.monster.inventory.add(new Helmet("Iron Helmet", 5 )); //Iron Helmet
-		lvl_6.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
-		lvl_7.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
-		lvl_8.monster.inventory.add(new Helmet("Steel Helmet", 7 )); //Steel Helmet
-		
+		lvl_2a.addItemToMonster(new Helmet("Leather Helmet", 2)); //Leather Helmet
+		lvl_3a.addItemToMonster(new Helmet("Iron Helmet", 5)); //Iron Helmet
+		lvl_5a.addItemToMonster(new Helmet("Iron Helmet", 5)); //Iron Helmet
+		lvl_6.addItemToMonster(new Helmet("Steel Helmet", 7)); //Steel Helmet
+		lvl_7.addItemToMonster(new Helmet("Steel Helmet", 7)); //Steel Helmet
+		lvl_8.addItemToMonster(new Helmet("Steel Helmet", 7)); //Steel Helmet
+
 		// Chestplates
-		lvl_2a.monster.inventory.add(new Chestplate("Leather Armour", 4)); //Leather Chestplate
-		lvl_4.monster.inventory.add(new Chestplate("Iron Armour", 6)); //Iron Chestplate
-		lvl_5a.monster.inventory.add(new Chestplate("Iron Armour", 6)); //Iron Chestplate                               
-		lvl_8.monster.inventory.add(new Chestplate("Steel Armour", 8)); //Steel Chestplate
-		
+		lvl_2a.addItemToMonster(new Armour("Leather Armour", 4)); //Leather Chestplate
+		lvl_4.addItemToMonster(new Armour("Iron Armour", 6)); //Iron Chestplate
+		lvl_5a.addItemToMonster(new Armour("Iron Armour", 6)); //Iron Chestplate                               
+		lvl_8.addItemToMonster(new Armour("Steel Armour", 8)); //Steel Chestplate
+
 		// Leggings
-		lvl_2.monster.inventory.add(new Legging("Leather Leggings", 3)); //Leather Leggings
-		lvl_4a.monster.inventory.add(new Legging("Iron Leggings", 5)); //Iron Leggings
-		lvl_5a.monster.inventory.add(new Legging("Iron Leggings", 5)); //Iron Leggings                             
-		lvl_7.monster.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings
-		lvl_8.monster.inventory.add(new Legging("Steel Leggings", 7)); //Steel Leggings
-		
+		lvl_2.addItemToMonster(new Legging("Leather Leggings", 3)); //Leather Leggings
+		lvl_4a.addItemToMonster(new Legging("Iron Leggings", 5)); //Iron Leggings
+		lvl_5a.addItemToMonster(new Legging("Iron Leggings", 5)); //Iron Leggings                             
+		lvl_7.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
+		lvl_8.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
+
 		// Boots          
-		lvl_2.monster.inventory.add(new Boot("Leather Boots", 1)); //Leather Boots
-		lvl_3.monster.inventory.add(new Boot("Iron Boots", 3)); //Iron Boots
-		lvl_5a.monster.inventory.add(new Boot("Iron Boots", 3)); //Iron Boots
-		lvl_5.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
-		lvl_6.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
-		lvl_7.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
-		lvl_8.monster.inventory.add(new Boot("Steel Boots", 5)); //Steel Boots
-		
+		lvl_2.addItemToMonster(new Boot("Leather Boots", 1)); //Leather Boots
+		lvl_3.addItemToMonster(new Boot("Iron Boots", 3)); //Iron Boots
+		lvl_5a.addItemToMonster(new Boot("Iron Boots", 3)); //Iron Boots
+		lvl_5.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+		lvl_6.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+		lvl_7.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+		lvl_8.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+
 		//Skip to lvl_6, which is mid of the game(set start level to 6 and player level to level 5)
 		//player.inventory.add(new Weapon("Steel Sword", 5));
 		//player.inventory.add(new Shield("Steel Shield", 6));
 		//player.inventory.add(new Helmet("Iron Helmet", 5 ));
-		//player.inventory.add(new Chestplate("Steel Armour", 8));
+		//player.inventory.add(new Armour("Steel Armour", 8));
 		//player.inventory.add(new Legging("Iron Leggings", 5));
 		//player.inventory.add(new Boot("Iron Boots", 3));
 		//player.inventory.add(new Boot("Steel Boots", 5));
 		//player.inventory.add(new Weapon("Steel Sword", 5));
-		/* placeholder to outcomment all above in 1 line */
 	}
-	
+
 	/**
 	 * The play method will be called when the main class starts. The game will
 	 * run until you write quit in the console.
 	 */
-	public void play()
-	{
+	@Override
+	public void play() {
 		printWelcome();
 	}
 
 	/**
 	 * This method will print out when you start the game
 	 */
-	private void printWelcome()
-	{
-		addDialogue("You're lost in the Dungeon of Zuul.");
-		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss.");
-		addDialogue("If you manage to defeat the boss, you will win.");
-		addDialogue("But if your health reaches zero, you will lose!\n");
+	private void printWelcome() {
+		addDialogue("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
+		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.''");
+		addDialogue("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
+		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
+		addDialogue("If you manage to defeat the boss, you will win, and escape this forgotten place.");
+		addDialogue("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
 		printLook();
 	}
 
 	/* By writing "help" in console, this method will be called. */
-	private void printHelp()
-	{
-		addDialogue();
-		addDialogue("Your command words are:");
-		addDialogue("go: This gives you the option to move around. The command is: go \"direction\".");
-		addDialogue("map: The console will print out a map and your current whereabouts.");
-		addDialogue("quit: The game will quit.");
-		addDialogue("look: Look around in the room for items.");
-		addDialogue("Status: Your healthpoints and XP");
-		addDialogue("Inventory: Look through your inventory");
-		addDialogue("Use: type use health_potion to use a potion from your inventory.");
-
-		// parser.showCommands(); // This line prints out the command words.
-	}
-
 	private void printLook() // Prints out what the character can see
 	{
 		addDialogue("You are " + currentRoom.getShortDescription());
-		if (currentRoom.hasMonster())
-		{
-			addDialogue("There's a monster level " + currentRoom.monster.getLevel() + " blocking your way");
+		if (currentRoom.hasMonster()) {
+			addDialogue("There's a monster level " + currentRoom.getMonster().getLevel() + " blocking your way");
 		}
 	}
-	
-	protected boolean useItem(Item searchForItem)
+
+	public void useItem(Item searchForItem) {
 	{
 		if(searchForItem instanceof Potion)
 		{
-			if(player.inventory.useItem(searchForItem))
+			if(player.getCreaturesInventory().useItem(searchForItem))
 			{
 				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.level + " points.");
-				points -= player.level*2;
+				points -= player.getLevel()*2;
 				return true;
 			}
 		}
 		if(searchForItem instanceof GasMask)
 		{
-			if(player.inventory.useItem(searchForItem))
+			if(player.getCreaturesInventory().useItem(searchForItem))
 			{
 				addDialogue("You prepared a mask and can now take on 5 more turns");
 				turnsLimit += 5;
@@ -337,19 +333,20 @@ public class Game
 		}
 		return false;
 	}
+	}
 	
 	protected void buyItem(Item itemToBuy)
 	{
 		
-		for (Item item : vendor.inventory.getContent())
+		for (Item item : vendor.getCreaturesInventory().getContent())
 		{
 			if(item == itemToBuy)
 			{
-				if(player.inventory.useItem(player.inventory.searchItem(Coin.class), itemToBuy.getPrice()))
+				if(player.getCreaturesInventory().useItem(player.getCreaturesInventory().searchItem(Coin.class), itemToBuy.getPrice()))
 				{
 					itemToBuy.clearPrice();
-					currentRoom.inventory.add(itemToBuy);
-					vendor.inventory.remove(itemToBuy);
+					currentRoom.getRoomsInventory().add(itemToBuy);
+					vendor.getCreaturesInventory().remove(itemToBuy);
 					addDialogue("Vendor> Splendid! I put it on the ground for you.");
 					return;
 				}
@@ -384,7 +381,7 @@ public class Game
 					if(lastRoom == null)
 					{
 						addDialogue("... although, you have no place you run, you find a shiny new stick laying around");
-						currentRoom.inventory.add(new Weapon("GASPOWERED STICK", 1));
+						currentRoom.getRoomsInventory().add(new Weapon("GASPOWERED STICK", 1));
 					}
 					else
 					{
@@ -400,7 +397,7 @@ public class Game
 			}
 			else
 			{
-				int playerRolled = player.rollDamage(currentRoom.monster);
+				int playerRolled = player.rollDamage(currentRoom.getMonster());
 				if (playerRolled == 0)
 				{
 					addDialogue("Monster blocked your attack");
@@ -411,9 +408,9 @@ public class Game
 				}
 			}
 
-			if (currentRoom.monster.getHealth() > 0)
+			if (currentRoom.getMonster().getHealth() > 0)
 			{
-				int monsterRolled = currentRoom.monster.rollDamage(player);
+				int monsterRolled = currentRoom.getMonster().rollDamage(player);
 				if (monsterRolled == 0)
 				{
 					addDialogue("You blocked the monsters attack");
@@ -430,13 +427,13 @@ public class Game
 			}
 			else
 			{
-				player.gainExperience(currentRoom.monster);
-				for (Item item : currentRoom.monster.inventory.getContent())
+				player.gainExperience(currentRoom.getMonster());
+				for (Item item : currentRoom.getMonster().getCreaturesInventory().getContent())
 				{
-					currentRoom.inventory.add(item);
+					currentRoom.getRoomsInventory().add(item);
 				}
-				currentRoom.monster = null;
-				points += player.level*5;
+				currentRoom.setMonsterToNull();
+				points += player.getLevel()*5;
 				
 				// Certain special events after slaying a monster
 				if(currentRoom == lvl_8)
@@ -463,7 +460,7 @@ public class Game
 	{
 		if (currentRoom.hasMonster())
 		{
-			addDialogue("The monster (level " + currentRoom.monster.getLevel() + "): is blocking your way");
+			addDialogue("The monster (level " + currentRoom.getMonster().getLevel() + "): is blocking your way");
 		}
 		else
 		{
@@ -482,7 +479,7 @@ public class Game
 				if(nextRoom.getLocked())
 				{
 					// Searches for items that have key as class and then uses it if possible, this also checks to see if it was successful to use the item
-					if(player.inventory.useItem(player.inventory.searchItem(Key.class)))
+					if(player.getCreaturesInventory().useItem(player.getCreaturesInventory().searchItem(Key.class)))
 					{
 						nextRoom.locked(false);
 						addDialogue("You've unlocked the door with your key"); // You can now enter the room!
