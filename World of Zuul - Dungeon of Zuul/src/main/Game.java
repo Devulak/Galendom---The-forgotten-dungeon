@@ -119,7 +119,7 @@ public class Game
 		lvl_8 = rooms[1][3];
 
 		// Adds creatures to the game, number tells what level they should start at
-		player = new Creature(100);
+		player = new Creature(1);
 		
 		// Give creatures some items that they drop
 		// Monsters
@@ -210,7 +210,7 @@ public class Game
 		vendor.inventory.add(new Chestplate("Steel Armour", 8, 20)); //Steel Chestplate from Vendor, 20 coins
 		vendor.inventory.add(new Legging("Steel Leggings", 7, 10)); //Steel Leggings from Vendor, 10 coins
 		vendor.inventory.add(new Boot("Steel Boots", 5, 5)); //Steel Boots from Vendor, 5 coins
-		vendor.inventory.add(new Gasmask(5, 5)); //Gassmask
+		vendor.inventory.add(new Gassmask(5, 5)); //Gassmask
 		
 		// Weapons
 		player.inventory.add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
@@ -327,7 +327,7 @@ public class Game
 				return true;
 			}
 		}
-		if(searchForItem instanceof Gasmask)
+		if(searchForItem instanceof Gassmask)
 		{
 			if(player.inventory.useItem(searchForItem))
 			{
