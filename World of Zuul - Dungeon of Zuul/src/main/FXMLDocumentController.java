@@ -247,40 +247,40 @@ public class FXMLDocumentController implements Initializable {
 	{
             
 		// Health
-		playerHealth.setText(game.player.getHealth() + " / " + game.player.getMaxHealth() + " HP");
-		playerHealthbar.setFitWidth((double)game.player.getHealth()/game.player.getMaxHealth()*342);
+		playerHealth.setText(game.getPlayer().getHealth() + " / " + game.getPlayer().getMaxHealth() + " HP");
+		playerHealthbar.setFitWidth((double)game.getPlayer().getHealth()/game.getPlayer().getMaxHealth()*342);
 		playerHealthbarEnd.setLayoutX(playerHealthbar.getLayoutX()+playerHealthbar.getFitWidth());
                 		
 		// Experience
-		experienceStatus.setText(game.player.getExperience() + " / " + game.player.getMaxExperience() + " EXP");
-		playerExperiencebar.setFitWidth((double)game.player.getExperience()/game.player.getMaxExperience()*214);
+		experienceStatus.setText(game.getPlayer().getExperience() + " / " + game.getPlayer().getMaxExperience() + " EXP");
+		playerExperiencebar.setFitWidth((double)game.getPlayer().getExperience()/game.getPlayer().getMaxExperience()*214);
 		playerExperiencebarEnd.setLayoutX(playerExperiencebar.getLayoutX()+playerExperiencebar.getFitWidth());
 		
 		// Level
-		playerLevel.setText(String.format("%d", game.player.getLevel()));
+		playerLevel.setText(String.format("%d", game.getPlayer().getLevel()));
 		
 		// Strength
-		playerStrength.setText(String.format("%d", game.player.getStrength()));
+		playerStrength.setText(String.format("%d", game.getPlayer().getStrength()));
 		
 		// Armour
-		playerArmour.setText(String.format("%d", game.player.getArmour()));
+		playerArmour.setText(String.format("%d", game.getPlayer().getArmour()));
 	}
 	
 	public void updateMonsterStatus()
 	{
 		// Health
-		monsterHealth.setText(game.currentRoom.monster.getHealth() + " / " + game.currentRoom.monster.getMaxHealth() + " HP");
-		monsterHealthbar.setFitWidth((double)game.currentRoom.monster.getHealth()/game.currentRoom.monster.getMaxHealth()*342);
+		monsterHealth.setText(game.getCurrentRoom().getMonster().getHealth() + " / " + game.getCurrentRoom().getMonster().getMaxHealth() + " HP");
+		monsterHealthbar.setFitWidth((double)game.getCurrentRoom().getMonster().getHealth()/game.getCurrentRoom().getMonster().getMaxHealth()*342);
 		monsterHealthbarEnd.setLayoutX(monsterHealthbar.getLayoutX()+monsterHealthbar.getFitWidth());
 		
 		// Level
-		monsterLevel.setText(String.format("%d", game.currentRoom.monster.getLevel()));
+		monsterLevel.setText(String.format("%d", game.getCurrentRoom().getMonster().getLevel()));
 		
 		// Strength
-		monsterStrength.setText(String.format("%d", game.currentRoom.monster.getStrength()));
+		monsterStrength.setText(String.format("%d", game.getCurrentRoom().getMonster().getStrength()));
 		
 		// Armour
-		monsterArmour.setText(String.format("%d", game.currentRoom.monster.getArmour()));
+		monsterArmour.setText(String.format("%d", game.getCurrentRoom().getMonster().getArmour()));
 	}
 	
 	public void updateVendorInventory()
@@ -292,14 +292,14 @@ public class FXMLDocumentController implements Initializable {
 	
 	public void updatePlayerInventory()
 	{
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.player.inventory.getContent());
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getPlayer().getCreaturesInventory().getContent());
 		playerInventory.setItems(null);
 		playerInventory.setItems(itemsTemp);
 	}
 	
 	public void updateRoomInventory()
 	{
-		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.currentRoom.inventory.getContent());
+		ObservableList<Item> itemsTemp = FXCollections.observableArrayList(game.getCurrentRoom().getRoomsInventory().getContent());
 		roomInventory.setItems(null);
 		roomInventory.setItems(itemsTemp);
 	}
