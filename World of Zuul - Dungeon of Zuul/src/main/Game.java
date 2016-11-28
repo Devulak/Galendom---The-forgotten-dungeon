@@ -311,7 +311,7 @@ public class Game implements GameInterface {
 		}
 	}
 
-	public void useItem(Item searchForItem) {
+	protected boolean useItem(Item searchForItem)
 	{
 		if(searchForItem instanceof Potion)
 		{
@@ -332,7 +332,6 @@ public class Game implements GameInterface {
 			}
 		}
 		return false;
-	}
 	}
 	
 	protected void buyItem(Item itemToBuy)
