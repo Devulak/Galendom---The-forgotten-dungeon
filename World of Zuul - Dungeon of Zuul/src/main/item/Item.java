@@ -4,8 +4,8 @@ public abstract class Item
 {
 	protected String name;
 	private int amount;
-	protected String extra;
-	protected int price;
+	private String extra;
+	private int price;
 
 	public Item(String name, int amount, int price) // Constructor
 	{
