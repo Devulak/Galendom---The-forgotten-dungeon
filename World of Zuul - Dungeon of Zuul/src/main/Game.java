@@ -13,7 +13,7 @@ public class Game implements GameInterface {
 	private Player player;
 	private Room currentRoom;
 	private Room lastRoom;
-	private Creature vendor;
+	private Vendor vendor;
 	private Room currentVendorRoom;
 	private int score = 0;
 	private Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
@@ -51,13 +51,29 @@ public class Game implements GameInterface {
 	}
 
 	@Override
+	public Vendor getVendor()
+	{
+		return vendor;
+	}
+	
+	@Override
 	public Room getCurrentVendorRoom() 
 	{
 		return currentVendorRoom;
 	}
 
 	@Override
-
+	public Room[][] getRooms()
+	{
+		return rooms;
+	}
+	
+	@Override
+	public Boolean[][] getRoomsSeen()
+	{
+		return roomsSeen;
+	}
+	
 	public void addTurn() 
 	{
 		turns++;

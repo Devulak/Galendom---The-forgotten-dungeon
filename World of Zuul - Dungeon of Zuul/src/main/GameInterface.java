@@ -17,7 +17,13 @@ public interface GameInterface {
 	public Room getCurrentRoom();
 
 	public Player getPlayer();
+	
+	public Vendor getVendor();
+	
+	public Room[][] getRooms();
 
+	public Boolean[][] getRoomsSeen();
+	
 	public Room getCurrentVendorRoom();
 
 	public int getTurns();

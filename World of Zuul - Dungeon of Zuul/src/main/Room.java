@@ -45,7 +45,7 @@ public class Room
     public LevelAbleCreature getMonster() 
     {
 		return monster;
-    }
+	}
 	
 	/**
 	* Returns an item to the monsters inventory in the specific room if there is any.
@@ -64,8 +64,6 @@ public class Room
 			return null;
 		}
 	}
-	
-
 	
 	public Inventory getRoomsInventory()
 	{
