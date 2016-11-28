@@ -1,6 +1,5 @@
 package main.creature;
 
-import main.Inventory;
 import java.util.*;
 import main.item.*;
 
@@ -13,7 +12,7 @@ public abstract class Creature
 	{ //this is a constructor for the creatures
 	}
 	
-	public Inventory getCreatureInventory()
+	public Inventory getCreaturesInventory()
 	{
 		return inventory;
 	}

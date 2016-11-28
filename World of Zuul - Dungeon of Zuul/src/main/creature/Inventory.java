@@ -1,4 +1,4 @@
-package main;
+package main.creature;
 
 import java.util.*;
 import main.item.*;

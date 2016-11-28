@@ -75,7 +75,7 @@ public abstract class LevelAbleCreature extends Creature implements Levelable, S
 	public int getArmour()
 	{
 		int armour = 0;
-		for (Item item : getCreatureInventory().getContent())
+		for (Item item : getCreaturesInventory().getContent())
 		{
 			if(item instanceof Armour)
 			{
@@ -87,7 +87,7 @@ public abstract class LevelAbleCreature extends Creature implements Levelable, S
 	
 	public boolean hasShield()
 	{
-		for (Item item : getCreatureInventory().getContent())
+		for (Item item : getCreaturesInventory().getContent())
 		{
 			if(item instanceof Shield)
 			{
@@ -100,7 +100,7 @@ public abstract class LevelAbleCreature extends Creature implements Levelable, S
 	public int getStrength()
 	{
 		int strength = level;
-		for (Item item : getCreatureInventory().getContent())
+		for (Item item : getCreaturesInventory().getContent())
 		{
 			if(item instanceof Weapon)
 			{

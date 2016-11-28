@@ -1,6 +1,7 @@
 package main;
 
 import main.creature.Creature;
+import main.creature.Inventory;
 import main.creature.LevelAbleCreature;
 import java.util.*;
 import main.item.*;
@@ -56,7 +57,7 @@ public class Room
 	{
 		if(hasMonster())
 		{
-			return getMonster().getCreatureInventory().add(item);
+			return getMonster().getCreaturesInventory().add(item);
 		}
 		else
 		{
