@@ -2,8 +2,13 @@ package main.item;
 
 public class Boot extends Armour
 {
+	public Boot(String name, int armour, int price) // Constructor
+	{
+		super(name, armour, price);
+	}
+	
 	public Boot(String name, int armour) // Constructor
 	{
-		super(name, armour);
+		this(name, armour, 0);
 	}
 }
