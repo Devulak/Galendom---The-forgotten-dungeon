@@ -3,21 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.item;
+
+package main.creature;
 
 /**
  *
  * @author Nicolai
  */
-public class Key extends Item
-{
-	public Key(int amount, int price)
-	{
-		super("Keys", amount, price);
+public class Vendor extends Creature{
+
+	public Vendor(int lvl) {
+		super(lvl);
 	}
 	
-	public Key(int amount)
-	{
-		this(amount, 0);
-	}
 }

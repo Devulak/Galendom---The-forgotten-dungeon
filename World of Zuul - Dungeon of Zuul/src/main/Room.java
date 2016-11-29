@@ -2,7 +2,6 @@ package main;
 
 import java.io.Serializable;
 import main.creature.Creature;
-import main.creature.Inventory;
 import main.creature.LevelAbleCreature;
 import java.util.*;
 import main.item.*;
@@ -47,7 +46,7 @@ public class Room implements Serializable
     public LevelAbleCreature getMonster() 
     {
 		return monster;
-    }
+	}
 	
 	/**
 	* Returns an item to the monsters inventory in the specific room if there is any.
@@ -66,8 +65,6 @@ public class Room implements Serializable
 			return null;
 		}
 	}
-	
-
 	
 	public Inventory getRoomsInventory()
 	{
