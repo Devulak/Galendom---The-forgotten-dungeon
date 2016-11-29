@@ -121,7 +121,7 @@ public abstract class LevelAbleCreature extends Creature implements Levelable, S
 		return enemy.takeDamage(hitPoints);
 	}
 	
-	protected int takeDamage(double hitPoints)
+	public int takeDamage(double hitPoints)
 	{
 		hitPoints = hitPoints * (1 - (double) getArmour() / 50); // Each point of armour reduces damage by 2% (max 40 armour (80% reduction) may be possible)
 		int hitPointsTaken = (int) Math.round(hitPoints); // Rounds to neearest point

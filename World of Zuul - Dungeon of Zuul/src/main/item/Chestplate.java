@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package main.item;
 
 /**
  *
  * @author Nicolai
  */
-public class Key extends Item
+public class Chestplate extends Armour
 {
-	public Key(int amount, int price)
+	public Chestplate(String name, int armour, int price) // Constructor
 	{
-		super("Keys", amount, price);
+		super(name, armour, price);
 	}
 	
-	public Key(int amount)
+	public Chestplate(String name, int armour) // Constructor
 	{
-		this(amount, 0);
+		this(name, armour, 0);
 	}
 }

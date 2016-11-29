@@ -1,5 +1,6 @@
 package main.creature;
 
+import main.Inventory;
 import java.util.*;
 import main.item.*;
 
