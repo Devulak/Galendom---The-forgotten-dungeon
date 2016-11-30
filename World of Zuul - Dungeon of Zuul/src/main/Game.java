@@ -25,6 +25,7 @@ public class Game
 		currentRoom = lvl_5a; //The player will start in this room
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
         pointstoFile();
+        pointinfo();
 	}
 
 	public int getTurns()
@@ -492,6 +493,44 @@ public class Game
             writer.close();
 
         } catch (Exception a) {
+            System.err.println("pointstoFile Error 1");
+        }
+    }
+
+    public void pointinfo() {
+        try {
+            File file = new File("Points.txt");
+            Scanner scanner;
+            if (file.exists()) {
+                scanner = new Scanner(file);
+                for (int n = 0; n < 5; ++n) {
+                    String line = scanner.nextLine();
+                    System.err.println(line);
+                }
+            } 
+            else 
+            {
+                System.out.println("pointinfo Error 1");
+            }
+        } 
+        catch (Exception a) 
+        {
+            System.out.println("pointinfo Error 2");
+        }
+    }
+    public void emptyList(){
+        try{
+            File file = new File("Points.txt");
+            PrintWriter writer;
+            writer = new PrintWriter(file);
+            for (int n=0; n<5;++n){
+                writer.println("");
+                
+            }
+            writer.close();
+        }
+        catch (Exception a){
+            System.out.println("emptyList Error 1");
         }
     }
 }
