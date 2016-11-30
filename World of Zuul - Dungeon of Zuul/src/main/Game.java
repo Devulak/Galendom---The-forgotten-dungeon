@@ -1,5 +1,6 @@
 package main;
 
+import java.io.*;
 import main.creature.*;
 import java.util.*;
 import main.item.*;
@@ -26,7 +27,7 @@ public class Game implements GameInterface {
 		turnsLimit = 20;
 		currentRoom = lvl_1; //The player will start in this room
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
-	}
+    }
 
 	public int getTurns() 
 	{
@@ -600,4 +601,56 @@ public class Game implements GameInterface {
 		// What to do if you lose
 		addDialogue("You died, thanks for playing.");
 	}
+    public void pointstoFile() {
+        try {
+            File file = new File("Points.txt");
+            PrintWriter writer;
+            writer = new PrintWriter(new FileWriter(file, true));
+            writer.println("Player current points:" + points);
+            writer.close();
+
+        } catch (Exception a) {
+            System.err.println("pointstoFile Error 1");
+        }
+    }
+
+    public void pointinfo() {
+        try {
+            File file = new File("Points.txt");
+            Scanner scanner;
+            if (file.exists()) {
+                scanner = new Scanner(file);
+                for (int n = 0; n < 5; ++n) {
+                    String line = scanner.nextLine();
+                    System.err.println(line);
+                }
+            } 
+            else 
+            {
+                System.out.println("pointinfo Error 1");
+            }
+        } 
+        catch (Exception a) 
+        {
+            System.out.println("pointinfo Error 2");
+        }
+    }
+    public void emptyList(){
+        try{
+            File file = new File("Points.txt");
+            PrintWriter writer;
+            writer = new PrintWriter(file);
+            for (int n=0; n<5;++n){
+                writer.println("");
+                
+            }
+            writer.close();
+        }
+        catch (Exception a){
+            System.out.println("emptyList Error 1");
+        }
+    }
 }
+
+
+

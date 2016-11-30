@@ -1,0 +1,2 @@
+Player current points:0
+Player current points:150
