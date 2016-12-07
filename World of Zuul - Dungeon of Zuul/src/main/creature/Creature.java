@@ -1,6 +1,7 @@
 package main.creature;
 
 import java.io.Serializable;
+import Main.*;
 import java.util.*;
 import main.item.*;
 
