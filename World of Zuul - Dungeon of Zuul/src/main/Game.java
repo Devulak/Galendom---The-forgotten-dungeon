@@ -15,7 +15,7 @@ public class Game implements GameInterface {
 
 	private int points;
 	private int turns;
-	private int turnsLimit;
+	private int turnsLimit = 20;
 	private String dialogue = "";
 	private Player player = new Player(100);
 	private Room currentRoom;
@@ -233,6 +233,20 @@ public class Game implements GameInterface {
 		lvl_4c.setExit(lvl_3c);
 
 		lvl_5c.setExit(lvl_4c);
+		
+		// Monsters
+        lvl_1.setMonster(new Monster(1));
+        lvl_2a.setMonster(new Monster(2));
+        lvl_2b.setMonster(new Monster(2));
+        lvl_2c.setMonster(new Monster(2));
+        lvl_3a.setMonster(new Monster(3));
+        lvl_3b.setMonster(new Monster(3));
+        lvl_4ba.setMonster(new Monster(4));
+        lvl_4bb.setMonster(new Monster(4));
+        lvl_3c.setMonster(new Monster(3));
+        lvl_4c.setMonster(new Monster(4));
+        lvl_5c.setMonster(new Monster(5));
+        lvl_2Boss.setMonster(new Boss(8));
 		
 		// Others
 		lvl_2Boss.hasBoss(true);
@@ -540,7 +554,7 @@ public class Game implements GameInterface {
 	@Override
 	public void useTeleporter()
 	{
-		if(currentRoom.getTeleporter() != null && currentRoom.getMonster() == null) // is there even a teleporter and isthere a monster blocking?
+		if(currentRoom.getTeleporter() != null && currentRoom.getMonster() == null) // is there even a teleporter and is there a monster blocking?
 		{
 			addTurn();
 			lastRoom = currentRoom;
