@@ -1,2 +1,6 @@
-Player current points:0
-Player current points:150
+2 Claus
+3 Knud
+1 Karl
+235 Andreas
+319 Erik
+15 poul
