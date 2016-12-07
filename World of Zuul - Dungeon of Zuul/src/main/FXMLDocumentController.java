@@ -23,7 +23,7 @@ import main.item.Item;
 
 public class FXMLDocumentController implements Initializable {
 	
-	private Game game;
+	private GameInterface game = new Game();
 	private GridPane activeMenu;
 	
 	@FXML
@@ -234,7 +234,6 @@ public class FXMLDocumentController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		game = new Game();
 		game.play();
 		updatePlayerStatus();
 		updatePlayerInventory();

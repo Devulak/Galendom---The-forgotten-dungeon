@@ -18,6 +18,10 @@ public interface GameInterface {
 
 	public Player getPlayer();
 	
+	public int getTurnsLimit();
+	
+	public int[] getVendorPosition();
+	
 	public Vendor getVendor();
 	
 	public Room[][] getRooms();
@@ -25,6 +29,8 @@ public interface GameInterface {
 	public Boolean[][] getRoomsSeen();
 	
 	public Room getCurrentVendorRoom();
+	
+	public void buyItem(Item itemToBuy);
 
 	public int getTurns();
 
