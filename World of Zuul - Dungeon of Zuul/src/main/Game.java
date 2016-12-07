@@ -1,5 +1,11 @@
 package main;
 
+import main.item.Key;
+import main.item.armour.Shield;
+import main.item.armour.Helmet;
+import main.item.armour.Boot;
+import main.item.armour.Legging;
+import main.item.armour.Chestplate;
 import main.creature.*;
 import java.util.*;
 import main.item.*;

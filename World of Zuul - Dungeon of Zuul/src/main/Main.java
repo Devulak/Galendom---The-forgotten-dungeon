@@ -13,7 +13,7 @@ public class Main extends Application
 	public void start(Stage stage) throws Exception
 	{
 		// Init of stage
-		stage.setTitle("Dungeon of Zuul");
+		stage.setTitle("Galendom - The forgotten dungeon");
 		stage.getIcons().add(new Image("/sprites/icon.png"));
 		stage.setMinWidth(960);
 		stage.setMinHeight(640);
