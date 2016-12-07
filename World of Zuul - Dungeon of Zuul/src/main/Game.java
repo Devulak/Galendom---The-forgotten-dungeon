@@ -124,7 +124,7 @@ public class Game implements GameInterface {
 		}
 		if (turns > turnsLimit) 
 		{
-			player.takeDamage((turns - turnsLimit) ^ 2);
+			player.takeDamageFromGas((turns - turnsLimit) * 2);
 			if (player.getHealth() <= 0) 
 			{
 				lose();
@@ -343,7 +343,7 @@ public class Game implements GameInterface {
 			{
 				if(Math.random() <= 0.5) // roll to check your flee success (0.5 = 50% chance)
 				{
-					addDialogue("Your atempt to flee was successful!");
+					addDialogue("Your attempt to flee was successful!");
 					if(lastRoom == null)
 					{
 						addDialogue("... although, you have no place you run, you find a shiny new stick laying around");
