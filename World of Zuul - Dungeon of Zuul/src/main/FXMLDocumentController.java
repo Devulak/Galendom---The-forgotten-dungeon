@@ -198,7 +198,8 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();               
+		updatePanel();     
+		updatePlayerStatus();
 	}
 	
 	@FXML
@@ -208,7 +209,8 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();                
+		updatePanel();           
+		updatePlayerStatus();
 	}
 	
 	@FXML
@@ -218,7 +220,8 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();                
+		updatePanel();      
+		updatePlayerStatus();
 	}
 	
 	@FXML
@@ -228,7 +231,8 @@ public class FXMLDocumentController implements Initializable {
 		updateMap();
 		updatePlayerInventory();
 		updateRoomInventory();
-		updatePanel();                   
+		updatePanel();         
+		updatePlayerStatus();
 	}
 	
 	@Override

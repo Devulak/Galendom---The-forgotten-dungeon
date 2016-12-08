@@ -132,6 +132,14 @@ public abstract class LevelAbleCreature extends Creature implements Levelable, S
 		health -= hitPointsTaken;
 		return hitPointsTaken;
 	}
+	
+	public int takeDamageFromGas(double hitPoints)
+	{
+		int hitPointsTaken = (int) Math.round(hitPoints); // Rounds to neearest point
+
+		health -= hitPointsTaken;
+		return hitPointsTaken;
+	}
 
 	@Override
 	public int givePlayerPoints() 
