@@ -1,6 +1,6 @@
 package main.item;
 
-public class Armour extends Item
+public abstract class Armour extends Item
 {
 	private int armour;
 	
