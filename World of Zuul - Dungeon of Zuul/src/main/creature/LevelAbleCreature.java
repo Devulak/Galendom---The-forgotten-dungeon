@@ -6,9 +6,9 @@
 
 package main.creature;
 
-import main.item.Armour;
+import main.item.armour.Armour;
 import main.item.Item;
-import main.item.Shield;
+import main.item.armour.Shield;
 import main.item.Weapon;
 
 /**

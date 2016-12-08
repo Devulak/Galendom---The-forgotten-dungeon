@@ -120,7 +120,7 @@ public class Room
 		return false;
     }
 	
-    protected List<Room> getExits() 
+    public List<Room> getExits() 
     {
         return exits;
     }

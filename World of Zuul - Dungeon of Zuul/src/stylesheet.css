@@ -11,10 +11,13 @@ AnchorPane
 {
 	-fx-font-family: 'VT323', monospace;
 	-fx-background-color: #4e4a4e;
+	-fx-font-size: 16px;
+}
+AnchorPane.split
+{
     -fx-background-image: url("sprites/splitter.png");
 	-fx-background-repeat: repeat-y;
     -fx-background-position: center;
-	-fx-font-size: 16px;
 }
 
 

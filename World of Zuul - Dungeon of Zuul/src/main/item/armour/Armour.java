@@ -1,4 +1,6 @@
-package main.item;
+package main.item.armour;
+
+import main.item.Item;
 
 public class Armour extends Item
 {

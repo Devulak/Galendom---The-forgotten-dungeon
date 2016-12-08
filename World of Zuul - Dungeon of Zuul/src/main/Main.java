@@ -9,17 +9,19 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
+	Stage thestage;
+	
 	@Override
 	public void start(Stage stage) throws Exception
 	{
 		// Init of stage
-		stage.setTitle("Dungeon of Zuul");
+		stage.setTitle("Galendom - The forgotten dungeon");
 		stage.getIcons().add(new Image("/sprites/icon.png"));
 		stage.setMinWidth(960);
 		stage.setMinHeight(640);
 		
 		// game scene
-		Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("fxml/Mainmenu.fxml"));
 		Scene scene = new Scene(root);
 		
 		// Show game scene

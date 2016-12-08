@@ -1,5 +1,11 @@
 package main;
 
+import main.item.Key;
+import main.item.armour.Shield;
+import main.item.armour.Helmet;
+import main.item.armour.Boot;
+import main.item.armour.Legging;
+import main.item.armour.Chestplate;
 import main.creature.*;
 import java.util.*;
 import main.item.*;
@@ -15,7 +21,6 @@ public class Game implements GameInterface {
 	private Room lastRoom;
 	private Vendor vendor = new Vendor(0);
 	private Room currentVendorRoom;
-	private int score = 0;
 	private Room lvl_1, lvl_2, lvl_2a, lvl_3, lvl_3a, lvl_4, lvl_4a, lvl_5, lvl_5a, lvl_6, lvl_7, lvl_8;
 	private Room[][] rooms = new Room[3][4];
 	private Boolean[][] roomsSeen = new Boolean[3][4];
@@ -28,6 +33,7 @@ public class Game implements GameInterface {
 		currentVendorRoom = lvl_5a; //The vendor will start in this room
 	}
 
+	@Override
 	public int getTurns() 
 	{
 		return turns;
@@ -356,7 +362,7 @@ public class Game implements GameInterface {
 		return false;
 	}
 	
-	protected void buyItem(Item itemToBuy)
+	public void buyItem(Item itemToBuy)
 	{
 		
 		for (Item item : vendor.getCreaturesInventory().getContent())
