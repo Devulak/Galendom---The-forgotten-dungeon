@@ -1,4 +1,4 @@
-package main;
+package main.fxml;
 
 import javafx.event.Event;
 import javafx.event.ActionEvent;
@@ -19,9 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import main.Game;
+import main.Room;
 import main.item.Item;
 
-public class FXMLDocumentController implements Initializable {
+public class GameController implements Initializable {
 	
 	private Game game;
 	private GridPane activeMenu;

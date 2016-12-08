@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
+	Stage thestage;
+	
 	@Override
 	public void start(Stage stage) throws Exception
 	{
@@ -19,7 +21,7 @@ public class Main extends Application
 		stage.setMinHeight(640);
 		
 		// game scene
-		Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("fxml/Mainmenu.fxml"));
 		Scene scene = new Scene(root);
 		
 		// Show game scene
