@@ -47,4 +47,6 @@ public interface GameInterface {
 
 	public void useTeleporter();
 
+	public boolean getLost();
+
 }
