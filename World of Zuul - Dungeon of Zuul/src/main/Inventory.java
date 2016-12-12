@@ -70,6 +70,7 @@ public class Inventory implements Serializable
 	{
 		remove(itemToRemove);
 		add(itemToAdd);
+                URL resource = getClass().getResource("Bag.mp3");
                 Media media = new Media(resource.toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.play();
