@@ -1,7 +1,10 @@
 package main;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import main.item.*;
 
 public class Inventory implements Serializable
@@ -67,6 +70,9 @@ public class Inventory implements Serializable
 	{
 		remove(itemToRemove);
 		add(itemToAdd);
+                Media media = new Media(resource.toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.play();
 	}
 	
 	public List<Item> getContent()

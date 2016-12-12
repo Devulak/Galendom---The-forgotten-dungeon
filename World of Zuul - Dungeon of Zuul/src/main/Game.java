@@ -5,9 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import main.creature.*;
 import main.item.*;
 import main.item.armour.*;
@@ -254,6 +257,7 @@ public class Game implements GameInterface {
 		lvl_4c.addItemToMonster(new Potion(2)); // x2 health potions
 		
 		// Coins
+                player.getCreaturesInventory().add(new Coin(52));
 		lvl_1.addItemToMonster(new Coin(2)); // 2 coins
                 lvl_2a.addItemToMonster(new Coin(3)); // 2 coins
 		lvl_3a.addItemToMonster(new Coin(4)); // 3 coins		
@@ -317,9 +321,9 @@ public class Game implements GameInterface {
 		lvl_4ba.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
 		lvl_4bb.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
                 lvl_2Boss.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
-		/* placeholder to outcomment all above in 1 line */ 
-		
+		/* placeholder to outcomment all above in 1 line */ 		
 	}
+        
 	
 	/**
 	 * The play method will be called when the main class starts. The game will
@@ -333,13 +337,10 @@ public class Game implements GameInterface {
 	/**
 	 * This method will print out when you start the game
 	 */
-	private void printWelcome() {
-		addDialogue("You awaken, hearing only silence. Without knowing where you are, you look to the right, and see a torch besides a skull and a Sign, which says:");
-		addDialogue("You're lost in the Dungeon of Zuul. You have to navigate through the rooms to find the exits.''");
-		addDialogue("You smell a disgusting stench, and look forward and see a big dark-green creature looking angry towards you.");
-		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
-		addDialogue("If you manage to defeat the boss, you will win, and escape this forgotten place.");
-		addDialogue("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
+	private void printWelcome() {		
+		addDialogue("Your goal is now to move to the end of the map.");
+		addDialogue("If you manage to defeat the boss at the end, you will win.");
+		addDialogue("But if your health reaches zero, you will lose!");
 		printLook();
 	}
 
@@ -361,6 +362,11 @@ public class Game implements GameInterface {
 			{
 				addDialogue("You were healed for " + player.heal() + " HP (max 40% of your max health), and you lost " + player.getLevel()+ " points.");
 				points -= player.getLevel()*2;
+                                        
+                                URL resource = getClass().getResource("Potion.mp3");
+                                Media media = new Media(resource.toString());
+                                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                                mediaPlayer.play();                                
 				return true;
 			}
 		}
@@ -370,11 +376,14 @@ public class Game implements GameInterface {
 			{
 				addDialogue("You prepared a mask and can now take on 5 more turns");
 				turnsLimit += 5;
-				return true;
-			}
-		}
-		return false;
-	}
+                                URL resource = getClass().getResource("GasMask.mp3");
+                                Media media = new Media(resource.toString());
+                                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                                mediaPlayer.play();  
+				return true;                                
+			} 
+                        }		
+		return false;	}
 	
 	@Override
 	public void buyItem(Item itemToBuy)
@@ -390,6 +399,10 @@ public class Game implements GameInterface {
 					currentRoom.getRoomsInventory().add(itemToBuy);
 					vendor.getCreaturesInventory().remove(itemToBuy);
 					addDialogue("Vendor> Splendid! I put it on the ground for you.");
+                                        URL resource = getClass().getResource("Coin.mp3");
+                                        Media media = new Media(resource.toString());
+                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                                        mediaPlayer.play();  
 					return;
 				}
 				else
@@ -446,10 +459,18 @@ public class Game implements GameInterface {
 				if (playerRolled == 0)
 				{
 					addDialogue("Monster blocked your attack");
+                                        URL resource = getClass().getResource("Block.mp3");
+                                        Media media = new Media(resource.toString());
+                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                                        mediaPlayer.play();
 				}
 				else
 				{
 					addDialogue("You rolled " + playerRolled + " dmg");
+                                        URL resource = getClass().getResource("Attack.mp3");
+                                        Media media = new Media(resource.toString());
+                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                                        mediaPlayer.play();  
 				}
 			}
 
@@ -459,6 +480,11 @@ public class Game implements GameInterface {
 				if (monsterRolled == 0)
 				{
 					addDialogue("You blocked the monsters attack");
+                                        addDialogue("Monster blocked your attack");
+                                        URL resource = getClass().getResource("Block.mp3");
+                                        Media media = new Media(resource.toString());
+                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                                        mediaPlayer.play();
 				}
 				else
 				{
@@ -488,10 +514,7 @@ public class Game implements GameInterface {
 					currentRoom.setMonsterToNull();
 					points += player.getLevel()*5;
 					addDialogue("You have slain the monster!");
-				}
-				
-				// Certain special events after slaying a monster
-
+				}                               
 			} 
 		}
 		else
@@ -525,9 +548,13 @@ public class Game implements GameInterface {
 				{
 					// Searches for items that have key as class and then uses it if possible, this also checks to see if it was successful to use the item
 					if(player.getCreaturesInventory().useItem(player.getCreaturesInventory().searchItem(Key.class)))
-					{
+					{                                            
 						nextRoom.locked(false);
-						addDialogue("You've unlocked the door with your key"); // You can now enter the room!
+                                                URL resource = getClass().getResource("Unlock Door.mp3");
+                                                Media media = new Media(resource.toString());
+                                                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                                                mediaPlayer.play();
+						addDialogue("You've unlocked the door with your key"); // You can now enter the room!                                                
 					}
 					else
 					{
@@ -541,7 +568,7 @@ public class Game implements GameInterface {
 					goVendor();
 					printLook(); // It will give you a description of what's in the room
 					addTurn();
-				}
+				}                                
 			}
 			else
 			{
