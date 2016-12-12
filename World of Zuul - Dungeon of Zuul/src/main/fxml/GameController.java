@@ -1,5 +1,6 @@
-package main;
+package main.fxml;
 
+import java.io.IOException;
 import javafx.event.Event;
 import javafx.event.ActionEvent;
 import java.net.URL;
@@ -7,8 +8,12 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -19,9 +24,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import main.Game;
+import main.GameInterface;
+import main.Room;
 import main.item.Item;
 
-public class FXMLDocumentController implements Initializable {
+public class GameController implements Initializable {
 	
 	private GameInterface game = new Game();
 	private GridPane activeMenu;
@@ -91,13 +100,13 @@ public class FXMLDocumentController implements Initializable {
 	private Label monsterStrength;
 	
 	@FXML
-	private void attack(ActionEvent event)
+	private void attack(ActionEvent event) throws IOException
 	{
 		game.attack();
 		updatePlayerStatus();
 		updateRoomInventory();
 		updatePanel();
-                
+		getLost();
 	}
 	
 	@FXML
@@ -316,7 +325,6 @@ public class FXMLDocumentController implements Initializable {
 	public void updateTurns()
 	{
 		turns.setText("TURN " + String.format("%02d", game.getTurns()) + " / " + String.format("%02d", game.getTurnsLimit()));
-                               
 	}
 	
 	public void updateDialouge()
@@ -325,6 +333,21 @@ public class FXMLDocumentController implements Initializable {
 		dialogue.setScrollTop(Double.MAX_VALUE);
 		dialogue.selectPositionCaret(dialogue.getLength());
 		dialogue.deselect();
+	}
+	
+	public void getLost()
+	{
+		game.getLost();
+		if(game.getLost())
+		{
+			/*Parent root = FXMLLoader.load(getClass().getResource("Mainmenu.fxml"));
+			Scene scene = new Scene(root);
+
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+			stage.setScene(scene);
+			stage.show();*/
+		}
 	}
 	
 	public void updatePanel()
@@ -379,6 +402,7 @@ public class FXMLDocumentController implements Initializable {
 	public void updateMap()
 	{
 		// Init
+		getLost();
 		GraphicsContext mapGC = canvasMap.getGraphicsContext2D();
 		double[] viewHalf = {canvasMap.getWidth()/2, canvasMap.getHeight()/2}; // Get the view size
 		

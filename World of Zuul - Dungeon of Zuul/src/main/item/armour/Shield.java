@@ -1,4 +1,4 @@
-package main.item;
+package main.item.armour;
 
 public class Shield extends Armour
 {

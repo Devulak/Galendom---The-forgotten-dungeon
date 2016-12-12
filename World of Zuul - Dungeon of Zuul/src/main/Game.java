@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.item.*;
+import main.item.armour.*;
 
 public class Game implements GameInterface {
 
@@ -62,6 +63,7 @@ public class Game implements GameInterface {
 		System.out.println("Deserialization succesful");
 	}
 
+	@Override
 	public int getTurns() 
 	{
 		return turns;
@@ -119,10 +121,6 @@ public class Game implements GameInterface {
 		if (turns > turnsLimit) 
 		{
 			player.takeDamageFromGas((turns - turnsLimit) * 2);
-			if (player.getHealth() <= 0) 
-			{
-				lose();
-			}
 		}
 	}
 
@@ -466,11 +464,6 @@ public class Game implements GameInterface {
 				{
 					addDialogue("The monster rolled " + monsterRolled + " dmg");
 				}
-
-				if (player.getHealth() <= 0)
-				{
-					lose();
-				}
 			}
 			else
 			{
@@ -629,9 +622,14 @@ public class Game implements GameInterface {
 		}
 	}
 	
-	public void lose()
+	@Override
+	public boolean getLost()
 	{
-		// What to do if you lose
-		addDialogue("You died, thanks for playing.");
+		if(player.getHealth() <= 0)
+		{
+			addDialogue("You died, thanks for playing.");
+			return true;
+		}
+		return false;
 	}
 }
