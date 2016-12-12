@@ -1,9 +1,10 @@
 package main;
 
+import java.io.Serializable;
 import java.util.*;
 import main.item.*;
 
-public class Inventory
+public class Inventory implements Serializable
 {
 	private List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
 	private boolean nolimit = false;
