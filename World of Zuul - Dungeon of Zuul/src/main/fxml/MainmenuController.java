@@ -12,10 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MainmenuController implements Initializable {
+public class MainmenuController implements Initializable
+{
 
 	@Override
-	public void initialize(URL url, ResourceBundle rb) {
+	public void initialize(URL url, ResourceBundle rb)
+	{
 		// TODO
 	}
 	
