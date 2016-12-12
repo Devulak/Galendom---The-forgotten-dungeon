@@ -37,6 +37,7 @@ public class Game implements GameInterface {
 			serialization();
 			currentRoom = rooms[1][2];
 			currentVendorRoom = rooms[3][1];
+                        givePlayerItems();
 		} catch (IOException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -64,7 +65,12 @@ public class Game implements GameInterface {
 			fileIn.close();
 		}
 		System.out.println("Deserialization succesful");
+        }
+                private void givePlayerItems(){
+		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
+		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game    
 	}
+	
 
 	@Override
 	public int getTurns() 
@@ -250,14 +256,12 @@ public class Game implements GameInterface {
 		lvl_4bb.addItemToMonster(new Key(1));
                 
                // Potions
-		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
 		lvl_3a.addItemToMonster(new Potion(5)); // x5 health potions
 		lvl_2c.addItemToMonster(new Potion(2)); // x2 health potions
 		lvl_3c.addItemToMonster(new Potion(2)); // x2 health potions
 		lvl_4c.addItemToMonster(new Potion(2)); // x2 health potions
 		
 		// Coins
-                player.getCreaturesInventory().add(new Coin(52));
 		lvl_1.addItemToMonster(new Coin(2)); // 2 coins
                 lvl_2a.addItemToMonster(new Coin(3)); // 2 coins
 		lvl_3a.addItemToMonster(new Coin(4)); // 3 coins		
@@ -271,8 +275,7 @@ public class Game implements GameInterface {
                 vendor.getCreaturesInventory().add(new Potion(5, 5)); //Potion
                 vendor.getCreaturesInventory().add(new Key(1, 20)); //Key
 		
-		// Weapons
-		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
+		// Weapons		                
 		lvl_4c.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_5c.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
 		lvl_2b.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
@@ -338,7 +341,7 @@ public class Game implements GameInterface {
 	 * This method will print out when you start the game
 	 */
 	private void printWelcome() {		
-		addDialogue("Your goal is now to move to the end of the map.");
+		addDialogue("Your goal is to move to the end of the map.");
 		addDialogue("If you manage to defeat the boss at the end, you will win.");
 		addDialogue("But if your health reaches zero, you will lose!");
 		printLook();
