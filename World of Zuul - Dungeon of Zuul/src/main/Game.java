@@ -40,7 +40,7 @@ public class Game implements GameInterface {
 	
 	public void serialization() throws IOException
 	{
-		try (FileOutputStream fout = new FileOutputStream("gamescenarios\\GameScenario2.ser")) {  
+		try (FileOutputStream fout = new FileOutputStream("src\\gamescenarios\\GameScenario2.ser")) {  
 		ObjectOutputStream out = new ObjectOutputStream(fout);  
 
 		out.writeObject(rooms);
@@ -52,7 +52,7 @@ public class Game implements GameInterface {
 	
 	public void deSerialization() throws IOException, ClassNotFoundException
 	{
-		try (FileInputStream fileIn = new FileInputStream("gamescenarios\\GameScenario2.ser")) {
+		try (FileInputStream fileIn = new FileInputStream("src\\gamescenarios\\GameScenario2.ser")) {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			rooms = (Room[][]) in.readObject();
 			roomsSeen = (Boolean[][]) in.readObject();
