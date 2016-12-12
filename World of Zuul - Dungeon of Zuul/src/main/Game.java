@@ -9,8 +9,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.AudioClip;
 import main.creature.*;
 import main.item.*;
 import main.item.armour.*;
@@ -367,9 +366,8 @@ public class Game implements GameInterface {
 				points -= player.getLevel()*2;
                                         
                                 URL resource = getClass().getResource("Potion.mp3");
-                                Media media = new Media(resource.toString());
-                                MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                mediaPlayer.play();                                
+                                AudioClip audio = new AudioClip(resource.toString());
+                                audio.play();                                 
 				return true;
 			}
 		}
@@ -380,9 +378,8 @@ public class Game implements GameInterface {
 				addDialogue("You prepared a mask and can now take on 5 more turns");
 				turnsLimit += 5;
                                 URL resource = getClass().getResource("GasMask.mp3");
-                                Media media = new Media(resource.toString());
-                                MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                mediaPlayer.play();  
+                                AudioClip audio = new AudioClip(resource.toString());
+                                audio.play();   
 				return true;                                
 			} 
                         }		
@@ -403,9 +400,8 @@ public class Game implements GameInterface {
 					vendor.getCreaturesInventory().remove(itemToBuy);
 					addDialogue("Vendor> Splendid! I put it on the ground for you.");
                                         URL resource = getClass().getResource("Coin.mp3");
-                                        Media media = new Media(resource.toString());
-                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                        mediaPlayer.play();  
+                                        AudioClip audio = new AudioClip(resource.toString());
+                                        audio.play();   
 					return;
 				}
 				else
@@ -463,17 +459,15 @@ public class Game implements GameInterface {
 				{
 					addDialogue("Monster blocked your attack");
                                         URL resource = getClass().getResource("Block.mp3");
-                                        Media media = new Media(resource.toString());
-                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                        mediaPlayer.play();
+                                        AudioClip audio = new AudioClip(resource.toString());
+                                        audio.play(); 
 				}
 				else
 				{
 					addDialogue("You rolled " + playerRolled + " dmg");
                                         URL resource = getClass().getResource("Attack.mp3");
-                                        Media media = new Media(resource.toString());
-                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                        mediaPlayer.play();  
+                                        AudioClip audio = new AudioClip(resource.toString());
+                                        audio.play();               
 				}
 			}
 
@@ -485,9 +479,8 @@ public class Game implements GameInterface {
 					addDialogue("You blocked the monsters attack");
                                         addDialogue("Monster blocked your attack");
                                         URL resource = getClass().getResource("Block.mp3");
-                                        Media media = new Media(resource.toString());
-                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                        mediaPlayer.play();
+                                        AudioClip audio = new AudioClip(resource.toString());
+                                        audio.play(); 
 				}
 				else
 				{
@@ -554,9 +547,8 @@ public class Game implements GameInterface {
 					{                                            
 						nextRoom.locked(false);
                                                 URL resource = getClass().getResource("Unlock Door.mp3");
-                                                Media media = new Media(resource.toString());
-                                                MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                                mediaPlayer.play();
+                                                AudioClip audio = new AudioClip(resource.toString());
+                                                audio.play(); 
 						addDialogue("You've unlocked the door with your key"); // You can now enter the room!                                                
 					}
 					else

@@ -6,11 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import javafx.util.Duration;
 import java.net.URL;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.AudioClip;
 
 public class Main extends Application
 {
@@ -34,15 +32,8 @@ public class Main extends Application
 		stage.show();  
                 
                 URL resource = getClass().getResource("Calming Dungeons.mp3");
-                Media media = new Media(resource.toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(media);
-                mediaPlayer.play();
-                mediaPlayer.setOnEndOfMedia(new Runnable(){
-                    public void run(){
-                        mediaPlayer.seek(Duration.ZERO);
-                    }
-                }
-                );                
+                AudioClip audio = new AudioClip(resource.toString());
+                audio.play();               
         }
         
         public static void main(String[] args)
