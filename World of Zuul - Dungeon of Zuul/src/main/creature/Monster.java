@@ -28,5 +28,17 @@ public class Monster extends LevelAbleCreature {
 	{
 		return maxPoints;
 	}
+	
+	@Override
+	public int getHealth()
+	{
+		return health;
+	}
+	
+	@Override
+	public int getMaxHealth()
+	{
+		return maxHealth;
+	}
 
 }

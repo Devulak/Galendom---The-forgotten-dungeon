@@ -1,16 +1,17 @@
 package main;
 
-import main.creature.Creature;
-import main.creature.LevelAbleCreature;
+import java.io.Serializable;
+import main.creature.*;
 import java.util.*;
 import main.item.*;
 
 
-public class Room
+public class Room implements Serializable
 {
     private final String description;
 	private List<Room> exits = new ArrayList<>();
     private LevelAbleCreature monster; // The monster in the room, if there's any!
+	private boolean hasBoss = false;
     private Inventory inventory = new Inventory(true); // Inventory full of stuff (or not)!
     private boolean locked = false;
 	private Room teleporter;
@@ -47,6 +48,17 @@ public class Room
 		return monster;
 	}
 	
+	public void hasBoss(boolean hasBoss)
+	{
+		this.hasBoss = hasBoss;
+	}
+	
+	public boolean getBoss()
+	{
+		return hasBoss;
+	}
+	
+	
 	/**
 	* Returns an item to the monsters inventory in the specific room if there is any.
 	* @param item	the item you want to add into the monsters inventory
@@ -70,7 +82,7 @@ public class Room
 		return inventory;
 	}
 	
-	protected void locked(boolean lock)
+	public void locked(boolean lock)
 	{
 		locked = lock;
 	}
@@ -80,7 +92,7 @@ public class Room
 		return locked;
 	}
     
-	protected void setTeleporter(Room teleportTo)
+	public void setTeleporter(Room teleportTo)
 	{
 		teleporter = teleportTo;
 	}
@@ -124,5 +136,6 @@ public class Room
     {
         return exits;
     }
+
 }
 

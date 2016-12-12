@@ -26,12 +26,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.Game;
+import main.GameInterface;
 import main.Room;
 import main.item.Item;
 
 public class GameController implements Initializable {
 	
-	private Game game;
+	private GameInterface game = new Game();
 	private GridPane activeMenu;
 	
 	@FXML
@@ -246,7 +247,6 @@ public class GameController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		game = new Game();
 		game.play();
 		updatePlayerStatus();
 		updatePlayerInventory();
