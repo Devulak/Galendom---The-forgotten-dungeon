@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="640.0" minWidth="960.0" prefHeight="640" prefWidth="960" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FXMLDocumentController">
+<AnchorPane minHeight="640.0" minWidth="960.0" prefHeight="640" prefWidth="960" styleClass="split" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fxml.GameController">
     <children>
       <HBox alignment="CENTER" fillHeight="false" layoutX="-143.0" layoutY="-128.0" spacing="32.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -69,42 +69,42 @@
                                 <children>
                                     <ImageView>
                                         <image>
-                                            <Image url="@../sprites/status_bg.png" />
+                                            <Image url="@../../sprites/status_bg.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView>
                                         <image>
-                                            <Image url="@../sprites/status_exp_bg.png" />
+                                            <Image url="@../../sprites/status_exp_bg.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView fx:id="playerHealthbar" layoutX="66" layoutY="4">
                                         <image>
-                                            <Image url="@../sprites/healthbar.png" />
+                                            <Image url="@../../sprites/healthbar.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView fx:id="playerHealthbarEnd" layoutY="4">
                                         <image>
-                                            <Image url="@../sprites/healthbar_end.png" />
+                                            <Image url="@../../sprites/healthbar_end.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView fx:id="playerExperiencebar" layoutX="66" layoutY="36">
                                         <image>
-                                            <Image url="@../sprites/experiencebar.png" />
+                                            <Image url="@../../sprites/experiencebar.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView fx:id="playerExperiencebarEnd" layoutY="36">
                                         <image>
-                                            <Image url="@../sprites/experiencebar_end.png" />
+                                            <Image url="@../../sprites/experiencebar_end.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView>
                                         <image>
-                                            <Image url="@../sprites/status_fg.png" />
+                                            <Image url="@../../sprites/status_fg.png" />
                                         </image>
                                     </ImageView>
                                     <ImageView>
                                         <image>
-                                            <Image url="@../sprites/status_exp_fg.png" />
+                                            <Image url="@../../sprites/status_exp_fg.png" />
                                         </image>
                                     </ImageView>
                                     <Label fx:id="playerLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44" text="lvl">
@@ -128,7 +128,7 @@
                                 <children>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/inventory.png" />
+                                    <Image url="@../../sprites/inventory.png" />
                                  </image>
                               </ImageView>
                                     <ListView fx:id="playerInventory" layoutX="8.0" layoutY="40.0" onMouseClicked="#dropItem" prefHeight="272.0" prefWidth="192.0" />
@@ -179,7 +179,7 @@
                      <children>
                         <ImageView pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="16" GridPane.rowSpan="2">
                            <image>
-                              <Image url="@../sprites/action.png" />
+                              <Image url="@../../sprites/action.png" />
                            </image>
                         </ImageView>
                         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="16" GridPane.rowSpan="2">
@@ -233,7 +233,7 @@
                               <Canvas fx:id="canvasMap" height="416.0" width="416.0" />
                               <ImageView layoutX="200.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/player.gif" />
+                                    <Image url="@../../sprites/player.gif" />
                                  </image>
                               </ImageView>
                            </children>
@@ -244,7 +244,7 @@
                                  <children>
                                     <ImageView pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../sprites/arrows.png" />
+                                          <Image url="@../../sprites/arrows.png" />
                                        </image>
                                     </ImageView>
                                         <Button layoutX="72.0" layoutY="8.0" onAction="#up" prefHeight="48.0" prefWidth="48.0" styleClass="up" />
@@ -259,7 +259,7 @@
                            <children>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/action_extra.png" />
+                                    <Image url="@../../sprites/action_extra.png" />
                                  </image>
                               </ImageView>
                               <Button layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#showTeleporter" prefHeight="48.0" prefWidth="160.0" text="A teleporter :o" />
@@ -269,7 +269,7 @@
                            <children>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/action_extra.png" />
+                                    <Image url="@../../sprites/action_extra.png" />
                                  </image>
                               </ImageView>
                               <Button layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#showVendor" prefHeight="48.0" prefWidth="160.0" text="Approach the vendor" />
@@ -319,22 +319,22 @@
                            <children>
                               <ImageView>
                                  <image>
-                                    <Image url="@../sprites/status_bg.png" />
+                                    <Image url="@../../sprites/status_bg.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="monsterHealthbar" layoutX="66" layoutY="4">
                                  <image>
-                                    <Image url="@../sprites/healthbar.png" />
+                                    <Image url="@../../sprites/healthbar.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="monsterHealthbarEnd" layoutY="4">
                                  <image>
-                                    <Image url="@../sprites/healthbar_end.png" />
+                                    <Image url="@../../sprites/healthbar_end.png" />
                                  </image>
                               </ImageView>
                               <ImageView>
                                  <image>
-                                    <Image url="@../sprites/status_fg.png" />
+                                    <Image url="@../../sprites/status_fg.png" />
                                  </image>
                               </ImageView>
                               <Label fx:id="monsterLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44">
@@ -350,7 +350,7 @@
                         </Pane>
                         <ImageView pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="14" GridPane.rowSpan="2">
                            <image>
-                              <Image url="@../sprites/button_max.png" />
+                              <Image url="@../../sprites/button_max.png" />
                            </image>
                         </ImageView>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#attack" text="Hit it!" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2">
@@ -361,7 +361,7 @@
                            <children>
                               <ImageView pickOnBounds="true" preserveRatio="true" styleClass="backcover">
                                  <image>
-                                    <Image url="@../sprites/monster.png" />
+                                    <Image url="@../../sprites/monster.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -415,12 +415,12 @@
                            <children>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/teleporter.png" />
+                                    <Image url="@../../sprites/teleporter.png" />
                                  </image>
                               </ImageView>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/map_frame.png" />
+                                    <Image url="@../../sprites/map_frame.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -428,7 +428,7 @@
                         <Pane prefHeight="200.0" prefWidth="200.0" />
                         <ImageView pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2">
                            <image>
-                              <Image url="@../sprites/button_max.png" />
+                              <Image url="@../../sprites/button_max.png" />
                            </image>
                         </ImageView>
                         <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#teleport" text="Use zé teleporter!" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2">
@@ -449,7 +449,7 @@
                            <children>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/vendor_shop.png" />
+                                    <Image url="@../../sprites/vendor_shop.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -458,7 +458,7 @@
                            <children>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../sprites/vendor_inventory.png" />
+                                    <Image url="@../../sprites/vendor_inventory.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="34.0" layoutY="4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="348.0" text="SHOP" />
@@ -518,6 +518,6 @@
     </children>
     <stylesheets>
         <URL value="http://fonts.googleapis.com/css?family=VT323" />
-        <URL value="@../stylesheet.css" />
+        <URL value="@../../stylesheet.css" />
     </stylesheets>
 </AnchorPane>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package main.item;
+package main.item.armour;
 
 /**
  *

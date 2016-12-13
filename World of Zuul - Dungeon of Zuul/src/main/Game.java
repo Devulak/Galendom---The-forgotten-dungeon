@@ -5,11 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import main.creature.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.creature.*;
 import main.item.*;
+import main.item.armour.*;
 
 public class Game implements GameInterface {
 
@@ -17,7 +18,7 @@ public class Game implements GameInterface {
 	private int turns;
 	private int turnsLimit = 20;
 	private String dialogue = "";
-	private Player player = new Player(100);
+	private Player player = new Player(1);
 	private Room currentRoom;
 	private Room lastRoom;
 	private Vendor vendor = new Vendor(0);
@@ -33,7 +34,6 @@ public class Game implements GameInterface {
 			serialization();
 			currentRoom = rooms[1][2];
 			currentVendorRoom = rooms[3][1];
-			givePlayerItems();
 		} catch (IOException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -41,7 +41,7 @@ public class Game implements GameInterface {
 	
 	public void serialization() throws IOException
 	{
-		try (FileOutputStream fout = new FileOutputStream("gamescenarios\\GameScenario2.ser")) {  
+		try (FileOutputStream fout = new FileOutputStream("src\\gamescenarios\\GameScenario2.ser")) {  
 		ObjectOutputStream out = new ObjectOutputStream(fout);  
 
 		out.writeObject(rooms);
@@ -53,7 +53,7 @@ public class Game implements GameInterface {
 	
 	public void deSerialization() throws IOException, ClassNotFoundException
 	{
-		try (FileInputStream fileIn = new FileInputStream("gamescenarios\\GameScenario2.ser")) {
+		try (FileInputStream fileIn = new FileInputStream("src\\gamescenarios\\GameScenario2.ser")) {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			rooms = (Room[][]) in.readObject();
 			roomsSeen = (Boolean[][]) in.readObject();
@@ -62,12 +62,8 @@ public class Game implements GameInterface {
 		}
 		System.out.println("Deserialization succesful");
 	}
-	
-	private void givePlayerItems(){
-		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
-		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game    
-	}
 
+	@Override
 	public int getTurns() 
 	{
 		return turns;
@@ -125,10 +121,6 @@ public class Game implements GameInterface {
 		if (turns > turnsLimit) 
 		{
 			player.takeDamageFromGas((turns - turnsLimit) * 2);
-			if (player.getHealth() <= 0) 
-			{
-				lose();
-			}
 		}
 	}
 
@@ -252,7 +244,80 @@ public class Game implements GameInterface {
 		lvl_2Boss.hasBoss(true);
 		lvl_2Boss.locked(true);
 		lvl_5c.setTeleporter(lvl_1);
-		lvl_5c.addItemToMonster(new Key(1));
+		lvl_4bb.addItemToMonster(new Key(1));
+                
+               // Potions
+		player.getCreaturesInventory().add(new Potion(5)); // x5 health potions
+		lvl_3a.addItemToMonster(new Potion(5)); // x5 health potions
+		lvl_2c.addItemToMonster(new Potion(2)); // x2 health potions
+		lvl_3c.addItemToMonster(new Potion(2)); // x2 health potions
+		lvl_4c.addItemToMonster(new Potion(2)); // x2 health potions
+		
+		// Coins
+		lvl_1.addItemToMonster(new Coin(2)); // 2 coins
+                lvl_2a.addItemToMonster(new Coin(3)); // 2 coins
+		lvl_3a.addItemToMonster(new Coin(4)); // 3 coins		
+		lvl_2c.addItemToMonster(new Coin(5)); // 5 coins
+		lvl_3c.addItemToMonster(new Coin(6)); // 6 coins
+                lvl_4c.addItemToMonster(new Coin(7)); // 4 coins
+		lvl_5c.addItemToMonster(new Coin(8)); // 8 coins
+		
+		//Vendor
+		vendor.getCreaturesInventory().add(new GasMask(5, 10)); //Gassmask
+                vendor.getCreaturesInventory().add(new Potion(5, 5)); //Potion
+                vendor.getCreaturesInventory().add(new Key(1, 20)); //Key
+		
+		// Weapons
+		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
+		lvl_4c.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
+		lvl_5c.addItemToMonster(new Weapon("Iron Sword", 3)); //Iron Sword
+		lvl_2b.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
+		lvl_3b.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
+		lvl_4ba.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
+		lvl_4bb.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword 
+                lvl_2Boss.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword 
+		
+		// Shields
+		lvl_1.addItemToMonster(new Shield("Wooden Shield", 2)); //Wooden Shield
+		lvl_5c.addItemToMonster(new Shield("Iron Shield", 4)); //Iron Shield
+		lvl_4bb.addItemToMonster(new Shield("Steel Shield", 6)); //Steel Shield
+                lvl_2Boss.addItemToMonster(new Shield("Steel Shield", 6)); //Steel Shield
+		
+		// Helmets
+		lvl_2a.addItemToMonster(new Helmet("Leather Helmet", 2)); //Leather Helmet
+		lvl_3a.addItemToMonster(new Helmet("Iron Helmet", 5 )); //Iron Helmet
+		lvl_5c.addItemToMonster(new Helmet("Iron Helmet", 5 )); //Iron Helmet
+		lvl_3b.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+		lvl_4ba.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+		lvl_4bb.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+                lvl_2Boss.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+		
+		// Chestplates
+		lvl_2a.addItemToMonster(new Chestplate("Leather Armour", 4)); //Leather Chestplate
+		lvl_4c.addItemToMonster(new Chestplate("Iron Armour", 6)); //Iron Chestplate
+		lvl_5c.addItemToMonster(new Chestplate("Iron Armour", 6)); //Iron Chestplate
+                lvl_4ba.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
+		lvl_4bb.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
+                lvl_2Boss.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
+		
+		// Leggings
+		lvl_2c.addItemToMonster(new Legging("Leather Leggings", 3)); //Leather Leggings
+		lvl_4c.addItemToMonster(new Legging("Iron Leggings", 5)); //Iron Leggings
+		lvl_5c.addItemToMonster(new Legging("Iron Leggings", 5)); //Iron Leggings                             
+		lvl_4ba.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
+		lvl_4bb.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
+                lvl_2Boss.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
+		
+		// Boots          
+		lvl_2c.addItemToMonster(new Boot("Leather Boots", 1)); //Leather Boots
+		lvl_3c.addItemToMonster(new Boot("Iron Boots", 3)); //Iron Boots
+		lvl_5c.addItemToMonster(new Boot("Iron Boots", 3)); //Iron Boots
+		lvl_2b.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+		lvl_3b.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+		lvl_4ba.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+		lvl_4bb.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+                lvl_2Boss.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+		/* placeholder to outcomment all above in 1 line */ 
 		
 	}
 	
@@ -398,11 +463,6 @@ public class Game implements GameInterface {
 				else
 				{
 					addDialogue("The monster rolled " + monsterRolled + " dmg");
-				}
-
-				if (player.getHealth() <= 0)
-				{
-					lose();
 				}
 			}
 			else
@@ -562,9 +622,14 @@ public class Game implements GameInterface {
 		}
 	}
 	
-	public void lose()
+	@Override
+	public boolean getLost()
 	{
-		// What to do if you lose
-		addDialogue("You died, thanks for playing.");
+		if(player.getHealth() <= 0)
+		{
+			addDialogue("You died, thanks for playing.");
+			return true;
+		}
+		return false;
 	}
 }
