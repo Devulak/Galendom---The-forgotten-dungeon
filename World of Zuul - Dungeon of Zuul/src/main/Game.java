@@ -51,6 +51,11 @@ public class Game implements GameInterface {
 		System.out.println("Serialization succesful");
 	}
 	
+	/**
+	 * This method will load a file that contains the rooms
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 */
 	public void deSerialization() throws IOException, ClassNotFoundException
 	{
 		try (FileInputStream fileIn = new FileInputStream("src\\gamescenarios\\GameScenario2.ser")) {
@@ -63,54 +68,92 @@ public class Game implements GameInterface {
 		System.out.println("Deserialization succesful");
 	}
 
+	/**
+	 * Returns the number of turns the player has made
+	 * @return turns
+	 */
 	@Override
 	public int getTurns() 
 	{
 		return turns;
 	}
 
+	/**
+	 * Returns the turn limit
+	 * @return turnsLimit
+	 */
 	@Override
 	public int getTurnsLimit() 
 	{
 		return turnsLimit;
 	}
 
+	/**
+	 * Returns the player's current position
+	 * @return currentRoom
+	 */
 	@Override
 	public Room getCurrentRoom() 
 	{
 		return currentRoom;
 	}
 
+	/**
+	 * Returns the player
+	 * @return player
+	 */
 	@Override
 	public Player getPlayer() 
 	{
 		return player;
 	}
 
+	/**
+	 * Returns the vendor
+	 * @return vendor
+	 */
 	@Override
 	public Vendor getVendor()
 	{
 		return vendor;
 	}
 	
+	/**
+	 * Returns the vendors current position
+	 * @return vendor
+	 */
 	@Override
 	public Room getCurrentVendorRoom() 
 	{
 		return currentVendorRoom;
 	}
 
+	/**
+	 * Returns the array containing rooms
+	 * @return rooms
+	 */
 	@Override
 	public Room[][] getRooms()
 	{
 		return rooms;
 	}
 	
+	/**
+	 * Returns the rooms that the player has visited previously
+	 * @return roomsSeen
+	 */
 	@Override
 	public Boolean[][] getRoomsSeen()
 	{
 		return roomsSeen;
 	}
 	
+	/**
+	 * Increments the number of turns by one everytime the player moves around the map.
+	 * The player will be warned that he will lose health if the amount of turns equals the turn limit.
+	 * The player will gradually lose health if he stays in the dungeon for long.
+	 */
+	@Override
 	public void addTurn() 
 	{
 		turns++;
@@ -124,24 +167,39 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Returns points
+	 * @return points
+	 */
 	@Override
 	public int getPoints() 
 	{
 		return points;
 	}
 
+	/**
+	 * Returns the dialogue to the GUI
+	 * @return dialouge
+	 */
 	@Override
 	public String getDialogue() 
 	{
 		return dialogue;
 	}
 
+	/**
+	 * Adds a new line everytime the game wants to print something out
+	 */
 	@Override
 	public void addDialogue() 
 	{
 		dialogue += "\n";
 	}
 
+	/**
+	 * 
+	 * @param string 
+	 */
 	@Override
 	public void addDialogue(String string) 
 	{
@@ -328,6 +386,7 @@ public class Game implements GameInterface {
 	@Override
 	public void play() {
 		printWelcome();
+		printLook();
 	}
 
 	/**
@@ -340,11 +399,13 @@ public class Game implements GameInterface {
 		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
 		addDialogue("If you manage to defeat the boss, you will win, and escape this forgotten place.");
 		addDialogue("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
-		printLook();
 	}
 
-	/* By writing "help" in console, this method will be called. */
-	private void printLook() // Prints out what the character can see
+	/**
+	 * Informs you your current whereabouts. If there is a monster in your room,
+	 * it will inform you its level.
+	 */
+	private void printLook()
 	{
 		addDialogue("You are " + currentRoom.getShortDescription());
 		if (currentRoom.hasMonster()) {
@@ -352,6 +413,12 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Will search through your inventory. If you wanted to use potion,
+	 * this method will find a class called Potion. Otherwise it will return false.
+	 * @param searchForItem
+	 * @return true, false
+	 */
 	@Override
 	public boolean useItem(Item searchForItem)
 	{
@@ -376,6 +443,10 @@ public class Game implements GameInterface {
 		return false;
 	}
 	
+	/**
+	 * Gives the player the item, he wants to buy if he has enough money
+	 * @param itemToBuy 
+	 */
 	@Override
 	public void buyItem(Item itemToBuy)
 	{
@@ -401,18 +472,28 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Will make the player to attack a monster
+	 */
 	@Override
 	public void attack()
 	{
 		attack(true);
 	}
 
+	/**
+	 * Will make the player flee to his previous room
+	 */
 	@Override
 	public void flee()
 	{
 		attack(false);
 	}
 
+	/**
+	 * 
+	 * @param wantToStay 
+	 */
 	@Override
 	public void attack(boolean wantToStay)
 	{
@@ -452,7 +533,6 @@ public class Game implements GameInterface {
 					addDialogue("You rolled " + playerRolled + " dmg");
 				}
 			}
-
 			if (currentRoom.getMonster().getHealth() > 0)
 			{
 				int monsterRolled = currentRoom.getMonster().rollDamage(player);
@@ -489,9 +569,6 @@ public class Game implements GameInterface {
 					points += player.getLevel()*5;
 					addDialogue("You have slain the monster!");
 				}
-				
-				// Certain special events after slaying a monster
-
 			} 
 		}
 		else

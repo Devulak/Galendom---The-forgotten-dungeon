@@ -12,9 +12,6 @@ package main.creature;
  */
 public class Boss extends LevelAbleCreature {
 
-	private int maxPoints;
-	private final int EXTRAPOINTS = 50; //How many points will the player be awarded if he defeats the boss?
-	
 	public Boss(int lvl) 
 	{
 		super(lvl);
@@ -22,13 +19,6 @@ public class Boss extends LevelAbleCreature {
 		experienceMax = EXP_BASE + level * EXP_REQUIRED_RATIO;
 		maxHealth = HEALTH_BASE_AMOUNT + level * HEALTH_GAIN_AMOUNT;
 		health = maxHealth;
-		maxPoints = POINTS * level + EXTRAPOINTS;
-	}
-
-	@Override
-	public int givePlayerPoints() 
-	{
-		return maxPoints;
 	}
 
 }
