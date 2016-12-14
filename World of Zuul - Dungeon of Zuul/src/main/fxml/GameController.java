@@ -22,6 +22,7 @@ import main.Game;
 import main.GameInterface;
 import main.Room;
 import main.item.Item;
+import main.singleton;
 
 public class GameController implements Initializable {
 	
