@@ -131,7 +131,7 @@
                                     <Image url="@../../sprites/inventory.png" />
                                  </image>
                               </ImageView>
-                                    <ListView fx:id="playerInventory" layoutX="8.0" layoutY="40.0" onMouseClicked="#dropItem" prefHeight="272.0" prefWidth="192.0" />
+                                    <ListView fx:id="playerInventory" layoutX="8.0" layoutY="40.0" onMouseClicked="#inventoryItem" prefHeight="272.0" prefWidth="192.0" />
                                     <ListView fx:id="roomInventory" layoutX="216.0" layoutY="40.0" onMouseClicked="#takeItem" prefHeight="272.0" prefWidth="192.0" />
                               <Label layoutX="34.0" layoutY="4.0" prefHeight="24.0" prefWidth="140.0" text="INVENTORY" />
                               <Label layoutX="242.0" layoutY="4.0" prefHeight="24.0" prefWidth="140.0" text="ROOM" />

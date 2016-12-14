@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="640.0" minWidth="960.0" prefHeight="640" prefWidth="960" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fxml.MainmenuController">
+<AnchorPane minHeight="640.0" minWidth="960.0" prefHeight="640" prefWidth="960" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fxml.ScenariosController">
     <stylesheets>
         <URL value="http://fonts.googleapis.com/css?family=VT323" />
         <URL value="@../../stylesheet.css" />
@@ -34,7 +34,7 @@
                               <Image url="@../../sprites/button_max.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scenarios" prefHeight="48.0" prefWidth="400.0" text="Play" />
+                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scenario1" prefHeight="48.0" prefWidth="400.0" text="Play the original" />
                      </children>
                   </Pane>
                   <Pane layoutY="64.0">
@@ -44,19 +44,29 @@
                               <Image url="@../../sprites/button_max.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" prefWidth="400.0" text="Leaderboard" />
+                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scenario2" prefHeight="48.0" prefWidth="400.0" text="Play the maze" />
                      </children>
                   </Pane>
-                  <Pane layoutY="128.0">
-                     <children>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../sprites/button_max.png" />
-                           </image>
-                        </ImageView>
-                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quit" prefHeight="48.0" prefWidth="400.0" text="Quit" />
-                     </children>
-                  </Pane>
+               </children>
+            </Pane>
+            <Pane>
+               <children>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../sprites/button_max.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#back" prefHeight="48.0" prefWidth="400.0" text="Back" />
+               </children>
+            </Pane>
+            <Pane>
+               <children>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../sprites/button_max.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#build" prefHeight="48.0" prefWidth="400.0" text="Build (DEVELOPER)" />
                </children>
             </Pane>
          </children>

@@ -41,6 +41,10 @@ public interface GameInterface {
 
 	public boolean useItem(Item searchForItem);
 
+	public void takeItem(Item searchForItem);
+
+	public void dropItem(Item searchForItem);
+
 	public void attack();
 
 	public void flee();
@@ -52,6 +56,12 @@ public interface GameInterface {
 	public int[] getPlayerPosition();
 
 	public void useTeleporter();
+
+	public boolean roomHasMonster();
+
+	public boolean roomHasVendor();
+
+	public boolean roomHasTeleporter();
 
 	public boolean getLost();
 
