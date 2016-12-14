@@ -14,17 +14,15 @@ import javafx.stage.Stage;
 
 public class MainmenuController implements Initializable
 {
-
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
-		// TODO
 	}
 	
 	@FXML
-	private void startGame(ActionEvent event) throws IOException
+	private void scenarios(ActionEvent event) throws IOException
 	{
-		Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("Scenarios.fxml"));
 		Scene scene = new Scene(root);
 		
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

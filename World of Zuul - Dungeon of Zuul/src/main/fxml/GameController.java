@@ -8,23 +8,16 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import main.Game;
 import main.GameInterface;
 import main.Room;
@@ -99,23 +92,59 @@ public class GameController implements Initializable {
 	@FXML
 	private Label monsterStrength;
 	
+	@Override
+	public void initialize(URL url, ResourceBundle rb)
+	{
+		game.play();
+		// Run all update commands so that we both have a list of them and the GUI is prepared
+		updatePlayerStatus();
+		updatePlayerInventory();
+		updateRoomInventory();
+		updateMap();
+		updateDialouge();
+		updatePoints();
+		updateTurns();
+		updateMove();
+	}
+	
 	@FXML
 	private void attack(ActionEvent event) throws IOException
 	{
 		game.attack();
 		updatePlayerStatus();
 		updateRoomInventory();
-		updatePanel();
+		updateDialouge();
+		updatePoints();
+		updateTurns();
 		getLost();
+		if(game.roomHasMonster())
+		{
+			updateMonsterStatus();
+		}
+		else
+		{
+			switchMenu(navigation);
+			updateMove();
+		}
 	}
 	
 	@FXML
 	private void flee(ActionEvent event)
 	{
 		game.flee();
-		updatePlayerStatus();
 		updateRoomInventory();
-		updatePanel();
+		updateDialouge();
+		updatePoints();
+		updateTurns();
+		if(game.roomHasMonster())
+		{
+			updatePlayerStatus();
+		}
+		else
+		{
+			switchMenu(navigation);
+			updateMove();
+		}
 	}
 	
 	@FXML
@@ -142,7 +171,11 @@ public class GameController implements Initializable {
 	{
 		game.useTeleporter();
 		updateRoomInventory();
-		updatePanel();
+		updateDialouge();
+		updatePoints();
+		updateTurns();
+		switchMenu(navigation);
+		updateMove();
 	}
 	
 	@FXML
@@ -170,8 +203,7 @@ public class GameController implements Initializable {
 	private void takeItem(Event event)
 	{
 		Item selectedItem = (Item) roomInventory.getSelectionModel().getSelectedItem();
-		Item tempItem = game.getPlayer().getCreaturesInventory().add(selectedItem);
-		game.getCurrentRoom().getRoomsInventory().swap(selectedItem, tempItem);
+		game.takeItem(selectedItem);
 		
 		// Update inventories
 		updatePlayerInventory();
@@ -181,14 +213,10 @@ public class GameController implements Initializable {
 	}
 	
 	@FXML
-	private void dropItem(Event event)
+	private void inventoryItem(Event event)
 	{
 		Item selectedItem = (Item) playerInventory.getSelectionModel().getSelectedItem();
-		if(!game.useItem(selectedItem)) // checks to see if it's an item that's suppose to be used
-		{
-			Item droppedItem = game.getCurrentRoom().getRoomsInventory().add(selectedItem);
-			game.getPlayer().getCreaturesInventory().swap(selectedItem, droppedItem);
-		}
+		game.dropItem(selectedItem);
 		
 		// Update inventories
 		updatePlayerInventory();
@@ -200,59 +228,55 @@ public class GameController implements Initializable {
                 
 	}
 	
+	private void updateMove()
+	{
+		updateMap();
+		updateRoomInventory();
+		updatePlayerStatus();
+		updateDialouge();
+		updatePoints();
+		updateTurns();
+		if(game.roomHasMonster())
+		{
+			switchMenu(monster);
+			updateMonsterStatus();
+		}
+		else
+		{
+			// Teleporter
+			showTeleporter.setVisible(game.roomHasTeleporter());
+
+			// Vendor
+			showVendor.setVisible(game.roomHasVendor());
+		}
+	}
+	
 	@FXML
 	private void up(ActionEvent event)
 	{
 		game.goRoom(new int[]{0, -1});
-		updateMap();
-		updatePlayerInventory();
-		updateRoomInventory();
-		updatePanel();     
-		updatePlayerStatus();
+		updateMove();
 	}
 	
 	@FXML
 	private void down(ActionEvent event)
 	{
 		game.goRoom(new int[]{0, 1});
-		updateMap();
-		updatePlayerInventory();
-		updateRoomInventory();
-		updatePanel();           
-		updatePlayerStatus();
+		updateMove();
 	}
 	
 	@FXML
 	private void left(ActionEvent event)
 	{
 		game.goRoom(new int[]{-1, 0});
-		updateMap();
-		updatePlayerInventory();
-		updateRoomInventory();
-		updatePanel();      
-		updatePlayerStatus();
+		updateMove();
 	}
 	
 	@FXML
 	private void right(ActionEvent event)
 	{
 		game.goRoom(new int[]{1, 0});
-		updateMap();
-		updatePlayerInventory();
-		updateRoomInventory();
-		updatePanel();         
-		updatePlayerStatus();
-	}
-	
-	@Override
-	public void initialize(URL url, ResourceBundle rb)
-	{
-		game.play();
-		updatePlayerStatus();
-		updatePlayerInventory();
-		updateRoomInventory();
-		updatePanel();
-		updateMap();
+		updateMove();
 	}
 	
 	public void updatePlayerStatus()
@@ -347,45 +371,6 @@ public class GameController implements Initializable {
 
 			stage.setScene(scene);
 			stage.show();*/
-		}
-	}
-	
-	public void updatePanel()
-	{
-		updateDialouge();
-		updatePoints();
-		updateTurns();                
-		
-		// Show combat
-		if(game.getCurrentRoom().hasMonster())
-		{
-			switchMenu(monster);
-			updateMonsterStatus();
-		}
-		else
-		{
-			switchMenu(navigation);
-			updateMap();
-		
-			// Show teleporter option
-			if(game.getCurrentRoom().getTeleporter() != null)
-			{
-				showTeleporter.setVisible(true);
-			}
-			else
-			{
-				showTeleporter.setVisible(false);
-			}
-
-			// Show vendor option
-			if(game.getCurrentRoom() == game.getCurrentVendorRoom())
-			{
-				showVendor.setVisible(true);
-			}
-			else
-			{
-				showVendor.setVisible(false);
-			}
 		}
 	}
 	

@@ -18,7 +18,7 @@ public class Game implements GameInterface {
 	private int turns;
 	private int turnsLimit = 20;
 	private String dialogue = "";
-	private Player player = new Player(1);
+	private Player player = new Player(100);
 	private Room currentRoom;
 	private Room lastRoom;
 	private Vendor vendor = new Vendor(0);
@@ -355,6 +355,12 @@ public class Game implements GameInterface {
 	@Override
 	public boolean useItem(Item searchForItem)
 	{
+		// Have the player already lost
+		if(getLost())
+		{
+			return false;
+		}
+		
 		if(searchForItem instanceof Potion)
 		{
 			if(player.getCreaturesInventory().useItem(searchForItem))
@@ -375,10 +381,50 @@ public class Game implements GameInterface {
 		}
 		return false;
 	}
+
+	@Override
+	public void takeItem(Item searchForItem)
+	{
+		// Have the player already lost
+		if(getLost())
+		{
+			return;
+		}
+		
+		Item tempItem = getPlayer().getCreaturesInventory().add(searchForItem);
+		getCurrentRoom().getRoomsInventory().swap(searchForItem, tempItem);
+	}
+
+	@Override
+	public void dropItem(Item searchForItem)
+	{
+		// Have the player already lost
+		if(getLost())
+		{
+			return;
+		}
+		
+		if(!useItem(searchForItem)) // checks to see if it's an item that's suppose to be used
+		{
+			Item droppedItem = getCurrentRoom().getRoomsInventory().add(searchForItem);
+			getPlayer().getCreaturesInventory().swap(searchForItem, droppedItem);
+		}
+	}
 	
 	@Override
 	public void buyItem(Item itemToBuy)
 	{
+		// Have the player lost?
+		if(getLost())
+		{
+			return;
+		}
+		
+		// Is the player and the vendor not in the same room or is there a monster?
+		if(!roomHasVendor() || roomHasMonster())
+		{
+			return;
+		}
 		
 		for (Item item : vendor.getCreaturesInventory().getContent())
 		{
@@ -416,6 +462,12 @@ public class Game implements GameInterface {
 	@Override
 	public void attack(boolean wantToStay)
 	{
+		// Have the player already lost
+		if(getLost())
+		{
+			return;
+		}
+		
 		if (currentRoom.hasMonster())
 		{
 			if(!wantToStay)
@@ -503,6 +555,12 @@ public class Game implements GameInterface {
 	@Override
 	public void goRoom(int[] direction)
 	{
+		// Have the player already lost
+		if(getLost())
+		{
+			return;
+		}
+		
 		if (currentRoom.hasMonster())
 		{
 			addDialogue("The monster (level " + currentRoom.getMonster().getLevel() + "): is blocking your way");
@@ -614,6 +672,12 @@ public class Game implements GameInterface {
 	@Override
 	public void useTeleporter()
 	{
+		// Have the player lost?
+		if(getLost())
+		{
+			return;
+		}
+		
 		if(currentRoom.getTeleporter() != null && currentRoom.getMonster() == null) // is there even a teleporter and is there a monster blocking?
 		{
 			addTurn();
@@ -623,11 +687,36 @@ public class Game implements GameInterface {
 	}
 	
 	@Override
+	public boolean roomHasMonster()
+	{
+		return currentRoom.hasMonster();
+	}
+	
+	@Override
+	public boolean roomHasVendor()
+	{
+		if(currentRoom == currentVendorRoom)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean roomHasTeleporter()
+	{
+		if(currentRoom.getTeleporter() != null)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean getLost()
 	{
 		if(player.getHealth() <= 0)
 		{
-			addDialogue("You died, thanks for playing.");
 			return true;
 		}
 		return false;
