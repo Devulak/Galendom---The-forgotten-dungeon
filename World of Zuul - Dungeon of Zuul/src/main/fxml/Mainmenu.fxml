@@ -34,7 +34,7 @@
                               <Image url="@../../sprites/button_max.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#startGame" prefHeight="48.0" prefWidth="400.0" text="Start Game" />
+                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scenarios" prefHeight="48.0" prefWidth="400.0" text="Play" />
                      </children>
                   </Pane>
                   <Pane>
