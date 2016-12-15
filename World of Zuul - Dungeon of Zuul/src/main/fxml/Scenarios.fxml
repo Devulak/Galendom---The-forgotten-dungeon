@@ -59,16 +59,6 @@
                   <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#back" prefHeight="48.0" prefWidth="400.0" text="Back" />
                </children>
             </Pane>
-            <Pane>
-               <children>
-                  <ImageView pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../sprites/button_max.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#build" prefHeight="48.0" prefWidth="400.0" text="Build (DEVELOPER)" />
-               </children>
-            </Pane>
          </children>
       </VBox>
    </children>

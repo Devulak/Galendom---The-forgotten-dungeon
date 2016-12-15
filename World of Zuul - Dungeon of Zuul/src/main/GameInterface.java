@@ -65,4 +65,6 @@ public interface GameInterface {
 
 	public boolean getLost();
 
+	public void setScenario(int setTo);
+
 }

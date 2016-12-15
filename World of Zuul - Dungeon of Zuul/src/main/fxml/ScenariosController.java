@@ -11,10 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.singleton;
+import main.Game;
+import main.GameInterface;
 
 public class ScenariosController implements Initializable
 {
+	private GameInterface game = Game.getInstance();
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb)
 	{
@@ -24,7 +27,7 @@ public class ScenariosController implements Initializable
 	@FXML
 	private void scenario1(ActionEvent event) throws IOException
 	{
-		singleton.setScenario(1);
+		game.setScenario(1);
 		Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
 		Scene scene = new Scene(root);
 		
@@ -37,20 +40,7 @@ public class ScenariosController implements Initializable
 	@FXML
 	private void scenario2(ActionEvent event) throws IOException
 	{
-		singleton.setScenario(2);
-		Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
-		Scene scene = new Scene(root);
-		
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		
-		stage.setScene(scene);
-		stage.show();
-	}
-
-	@FXML
-	private void build(ActionEvent event) throws IOException
-	{
-		singleton.setScenario(0);
+		game.setScenario(2);
 		Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
 		Scene scene = new Scene(root);
 		
