@@ -34,6 +34,18 @@ public class MainmenuController implements Initializable
 	}
 	
 	@FXML
+	private void highscore(ActionEvent event) throws IOException
+	{
+		Parent root = FXMLLoader.load(getClass().getResource("Highscore.fxml"));
+		Scene scene = new Scene(root);
+		
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	@FXML
 	private void quit(ActionEvent event)
 	{
 		System.exit(0);
