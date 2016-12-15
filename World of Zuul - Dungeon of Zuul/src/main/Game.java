@@ -30,87 +30,141 @@ public class Game implements GameInterface {
 	public Game()
 	{
 		try {
-			createRooms();
-			serialization();
-			currentRoom = rooms[1][2];
-			currentVendorRoom = rooms[3][1];
+			deSerialization();
 		} catch (IOException ex) {
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 	
+	/**
+	 * This method will save every single object that are required
+	 * @throws IOException 
+	 */
 	public void serialization() throws IOException
 	{
-		try (FileOutputStream fout = new FileOutputStream("src\\gamescenarios\\GameScenario2.ser")) {  
+		try (FileOutputStream fout = new FileOutputStream("src\\gamescenarios\\GameScenario1.ser")) {  
 		ObjectOutputStream out = new ObjectOutputStream(fout);  
 
 		out.writeObject(rooms);
 		out.writeObject(roomsSeen);
+		out.writeObject(currentRoom);
+		out.writeObject(currentVendorRoom);
+		out.writeObject(player);
+		out.writeObject(vendor);
 		out.close();
 		}
 		System.out.println("Serialization succesful");
 	}
 	
+	/**
+	 * This method will load a file that contains the rooms
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 */
 	public void deSerialization() throws IOException, ClassNotFoundException
 	{
-		try (FileInputStream fileIn = new FileInputStream("src\\gamescenarios\\GameScenario2.ser")) {
+		try (FileInputStream fileIn = new FileInputStream("src\\gamescenarios\\GameScenario1.ser")) {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			rooms = (Room[][]) in.readObject();
 			roomsSeen = (Boolean[][]) in.readObject();
+			currentRoom = (Room) in.readObject();
+			currentVendorRoom = (Room) in.readObject();
+			player = (Player) in.readObject();
+			vendor = (Vendor) in.readObject();
 			in.close();
 			fileIn.close();
 		}
 		System.out.println("Deserialization succesful");
 	}
 
+	/**
+	 * Returns the number of turns the player has made
+	 * @return turns
+	 */
 	@Override
 	public int getTurns() 
 	{
 		return turns;
 	}
 
+	/**
+	 * Returns the turn limit
+	 * @return turnsLimit
+	 */
 	@Override
 	public int getTurnsLimit() 
 	{
 		return turnsLimit;
 	}
 
+	/**
+	 * Returns the player's current position
+	 * @return currentRoom
+	 */
 	@Override
 	public Room getCurrentRoom() 
 	{
 		return currentRoom;
 	}
 
+	/**
+	 * Returns the player
+	 * @return player
+	 */
 	@Override
 	public Player getPlayer() 
 	{
 		return player;
 	}
 
+	/**
+	 * Returns the vendor
+	 * @return vendor
+	 */
 	@Override
 	public Vendor getVendor()
 	{
 		return vendor;
 	}
 	
+	/**
+	 * Returns the vendors current position
+	 * @return vendor
+	 */
 	@Override
 	public Room getCurrentVendorRoom() 
 	{
 		return currentVendorRoom;
 	}
 
+	/**
+	 * Returns the array containing rooms
+	 * @return rooms
+	 */
 	@Override
 	public Room[][] getRooms()
 	{
 		return rooms;
 	}
 	
+	/**
+	 * Returns the rooms that the player has visited previously
+	 * @return roomsSeen
+	 */
 	@Override
 	public Boolean[][] getRoomsSeen()
 	{
 		return roomsSeen;
 	}
 	
+	/**
+	 * Increments the number of turns by one everytime the player moves around the map.
+	 * The player will be warned that he will lose health if the amount of turns equals the turn limit.
+	 * The player will gradually lose health if he stays in the dungeon for long.
+	 */
+	@Override
 	public void addTurn() 
 	{
 		turns++;
@@ -124,24 +178,39 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Returns points
+	 * @return points
+	 */
 	@Override
 	public int getPoints() 
 	{
 		return points;
 	}
 
+	/**
+	 * Returns the dialogue to the GUI
+	 * @return dialouge
+	 */
 	@Override
 	public String getDialogue() 
 	{
 		return dialogue;
 	}
 
+	/**
+	 * Adds a new line everytime the game wants to print something out
+	 */
 	@Override
 	public void addDialogue() 
 	{
 		dialogue += "\n";
 	}
 
+	/**
+	 * 
+	 * @param string 
+	 */
 	@Override
 	public void addDialogue(String string) 
 	{
@@ -226,6 +295,9 @@ public class Game implements GameInterface {
 
 		lvl_5c.setExit(lvl_4c);
 		
+		player = new Player(1);
+		vendor = new Vendor(0);
+		
 		// Monsters
         lvl_1.setMonster(new Monster(1));
         lvl_2a.setMonster(new Monster(2));
@@ -255,17 +327,17 @@ public class Game implements GameInterface {
 		
 		// Coins
 		lvl_1.addItemToMonster(new Coin(2)); // 2 coins
-                lvl_2a.addItemToMonster(new Coin(3)); // 2 coins
+        lvl_2a.addItemToMonster(new Coin(3)); // 2 coins
 		lvl_3a.addItemToMonster(new Coin(4)); // 3 coins		
 		lvl_2c.addItemToMonster(new Coin(5)); // 5 coins
 		lvl_3c.addItemToMonster(new Coin(6)); // 6 coins
-                lvl_4c.addItemToMonster(new Coin(7)); // 4 coins
+        lvl_4c.addItemToMonster(new Coin(7)); // 4 coins
 		lvl_5c.addItemToMonster(new Coin(8)); // 8 coins
 		
 		//Vendor
 		vendor.getCreaturesInventory().add(new GasMask(5, 10)); //Gassmask
-                vendor.getCreaturesInventory().add(new Potion(5, 5)); //Potion
-                vendor.getCreaturesInventory().add(new Key(1, 20)); //Key
+        vendor.getCreaturesInventory().add(new Potion(5, 5)); //Potion
+        vendor.getCreaturesInventory().add(new Key(1, 20)); //Key
 		
 		// Weapons
 		player.getCreaturesInventory().add(new Weapon("Wooden Sword", 1)); //Wooden Sword, which the player has in the start of the game                
@@ -275,13 +347,13 @@ public class Game implements GameInterface {
 		lvl_3b.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_4ba.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword
 		lvl_4bb.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword 
-                lvl_2Boss.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword 
+        lvl_2Boss.addItemToMonster(new Weapon("Steel Sword", 5)); //Steel Sword 
 		
 		// Shields
 		lvl_1.addItemToMonster(new Shield("Wooden Shield", 2)); //Wooden Shield
 		lvl_5c.addItemToMonster(new Shield("Iron Shield", 4)); //Iron Shield
 		lvl_4bb.addItemToMonster(new Shield("Steel Shield", 6)); //Steel Shield
-                lvl_2Boss.addItemToMonster(new Shield("Steel Shield", 6)); //Steel Shield
+        lvl_2Boss.addItemToMonster(new Shield("Steel Shield", 6)); //Steel Shield
 		
 		// Helmets
 		lvl_2a.addItemToMonster(new Helmet("Leather Helmet", 2)); //Leather Helmet
@@ -290,15 +362,15 @@ public class Game implements GameInterface {
 		lvl_3b.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
 		lvl_4ba.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
 		lvl_4bb.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
-                lvl_2Boss.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
+        lvl_2Boss.addItemToMonster(new Helmet("Steel Helmet", 7 )); //Steel Helmet
 		
 		// Chestplates
 		lvl_2a.addItemToMonster(new Chestplate("Leather Armour", 4)); //Leather Chestplate
 		lvl_4c.addItemToMonster(new Chestplate("Iron Armour", 6)); //Iron Chestplate
 		lvl_5c.addItemToMonster(new Chestplate("Iron Armour", 6)); //Iron Chestplate
-                lvl_4ba.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
+        lvl_4ba.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
 		lvl_4bb.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
-                lvl_2Boss.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
+        lvl_2Boss.addItemToMonster(new Chestplate("Steel Armour", 8)); //Steel Chestplate
 		
 		// Leggings
 		lvl_2c.addItemToMonster(new Legging("Leather Leggings", 3)); //Leather Leggings
@@ -306,7 +378,7 @@ public class Game implements GameInterface {
 		lvl_5c.addItemToMonster(new Legging("Iron Leggings", 5)); //Iron Leggings                             
 		lvl_4ba.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
 		lvl_4bb.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
-                lvl_2Boss.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
+        lvl_2Boss.addItemToMonster(new Legging("Steel Leggings", 7)); //Steel Leggings
 		
 		// Boots          
 		lvl_2c.addItemToMonster(new Boot("Leather Boots", 1)); //Leather Boots
@@ -316,7 +388,7 @@ public class Game implements GameInterface {
 		lvl_3b.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
 		lvl_4ba.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
 		lvl_4bb.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
-                lvl_2Boss.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
+        lvl_2Boss.addItemToMonster(new Boot("Steel Boots", 5)); //Steel Boots
 		/* placeholder to outcomment all above in 1 line */ 
 		
 	}
@@ -328,6 +400,7 @@ public class Game implements GameInterface {
 	@Override
 	public void play() {
 		printWelcome();
+		printLook();
 	}
 
 	/**
@@ -340,11 +413,13 @@ public class Game implements GameInterface {
 		addDialogue("Your goal is now to move to the end of the map. At the end of the map, you will meet the last boss, the Fallen Knight.");
 		addDialogue("If you manage to defeat the boss, you will win, and escape this forgotten place.");
 		addDialogue("But if your health reaches zero, you will lose and your corpse will forever be forgotten. Now, go!");
-		printLook();
 	}
 
-	/* By writing "help" in console, this method will be called. */
-	private void printLook() // Prints out what the character can see
+	/**
+	 * Informs you your current whereabouts. If there is a monster in your room,
+	 * it will inform you its level.
+	 */
+	private void printLook()
 	{
 		addDialogue("You are " + currentRoom.getShortDescription());
 		if (currentRoom.hasMonster()) {
@@ -352,6 +427,12 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Will search through your inventory. If you wanted to use potion,
+	 * this method will find a class called Potion. Otherwise it will return false.
+	 * @param searchForItem
+	 * @return true, false
+	 */
 	@Override
 	public boolean useItem(Item searchForItem)
 	{
@@ -411,6 +492,10 @@ public class Game implements GameInterface {
 		}
 	}
 	
+	/**
+	 * Gives the player the item, he wants to buy if he has enough money
+	 * @param itemToBuy 
+	 */
 	@Override
 	public void buyItem(Item itemToBuy)
 	{
@@ -447,18 +532,28 @@ public class Game implements GameInterface {
 		}
 	}
 
+	/**
+	 * Will make the player to attack a monster
+	 */
 	@Override
 	public void attack()
 	{
 		attack(true);
 	}
 
+	/**
+	 * Will make the player flee to his previous room
+	 */
 	@Override
 	public void flee()
 	{
 		attack(false);
 	}
 
+	/**
+	 * 
+	 * @param wantToStay 
+	 */
 	@Override
 	public void attack(boolean wantToStay)
 	{
@@ -504,7 +599,6 @@ public class Game implements GameInterface {
 					addDialogue("You rolled " + playerRolled + " dmg");
 				}
 			}
-
 			if (currentRoom.getMonster().getHealth() > 0)
 			{
 				int monsterRolled = currentRoom.getMonster().rollDamage(player);
@@ -541,9 +635,6 @@ public class Game implements GameInterface {
 					points += player.getLevel()*5;
 					addDialogue("You have slain the monster!");
 				}
-				
-				// Certain special events after slaying a monster
-
 			} 
 		}
 		else

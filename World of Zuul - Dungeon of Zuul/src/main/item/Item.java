@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public abstract class Item implements Serializable
 {
-	protected String name;
+	private String name;
 	private int amount;
 	protected String extra;
 	private int price;
