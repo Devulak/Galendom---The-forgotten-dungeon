@@ -35,6 +35,10 @@ public abstract class LevelAbleCreature extends Creature implements Levelable {
 	*/
 	public int getHealth()
 	{
+		if(health < 0)
+		{
+			return 0;
+		}
 		return health;
 	}
 	
