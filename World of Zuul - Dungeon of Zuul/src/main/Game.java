@@ -1,10 +1,6 @@
 package main;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,15 +14,48 @@ public class Game implements GameInterface
 	private int scenario;
 	private int points;
 	private int turns;
+	private boolean won;
 	private int turnsLimit = 20;
 	private String dialogue = "";
-	private Player player = new Player(100);
+	private Player player = new Player(1);
 	private Room currentRoom;
 	private Room lastRoom;
 	private Vendor vendor = new Vendor(0);
 	private Room currentVendorRoom;
 	private Room[][] rooms = new Room[4][5];
 	private Boolean[][] roomsSeen = new Boolean[4][5];
+	private Scoreboard scoreboard = new Scoreboard();
+	
+	@Override
+	public void play()
+	{
+		// Reset values
+		this.points = 0;
+		this.turns = 0;
+		this.won = false;
+		this.turnsLimit = 20;
+		this.dialogue = "";
+		this.player = new Player(1);
+		this.currentRoom = null;
+		this.lastRoom = null;
+		this.vendor = new Vendor(0);
+		this.currentVendorRoom = null;
+		this.rooms = null;
+		this.roomsSeen = null;
+		
+		// load scenario
+		try {
+			deSerialization();
+		} catch (IOException ex) {
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		// Welcome the player and do default stuff
+		printWelcome();
+		printLook();
+	}
 	
 	public static Game getInstance()
 	{
@@ -49,16 +78,18 @@ public class Game implements GameInterface
 	 */
 	public void serialization() throws IOException
 	{
-		try (FileOutputStream fout = new FileOutputStream("src/gamescenarios/GameScenario" + scenario + ".ser")) {  
-		ObjectOutputStream out = new ObjectOutputStream(fout);  
+		try (FileOutputStream fout = new FileOutputStream("src/gamescenarios/GameScenario" + scenario + ".ser"))
+		{  
+			ObjectOutputStream out = new ObjectOutputStream(fout);  
 
-		out.writeObject(rooms);
-		out.writeObject(roomsSeen);
-		out.writeObject(currentRoom);
-		out.writeObject(currentVendorRoom);
-		out.writeObject(player);
-		out.writeObject(vendor);
-		out.close();
+			out.writeObject(rooms);
+			out.writeObject(roomsSeen);
+			out.writeObject(currentRoom);
+			out.writeObject(currentVendorRoom);
+			out.writeObject(player);
+			out.writeObject(vendor);
+			out.close();
+			fout.close();
 		}
 		System.out.println("Serialization succesful");
 	}
@@ -70,7 +101,8 @@ public class Game implements GameInterface
 	 */
 	public void deSerialization() throws IOException, ClassNotFoundException
 	{
-		try (FileInputStream fileIn = new FileInputStream("src/gamescenarios/GameScenario" + scenario + ".ser")) {
+		try (FileInputStream fileIn = new FileInputStream("src/gamescenarios/GameScenario" + scenario + ".ser"))
+		{
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			rooms = (Room[][]) in.readObject();
 			roomsSeen = (Boolean[][]) in.readObject();
@@ -397,24 +429,6 @@ public class Game implements GameInterface
 		/* placeholder to outcomment all above in 1 line */ 
 		
 	}
-	
-	/**
-	 * The play method will be called when the main class starts. The game will
-	 * run until you write quit in the console.
-	 */
-	@Override
-	public void play()
-	{
-		try {
-			deSerialization();
-		} catch (IOException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		printWelcome();
-		printLook();
-	}
 
 	/**
 	 * This method will print out when you start the game
@@ -635,7 +649,7 @@ public class Game implements GameInterface
 					}
 					currentRoom.setMonsterToNull();
 					points += player.getLevel()*5;
-					addDialogue("You have killed the last boss, and escaped the Dungeon of Zuul, thanks for playing.\nPlease exit the game.");
+					this.won = true;
 				}				
 				else
 				{
@@ -824,5 +838,28 @@ public class Game implements GameInterface
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public ArrayList<Score> getScoreboard()
+	{
+		return this.scoreboard.getScoreboard();
+	}
+
+	@Override
+	public void addScore(String name)
+	{
+		if(this.getWon())
+		{
+			this.points = (int) (this.points*1.2);
+		}
+		this.scoreboard.add(name, points);
+		this.points = 0;
+	}
+
+	@Override
+	public boolean getWon()
+	{
+		return this.won;
 	}
 }

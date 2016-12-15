@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import main.creature.*;
 import main.item.*;
 
@@ -39,6 +40,8 @@ public interface GameInterface {
 
 	public void play();
 
+	public boolean getWon();
+
 	public boolean useItem(Item searchForItem);
 
 	public void takeItem(Item searchForItem);
@@ -66,5 +69,9 @@ public interface GameInterface {
 	public boolean getLost();
 
 	public void setScenario(int setTo);
+
+	public void addScore(String name);
+
+	public ArrayList<Score> getScoreboard();
 
 }
