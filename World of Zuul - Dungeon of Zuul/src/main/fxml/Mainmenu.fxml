@@ -25,7 +25,7 @@
                   <Image url="@../../sprites/title.png" />
                </image>
             </ImageView>
-            <Pane>
+            <VBox>
                <children>
                   <Pane>
                      <children>
@@ -37,17 +37,17 @@
                         <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scenarios" prefHeight="48.0" prefWidth="400.0" text="Play" />
                      </children>
                   </Pane>
-                  <Pane layoutY="64.0">
+                  <Pane>
                      <children>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../sprites/button_max.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="48.0" prefWidth="400.0" text="Leaderboard" />
+                        <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#highscore" prefHeight="48.0" prefWidth="400.0" text="Highscore" />
                      </children>
                   </Pane>
-                  <Pane layoutY="128.0">
+                  <Pane>
                      <children>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -58,7 +58,7 @@
                      </children>
                   </Pane>
                </children>
-            </Pane>
+            </VBox>
          </children>
       </VBox>
    </children>

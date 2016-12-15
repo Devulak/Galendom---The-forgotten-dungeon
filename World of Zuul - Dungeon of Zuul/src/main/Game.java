@@ -12,8 +12,10 @@ import main.creature.*;
 import main.item.*;
 import main.item.armour.*;
 
-public class Game implements GameInterface {
-
+public class Game implements GameInterface
+{
+	private static Game instance = null;
+	private int scenario;
 	private int points;
 	private int turns;
 	private int turnsLimit = 20;
@@ -23,19 +25,22 @@ public class Game implements GameInterface {
 	private Room lastRoom;
 	private Vendor vendor = new Vendor(0);
 	private Room currentVendorRoom;
-	private int score = 0;
 	private Room[][] rooms = new Room[4][5];
 	private Boolean[][] roomsSeen = new Boolean[4][5];
-
-	public Game()
+	
+	public static Game getInstance()
 	{
-		try {
-			deSerialization();
-		} catch (IOException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		if(instance == null)
+		{
+			instance = new Game();
 		}
+		return instance;
+	}
+	
+	@Override
+	public void setScenario(int setTo)
+	{
+		scenario = setTo;
 	}
 	
 	/**
@@ -44,7 +49,7 @@ public class Game implements GameInterface {
 	 */
 	public void serialization() throws IOException
 	{
-		try (FileOutputStream fout = new FileOutputStream("src\\gamescenarios\\GameScenario1.ser")) {  
+		try (FileOutputStream fout = new FileOutputStream("src/gamescenarios/GameScenario" + scenario + ".ser")) {  
 		ObjectOutputStream out = new ObjectOutputStream(fout);  
 
 		out.writeObject(rooms);
@@ -65,7 +70,7 @@ public class Game implements GameInterface {
 	 */
 	public void deSerialization() throws IOException, ClassNotFoundException
 	{
-		try (FileInputStream fileIn = new FileInputStream("src\\gamescenarios\\GameScenario1.ser")) {
+		try (FileInputStream fileIn = new FileInputStream("src/gamescenarios/GameScenario" + scenario + ".ser")) {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			rooms = (Room[][]) in.readObject();
 			roomsSeen = (Boolean[][]) in.readObject();
@@ -398,7 +403,15 @@ public class Game implements GameInterface {
 	 * run until you write quit in the console.
 	 */
 	@Override
-	public void play() {
+	public void play()
+	{
+		try {
+			deSerialization();
+		} catch (IOException ex) {
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		printWelcome();
 		printLook();
 	}

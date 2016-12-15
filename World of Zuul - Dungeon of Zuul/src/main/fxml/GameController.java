@@ -25,7 +25,7 @@ import main.item.Item;
 
 public class GameController implements Initializable {
 	
-	private GameInterface game = new Game();
+	private GameInterface game = Game.getInstance();
 	private GridPane activeMenu;
 	
 	@FXML
