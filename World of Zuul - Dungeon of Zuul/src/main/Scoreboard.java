@@ -9,7 +9,7 @@ public class Scoreboard
 {
 	private ArrayList<Score> scoreboard;
 	
-	public Scoreboard() throws IOException
+	public Scoreboard()
 	{
 		this.scoreboard = new ArrayList<>();
 		try {
