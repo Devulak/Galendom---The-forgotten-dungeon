@@ -32,7 +32,8 @@ public class Main extends Application
                 
                 URL resource = getClass().getResource("Calming Dungeons.mp3");
                 AudioClip audio = new AudioClip(resource.toString());
-                audio.play();               
+                audio.setCycleCount(AudioClip.INDEFINITE);
+                audio.play();            
         }
         
         public static void main(String[] args)
