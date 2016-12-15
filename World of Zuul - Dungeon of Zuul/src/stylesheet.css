@@ -83,6 +83,17 @@ AnchorPane.split
 
 
 /* TextArea */
+.text-field
+{
+	-fx-background-color: transparent;
+	-fx-border-width: 2;
+	-fx-border-color: #3f3a41 #757473 #757473 #3f3a41;
+	-fx-padding: 2;
+}
+
+
+
+/* TextArea */
 .text-area
 {
 	-fx-background-color: transparent;

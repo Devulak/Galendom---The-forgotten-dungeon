@@ -5,10 +5,15 @@ import javafx.event.Event;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -18,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import main.Game;
 import main.GameInterface;
 import main.Room;
@@ -116,7 +122,7 @@ public class GameController implements Initializable {
 		updateDialouge();
 		updatePoints();
 		updateTurns();
-		getLost();
+		getEnd();
 		if(game.roomHasMonster())
 		{
 			updateMonsterStatus();
@@ -136,6 +142,7 @@ public class GameController implements Initializable {
 		updateDialouge();
 		updatePoints();
 		updateTurns();
+		getEnd();
 		if(game.roomHasMonster())
 		{
 			updatePlayerStatus();
@@ -359,18 +366,22 @@ public class GameController implements Initializable {
 		dialogue.deselect();
 	}
 	
-	public void getLost()
+	public void getEnd()
 	{
-		game.getLost();
-		if(game.getLost())
+		if(game.getLost() || game.getWon())
 		{
-			/*Parent root = FXMLLoader.load(getClass().getResource("Mainmenu.fxml"));
+			Parent root = null;
+			try {
+				root = FXMLLoader.load(getClass().getResource("End.fxml"));
+			} catch (IOException ex) {
+				Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+			}
 			Scene scene = new Scene(root);
 
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Stage stage = (Stage) activeMenu.getScene().getWindow();
 
 			stage.setScene(scene);
-			stage.show();*/
+			stage.show();
 		}
 	}
 	
@@ -387,7 +398,7 @@ public class GameController implements Initializable {
 	public void updateMap()
 	{
 		// Init
-		getLost();
+		getEnd();
 		GraphicsContext mapGC = canvasMap.getGraphicsContext2D();
 		double[] viewHalf = {canvasMap.getWidth()/2, canvasMap.getHeight()/2}; // Get the view size
 		
