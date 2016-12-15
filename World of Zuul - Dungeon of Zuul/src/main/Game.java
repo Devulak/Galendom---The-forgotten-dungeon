@@ -30,15 +30,18 @@ public class Game implements GameInterface {
 	public Game()
 	{
 		try {
-			createRooms();
-			serialization();
-			currentRoom = rooms[1][2];
-			currentVendorRoom = rooms[3][1];
+			deSerialization();
 		} catch (IOException ex) {
+			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 	
+	/**
+	 * This method will save every single object that are required
+	 * @throws IOException 
+	 */
 	public void serialization() throws IOException
 	{
 		try (FileOutputStream fout = new FileOutputStream("src\\gamescenarios\\GameScenario2.ser")) {  
@@ -46,6 +49,10 @@ public class Game implements GameInterface {
 
 		out.writeObject(rooms);
 		out.writeObject(roomsSeen);
+		out.writeObject(currentRoom);
+		out.writeObject(currentVendorRoom);
+		out.writeObject(player);
+		out.writeObject(vendor);
 		out.close();
 		}
 		System.out.println("Serialization succesful");
@@ -62,6 +69,10 @@ public class Game implements GameInterface {
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			rooms = (Room[][]) in.readObject();
 			roomsSeen = (Boolean[][]) in.readObject();
+			currentRoom = (Room) in.readObject();
+			currentVendorRoom = (Room) in.readObject();
+			player = (Player) in.readObject();
+			vendor = (Vendor) in.readObject();
 			in.close();
 			fileIn.close();
 		}
@@ -283,6 +294,9 @@ public class Game implements GameInterface {
 		lvl_4c.setExit(lvl_3c);
 
 		lvl_5c.setExit(lvl_4c);
+		
+		player = new Player(1);
+		vendor = new Vendor(0);
 		
 		// Monsters
         lvl_1.setMonster(new Monster(1));
