@@ -379,7 +379,6 @@ public class GameController implements Initializable {
 			Scene scene = new Scene(root);
 
 			Stage stage = (Stage) activeMenu.getScene().getWindow();
-
 			stage.setScene(scene);
 			stage.show();
 		}
@@ -398,7 +397,10 @@ public class GameController implements Initializable {
 	public void updateMap()
 	{
 		// Init
-		getEnd();
+		if(!game.getWon())
+		{
+			getEnd();
+		}
 		GraphicsContext mapGC = canvasMap.getGraphicsContext2D();
 		double[] viewHalf = {canvasMap.getWidth()/2, canvasMap.getHeight()/2}; // Get the view size
 		
