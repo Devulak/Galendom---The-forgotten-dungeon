@@ -20,9 +20,9 @@ public class Player extends LevelAbleCreature {
 		health = maxHealth;
 	}
 
-	public void gainExperience(LevelAbleCreature Enemy)
+	public void gainExperience(LevelAbleCreature enemy)
 	{
-		experience += EXPERIENCE_GAIN_RATIO*Enemy.getLevel();
+		experience += EXPERIENCE_GAIN_RATIO*enemy.getLevel();
 		while(experience >= experienceMax)
 		{
 			experience -= experienceMax;
