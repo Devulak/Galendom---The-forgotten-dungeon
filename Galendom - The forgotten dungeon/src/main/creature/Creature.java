@@ -2,8 +2,6 @@ package main.creature;
 
 import java.io.Serializable;
 import main.Inventory;
-import java.util.*;
-import main.item.*;
 
 public abstract class Creature implements Serializable
 {

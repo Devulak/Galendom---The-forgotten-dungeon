@@ -9,7 +9,7 @@ public class Inventory implements Serializable
 	private List<Item> inventory = new ArrayList<>(); // Inventory full of stuff!
 	private boolean nolimit = false;
 	
-		public Inventory() // Constructor
+	public Inventory() // Constructor
 	{
 		
 	}
