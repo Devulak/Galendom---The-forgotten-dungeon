@@ -24,10 +24,10 @@ public abstract class Item implements Serializable
 	@Override
 	public String toString() // Return value on object
 	{
-		String amount = this.amount > 0 ? " (" + this.amount + ")" : "";
-		String extra = this.extra != null ? " (" + this.extra + ")" : "";
-		String price = this.price > 0 ? " (" + this.price + ")" : "";
-		return name + amount + extra + price;
+		String amountStr = this.amount > 0 ? " (" + this.amount + ")" : "";
+		String extraStr = this.extra != null ? " (" + this.extra + ")" : "";
+		String priceStr = this.price > 0 ? " (" + this.price + ")" : "";
+		return this.name + amountStr + extraStr + priceStr;
 	}
 
 	public int getPrice() // Get the amount of the item, if zero, means it's not stackable

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +18,6 @@ import javafx.stage.Stage;
 import main.Game;
 import main.GameInterface;
 import main.Score;
-import main.Scoreboard;
 
 public class ScoreboardController implements Initializable
 {

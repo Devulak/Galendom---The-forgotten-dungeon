@@ -5,7 +5,6 @@ import main.creature.*;
 import java.util.*;
 import main.item.*;
 
-
 public class Room implements Serializable
 {
     private final String description;

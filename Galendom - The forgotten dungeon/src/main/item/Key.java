@@ -1,7 +1,5 @@
 package main.item;
 
-import main.item.Item;
-
 public class Key extends Item
 {
 	public Key(int amount, int price)
