@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="640.0" minWidth="960.0" prefHeight="640" prefWidth="960" styleClass="split" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fxml.GameController">
+    <children>
+      <HBox alignment="CENTER" fillHeight="false" layoutX="-143.0" layoutY="-128.0" spacing="32.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane alignment="CENTER" hgap="64.0" prefHeight="640.0" prefWidth="960.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <GridPane alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                            <!-- Status -->
+                            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
+                                <children>
+                                    <ImageView>
+                                        <image>
+                                            <Image url="@../../sprites/status_bg.png" />
+                                        </image>
+                                    </ImageView>
+                                    <ImageView>
+                                        <image>
+                                            <Image url="@../../sprites/status_exp_bg.png" />
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="playerHealthbar" layoutX="66" layoutY="4">
+                                        <image>
+                                            <Image url="@../../sprites/healthbar.png" />
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="playerHealthbarEnd" layoutY="4">
+                                        <image>
+                                            <Image url="@../../sprites/healthbar_end.png" />
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="playerExperiencebar" layoutX="66" layoutY="36">
+                                        <image>
+                                            <Image url="@../../sprites/experiencebar.png" />
+                                        </image>
+                                    </ImageView>
+                                    <ImageView fx:id="playerExperiencebarEnd" layoutY="36">
+                                        <image>
+                                            <Image url="@../../sprites/experiencebar_end.png" />
+                                        </image>
+                                    </ImageView>
+                                    <ImageView>
+                                        <image>
+                                            <Image url="@../../sprites/status_fg.png" />
+                                        </image>
+                                    </ImageView>
+                                    <ImageView>
+                                        <image>
+                                            <Image url="@../../sprites/status_exp_fg.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Label fx:id="playerLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44" text="lvl">
+                                 <styleClass>
+                                    <String fx:value="status" />
+                                    <String fx:value="big" />
+                                 </styleClass>
+                              </Label>
+                                    <Label fx:id="playerHealth" layoutX="72" prefHeight="32" prefWidth="184" styleClass="status" text="12 / 12 HP" />
+                                    <Label fx:id="experienceStatus" layoutX="72" layoutY="32" prefHeight="32" prefWidth="184" styleClass="status" text="300 / 300 HP" />
+                                    <!-- Armour -->
+                                    <Label fx:id="playerStrength" layoutX="324" layoutY="36" prefHeight="20" prefWidth="20" styleClass="status" text="12" />
+                                    <!-- Strength -->
+                                    <Label fx:id="playerArmour" layoutX="388" layoutY="36" prefHeight="20" prefWidth="20" styleClass="status" text="60" />
+                                </children>
+                            </Pane>
+                            <!-- Dialogue -->
+                            <TextArea fx:id="dialogue" editable="false" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2147483647" />
+                            <!-- Inventory -->
+                            <Pane prefHeight="256" prefWidth="416" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="10">
+                                <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/inventory.png" />
+                                 </image>
+                              </ImageView>
+                                    <ListView fx:id="playerInventory" layoutX="8.0" layoutY="40.0" onMouseClicked="#inventoryItem" prefHeight="272.0" prefWidth="192.0" />
+                                    <ListView fx:id="roomInventory" layoutX="216.0" layoutY="40.0" onMouseClicked="#takeItem" prefHeight="272.0" prefWidth="192.0" />
+                              <Label layoutX="34.0" layoutY="4.0" prefHeight="24.0" prefWidth="140.0" text="INVENTORY" />
+                              <Label layoutX="242.0" layoutY="4.0" prefHeight="24.0" prefWidth="140.0" text="ROOM" />
+                                </children>
+                            </Pane>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="teleporter1" alignment="CENTER" GridPane.columnIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints prefWidth="16.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="32.0" />
+                        <ColumnConstraints prefWidth="16.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ImageView pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="16" GridPane.rowSpan="2">
+                           <image>
+                              <Image url="@../../sprites/action.png" />
+                           </image>
+                        </ImageView>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="16" GridPane.rowSpan="2">
+                           <children>
+                              <Label fx:id="turns" layoutX="8.0" layoutY="8.0" prefHeight="16.0" prefWidth="96.0" text="TURN 12 / 55" />
+                              <Label fx:id="points" layoutX="312.0" layoutY="8.0" prefHeight="16.0" prefWidth="96.0" text="12345 POINTS" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="navigation" alignment="CENTER" visible="false" GridPane.columnIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Pane styleClass="backcover" GridPane.columnSpan="2147483647" GridPane.rowSpan="13">
+                           <children>
+                              <Canvas fx:id="canvasMap" height="416.0" width="416.0" />
+                              <ImageView layoutX="200.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/player.gif" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2147483647">
+                           <children>
+                              <Pane prefHeight="128.0" prefWidth="192.0">
+                                 <children>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../sprites/arrows.png" />
+                                       </image>
+                                    </ImageView>
+                                        <Button layoutX="72.0" layoutY="8.0" onAction="#up" prefHeight="48.0" prefWidth="48.0" styleClass="up" />
+                                        <Button layoutX="8.0" layoutY="72.0" onAction="#left" prefHeight="48.0" prefWidth="48.0" styleClass="left" />
+                                        <Button layoutX="72.0" layoutY="72.0" onAction="#down" prefHeight="48.0" prefWidth="48.0" styleClass="down" />
+                                        <Button layoutX="136.0" layoutY="72.0" onAction="#right" prefHeight="48.0" prefWidth="48.0" styleClass="right" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <Pane fx:id="showTeleporter" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="14" GridPane.rowSpan="2">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/action_extra.png" />
+                                 </image>
+                              </ImageView>
+                              <Button layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#showTeleporter" prefHeight="48.0" prefWidth="160.0" text="A teleporter :o" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="showVendor" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.columnSpan="6" GridPane.rowIndex="14" GridPane.rowSpan="2">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/action_extra.png" />
+                                 </image>
+                              </ImageView>
+                              <Button layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#showVendor" prefHeight="48.0" prefWidth="160.0" text="Approach the vendor" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="monster" alignment="CENTER" visible="false" GridPane.columnIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
+                           <children>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../sprites/status_bg.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="monsterHealthbar" layoutX="66" layoutY="4">
+                                 <image>
+                                    <Image url="@../../sprites/healthbar.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="monsterHealthbarEnd" layoutY="4">
+                                 <image>
+                                    <Image url="@../../sprites/healthbar_end.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../sprites/status_fg.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="monsterLevel" layoutX="10" layoutY="10" prefHeight="44" prefWidth="44">
+                                 <styleClass>
+                                    <String fx:value="status" />
+                                    <String fx:value="big" />
+                                 </styleClass>
+                              </Label>
+                              <Label fx:id="monsterHealth" layoutX="72" prefHeight="32" prefWidth="184" styleClass="status" />
+                              <Label fx:id="monsterStrength" layoutX="324" layoutY="36" prefHeight="20" prefWidth="20" styleClass="status" />
+                              <Label fx:id="monsterArmour" layoutX="388" layoutY="36" prefHeight="20" prefWidth="20" styleClass="status" />
+                           </children>
+                        </Pane>
+                        <ImageView pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="14" GridPane.rowSpan="2">
+                           <image>
+                              <Image url="@../../sprites/button_max.png" />
+                           </image>
+                        </ImageView>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#attack" text="Hit it!" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2">
+                           <GridPane.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </GridPane.margin></Button>
+                        <Pane styleClass="backcover" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="10">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true" styleClass="backcover">
+                                 <image>
+                                    <Image url="@../../sprites/monster.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="16" GridPane.rowSpan="2">
+                           <children>
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#flee" prefHeight="48.0" prefWidth="176.0" text="Flee, you fool!" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="teleporter" alignment="CENTER" visible="false" GridPane.columnIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Pane styleClass="backcover" GridPane.columnSpan="2147483647" GridPane.rowSpan="13">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/teleporter.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/map_frame.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <ImageView pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2">
+                           <image>
+                              <Image url="@../../sprites/button_max.png" />
+                           </image>
+                        </ImageView>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#teleport" text="Use zé teleporter!" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" GridPane.rowSpan="2">
+                           <GridPane.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Pane GridPane.columnIndex="4" GridPane.columnSpan="6" GridPane.rowIndex="16" GridPane.rowSpan="2">
+                           <children>
+                              <Button layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#closeTeleporter" prefHeight="48.0" prefWidth="176.0" text="Escape zé teleporter!" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="vendor" alignment="CENTER" visible="false" GridPane.columnIndex="1">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowSpan="4">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/vendor_shop.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" GridPane.rowSpan="10">
+                           <children>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../sprites/vendor_inventory.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="34.0" layoutY="4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="348.0" text="SHOP" />
+                              <ListView fx:id="vendorInventory" layoutX="8.0" layoutY="40.0" onMouseClicked="#buyItem" prefHeight="272.0" prefWidth="400.0" />
+                           </children>
+                        </Pane>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#closeVendor" prefHeight="48.0" prefWidth="176.0" text="Continue? .. 9" GridPane.columnIndex="4" GridPane.columnSpan="6" GridPane.rowIndex="16" GridPane.rowSpan="2">
+                           <GridPane.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </GridPane.margin>
+                        </Button>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="16.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </HBox>
+    </children>
+    <stylesheets>
+        <URL value="http://fonts.googleapis.com/css?family=VT323" />
+        <URL value="@../../stylesheet.css" />
+    </stylesheets>
+</AnchorPane>

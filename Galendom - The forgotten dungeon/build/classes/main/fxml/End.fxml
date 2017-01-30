@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="640.0" minWidth="960.0" prefHeight="640" prefWidth="960" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.fxml.EndController">
+    <stylesheets>
+        <URL value="http://fonts.googleapis.com/css?family=VT323" />
+        <URL value="@../../stylesheet.css" />
+    </stylesheets>
+   <children>
+      <VBox alignment="TOP_CENTER" fillWidth="false" spacing="32.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+         </padding>
+         <children>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../sprites/title.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="status" maxWidth="1.7976931348623157E308" text="You [won/lost]!">
+               <styleClass>
+                  <String fx:value="status" />
+                  <String fx:value="big" />
+               </styleClass>
+            </Label>
+            <VBox prefWidth="416.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="Your name (max 3 characters)" />
+                  <TextField fx:id="nameField" alignment="CENTER" prefHeight="48.0" />
+               </children>
+            </VBox>
+            <Pane>
+               <children>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../sprites/button_max.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#scoreboard" prefHeight="48.0" prefWidth="400.0" text="Continue" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
